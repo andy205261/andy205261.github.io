@@ -165,7 +165,62 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   .stats{gap:22px;flex-wrap:wrap}
 }
 </style>
+</head>
+<body>
 
+<nav>
+  <span class="nav-logo">Anh Truong <span>Nguyen</span></span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<!-- PROJECTS section contains live dashboard — dashboard styles below -->
+<style>
+.db-tab-bar{display:flex;gap:4px;margin-bottom:0}
+.db-tab{padding:7px 14px;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:none;cursor:pointer;font-size:12px;color:var(--ink3);background:rgba(255,255,255,.03);transition:all .15s;font-family:'Outfit',sans-serif}
+.db-tab.active{background:var(--paper2);color:var(--ink);font-weight:500;border-color:rgba(255,255,255,.1)}
+.db-panel{display:none;border:1px solid rgba(255,255,255,.08);border-radius:0 8px 8px 8px;padding:16px;background:var(--paper2)}
+.db-panel.active{display:block}
+.db-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
+.db-bred{background:rgba(248,113,113,.15);color:#f87171}.db-bamb{background:rgba(251,191,36,.12);color:#fbbf24}.db-bgrn{background:rgba(52,211,153,.12);color:#34d399}
+.db-mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
+.db-mcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:9px 11px}
+.db-mlabel{font-size:10px;color:var(--ink3);margin-bottom:2px}
+.db-mval{font-size:18px;font-weight:500;color:var(--ink)}
+.db-shap-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:11px}
+.db-shap-lbl{width:120px;color:var(--ink3);font-size:11px}
+.db-shap-wrap{flex:1;background:rgba(255,255,255,.06);border-radius:3px;height:10px;overflow:hidden}
+.db-shap-bar{height:100%;border-radius:3px}
+.db-shap-num{width:38px;text-align:right;font-size:10px}
+.db-act-row{display:flex;align-items:flex-start;gap:8px;margin:6px 0;padding:9px 10px;border-radius:6px;background:rgba(255,255,255,.04)}
+.db-act-num{width:18px;height:18px;border-radius:50%;background:var(--accent);color:#080c14;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.db-act-title{font-size:12px;font-weight:500;color:var(--ink)}
+.db-act-sub{font-size:11px;color:var(--ink3);margin-top:1px}
+.db-sec{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:12px 0 5px}
+.db-goal-row{display:flex;align-items:center;gap:8px;margin:5px 0}
+.db-goal-lbl{font-size:11px;width:120px;color:var(--ink)}
+.db-goal-wrap{flex:1;background:rgba(255,255,255,.06);border-radius:4px;height:8px;overflow:hidden}
+.db-goal-bar{height:100%;border-radius:4px}
+.db-goal-val{font-size:10px;color:var(--ink3);width:30px;text-align:right}
+.db-icon-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:8px 0}
+.db-icon-box{text-align:center;padding:7px 4px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);font-size:10px;color:var(--ink3)}
+.db-icon-box.mod{background:rgba(52,211,153,.08);color:var(--green);border-color:rgba(52,211,153,.15)}
+.db-icon-box.fix{background:rgba(251,191,36,.08);color:var(--amber);border-color:rgba(251,191,36,.15)}
+.db-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:10px 0}
+.db-ci-track{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;position:relative;overflow:visible}
+.db-ci-fill{position:absolute;top:0;height:6px;border-radius:3px;background:rgba(56,189,248,.3)}
+.db-ci-dot{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid var(--paper2);margin-left:-7px;box-shadow:0 0 8px rgba(56,189,248,.4)}
+.db-sim-row{display:flex;align-items:center;gap:8px;margin:6px 0}
+.db-sim-lbl{width:120px;font-size:11px;color:var(--ink3)}
+.db-sim-out{font-size:12px;font-weight:500;min-width:36px;text-align:right;color:var(--ink)}
+.db-pt-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,255,255,.1);border-radius:4px;background:rgba(255,255,255,.05);color:var(--ink)}
+</style>
 
         <div class="db-tab-bar">
           <div class="db-tab active" onclick="dbSwitch('cardio')">Cardiologist</div>
