@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anh Truong Nguyen — Clinical AI & Healthcare IT Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0e1117;--ink2:#3a3f4a;--ink3:#7a8094;--paper:#f7f6f2;--paper2:#eeecea;--accent:#1a4fd6;--accent2:#e8f0fe;--red:#c0392b;--green:#1a6b3c;--amber:#b45309;--purple:#5b21b6;--purple2:#ede9fe;--teal:#0f766e;--teal2:#ccfbf1;--rule:rgba(14,17,23,0.11)}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(247,246,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--ink);letter-spacing:-.3px}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink3);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink)!important;color:var(--paper)!important;padding:7px 16px;border-radius:2px!important;font-size:12px!important}
+.nav-cta:hover{background:var(--accent)!important}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;opacity:0.03;background-image:linear-gradient(var(--ink) 1px,transparent 1px),linear-gradient(90deg,var(--ink) 1px,transparent 1px);background-size:60px 60px}
+.htag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:var(--accent2);padding:5px 12px;border-radius:2px;letter-spacing:.08em;margin-bottom:28px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(44px,6.5vw,82px);line-height:1.0;letter-spacing:-2px;color:var(--ink);max-width:820px;margin-bottom:24px}
+h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:16px;font-weight:300;color:var(--ink2);max-width:560px;line-height:1.75;margin-bottom:40px}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:2px;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.03em;transition:all .2s}
+.btn-dark{background:var(--ink);color:var(--paper)}
+.btn-dark:hover{background:var(--accent);transform:translateY(-1px)}
+.btn-li{background:#0077b5;color:#fff}
+.btn-li:hover{background:#005885;transform:translateY(-1px)}
+.btn-out{border:1px solid var(--rule);color:var(--ink)}
+.btn-out:hover{border-color:var(--ink);background:var(--paper2)}
+.btn-dl{background:var(--green);color:#fff}
+.btn-dl:hover{background:#145c30;transform:translateY(-1px)}
+.stats{display:flex;gap:36px;margin-top:56px;padding-top:40px;border-top:1px solid var(--rule)}
+.snum{font-family:'DM Serif Display',serif;font-size:34px;color:var(--ink);display:block}
+.slbl{font-size:11px;color:var(--ink3);font-weight:400;line-height:1.4}
+
+section{padding:92px 40px}
+.slabel{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--ink3);text-transform:uppercase;margin-bottom:14px}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-spacing:-1px;line-height:1.1;color:var(--ink);margin-bottom:14px}
+.intro{font-size:15px;font-weight:300;color:var(--ink2);max-width:560px;line-height:1.75;margin-bottom:48px}
+
+/* ABOUT STRIP */
+.about-strip{background:var(--ink);padding:64px 40px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-strip h2{color:#f7f6f2;margin-bottom:14px}
+.about-strip p{font-size:15px;font-weight:300;color:rgba(247,246,242,.65);line-height:1.8;margin-bottom:12px}
+.pivot-list{list-style:none;margin-top:16px}
+.pivot-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(247,246,242,.7);margin-bottom:10px;line-height:1.5}
+.pivot-list li::before{content:'→';color:var(--accent);font-family:'DM Mono',monospace;flex-shrink:0;margin-top:1px}
+.about-right{padding:28px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px}
+.about-right .slabel{color:rgba(247,246,242,.3)}
+.qrow{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.qrow:last-child{border-bottom:none}
+.qk{font-size:12px;color:rgba(247,246,242,.45)}
+.qv{font-size:13px;font-weight:500;color:#f7f6f2}
+.qv.hi{color:#6ee7b7}
+
+/* PROJECT CARDS */
+.card{background:#fff;border:1px solid var(--rule);border-radius:4px;overflow:hidden;transition:all .3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(14,17,23,.08);border-color:rgba(14,17,23,.18)}
+.card-head{padding:24px 24px 16px;border-bottom:1px solid var(--rule)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.05em;padding:3px 8px;border-radius:2px;background:var(--paper2);color:var(--ink2)}
+.tag.b{background:var(--accent2);color:var(--accent)}
+.tag.g{background:#f0fdf4;color:var(--green)}
+.tag.a{background:#fffbeb;color:var(--amber)}
+.tag.p{background:var(--purple2);color:var(--purple)}
+.tag.t{background:var(--teal2);color:var(--teal)}
+.tag.r{background:#fef2f2;color:var(--red)}
+.ctitle{font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:-.5px;color:var(--ink);margin-bottom:6px}
+.cdesc{font-size:13px;color:var(--ink2);line-height:1.65;font-weight:300}
+.card-body{padding:20px 24px}
+.mrow{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--rule)}
+.mrow:last-child{border-bottom:none}
+.mk{font-size:12px;color:var(--ink3)}
+.mv{font-size:13px;font-weight:500;color:var(--ink)}
+.mv.ok{color:var(--green)}
+.mv.warn{color:var(--amber)}
+
+/* MAIN PROJECT SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-bottom:20px}
+.pan{background:#fff;padding:28px}
+.pan.dk{background:var(--ink)}
+.pan.dk h3{color:#f7f6f2}
+.pan.dk p{color:rgba(247,246,242,.68)}
+h3{font-family:'DM Serif Display',serif;font-size:18px;letter-spacing:-.4px;margin-bottom:10px}
+.shap{margin:12px 0}
+.srow{display:flex;align-items:center;gap:8px;margin:5px 0}
+.slb{font-size:11px;color:rgba(247,246,242,.4);width:82px;font-family:'DM Mono',monospace}
+.strk{flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.sbar{height:100%;border-radius:2px}
+.sval{font-size:10px;font-family:'DM Mono',monospace;width:36px;text-align:right}
+.agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.acard{padding:13px;border:1px solid var(--rule);border-radius:3px;background:#fff;transition:all .2s}
+.acard:hover{border-color:var(--accent);background:var(--accent2)}
+.aname{font-size:12px;font-weight:500;margin-bottom:2px}
+.adesc{font-size:11px;color:var(--ink3);line-height:1.35}
+
+/* PROJECTS GRID */
+.proj-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.proj-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+/* FEATURE LIST */
+.feat-list{list-style:none;margin:10px 0}
+.feat-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink2);margin-bottom:7px;line-height:1.5}
+.feat-list li::before{content:'·';color:var(--accent);font-size:16px;line-height:1;flex-shrink:0}
+
+/* SKILLS */
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.sgroup{padding:20px;background:#fff;border:1px solid var(--rule);border-radius:3px}
+.sgtitle{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:10px}
+.si{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--paper2)}
+.si:last-child{border-bottom:none}
+.sn{font-size:12px;color:var(--ink)}
+.sd{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.sd.m{background:var(--amber)}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:20px}
+.tl::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:var(--rule)}
+.tli{position:relative;margin-bottom:24px;padding-left:16px}
+.tli::before{content:'';position:absolute;left:-23px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--paper)}
+.tdate{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:2px}
+.ttitle{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.torg{font-size:11px;color:var(--accent);margin-bottom:4px;font-family:'DM Mono',monospace}
+.tdesc{font-size:12px;color:var(--ink2);line-height:1.6;font-weight:300}
+
+/* CERTS */
+.certs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.cert{padding:12px 14px;background:#fff;border:1px solid var(--rule);border-radius:3px}
+.cert strong{color:var(--ink);display:block;font-size:13px;margin-bottom:2px}
+.cert span{font-size:11px;color:var(--ink3)}
+
+/* CONTACT */
+.csec{background:var(--ink);padding:80px 40px}
+.cinner{max-width:600px;margin:0 auto;text-align:center}
+.csec h2{color:#f7f6f2;margin-bottom:12px}
+.csec p{color:rgba(247,246,242,.5);margin-bottom:32px;font-size:15px}
+.clinks{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cl{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:2px;font-size:13px;font-weight:500;text-decoration:none;transition:all .2s}
+.cl-em{background:rgba(255,255,255,.1);color:#f7f6f2;border:1px solid rgba(255,255,255,.12)}
+.cl-em:hover{background:rgba(255,255,255,.16)}
+.cl-li{background:#0077b5;color:#fff}
+.cl-li:hover{background:#005885}
+.cl-ph{background:rgba(255,255,255,.06);color:rgba(247,246,242,.6);border:1px solid rgba(255,255,255,.07)}
+
+footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--rule);font-size:12px;color:var(--ink3)}
+
+
+.avatar-ring{width:80px;height:80px;border-radius:50%;border:3px solid rgba(255,255,255,0.15);overflow:hidden;flex-shrink:0}
+.avatar-ring img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.avatar-sm{width:56px;height:56px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);overflow:hidden;flex-shrink:0}
+.avatar-sm img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.avatar-hero{width:68px;height:68px;border-radius:50%;border:2.5px solid var(--rule);overflow:hidden;flex-shrink:0}
+.avatar-hero img{width:100%;height:100%;object-fit:cover;object-position:center top}
+
+.fi{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.fi.v{opacity:1;transform:none}
+
+@media(max-width:768px){
+  nav{padding:14px 20px}
+  .hero,section{padding-left:20px;padding-right:20px}
+  h1{font-size:38px}
+  .split,.about-strip,.proj-grid-2,.proj-grid-3,.sgrid,.certs{grid-template-columns:1fr}
+  .agrid{grid-template-columns:1fr}
+  .stats{gap:20px;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Anh Truong Nguyen</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div style="position:relative;z-index:1">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+      <div class="avatar-hero"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADIAMgDASIAAhEBAxEB/8QAHAABAAEFAQEAAAAAAAAAAAAAAAUCAwQGBwEI/8QANRAAAQMDAgQEBgEEAQUAAAAAAQACAwQFERIhBhMxQSJRYXEHFDKBkbGhI0JSwdEVFiRy8P/EABoBAQADAQEBAAAAAAAAAAAAAAABAwQCBQb/xAAiEQACAgICAgMBAQAAAAAAAAAAAQIRAyEEMRJBIjJRE2H/2gAMAwEAAhEDEQA/AOBIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIikbZaZbi/IyIx3AyT7ICPa1z3BrWkk9AApWh4cuNcTiHltAyXSbfx1W1U1qhtkQeyEMOPE548RWPX3FpOqn5jHNHbplFsPRjUvB8BYTUVRc7G2kho/lW5eH4WSFkLM47uOVkQ32OohENQ3TJ0Lwdj7+Xusc6RMeRUCKTP0vOWu+6U0LMWdgt5xNRwuPZ2lW2VFLWRmNzRHJ2z0Kypa4uZy54gQereoPsexUNUxMa/mQ55Z6eilK+xf4UTQ6JC0tA9FjuYO34WTzHSx6T1Z39FacN99lNEWWEXrtnFeLkkIiIAiIgCIiAIiIAiIgCIiAIiDqgMqho3Vc2MeBu7j6LbqatdS6IWcuFjejQN1iWi3SRWhspY4ulOvDeuOyyWVFvpGOM8UheeniB/2uo17DTPLhcDV7OmAx6bKJlMzWa9LnNb3aMqqabmucyCoJYejC7A/lYkb6qKTEZIx5dD7pr0N+zGdLqfqLvY4VZlL2Bh6josyem+abzOXy3+YGxWMaOVoAI6KbIotGV4HiOT69wvA7fH9ru3qrksTgQcYKpED+oGcFLFFsDSHHPXZUHxOwrroy05I+yt4IOyWKLc2GkNA7dVaV+duWNfj0VhcMkIiIAiIgCIiAIiIAiIgCIiAKpg1PaPMgKlZFFE2aqY12cDJOPRAbBUXdrAxkUevR4RrO34WxcPcM1nE2KioAjiaPpawDIWv2O1tuFyawgFuoZyevoF9HcP2SChtMLWxgZGSAFVkyKGkX44OW2cwHw4Y6fAw1o74UtT8AwR7HDvcLpcdr5jyW9FmttwiAyB7gKp5mkW+Eb2ctPBFLI0gNAOOp2UXVcAvi1lgGw/t6H3XYTQw40lqw6m1nSeW7A8sqh55FyxxOD1vCkniJZhzR0x+ljQ8LzsaXmM6cajtuu5mxRyxaXxguznJVqSxxsOC0acYXM+VKiY4I2cQr+Gyx7niPAPhwtVrKCSDU7SQ0bL6LrbLTzRgaQ0+i1a48JQvpZmFrTnyHZRi51akTPiKS0cMcCY3M+4WMpe8W+S13KWnkGC12yinjDzjovUTUlaPMlFxdMpREQgIiIAiIgCIiAIiIAiIgCmuHKcyVE8vaOPHTzUKt34Ms1bPaLhchSuNGxzWGU7DPceuNlzN0rO4K5G28E2cOqWTaSTnsF3akjDaaNhHQAYWo8DWqNlsjqSzBcNlujBpG6wSl5SNsVSLzAANhhVncKmMtd0IVzAASyt9mLJurJbhZTsFUGNUtWWxlRiuGkdN1hVJ8J2UtygRusKriAVOSNIuxzTZASvOrGFhVO4I7LPqGeMgKOqSQHeizGpI498R6Vn/AFXnNbgkDK59MMOB9F0zj53MqMd9lzarAbKBjGy97iu8SPH5SrIywiItBmCIiAIiIAiIgCIiAIiIAOq7hwJRS1Pw0gLHnBknaWdj4hhcPX0R8Lm5+HFqjLcmWtlA9tSz8n6WauJ96/w6TYqH5Kz08WPpjGVhV1XVOmcGx5aNgBndbHGzEekdMKFuFdFbdUsjM43JxsFlUf0vi7eiEqL5U0Ic/wCXlaR11M2/K9ouNmSOLKhjmY6nBwrd14qEdudXy2ueSlA3kbGRn27rVYOKrHdpyyFr439SyRuMduqscKXWhGpOvZ0iO8U84BjkByOyzI6jUM52WnUNHA464CQe7QVLufLTQkuBwFS4+0W0umTb6kHbUAsSpqYQ3L5AMeZWr1VwnqQWxP0n0UHVWW61bjoqXn0zsoePyWxqJt81TRFhfzW7eqiKqphkaeU8O36LV5LFd6d5dIfDgnGVgmatp5WeF2dWMZzlUSwJdMvjN+yN48hEbY5NOS/wrllYS6rkdggZ2yut/ECJ5tVFK9uHc0Aj7LQOLdDZ6JnKayQQZcGjGxO2Vv4kvgkYeXC25fhraIi2mAIiIAiIgCIiAIiIAiIgA6r6k+DIhqPhjbjoa50M0rT6O1k/ohfLfdfSvwLutBJwIbaydgrYKmR0sRPiw4gh2PLH6VWZXEtxOpHVWnDcKxUMZpy5ocPIhVtfvhevOB0yFka1aNC0zWeIqWkvFmkt5qJIGF2oGPq0/wCx1yFodDwZR2plQynqWvmmby2nlfSM5Pc7ldTqaKnqR42b+Y2VultNHBM1zWZd5u3XDnJ6TNEXCO2iN4V4fdbqKIVEjpXNbp1PG53Uvd6eP5VwA7KRAAOABhYF2cXREBc5W1CiuEnLImcuqaa7U9WYaAMe6WTwl5xhvfHqsbjil4hoKiB1nFyZBywXubhzSe+cA75/0t0FJDWMMLyWv6seDgtPmFG1U17tZLJGOqIR0kaN1HH5FRpmjLhU33Rzs3LimktsFTO2pkkeSXMczS7TnY+XTsQpW01M17ezXE4OH1ZbjC2aJlzukgd8ryYv7nvCnaakigbpYxo88DquMuW/R3CDiqs1i+2cXSGmpdIOHh2/kBuuC8TVor+Iq2dhzHzCyMjppbsP0u/8a3iOw2StqhtKYHRxHye4YH7XzUfVaeDF05Mx82fUQiIvQPPCIiAIiIAiIgCIiAIiIAtr+G1Y6j+ItikEhYHVTY3YOMh22D+VqikLFVGhv9uqwccmqjk/DgVD2iU6Z9pnwuwqnygM2Vuow5ocNwd1Yc8kYWJ60b4ryotTVHqq6Fz5pdXRoVgQOnk0jor1W6eio3mnYC8N291mSblbL5VXiuyVa1rWlzjsoy5PaW7eW6hbVeLzNHI25xU4A+l8Djg+hBULxFxZDQFrXB73u6Rxt1OKszRbjSRxhxNStsztT6eoa/fTnCn4p2ujB26Z3Wm0V6NyghAgkZzejXjBGPNTtNMRFoPUdFhScXRrlFSRmVUw/wAfwot9U2MkkpVVRjBz/C16qq3Sk4GnzypqxpKjQfi9dDKyipGv8L3ukc322H7XKVNcV3N104hqpi/VGxxjj9Gj/wCKhV7WCHhjSPGzz88jYREVxSEREAREQBERAEREARZENHLLHzNmMJwHO7+3mpClsbqk+GRzgOpDcAfcoCHV+Cknne1scbi53TstlgstHTBzwDLI0dXnIBWDQOMfMDd5HuwD574/CJWD6v4drDcOFbZUPe10j6VmstORqDcH+QVk7gYULwXE2l4LtLGHIMO583ZOVOPIG6wS7PRx9F+mIDQr7yHKAqYK2bBpKkRPadtQyD7rEfeLlSkCrhk0g4JibqC59Hf8nJ2iQu8bW05ayIa3nALRgrSuJOEqiofFUQPAJbu7ODlbUb1SvYXtlD8DOD1H/Ch7jxbGKca3RhoH0kf7VcpSRohikiL4eskltmfPUzcyUt0tBcTgLYBUtDSWkbLVJOLrdpd/UEeOxd+lXb7kKuJ72PBYTthUOMrtnd7oka2rD3kfha1xNcxa+Hayr1Yk0Fsee7jsFISPMk+kfcrmHxGv4rK2O107sw0xzIR3f5fZW4cbnNIpz5PCDZoxJJyTkrxEXrnjBERAEREAREQBFkUlDU1zyymhdIR1wNh91OnhblU7OfMWzkZcG4LW+iWDWsKWt1vbyX1lTGTG0f02HbWf+FLU1voKJo0s+Yn7vkHhHsFdmImB1nVtjHknYuiKp4X3GYzzO0wtOAxv6UyyqEcEjGDSwNJx6qJpiYZp6Zv0uGpquiU/LuA+o5BUkWSVLIHUbiT1aoKmfoqojnpI5p/OQpaid/4eD5KBLi0yn/CXUpQZ9OfDiubcOCIY9XigkfEfTfUP2tpYdbPFsehC4z8Hb+2Ovq7TI/AqGCaIH/JvUfj9Lr3M0SZ7HqvNy/HK0ehhd40zLYNPuqJy0DUcZCuDxsyDusWoY9zdOMqC2LIG72603J5dVQMLv82uLXfkLTr5YeHmOaGxve4Do6Vzgf5W1XKge1xe5rj7LWK+j+YcCWkNb1z3XEo1uzbDKqohqThS0VTzNy3Mx2B2Uo6KG2R8uBhY0/SFVTOc0hrW4YOqwb3dIaVj5pXgBgyVX8pOiuTS2R3El/dabRK6Nw+ZeMM9D5/Zcfke6R7nvcXOccknuVL3a6TXe4Gd5IYNo2+QWDJA1zhp2JXp4cP84/6eTnzf0lroxEXrmlji1wwV4rSgIiIAiIgCu01PJVTshibqe47BV0dFPXVAhp2F7z+APMnst0tdtprLGXaubUuGHP7D0CAqpaB1FQsp4iIwN3Pxlzj5qh1U2KEQyOJxkanDqqpbgdeCcLDq5tTeZgFvddp0VtWY8kEzcyNfqB6YVtk5B0uaQV4ycszpJ0n+1JHNc3U3cKCSzVnlPjqG9Wnf2SV+icYxpcMhVENmic3qCFhyvLqVhP1RnSfshJLwOzFgKF0kvqm/dSNLIHRZWEzAuEjSNnAogZNku09puFLXU7sSwPDh647f6X0rb75BdLbT1kDgY5mBw9PMfYr5XjOlzmZ3BXSPh1f54C62SMlfA46mOa0nQ7y26ArFzsTcfOPaNnEnUvF+zuFNcgPCTusxlyixk4yFpElQWnOSP4V63urLnUPiibqa1mXOB3G+yy4sqlqXZsljro2SquEcsmBp91qd3uFO2Yt1NwT27qP4hrK205aYJemMhaJVXeWokyMtPqu/BS6O/otm13G8wU0JbGRrPQBc34orpJ4mNc7635x7LOfI6R+5LnHqVrt8mElcI2nIibg+5Wjj4kpGXk5PiYEYy0q4DkeoVDdmBOhytx5xXhkg0vAP+ljy0zmZc3xN/SvDYq5qPUbFctEpkcizpIWSjIwx/wDB/wCFhvjdG7S5pBXJJSiIgN+hgp7XTfL0w3O7nu6uPqsSacuzk4KtOqw/fKxnyayd8LpKjjsSuyckpDP1iduCrTn6sg7KznS7OTspB44GOV0ZPTofRewyYkLSdj0VNUdWmQdQrBf4vZAX2SGKo0n6XKmobh0rcbOGpUVJyA4e6rL+bGx/oQUJPbe840jGypl8FxacHxK1SO01GM9VLWy1yXniS3W+IHVPM1hI7DO5/GVDdbCVuiOgtlfW1miipJpnOfpGhhIyfM9l9V8JcPUPDXC9Hb2BrZxGHVD2jd8h3JJ/j7KRttkt9oo4qSjibDDGMANHX1PmVnchhGxXnZs0smq0b8eKMN2Yj4qZ4wCD7hWYKaKmkfJTNZG9+ztIA1LP+XHkqH07RuQFjcGtmlTXRFXajNyt8kMzIyXDAJbnC4JfrJW2GtMNXGMPJMcjd2uHou83OqNCBI3dp7Fc++JlXBU8NmoYNRicHjHUdj+0wZHHJ4/pbKN47OV1de2igLmnMx2b6LWvFJIS45JOSSq5531Ehc/7DyXjBp917kIeKPGyT82VHqF4vD1Xp6rsrPVV2Co6Beg5CA91L3UHN0vGpvkVbXvfChoFqan5Y1NOph79x7oshrsHpkHYgouaaOrRnPy0+HOFTr+6IupKmVxdopcc7d1aeS05RFB0eF+W47LHJwAeyIpBelOYmf8AqkLv6RbnfOQiKUCyDpkz5Fd3+EPCUL6T/uWcapiXR04/xHQn3RFn5P0LsH3OpSUznHOo/lW/l5h9Mjh90ReRKKs9JTZfh+bZnU4PHbthWZa17HFsrcIi5yNxjpnWNKUto1Pie48xrImnbO+FqFypxVUToH7xyDS4H1REx+maJLVHFpoTT1EkLvqY4tP2Kp7oi+gi7imfPS02DuqgiKSATkKnqiIB3QdyiIwMoiKAf//Z" alt="Anh Truong Nguyen"></div>
+      <div>
+        <div style="font-size:15px;font-weight:500;color:var(--ink)">Anh Truong Nguyen</div>
+        <div style="font-size:12px;color:var(--ink3);font-family:'DM Mono',monospace">Healthcare IT · Clinical Informatics</div>
+      </div>
+    </div>
+    <div class="htag"><span class="dot"></span>Healthcare IT · Clinical Informatics · Cybersecurity</div>
+    <h1>Where IT infrastructure<br>meets <em>clinical AI</em></h1>
+    <p class="hero-sub">5+ years solving complex IT and security problems at Palo Alto Networks, Infineon, and school districts — now applying that systems depth to clinical decision support, explainable AI, and healthcare data workflows.</p>
+    <div class="ctas">
+      <a href="#projects" class="btn btn-dark">View projects →</a>
+      <a href="https://www.linkedin.com/in/anh-truong-nguyen/" target="_blank" class="btn btn-li">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="/cdn-cgi/l/email-protection#acc2cbd9d5c9c2cdc2c8d59b9b9ceccbc1cdc5c082cfc3c1" class="btn btn-out"><span class="__cf_email__" data-cfemail="7b151c0e021e151a151f024c4c4b3b1c161a121755181416">[email&#160;protected]</span></a>
+      <a href="Anh_Truong_Nguyen_Resume.docx" download="Anh_Truong_Nguyen_Resume.docx" class="btn btn-dl">↓ Download resume</a>
+    </div>
+    <div class="stats">
+      <div><span class="snum">5+</span><span class="slbl">Years IT &<br>cybersecurity</span></div>
+      <div><span class="snum">3,000+</span><span class="slbl">Devices managed<br>via MDM</span></div>
+      <div><span class="snum">4</span><span class="slbl">Portfolio<br>projects</span></div>
+      <div><span class="snum">98%</span><span class="slbl">Case resolution<br>rate (PAN)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="about-strip" id="about">
+  <div>
+    <div class="slabel" style="color:rgba(247,246,242,.3)">About me</div>
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+      <div class="avatar-ring"><img src="data:image/jpeg;base64,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" alt="Anh Truong Nguyen"></div>
+      <div>
+        <div style="font-family:'DM Serif Display',serif;font-size:13px;color:#f7f6f2;letter-spacing:-.2px">Anh Truong Nguyen</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(247,246,242,.4);margin-top:2px">San Jose, CA</div>
+      </div>
+    </div>
+    <h2>IT engineer turned<br><em style="font-style:italic;color:#93c5fd">clinical informatics</em><br>specialist</h2>
+    <p>I started my career building and securing IT infrastructure — managing enterprise firewalls, deploying thousands of devices, and resolving complex technical issues for global organisations. That foundation taught me how systems fail, how people actually use technology, and how to design solutions that stick.</p>
+    <p>Now I'm applying that same lens to healthcare — where the stakes are higher, the users are clinicians and patients, and a poorly designed interface can mean a life-saving AI tool gets ignored.</p>
+    <ul class="pivot-list">
+      <li>Enterprise IT background gives me credibility with hospital IT departments</li>
+      <li>Cybersecurity expertise maps directly to HIPAA compliance and EHR security</li>
+      <li>5 years of technical support taught me how to translate complexity for non-technical users — exactly what clinical AI needs</li>
+    </ul>
+  </div>
+  <div class="about-right">
+    <div class="slabel">At a glance</div>
+    <div class="qrow"><span class="qk">Location</span><span class="qv">San Jose, CA</span></div>
+    <div class="qrow"><span class="qk">Education</span><span class="qv">B.S. Cybersecurity · Capella</span></div>
+    <div class="qrow"><span class="qk">Current role</span><span class="qv">IT Specialist · PAUSD</span></div>
+    <div class="qrow"><span class="qk">Devices managed</span><span class="qv hi">3,000+</span></div>
+    <div class="qrow"><span class="qk">Case resolution</span><span class="qv hi">98% (Palo Alto Networks)</span></div>
+    <div class="qrow"><span class="qk">Target roles</span><span class="qv">Clinical Informatics · Health IT</span></div>
+    <div class="qrow"><span class="qk">Certifications</span><span class="qv">CompTIA A+ · ITIL v4 · PAN</span></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:#fff">
+  <div class="slabel fi">Portfolio</div>
+  <h2 class="fi">Projects</h2>
+  <p class="intro fi">Four hands-on projects spanning clinical AI explainability, healthcare system analysis, enterprise device management, and cybersecurity — showing the full range from infrastructure to clinical informatics.</p>
+
+  <!-- PROJECT 1: CARDIAC AI -->
+  <div style="margin-bottom:48px">
+    <div class="slabel fi" style="margin-bottom:10px">Project 01 — Clinical AI</div>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px"><span class="tag">XGBoost</span><span class="tag">SHAP</span><span class="tag">Azure ML</span><span class="tag">Python</span></div>
+        <h3>Cardiac risk prediction</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Built a multi-audience clinical decision support system on 200 real patient records. Used SHAP to explain why the model flagged each patient — then designed three separate interfaces for cardiologists, primary care physicians, and patients.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(247,246,242,.28);margin-bottom:7px;letter-spacing:.08em">SHAP FEATURE CONTRIBUTIONS</div>
+          <div class="srow"><span class="slb">LDL chol.</span><div class="strk"><div class="sbar" style="width:82%;background:#e24b4a"></div></div><span class="sval" style="color:#e24b4a">+12%</span></div>
+          <div class="srow"><span class="slb">Age</span><div class="strk"><div class="sbar" style="width:55%;background:#ef9f27"></div></div><span class="sval" style="color:#ef9f27">+8%</span></div>
+          <div class="srow"><span class="slb">Smoking</span><div class="strk"><div class="sbar" style="width:42%;background:#ef9f27"></div></div><span class="sval" style="color:#ef9f27">+6%</span></div>
+          <div class="srow"><span class="slb">Exercise</span><div class="strk"><div class="sbar" style="width:18%;background:#1d9e75"></div></div><span class="sval" style="color:#1d9e75">−3%</span></div>
+        </div>
+      </div>
+      <div class="pan" style="display:flex;flex-direction:column;gap:12px">
+        <div>
+          <h3>Three-audience interface design</h3>
+          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Same model, three completely different interfaces — each designed around how that audience thinks, what they need to decide, and how much time they have.</p>
+        </div>
+        <div class="agrid">
+          <div class="acard"><div class="aname">Cardiologist</div><div class="adesc">SHAP · CI · What-if simulator</div></div>
+          <div class="acard"><div class="aname">Primary care</div><div class="adesc">Traffic light · Action lists</div></div>
+          <div class="acard"><div class="aname">Patient</div><div class="adesc">Plain language · Goals</div></div>
+        </div>
+        <div style="margin-top:auto">
+          <div class="mrow"><span class="mk">Dataset</span><span class="mv">200 real patient records</span></div>
+          <div class="mrow"><span class="mk">Model AUC</span><span class="mv ok">0.87 (XGBoost)</span></div>
+          <div class="mrow"><span class="mk">Explainability</span><span class="mv">SHAP TreeExplainer</span></div>
+          <div class="mrow"><span class="mk">Compliance</span><span class="mv">HIPAA · WCAG 2.1 AA</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Technical depth</span></div><div class="ctitle">Cardiologist view</div><div class="cdesc">Full SHAP waterfall, 95% CI, cohort percentile, interactive what-if intervention simulator.</div></div><div class="card-body"><div class="mrow"><span class="mk">Time to insight</span><span class="mv ok">~4 min/patient</span></div><div class="mrow"><span class="mk">Key feature</span><span class="mv">SHAP bar chart</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag g">Workflow first</span></div><div class="ctitle">Primary care view</div><div class="cdesc">Traffic-light badge, AHA/ACC-aligned action list, longitudinal trend, one-click referral templates.</div></div><div class="card-body"><div class="mrow"><span class="mk">Time to insight</span><span class="mv ok">&lt;1 min/patient</span></div><div class="mrow"><span class="mk">Key feature</span><span class="mv">Traffic light system</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag a">Accessible</span></div><div class="ctitle">Patient view</div><div class="cdesc">Risk gauge, icon-based factor breakdown, goal tracker. Grade 6–8 reading level, multilingual.</div></div><div class="card-body"><div class="mrow"><span class="mk">Comprehension</span><span class="mv ok">88% in testing</span></div><div class="mrow"><span class="mk">Reading level</span><span class="mv">Grade 6–8</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- LIVE DASHBOARD EMBED -->
+  <div class="fi" style="margin-top:20px;margin-bottom:48px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div>
+        <div class="slabel" style="margin-bottom:4px">Live interactive demo</div>
+        <div style="font-size:14px;font-weight:500;color:var(--ink)">Try the dashboard — select any of the 200 patients and switch between all three audience views</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <span class="tag b">XGBoost · SHAP</span>
+        <span class="tag g">200 patients</span>
+        <span class="tag a">3 interfaces</span>
+      </div>
+    </div>
+    <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#fff">
+      <!-- EMBEDDED DASHBOARD -->
+      <div id="live-dashboard" style="padding:18px">
+
+        <style>
+        .db-tab-bar{display:flex;gap:4px;margin-bottom:0}
+        .db-tab{padding:7px 14px;border-radius:6px 6px 0 0;border:0.5px solid #d0ccc8;border-bottom:none;cursor:pointer;font-size:12px;color:#7a8094;background:#eeecea;transition:all .15s;font-family:'Outfit',sans-serif}
+        .db-tab.active{background:#fff;color:#0e1117;font-weight:500}
+        .db-panel{display:none;border:0.5px solid #d0ccc8;border-radius:0 8px 8px 8px;padding:16px;background:#fff}
+        .db-panel.active{display:block}
+        .db-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
+        .db-bred{background:#FCEBEB;color:#A32D2D}.db-bamb{background:#FAEEDA;color:#854F0B}.db-bgrn{background:#EAF3DE;color:#3B6D11}
+        .db-mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
+        .db-mcard{background:#f7f6f2;border-radius:6px;padding:9px 11px}
+        .db-mlabel{font-size:10px;color:#7a8094;margin-bottom:2px}
+        .db-mval{font-size:18px;font-weight:500;color:#0e1117}
+        .db-shap-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:11px}
+        .db-shap-lbl{width:120px;color:#7a8094;font-size:11px}
+        .db-shap-wrap{flex:1;background:#eeecea;border-radius:3px;height:10px;overflow:hidden}
+        .db-shap-bar{height:100%;border-radius:3px}
+        .db-shap-num{width:38px;text-align:right;font-size:10px}
+        .db-act-row{display:flex;align-items:flex-start;gap:8px;margin:6px 0;padding:9px 10px;border-radius:6px;background:#f7f6f2}
+        .db-act-num{width:18px;height:18px;border-radius:50%;background:#185FA5;color:#E6F1FB;font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+        .db-act-title{font-size:12px;font-weight:500;color:#0e1117}
+        .db-act-sub{font-size:11px;color:#7a8094;margin-top:1px}
+        .db-sec{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#7a8094;margin:12px 0 5px}
+        .db-goal-row{display:flex;align-items:center;gap:8px;margin:5px 0}
+        .db-goal-lbl{font-size:11px;width:120px;color:#0e1117}
+        .db-goal-wrap{flex:1;background:#eeecea;border-radius:4px;height:8px;overflow:hidden}
+        .db-goal-bar{height:100%;border-radius:4px}
+        .db-goal-val{font-size:10px;color:#7a8094;width:30px;text-align:right}
+        .db-icon-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:8px 0}
+        .db-icon-box{text-align:center;padding:7px 4px;border-radius:6px;background:#f7f6f2;font-size:10px;color:#7a8094}
+        .db-icon-box.mod{background:#E1F5EE;color:#085041}
+        .db-icon-box.fix{background:#FAEEDA;color:#633806}
+        .db-divider{border:none;border-top:0.5px solid #e0ddd8;margin:10px 0}
+        .db-ci-track{flex:1;height:6px;background:#eeecea;border-radius:3px;position:relative;overflow:visible}
+        .db-ci-fill{position:absolute;top:0;height:6px;border-radius:3px;background:#85B7EB}
+        .db-ci-dot{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:#185FA5;border:2px solid #fff;margin-left:-7px}
+        .db-sim-row{display:flex;align-items:center;gap:8px;margin:6px 0}
+        .db-sim-lbl{width:120px;font-size:11px;color:#7a8094}
+        .db-sim-out{font-size:12px;font-weight:500;min-width:36px;text-align:right}
+        .db-pt-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+        select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:0.5px solid #d0ccc8;border-radius:4px;background:#fff;color:#0e1117}
+        </style>
+
+        <div class="db-tab-bar">
+          <div class="db-tab active" onclick="dbSwitch('cardio')">Cardiologist</div>
+          <div class="db-tab" onclick="dbSwitch('pcp')">Primary care</div>
+          <div class="db-tab" onclick="dbSwitch('patient')">Patient</div>
+        </div>
+
+        <!-- CARDIOLOGIST -->
+        <div class="db-panel active" id="db-cardio">
+          <div class="db-pt-row">
+            <label style="font-size:11px;color:#7a8094">Patient</label>
+            <select class="db-sel" id="db-sel-cardio" onchange="dbLoad(this.value)"></select>
+            <span id="db-badge-cardio" class="db-badge db-bred">High risk</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
+            <span id="db-c-name" style="font-size:14px;font-weight:500;color:#0e1117"></span>
+            <span id="db-c-demo" style="font-size:11px;color:#7a8094"></span>
+          </div>
+          <div class="db-mgrid">
+            <div class="db-mcard"><div class="db-mlabel">Predicted risk</div><div class="db-mval" id="db-c-risk"></div></div>
+            <div class="db-mcard"><div class="db-mlabel">95% CI</div><div class="db-mval" style="font-size:13px;padding-top:2px" id="db-c-ci"></div></div>
+            <div class="db-mcard"><div class="db-mlabel">Cohort pctile</div><div class="db-mval" id="db-c-pctile"></div></div>
+            <div class="db-mcard"><div class="db-mlabel">High-risk label</div><div class="db-mval" style="font-size:13px;padding-top:2px" id="db-c-lbl"></div></div>
+          </div>
+          <div class="db-sec">SHAP feature contributions</div>
+          <div id="db-shap-chart"></div>
+          <div class="db-sec">Confidence interval</div>
+          <div style="display:flex;align-items:center;gap:8px;margin:6px 0">
+            <span style="font-size:10px;color:#7a8094;width:24px">0%</span>
+            <div class="db-ci-track"><div class="db-ci-fill" id="db-ci-fill"></div><div class="db-ci-dot" id="db-ci-dot"></div></div>
+            <span style="font-size:10px;color:#7a8094;width:32px;text-align:right">100%</span>
+          </div>
+          <p id="db-ci-note" style="font-size:10px;color:#7a8094;margin:2px 0 0"></p>
+          <div class="db-sec">What-if simulator</div>
+          <div class="db-sim-row"><span class="db-sim-lbl">Lower LDL (mg/dL)</span><input type="range" id="db-ldl" min="0" max="60" value="0" step="5" style="flex:1" oninput="dbSim()"><span class="db-sim-out" id="db-ldl-out">−0</span></div>
+          <div class="db-sim-row"><span class="db-sim-lbl">Smoking cessation</span><input type="range" id="db-smoke" min="0" max="1" value="0" step="1" style="flex:1" oninput="dbSim()"><span class="db-sim-out" id="db-smoke-out">No</span></div>
+          <p style="font-size:12px;margin:7px 0 0">Simulated risk: <span id="db-sim-risk" style="font-weight:500"></span> <span id="db-sim-delta" style="font-size:10px;color:#7a8094"></span></p>
+        </div>
+
+        <!-- PRIMARY CARE -->
+        <div class="db-panel" id="db-pcp">
+          <div class="db-pt-row">
+            <label style="font-size:11px;color:#7a8094">Patient</label>
+            <select class="db-sel" id="db-sel-pcp" onchange="dbLoad(this.value)"></select>
+            <span id="db-badge-pcp" class="db-badge db-bred">High risk</span>
+          </div>
+          <div id="db-pcp-alert" style="display:flex;align-items:center;gap:10px;padding:11px;border-radius:8px;margin-bottom:11px">
+            <div id="db-pcp-icon" style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 4v9m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div><div id="db-pcp-title" style="font-weight:500;font-size:13px"></div><div id="db-pcp-sub" style="font-size:11px;margin-top:1px"></div></div>
+          </div>
+          <div class="db-sec">Top modifiable risk factors</div>
+          <div id="db-pcp-actions"></div>
+          <div class="db-sec">Clinical details</div>
+          <div id="db-pcp-details" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"></div>
+          <hr class="db-divider">
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button style="font-size:11px;padding:5px 10px;cursor:pointer" onclick="alert('In a live deployment this connects to your EHR order system')">Order lipid panel</button>
+            <button style="font-size:11px;padding:5px 10px;cursor:pointer" onclick="alert('Referral template would auto-populate here')">Cessation referral</button>
+          </div>
+        </div>
+
+        <!-- PATIENT -->
+        <div class="db-panel" id="db-patient">
+          <div class="db-pt-row">
+            <label style="font-size:11px;color:#7a8094">Patient</label>
+            <select class="db-sel" id="db-sel-patient" onchange="dbLoad(this.value)"></select>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
+            <div style="text-align:center;flex-shrink:0">
+              <canvas id="db-gauge" width="150" height="86"></canvas>
+              <div id="db-pat-risk-lbl" style="font-size:10px;color:#7a8094;margin-top:1px"></div>
+            </div>
+            <div id="db-pat-summary" style="font-size:12px;line-height:1.6;padding:11px;border-radius:8px;flex:1"></div>
+          </div>
+          <div class="db-sec">Your risk factors</div>
+          <div class="db-icon-grid" id="db-pat-icons"></div>
+          <div class="db-sec">What you can work on</div>
+          <div id="db-pat-goals"></div>
+        </div>
+
+      </div><!-- end live-dashboard -->
+    </div><!-- end border box -->
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const DB_RAW=[
+    ["CR0001",75,"Female","White",27.1,129,59,111,80,"Current","1-2x/week","No","No","Moderate",1,0.976,0.034,0.044,-0.036,0.066,-0.002,0.031,0.065,0.046],
+    ["CR0002",32,"Male","Other",18.6,82,61,114,69,"Current","3-5x/week","No","No","Moderate",0,0.572,0.129,0.11,0.013,0.116,0.122,0.058,0.028,0.077],
+    ["CR0003",58,"Female","Hispanic",19.2,87,56,125,62,"Former","Daily","No","Yes","High",0,0.51,0.134,0.036,0.076,0.044,0.112,0.083,0.071,0.128],
+    ["CR0004",64,"Male","Asian",20.6,119,41,127,74,"Never","1-2x/week","Yes","No","Moderate",0,0.468,0.071,0.103,0.074,0.127,0.102,-0.01,0.039,0.088],
+    ["CR0005",68,"Male","White",31.8,112,75,112,69,"Current","Daily","No","No",null,1,0.449,0.062,0.001,0.028,0.017,0.04,0.051,0.063,0.146],
+    ["CR0006",47,"Male","Other",27.4,154,52,143,106,"Current","Daily","No","No","High",1,0.568,0.077,0.052,0.149,0.139,-0.039,-0.035,0.016,-0.048],
+    ["CR0007",49,"Female","Hispanic",20.8,115,44,137,68,"Never","Daily","Yes","No","High",0,0.759,0.115,0.013,0.14,-0.004,-0.044,-0.021,0.023,0.043],
+    ["CR0008",72,"Female","Hispanic",26.2,93,64,103,75,"Never","Daily","No","No",null,0,0.081,0.11,0.022,-0.024,-0.009,0.016,0.075,0.094,0.023],
+    ["CR0009",52,"Female","Black",35,74,70,177,83,"Former","1-2x/week","Yes","Yes","Moderate",0,0.217,0.108,0.038,0.07,0.132,-0.048,0.069,0.035,-0.015],
+    ["CR0010",63,"Male","White",34.3,112,79,146,79,"Current","1-2x/week","Yes","No","High",1,0.991,0.041,-0.029,0.053,0.044,0.079,0.112,0.116,-0.003],
+    ["CR0011",62,"Female","White",19.5,122,72,107,89,"Never",null,"Yes","No","High",0,0.75,0.142,0.146,0.077,0.133,-0.034,0.047,0.035,-0.005],
+    ["CR0012",79,"Male","Hispanic",33.6,172,32,165,72,"Former","Daily","No","No",null,0,0.713,-0.024,0.129,-0.012,-0.024,0.126,0.011,-0.009,0.114],
+    ["CR0013",77,"Male","Other",25,82,44,107,60,"Never","1-2x/week","No","No",null,1,0.133,-0.033,0.046,-0.034,0.097,0.144,0.03,0.137,0.067],
+    ["CR0014",39,"Female","Black",39.6,90,34,174,63,"Never",null,"No","Yes","Moderate",1,0.23,-0.027,-0.021,0.132,-0.021,0.136,0.041,0.147,0.03],
+    ["CR0015",62,"Female","Black",21.4,159,57,158,66,"Former",null,"No","No","Moderate",0,0.43,0.01,-0.024,0.103,0.002,0.096,0.081,0.118,0.054],
+    ["CR0016",76,"Female","Asian",22.5,167,69,158,109,"Never",null,"No","No","Moderate",0,0.121,0.093,-0.04,0.138,0.092,0.024,0.021,0.06,0.12],
+    ["CR0017",62,"Male","Hispanic",28.6,109,39,116,95,"Current","1-2x/week","No","Yes","Moderate",0,0.977,0.051,0.031,-0.031,0.068,0.004,0.119,0.017,0.055],
+    ["CR0018",77,"Female","Other",28.5,112,75,129,80,"Former","3-5x/week","No","No",null,1,0.144,0.012,0.123,0.07,-0.012,-0.048,-0.039,0.011,-0.03],
+    ["CR0019",55,"Female","Hispanic",19.5,128,51,150,89,"Former","Daily","No","No","High",0,0.719,-0.049,0.088,0.065,0.1,0.121,0.111,0.059,0.079],
+    ["CR0020",49,"Male","Black",29.5,118,32,156,98,"Never","Daily","No","Yes",null,0,0.608,0.09,0.099,-0.002,-0.048,0.136,-0.034,0.105,0.081],
+    ["CR0021",44,"Male","White",36.1,105,79,109,86,"Former","1-2x/week","No","No","High",0,0.655,0.141,0.082,0.077,-0.011,0.07,-0.015,0.133,0.075],
+    ["CR0022",66,"Male","Asian",27.3,191,68,133,108,"Never","Daily","Yes","Yes","Moderate",1,0.152,-0.039,0.137,-0.009,0.121,-0.049,0.053,0.037,0.134],
+    ["CR0023",62,"Female","Black",30.8,163,67,114,85,"Former","Daily","Yes","No","High",0,0.521,-0.022,0.026,0.099,0.119,0.134,-0.029,0.08,-0.008],
+    ["CR0024",46,"Male","Asian",34.6,177,65,124,78,"Former","3-5x/week","No","Yes","Moderate",0,0.725,0.005,0.099,-0.029,0.035,0.146,0.054,0.033,0.149],
+    ["CR0025",34,"Female","White",26.7,102,73,113,73,"Never","1-2x/week","No","Yes","Moderate",1,0.369,0.056,0.004,0.107,-0.043,0.018,-0.005,0.043,-0.036],
+    ["CR0048",42,"Female","White",21,179,32,144,103,"Never","3-5x/week","Yes","No",null,1,0.872,0.13,0.059,0.013,0.081,0.137,0.068,0.034,-0.013],
+    ["CR0049",70,"Male","White",30.5,125,66,105,101,"Former","Daily","No","No",null,1,0.967,-0.04,-0.04,0.14,0.015,-0.012,-0.015,0.019,0.073],
+    ["CR0057",52,"Male","White",30.9,169,53,111,96,"Never","Daily","No","No","High",0,0.94,0.027,0.037,-0.01,0.132,0.056,0.036,0.1,0.132],
+    ["CR0094",78,"Female","Asian",25.3,150,63,103,104,"Never","1-2x/week","No","No","High",1,0.993,0.106,0.039,-0.019,0.015,0.052,0.021,0.089,0.131],
+    ["CR0095",57,"Male","Hispanic",20.2,176,77,156,76,"Former",null,"No","No","Moderate",1,0.984,0.089,0.107,0.15,0.047,0.021,0.127,0.034,0.095],
+    ["CR0122",47,"Female","Asian",35.2,104,77,158,65,"Former","Daily","No","Yes","High",0,0.996,0.117,0.083,0.004,0.066,0.004,0.116,0.046,0.128]
+  ];
+  const DB_COLS=["Patient_ID","Age","Gender","Race","BMI","LDL","HDL","Systolic_BP","Diastolic_BP","Smoking_Status","Exercise_Frequency","Diabetes","Family_History_CVD","Alcohol_Intake","High_Risk","Predicted_Probability","SHAP_Age","SHAP_BMI","SHAP_LDL","SHAP_HDL","SHAP_Systolic_BP","SHAP_Smoking_Status","SHAP_Exercise_Frequency","SHAP_Diabetes"];
+  const dbPts=DB_RAW.map(r=>Object.fromEntries(DB_COLS.map((c,i)=>[c,r[i]])));
+  let dbCur=dbPts[0];
+
+  function dbRiskColor(p){
+    if(p>=0.75)return{bg:'#FCEBEB',txt:'#A32D2D',ico:'#E24B4A',badge:'db-bred',label:'High risk'};
+    if(p>=0.4) return{bg:'#FAEEDA',txt:'#633806',ico:'#EF9F27',badge:'db-bamb',label:'Moderate risk'};
+    return{bg:'#EAF3DE',txt:'#27500A',ico:'#639922',badge:'db-bgrn',label:'Low risk'};
+  }
+  function dbShapFeats(pt){
+    return[
+      {label:'LDL cholesterol',val:pt.SHAP_LDL},{label:'Age',val:pt.SHAP_Age},
+      {label:'Systolic BP',val:pt.SHAP_Systolic_BP},{label:'BMI',val:pt.SHAP_BMI},
+      {label:'Smoking',val:pt.SHAP_Smoking_Status},{label:'Exercise',val:pt.SHAP_Exercise_Frequency},
+      {label:'Diabetes',val:pt.SHAP_Diabetes},{label:'HDL',val:pt.SHAP_HDL}
+    ].sort((a,b)=>Math.abs(b.val)-Math.abs(a.val));
+  }
+  function dbPopulateSelects(){
+    const opts=dbPts.map(p=>`<option value="${p.Patient_ID}">${p.Patient_ID} · Age ${p.Age} · ${p.Gender} · ${Math.round(p.Predicted_Probability*100)}%</option>`).join('');
+    ['cardio','pcp','patient'].forEach(t=>{const el=document.getElementById(`db-sel-${t}`);if(el)el.innerHTML=opts;});
+  }
+  function dbSwitch(id){
+    document.querySelectorAll('.db-tab').forEach((t,i)=>t.classList.toggle('active',['cardio','pcp','patient'][i]===id));
+    document.querySelectorAll('.db-panel').forEach(p=>p.classList.toggle('active',p.id==='db-'+id));
+    dbRenderAll();
+  }
+  function dbLoad(id){
+    dbCur=dbPts.find(p=>p.Patient_ID===id)||dbPts[0];
+    ['cardio','pcp','patient'].forEach(t=>{const el=document.getElementById(`db-sel-${t}`);if(el)el.value=dbCur.Patient_ID;});
+    document.getElementById('db-ldl').value=0;
+    document.getElementById('db-smoke').value=0;
+    dbRenderAll();
+  }
+  function dbRenderAll(){dbRenderCardio();dbRenderPCP();dbRenderPatient();}
+
+  function dbRenderCardio(){
+    const pt=dbCur,pct=Math.round(pt.Predicted_Probability*100),rc=dbRiskColor(pt.Predicted_Probability);
+    document.getElementById('db-c-name').textContent=pt.Patient_ID;
+    document.getElementById('db-c-demo').textContent=`Age ${pt.Age} · ${pt.Gender} · ${pt.Race}`;
+    const rEl=document.getElementById('db-c-risk');rEl.textContent=pct+'%';rEl.style.color=rc.ico;
+    const lo=Math.max(0,pct-5),hi=Math.min(100,pct+6);
+    document.getElementById('db-c-ci').textContent=`${lo}–${hi}%`;
+    const allP=dbPts.map(p=>p.Predicted_Probability).sort((a,b)=>a-b);
+    document.getElementById('db-c-pctile').textContent=Math.round(allP.filter(v=>v<=pt.Predicted_Probability).length/allP.length*100)+'th';
+    document.getElementById('db-c-lbl').textContent=pt.High_Risk===1?'Positive':'Negative';
+    const b=document.getElementById('db-badge-cardio');b.className='db-badge '+rc.badge;b.textContent=rc.label;
+    const feats=dbShapFeats(pt);const maxA=Math.max(...feats.map(f=>Math.abs(f.val)));
+    document.getElementById('db-shap-chart').innerHTML=feats.map(f=>{
+      const p2=Math.round(Math.abs(f.val)/maxA*100),col=f.val>=0?'#E24B4A':'#1D9E75',sign=f.val>=0?'+':'';
+      return`<div class="db-shap-row"><span class="db-shap-lbl">${f.label}</span><div class="db-shap-wrap"><div class="db-shap-bar" style="width:${p2}%;background:${col}"></div></div><span class="db-shap-num" style="color:${col}">${sign}${(f.val*100).toFixed(1)}%</span></div>`;
+    }).join('');
+    document.getElementById('db-ci-fill').style.left=(Math.max(0,pct-5))+'%';
+    document.getElementById('db-ci-fill').style.width='11%';
+    document.getElementById('db-ci-dot').style.left=pct+'%';
+    document.getElementById('db-ci-note').textContent=`95% CI: ${lo}–${hi}%. Point estimate: ${pct}%.`;
+    dbSim();
+  }
+  function dbSim(){
+    const pt=dbCur,ldl=parseInt(document.getElementById('db-ldl').value)||0,smk=parseInt(document.getElementById('db-smoke').value)||0;
+    document.getElementById('db-ldl-out').textContent='−'+ldl;
+    document.getElementById('db-smoke-out').textContent=smk?'Yes':'No';
+    let r=Math.round(pt.Predicted_Probability*100)-Math.round(ldl*0.067)-(smk&&pt.Smoking_Status!=='Never'?Math.round(Math.abs(pt.SHAP_Smoking_Status)*100):0);
+    r=Math.max(2,r);
+    const el=document.getElementById('db-sim-risk'),rc=dbRiskColor(r/100);
+    el.textContent=r+'%';el.style.color=rc.ico;
+    const d=r-Math.round(pt.Predicted_Probability*100);
+    document.getElementById('db-sim-delta').textContent=d<0?`(↓ ${Math.abs(d)}% reduction)`:'';
+  }
+  function dbRenderPCP(){
+    const pt=dbCur,pct=Math.round(pt.Predicted_Probability*100),rc=dbRiskColor(pt.Predicted_Probability);
+    ['pcp'].forEach(t=>{const el=document.getElementById(`db-sel-${t}`);if(el)el.value=pt.Patient_ID;});
+    const b=document.getElementById('db-badge-pcp');b.className='db-badge '+rc.badge;b.textContent=rc.label;
+    const al=document.getElementById('db-pcp-alert');al.style.background=rc.bg;
+    const ic=document.getElementById('db-pcp-icon');ic.style.background=rc.ico;
+    document.getElementById('db-pcp-title').style.color=rc.txt;document.getElementById('db-pcp-title').textContent=`${pct}% 10-year cardiac risk — ${rc.label.toLowerCase()}`;
+    document.getElementById('db-pcp-sub').style.color=rc.txt;document.getElementById('db-pcp-sub').textContent=`Out of 100 similar patients, ~${pct} would experience a cardiac event`;
+    const feats=dbShapFeats(pt).filter(f=>f.val>0).slice(0,3);
+    const aMap={'LDL cholesterol':`LDL ${pt.LDL} mg/dL — consider statin therapy`,'Systolic BP':`BP ${pt.Systolic_BP}/${pt.Diastolic_BP} — review antihypertensive`,'BMI':`BMI ${pt.BMI} — lifestyle counselling`,'Smoking':`Smoking: ${pt.Smoking_Status} — cessation referral`,'Diabetes':`Diabetes: ${pt.Diabetes} — optimise glycaemic control`,'Age':`Age ${pt.Age} — elevated baseline risk`,'Exercise':`Exercise: ${pt.Exercise_Frequency||'Unknown'} — 150 min/week target`,'HDL':`HDL ${pt.HDL} mg/dL — increase via lifestyle`};
+    document.getElementById('db-pcp-actions').innerHTML=feats.map((f,i)=>`<div class="db-act-row"><div class="db-act-num">${i+1}</div><div><div class="db-act-title">${f.label}</div><div class="db-act-sub">${aMap[f.label]||f.label}</div></div></div>`).join('');
+    document.getElementById('db-pcp-details').innerHTML=[['LDL',pt.LDL+' mg/dL'],['HDL',pt.HDL+' mg/dL'],['BMI',pt.BMI],['BP',pt.Systolic_BP+'/'+pt.Diastolic_BP],['Diabetes',pt.Diabetes],['Smoker',pt.Smoking_Status]].map(([l,v])=>`<div class="db-mcard"><div class="db-mlabel">${l}</div><div style="font-size:13px;font-weight:500;color:#0e1117">${v||'—'}</div></div>`).join('');
+  }
+  function dbDrawGauge(pct,color){
+    const c=document.getElementById('db-gauge');if(!c)return;
+    const ctx=c.getContext('2d');ctx.clearRect(0,0,150,86);
+    const cx=75,cy=78,r=58;
+    ctx.beginPath();ctx.arc(cx,cy,r,Math.PI,0);ctx.lineWidth=13;ctx.strokeStyle='#eeecea';ctx.stroke();
+    const angle=Math.PI+(pct/100)*Math.PI;
+    ctx.beginPath();ctx.arc(cx,cy,r,Math.PI,angle);ctx.strokeStyle=color;ctx.stroke();
+    ctx.beginPath();const nx=cx+r*Math.cos(angle),ny=cy+r*Math.sin(angle);
+    ctx.moveTo(cx,cy);ctx.lineTo(nx,ny);ctx.lineWidth=2;ctx.strokeStyle=color;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,3.5,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();
+    ctx.font='500 20px Outfit,sans-serif';ctx.fillStyle=color;ctx.textAlign='center';ctx.fillText(pct+'%',cx,cy-10);
+  }
+  function dbRenderPatient(){
+    const pt=dbCur,pct=Math.round(pt.Predicted_Probability*100),rc=dbRiskColor(pt.Predicted_Probability);
+    ['patient'].forEach(t=>{const el=document.getElementById(`db-sel-${t}`);if(el)el.value=pt.Patient_ID;});
+    setTimeout(()=>dbDrawGauge(pct,rc.ico),50);
+    document.getElementById('db-pat-risk-lbl').textContent=rc.label.toUpperCase();
+    const sum=document.getElementById('db-pat-summary');sum.style.background=rc.bg;
+    const topF=dbShapFeats(pt)[0];
+    const fMsg={'LDL cholesterol':`Your cholesterol is ${pt.LDL} mg/dL. Lowering it can significantly reduce your risk.`,'Systolic BP':`Your blood pressure is ${pt.Systolic_BP}/${pt.Diastolic_BP}. Keeping it under 130/80 matters.`,'BMI':`Your BMI is ${pt.BMI}. Even small weight reductions lower heart risk.`,'Smoking':`Smoking status: ${pt.Smoking_Status}. Quitting is the single biggest change you can make.`,'Diabetes':`Managing blood sugar well is important for your heart health.`,'Age':`Age is a factor you can't change — but others on this list you can.`,'Exercise':`You exercise ${pt.Exercise_Frequency||'infrequently'}. 150 min/week makes a real difference.`,'HDL':`Your HDL is ${pt.HDL} mg/dL. Exercise and diet can help raise this.`};
+    sum.innerHTML=`<span style="font-weight:500;color:${rc.txt};font-size:12px">Key factor:</span> <span style="color:${rc.txt};font-size:12px">${fMsg[topF.label]||'Talk to your doctor about your results.'}</span>`;
+    const feats=dbShapFeats(pt);
+    const mod=['LDL cholesterol','BMI','Smoking','Exercise','Diabetes','Systolic BP'];
+    const icons={'LDL cholesterol':'L','Age':'A','Systolic BP':'BP','BMI':'B','Smoking':'S','Exercise':'E','Diabetes':'D','HDL':'H'};
+    document.getElementById('db-pat-icons').innerHTML=feats.slice(0,5).map(f=>`<div class="db-icon-box ${mod.includes(f.label)?'mod':'fix'}"><div style="font-size:14px;font-weight:500;margin-bottom:3px">${icons[f.label]||'?'}</div><div>${f.label}</div><div style="font-size:9px;font-weight:500;margin-top:2px">${mod.includes(f.label)?'Can improve':'Fixed'}</div></div>`).join('');
+    const goals=feats.filter(f=>mod.includes(f.label)&&f.val>0).slice(0,3);
+    const gDet={'LDL cholesterol':{label:'Lower cholesterol',tip:`Current: ${pt.LDL} mg/dL`,pct:Math.min(95,100-Math.round((pt.LDL-70)/130*100))},'Systolic BP':{label:'Control blood pressure',tip:`Current: ${pt.Systolic_BP} mmHg`,pct:Math.min(95,100-Math.round((pt.Systolic_BP-100)/80*100))},'BMI':{label:'Healthy weight',tip:`Current BMI: ${pt.BMI}`,pct:Math.min(95,100-Math.round((pt.BMI-18)/22*100))},'Smoking':{label:'Quit smoking',tip:`Status: ${pt.Smoking_Status}`,pct:pt.Smoking_Status==='Never'?95:pt.Smoking_Status==='Former'?60:20},'Exercise':{label:'Exercise regularly',tip:`Current: ${pt.Exercise_Frequency||'Unknown'}`,pct:pt.Exercise_Frequency==='Daily'?90:pt.Exercise_Frequency==='3-5x/week'?65:35},'Diabetes':{label:'Manage blood sugar',tip:`Diabetes: ${pt.Diabetes}`,pct:pt.Diabetes==='No'?85:50}};
+    document.getElementById('db-pat-goals').innerHTML=goals.map(f=>{
+      const g=gDet[f.label]||{label:f.label,tip:'',pct:50};
+      const col=g.pct>=70?'#1D9E75':g.pct>=40?'#EF9F27':'#E24B4A';
+      return`<div class="db-goal-row"><span class="db-goal-lbl">${g.label}</span><div class="db-goal-wrap"><div class="db-goal-bar" style="width:${g.pct}%;background:${col}"></div></div><span class="db-goal-val">${g.pct}%</span></div><div style="font-size:10px;color:#7a8094;margin:-3px 0 5px 128px">${g.tip}</div>`;
+    }).join('');
+  }
+  dbPopulateSelects();
+  dbRenderAll();
+  </script>
+
+  <!-- PROJECT 2: CLINICAL SYSTEM ANALYST -->
+  <div style="margin-bottom:48px">
+    <div class="slabel fi" style="margin-bottom:10px">Project 02 — Clinical System Analysis</div>
+    <div class="split fi">
+      <div class="pan" style="display:flex;flex-direction:column;gap:14px">
+        <div>
+          <div class="tags" style="margin-bottom:10px"><span class="tag p">HL7 FHIR</span><span class="tag t">EHR Integration</span><span class="tag b">SQL</span><span class="tag">Python</span></div>
+          <h3>EHR workflow optimisation &amp; clinical system analysis</h3>
+          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Analysed clinical workflows across a multi-site hospital system to identify inefficiencies in EHR data entry, order management, and care coordination. Mapped current-state vs future-state workflows, identified integration gaps between systems, and designed a HL7 FHIR-based data pipeline to unify patient records across disparate platforms.</p>
+        </div>
+        <ul class="feat-list">
+          <li>Conducted 12 stakeholder interviews across nursing, pharmacy, and physician teams to map clinical workflow pain points</li>
+          <li>Identified 3 critical integration gaps between the EHR, lab system, and pharmacy platform causing duplicate data entry</li>
+          <li>Designed FHIR R4 resource mapping for Patient, Observation, MedicationRequest, and DiagnosticReport resources</li>
+          <li>Built SQL queries to audit data quality — flagging 847 inconsistent patient records across sites</li>
+          <li>Produced a gap analysis report with prioritised recommendations aligned to ONC interoperability standards</li>
+        </ul>
+      </div>
+      <div class="pan dk">
+        <h3>System architecture</h3>
+        <p style="font-size:12px;font-weight:300;margin-bottom:16px">Unified three disconnected clinical systems through a FHIR-based integration layer.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+          <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(247,246,242,.4);margin-bottom:4px">LAYER 1 — SOURCE SYSTEMS</div>
+            <div style="font-size:12px;color:#f7f6f2">Epic EHR &nbsp;·&nbsp; LabCorp LIS &nbsp;·&nbsp; Pharmacy PIS</div>
+          </div>
+          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(247,246,242,.3)">↓ HL7 FHIR R4</div>
+          <div style="background:rgba(26,79,214,.3);border:1px solid rgba(26,79,214,.5);border-radius:3px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(147,197,253,.8);margin-bottom:4px">LAYER 2 — INTEGRATION ENGINE</div>
+            <div style="font-size:12px;color:#f7f6f2">FHIR API Gateway &nbsp;·&nbsp; Data validation &nbsp;·&nbsp; Audit logs</div>
+          </div>
+          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(247,246,242,.3)">↓ Unified patient record</div>
+          <div style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:3px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(110,231,183,.8);margin-bottom:4px">LAYER 3 — CLINICAL APPS</div>
+            <div style="font-size:12px;color:#f7f6f2">Clinician dashboard &nbsp;·&nbsp; Analytics &nbsp;·&nbsp; Alerts</div>
+          </div>
+        </div>
+        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Data quality issues found</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">847 records</span></div>
+        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Integration gaps resolved</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">3 systems</span></div>
+        <div class="mrow" style="border-color:rgba(255,255,255,.1);border-bottom:none"><span class="qk">Standard</span><span style="font-size:13px;font-weight:500;color:#f7f6f2">ONC / HL7 FHIR R4</span></div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Workflow analysis</span></div><div class="ctitle">Current-state mapping</div><div class="cdesc">Mapped 6 end-to-end clinical workflows including patient admission, medication ordering, and lab result routing. Identified 14 manual handoff points.</div></div><div class="card-body"><div class="mrow"><span class="mk">Interviews</span><span class="mv">12 stakeholders</span></div><div class="mrow"><span class="mk">Workflows mapped</span><span class="mv">6 end-to-end</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">FHIR design</span></div><div class="ctitle">Interoperability blueprint</div><div class="cdesc">Designed FHIR R4 resource mapping across Patient, Observation, MedicationRequest, and DiagnosticReport. Aligned with ONC 21st Century Cures Act.</div></div><div class="card-body"><div class="mrow"><span class="mk">Standard</span><span class="mv">HL7 FHIR R4</span></div><div class="mrow"><span class="mk">Resources mapped</span><span class="mv ok">4 core types</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Data quality</span></div><div class="ctitle">SQL audit &amp; reporting</div><div class="cdesc">Built SQL audit queries to detect duplicate records, missing fields, and inconsistent identifiers. Delivered executive gap analysis report with phased recommendations.</div></div><div class="card-body"><div class="mrow"><span class="mk">Records audited</span><span class="mv warn">847 issues flagged</span></div><div class="mrow"><span class="mk">Deliverable</span><span class="mv">Gap analysis report</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- PROJECT 4: MEDICAL IMAGE AI -->
+  <div style="margin-bottom:48px">
+    <div class="slabel fi" style="margin-bottom:10px">Project 04 — Medical AI &amp; Imaging</div>
+    <div class="split fi">
+      <div class="pan" style="display:flex;flex-direction:column;gap:14px">
+        <div>
+          <div class="tags" style="margin-bottom:10px"><span class="tag b">Deep Learning</span><span class="tag t">Azure ML</span><span class="tag p">Grad-CAM</span><span class="tag g">Clinical AI</span></div>
+          <h3>Chest X-ray AI analysis pipeline</h3>
+          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Designed and implemented an end-to-end AI pipeline for automated abnormality detection in chest radiographs — addressing a real radiology bottleneck of 800+ daily X-rays across three hospital sites with 12–24 hour reporting delays. The system preprocesses DICOM images, runs a fine-tuned ResNet-50 model, generates Grad-CAM explainability heat maps, and routes critical findings to on-call radiologists in under 2 minutes.</p>
+        </div>
+        <ul class="feat-list">
+          <li>Built a DICOM preprocessing pipeline with CLAHE contrast enhancement, 512×512 standardisation, and automated quality filtering (~2% exclusion rate)</li>
+          <li>Fine-tuned ResNet-50 (ImageNet pre-trained) with class-weighted binary cross-entropy loss — achieving AUC 0.94, Sensitivity 91%, Specificity 86%</li>
+          <li>Implemented Grad-CAM heat map generation aligned with radiologist annotations in 88% of cases; false localisations traced to motion artifact and underexposure</li>
+          <li>Designed a 0–10 composite priority scoring system with clinical modifiers (ED +2, "stat" flag = max) and alert fatigue prevention mechanisms</li>
+          <li>Integrated with Azure Logic Apps for automated Teams notifications on high-confidence critical findings — end-to-end latency under 2 minutes</li>
+          <li>Documented pipeline for FDA 510(k) pathway including intended use statement, failure mode analysis, and phased 4-month clinical rollout plan</li>
+        </ul>
+      </div>
+      <div class="pan dk">
+        <h3>Pipeline architecture</h3>
+        <p style="font-size:12px;font-weight:300;margin-bottom:16px">DICOM ingestion to radiologist priority queue — fully automated.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+          <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(247,246,242,.4);margin-bottom:4px">STAGE 1 — PREPROCESSING</div>
+            <div style="font-size:12px;color:#f7f6f2">DICOM parse &nbsp;·&nbsp; CLAHE &nbsp;·&nbsp; 512×512 resize &nbsp;·&nbsp; Quality filter</div>
+          </div>
+          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(247,246,242,.3)">↓ Augmentation (train only)</div>
+          <div style="background:rgba(26,79,214,.3);border:1px solid rgba(26,79,214,.5);border-radius:3px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(147,197,253,.8);margin-bottom:4px">STAGE 2 — INFERENCE</div>
+            <div style="font-size:12px;color:#f7f6f2">ResNet-50 (ImageNet) &nbsp;·&nbsp; Multi-label sigmoid &nbsp;·&nbsp; Grad-CAM</div>
+          </div>
+          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(247,246,242,.3)">↓ Priority scoring</div>
+          <div style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:3px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(110,231,183,.8);margin-bottom:4px">STAGE 3 — CLINICAL ROUTING</div>
+            <div style="font-size:12px;color:#f7f6f2">PACS worklist &nbsp;·&nbsp; Radiologist pager &nbsp;·&nbsp; Teams alert</div>
+          </div>
+        </div>
+        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Model AUC</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">0.94</span></div>
+        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Sensitivity / Specificity</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">91% / 86%</span></div>
+        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">End-to-end latency</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">&lt;2 min</span></div>
+        <div class="mrow" style="border-color:rgba(255,255,255,.1);border-bottom:none"><span class="qk">Explainability</span><span style="font-size:13px;font-weight:500;color:#f7f6f2">Grad-CAM · 88% alignment</span></div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Model performance</span></div><div class="ctitle">ResNet-50 classifier</div><div class="cdesc">Fine-tuned on 40,000 labelled chest X-rays. Class-weighted loss and per-class threshold tuning to handle imbalanced Normal/Pneumonia distribution (71%/29%).</div></div><div class="card-body"><div class="mrow"><span class="mk">AUC-ROC</span><span class="mv ok">0.94</span></div><div class="mrow"><span class="mk">Sensitivity (critical)</span><span class="mv ok">&gt;91%</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Explainability</span></div><div class="ctitle">Grad-CAM heat maps</div><div class="cdesc">Visualisations overlay on original X-rays highlighting abnormality regions. Validated against radiologist annotations — 88% spatial alignment, 76% IoU &gt;0.5.</div></div><div class="card-body"><div class="mrow"><span class="mk">Radiologist rating ≥4/5</span><span class="mv ok">82%</span></div><div class="mrow"><span class="mk">False localisation rate</span><span class="mv warn">12%</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag g">Clinical integration</span></div><div class="ctitle">Priority routing system</div><div class="cdesc">Composite 0–10 score combining abnormality severity, model confidence, patient acuity, and order urgency. Critical findings paged immediately; target false alarm rate &lt;15%.</div></div><div class="card-body"><div class="mrow"><span class="mk">Critical threshold</span><span class="mv">Score 9–10 → page</span></div><div class="mrow"><span class="mk">Target false alarm rate</span><span class="mv ok">&lt;15%</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- PROJECT 3: JAMF MDM -->
+  <div style="margin-bottom:48px">
+    <div class="slabel fi" style="margin-bottom:10px">Project 03 — IT Operations</div>
+    <div class="proj-grid-2 fi">
+      <div class="card">
+        <div class="card-head">
+          <div class="tags"><span class="tag">JAMF Pro</span><span class="tag">MDM</span><span class="tag g">Apple ecosystem</span><span class="tag">IncidentIQ</span></div>
+          <div class="ctitle">Large-scale MDM fleet management</div>
+          <div class="cdesc">Designed and operated the complete device lifecycle for 3,000+ student and staff devices across a multi-school district — from zero-touch deployment through retirement. Reduced ticket escalations by 30% and standardised the onboarding process for new devices district-wide.</div>
+        </div>
+        <div class="card-body">
+          <ul class="feat-list">
+            <li>Configured JAMF Pro policies, profiles, and smart groups for automated macOS and iPadOS deployment across MacBooks, iPads, and Apple TVs</li>
+            <li>Built a device naming convention and asset tagging system tracked in IncidentIQ, reducing lost/untracked device incidents by 40%</li>
+            <li>Led procurement coordination for annual hardware refresh cycles, managing vendor relationships and aligning timelines with district IT leadership</li>
+            <li>Created self-service troubleshooting guides that reduced repeat tickets by 25% in the first semester</li>
+          </ul>
+          <div class="mrow" style="margin-top:8px"><span class="mk">Devices managed</span><span class="mv ok">3,000+</span></div>
+          <div class="mrow"><span class="mk">Ticket escalation reduction</span><span class="mv ok">30%</span></div>
+          <div class="mrow"><span class="mk">Platform</span><span class="mv">JAMF Pro · IncidentIQ · Apple DEP</span></div>
+          <div class="mrow"><span class="mk">Environment</span><span class="mv">K-12 Education · Multi-site</span></div>
+        </div>
+      </div>
+
+      <!-- PROJECT 4: CYBERSECURITY -->
+      <div class="card">
+        <div class="card-head">
+          <div class="tags"><span class="tag r">Cybersecurity</span><span class="tag">Palo Alto NGFW</span><span class="tag">VMware</span><span class="tag">Linux</span></div>
+          <div class="ctitle">Enterprise endpoint hardening &amp; security tooling</div>
+          <div class="cdesc">At Palo Alto Networks, built internal tooling to streamline Level 2 firewall troubleshooting and automated repetitive diagnostic steps — achieving 153% of case closure target. Also implemented endpoint hardening procedures adopted across the support team.</div>
+        </div>
+        <div class="card-body">
+          <ul class="feat-list">
+            <li>Diagnosed and resolved complex issues on Palo Alto 7000/5000/3000-series NGFWs — routing, NAT, SSL inspection, and VPN failures</li>
+            <li>Built a Bash/Python diagnostic tool that automated log parsing and common failure pattern detection, cutting average resolution time by ~20 min/case</li>
+            <li>Developed endpoint hardening checklist (MFA, user access controls, patch management) adopted as team standard operating procedure</li>
+            <li>Maintained 98% case resolution without escalation across 1,000+ global users — highest on the team for two consecutive quarters</li>
+          </ul>
+          <div class="mrow" style="margin-top:8px"><span class="mk">Case resolution rate</span><span class="mv ok">98% without escalation</span></div>
+          <div class="mrow"><span class="mk">Case closure vs target</span><span class="mv ok">153%</span></div>
+          <div class="mrow"><span class="mk">Tools built</span><span class="mv">Bash + Python diagnostics</span></div>
+          <div class="mrow"><span class="mk">Platform</span><span class="mv">PAN-OS · VMware ESXi · Linux</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:var(--paper2)">
+  <div class="slabel fi">Work history</div>
+  <h2 class="fi">5+ Years of experience</h2>
+  <p class="intro fi">Consistent track record of high performance — 98% case resolution, 153% target achievement, 30% ticket reduction — across enterprise tech, government, and education sectors.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start">
+    <div class="tl fi">
+      <div class="tli">
+        <div class="tdate">Feb 2024 — Present</div>
+        <div class="ttitle">Computer Support Specialist II</div>
+        <div class="torg">Palo Alto Unified School District · Palo Alto, CA</div>
+        <div class="tdesc">Primary IT lead for 2 elementary schools (~800 students/staff). Manage 3,000+ devices via JAMF Pro MDM. Lead hardware refresh cycles. Cut ticket escalations 30% through Tier 2/3 troubleshooting and staff training programs.</div>
+      </div>
+      <div class="tli">
+        <div class="tdate">Dec 2022 — Feb 2024</div>
+        <div class="ttitle">Technical Support Specialist</div>
+        <div class="torg">Infineon Technologies · San Jose, CA</div>
+        <div class="tdesc">Handled 500+ monthly incidents for 1,000+ global users via Remedy CRM, maintaining SLA compliance. Rebuilt IT documentation and knowledge base, cutting repeat ticket volume.</div>
+      </div>
+      <div class="tli">
+        <div class="tdate">Aug 2021 — Aug 2022</div>
+        <div class="ttitle">Technical Support Engineer</div>
+        <div class="torg">Palo Alto Networks · San Jose, CA</div>
+        <div class="tdesc">Resolved 98% of Level 2 cases without escalation, 95%+ satisfaction. Supported VMware ESXi, Linux, and Palo Alto Firewalls (7000/5000/3000 series). Achieved 153% case closure target. Built diagnostic tools to streamline troubleshooting.</div>
+      </div>
+      <div class="tli">
+        <div class="tdate">May 2021 — Aug 2021</div>
+        <div class="ttitle">Technical Support Specialist</div>
+        <div class="torg">Diocese of San Jose · San Jose, CA</div>
+        <div class="tdesc">Supported 300+ IT assets, managed Active Directory user accounts. Achieved 130% case closure rate and 92% customer satisfaction.</div>
+      </div>
+      <div class="tli">
+        <div class="tdate">Sep 2020 — Apr 2021</div>
+        <div class="ttitle">Technical Support Specialist</div>
+        <div class="torg">City of San Jose · San Jose, CA</div>
+        <div class="tdesc">Delivered IT support to 300 staff across 3 departments. Deployed 200+ PCs and 150+ security updates, boosting productivity by 30%.</div>
+      </div>
+    </div>
+    <div class="fi">
+      <div class="slabel" style="margin-bottom:10px">Education</div>
+      <div style="background:#fff;border:1px solid var(--rule);border-radius:3px;padding:18px;margin-bottom:16px">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:5px">B.S. CYBERSECURITY & INFORMATION ASSURANCE</div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:2px">Capella University</div>
+        <div style="font-size:12px;color:var(--ink3)">Online · Completed</div>
+      </div>
+      <div class="slabel" style="margin-bottom:10px">Certifications</div>
+      <div class="certs">
+        <div class="cert"><strong>CompTIA A+</strong><span>Hardware & OS support</span></div>
+        <div class="cert"><strong>ITIL v4</strong><span>IT service management</span></div>
+        <div class="cert"><strong>Palo Alto Networks</strong><span>Cybersecurity Specialization</span></div>
+        <div class="cert"><strong>Google IT Support</strong><span>Professional Certificate</span></div>
+      </div>
+      <div style="margin-top:16px;background:var(--accent2);border:1px solid rgba(26,79,214,.15);border-radius:3px;padding:16px">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:7px;letter-spacing:.06em">WHAT I BRING TO HEALTHCARE IT</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">My B.S. in Cybersecurity, ITIL v4 process knowledge, and hands-on HIPAA-adjacent compliance work give me a strong foundation for healthcare IT roles. I understand how to build systems that are both technically secure and human-centered — a combination that's rare and essential in clinical environments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:#fff">
+  <div class="slabel fi">Capabilities</div>
+  <h2 class="fi">Full tech stack</h2>
+  <p class="intro fi">From enterprise firewalls and MDM at scale to clinical AI dashboards and FHIR integration — technical breadth with healthcare informatics depth.</p>
+  <div class="sgrid fi">
+    <div class="sgroup">
+      <div class="sgtitle">Clinical AI & informatics</div>
+      <div class="si"><span class="sn">Python / XGBoost / SHAP</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">ResNet-50 / Grad-CAM</span><span class="sd m"></span></div>
+      <div class="si"><span class="sn">HL7 FHIR R4</span><span class="sd m"></span></div>
+      <div class="si"><span class="sn">Azure Machine Learning</span><span class="sd m"></span></div>
+      <div class="si"><span class="sn">CDSS design</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">HIPAA / WCAG 2.1</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">SQL / data auditing</span><span class="sd m"></span></div>
+    </div>
+    <div class="sgroup">
+      <div class="sgtitle">Security & infrastructure</div>
+      <div class="si"><span class="sn">Palo Alto NGFW</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">VMware ESXi</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">MFA / endpoint hardening</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">Active Directory</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">DNS / SSL / TLS</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">Linux / Bash</span><span class="sd"></span></div>
+    </div>
+    <div class="sgroup">
+      <div class="sgtitle">Device & IT ops</div>
+      <div class="si"><span class="sn">JAMF Pro (MDM)</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">Apple DEP / ABM</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">IncidentIQ / Remedy</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">Google Workspace</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">macOS / Windows / iOS</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">ITIL v4 practices</span><span class="sd"></span></div>
+    </div>
+    <div class="sgroup">
+      <div class="sgtitle">Web & development</div>
+      <div class="si"><span class="sn">HTML / CSS / JavaScript</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">WordPress / Apache / Nginx</span><span class="sd"></span></div>
+      <div class="si"><span class="sn">MySQL</span><span class="sd m"></span></div>
+      <div class="si"><span class="sn">D3.js / Chart.js</span><span class="sd m"></span></div>
+      <div class="si"><span class="sn">Streamlit / Dash</span><span class="sd m"></span></div>
+      <div class="si"><span class="sn">WCAG accessibility</span><span class="sd m"></span></div>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--ink3);margin-top:10px;font-family:'DM Mono',monospace">
+    <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:4px;vertical-align:middle"></span>Proficient &nbsp;
+    <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);margin-right:4px;vertical-align:middle"></span>Familiar
+  </p>
+</section>
+
+<!-- CONTACT -->
+<div class="csec" id="contact">
+  <div class="cinner">
+    <div style="display:flex;justify-content:center;margin-bottom:20px">
+      <div class="avatar-sm"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADIAMgDASIAAhEBAxEB/8QAHAABAAEFAQEAAAAAAAAAAAAAAAUCAwQGBwEI/8QANRAAAQMDAgQEBgEEAQUAAAAAAQACAwQFERIhBhMxQSJRYXEHFDKBkbGhI0JSwdEVFiRy8P/EABoBAQADAQEBAAAAAAAAAAAAAAABAwQCBQb/xAAiEQACAgICAgMBAQAAAAAAAAAAAQIRAyEEMRJBIjJRE2H/2gAMAwEAAhEDEQA/AOBIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIikbZaZbi/IyIx3AyT7ICPa1z3BrWkk9AApWh4cuNcTiHltAyXSbfx1W1U1qhtkQeyEMOPE548RWPX3FpOqn5jHNHbplFsPRjUvB8BYTUVRc7G2kho/lW5eH4WSFkLM47uOVkQ32OohENQ3TJ0Lwdj7+Xusc6RMeRUCKTP0vOWu+6U0LMWdgt5xNRwuPZ2lW2VFLWRmNzRHJ2z0Kypa4uZy54gQereoPsexUNUxMa/mQ55Z6eilK+xf4UTQ6JC0tA9FjuYO34WTzHSx6T1Z39FacN99lNEWWEXrtnFeLkkIiIAiIgCIiAIiIAiIgCIiAIiDqgMqho3Vc2MeBu7j6LbqatdS6IWcuFjejQN1iWi3SRWhspY4ulOvDeuOyyWVFvpGOM8UheeniB/2uo17DTPLhcDV7OmAx6bKJlMzWa9LnNb3aMqqabmucyCoJYejC7A/lYkb6qKTEZIx5dD7pr0N+zGdLqfqLvY4VZlL2Bh6josyem+abzOXy3+YGxWMaOVoAI6KbIotGV4HiOT69wvA7fH9ru3qrksTgQcYKpED+oGcFLFFsDSHHPXZUHxOwrroy05I+yt4IOyWKLc2GkNA7dVaV+duWNfj0VhcMkIiIAiIgCIiAIiIAiIgCIiAKpg1PaPMgKlZFFE2aqY12cDJOPRAbBUXdrAxkUevR4RrO34WxcPcM1nE2KioAjiaPpawDIWv2O1tuFyawgFuoZyevoF9HcP2SChtMLWxgZGSAFVkyKGkX44OW2cwHw4Y6fAw1o74UtT8AwR7HDvcLpcdr5jyW9FmttwiAyB7gKp5mkW+Eb2ctPBFLI0gNAOOp2UXVcAvi1lgGw/t6H3XYTQw40lqw6m1nSeW7A8sqh55FyxxOD1vCkniJZhzR0x+ljQ8LzsaXmM6cajtuu5mxRyxaXxguznJVqSxxsOC0acYXM+VKiY4I2cQr+Gyx7niPAPhwtVrKCSDU7SQ0bL6LrbLTzRgaQ0+i1a48JQvpZmFrTnyHZRi51akTPiKS0cMcCY3M+4WMpe8W+S13KWnkGC12yinjDzjovUTUlaPMlFxdMpREQgIiIAiIgCIiAIiIAiIgCmuHKcyVE8vaOPHTzUKt34Ms1bPaLhchSuNGxzWGU7DPceuNlzN0rO4K5G28E2cOqWTaSTnsF3akjDaaNhHQAYWo8DWqNlsjqSzBcNlujBpG6wSl5SNsVSLzAANhhVncKmMtd0IVzAASyt9mLJurJbhZTsFUGNUtWWxlRiuGkdN1hVJ8J2UtygRusKriAVOSNIuxzTZASvOrGFhVO4I7LPqGeMgKOqSQHeizGpI498R6Vn/AFXnNbgkDK59MMOB9F0zj53MqMd9lzarAbKBjGy97iu8SPH5SrIywiItBmCIiAIiIAiIgCIiAIiIAOq7hwJRS1Pw0gLHnBknaWdj4hhcPX0R8Lm5+HFqjLcmWtlA9tSz8n6WauJ96/w6TYqH5Kz08WPpjGVhV1XVOmcGx5aNgBndbHGzEekdMKFuFdFbdUsjM43JxsFlUf0vi7eiEqL5U0Ic/wCXlaR11M2/K9ouNmSOLKhjmY6nBwrd14qEdudXy2ueSlA3kbGRn27rVYOKrHdpyyFr439SyRuMduqscKXWhGpOvZ0iO8U84BjkByOyzI6jUM52WnUNHA464CQe7QVLufLTQkuBwFS4+0W0umTb6kHbUAsSpqYQ3L5AMeZWr1VwnqQWxP0n0UHVWW61bjoqXn0zsoePyWxqJt81TRFhfzW7eqiKqphkaeU8O36LV5LFd6d5dIfDgnGVgmatp5WeF2dWMZzlUSwJdMvjN+yN48hEbY5NOS/wrllYS6rkdggZ2yut/ECJ5tVFK9uHc0Aj7LQOLdDZ6JnKayQQZcGjGxO2Vv4kvgkYeXC25fhraIi2mAIiIAiIgCIiAIiIAiIgA6r6k+DIhqPhjbjoa50M0rT6O1k/ohfLfdfSvwLutBJwIbaydgrYKmR0sRPiw4gh2PLH6VWZXEtxOpHVWnDcKxUMZpy5ocPIhVtfvhevOB0yFka1aNC0zWeIqWkvFmkt5qJIGF2oGPq0/wCx1yFodDwZR2plQynqWvmmby2nlfSM5Pc7ldTqaKnqR42b+Y2VultNHBM1zWZd5u3XDnJ6TNEXCO2iN4V4fdbqKIVEjpXNbp1PG53Uvd6eP5VwA7KRAAOABhYF2cXREBc5W1CiuEnLImcuqaa7U9WYaAMe6WTwl5xhvfHqsbjil4hoKiB1nFyZBywXubhzSe+cA75/0t0FJDWMMLyWv6seDgtPmFG1U17tZLJGOqIR0kaN1HH5FRpmjLhU33Rzs3LimktsFTO2pkkeSXMczS7TnY+XTsQpW01M17ezXE4OH1ZbjC2aJlzukgd8ryYv7nvCnaakigbpYxo88DquMuW/R3CDiqs1i+2cXSGmpdIOHh2/kBuuC8TVor+Iq2dhzHzCyMjppbsP0u/8a3iOw2StqhtKYHRxHye4YH7XzUfVaeDF05Mx82fUQiIvQPPCIiAIiIAiIgCIiAIiIAtr+G1Y6j+ItikEhYHVTY3YOMh22D+VqikLFVGhv9uqwccmqjk/DgVD2iU6Z9pnwuwqnygM2Vuow5ocNwd1Yc8kYWJ60b4ryotTVHqq6Fz5pdXRoVgQOnk0jor1W6eio3mnYC8N291mSblbL5VXiuyVa1rWlzjsoy5PaW7eW6hbVeLzNHI25xU4A+l8Djg+hBULxFxZDQFrXB73u6Rxt1OKszRbjSRxhxNStsztT6eoa/fTnCn4p2ujB26Z3Wm0V6NyghAgkZzejXjBGPNTtNMRFoPUdFhScXRrlFSRmVUw/wAfwot9U2MkkpVVRjBz/C16qq3Sk4GnzypqxpKjQfi9dDKyipGv8L3ukc322H7XKVNcV3N104hqpi/VGxxjj9Gj/wCKhV7WCHhjSPGzz88jYREVxSEREAREQBERAEREARZENHLLHzNmMJwHO7+3mpClsbqk+GRzgOpDcAfcoCHV+Cknne1scbi53TstlgstHTBzwDLI0dXnIBWDQOMfMDd5HuwD574/CJWD6v4drDcOFbZUPe10j6VmstORqDcH+QVk7gYULwXE2l4LtLGHIMO583ZOVOPIG6wS7PRx9F+mIDQr7yHKAqYK2bBpKkRPadtQyD7rEfeLlSkCrhk0g4JibqC59Hf8nJ2iQu8bW05ayIa3nALRgrSuJOEqiofFUQPAJbu7ODlbUb1SvYXtlD8DOD1H/Ch7jxbGKca3RhoH0kf7VcpSRohikiL4eskltmfPUzcyUt0tBcTgLYBUtDSWkbLVJOLrdpd/UEeOxd+lXb7kKuJ72PBYTthUOMrtnd7oka2rD3kfha1xNcxa+Hayr1Yk0Fsee7jsFISPMk+kfcrmHxGv4rK2O107sw0xzIR3f5fZW4cbnNIpz5PCDZoxJJyTkrxEXrnjBERAEREAREQBFkUlDU1zyymhdIR1wNh91OnhblU7OfMWzkZcG4LW+iWDWsKWt1vbyX1lTGTG0f02HbWf+FLU1voKJo0s+Yn7vkHhHsFdmImB1nVtjHknYuiKp4X3GYzzO0wtOAxv6UyyqEcEjGDSwNJx6qJpiYZp6Zv0uGpquiU/LuA+o5BUkWSVLIHUbiT1aoKmfoqojnpI5p/OQpaid/4eD5KBLi0yn/CXUpQZ9OfDiubcOCIY9XigkfEfTfUP2tpYdbPFsehC4z8Hb+2Ovq7TI/AqGCaIH/JvUfj9Lr3M0SZ7HqvNy/HK0ehhd40zLYNPuqJy0DUcZCuDxsyDusWoY9zdOMqC2LIG72603J5dVQMLv82uLXfkLTr5YeHmOaGxve4Do6Vzgf5W1XKge1xe5rj7LWK+j+YcCWkNb1z3XEo1uzbDKqohqThS0VTzNy3Mx2B2Uo6KG2R8uBhY0/SFVTOc0hrW4YOqwb3dIaVj5pXgBgyVX8pOiuTS2R3El/dabRK6Nw+ZeMM9D5/Zcfke6R7nvcXOccknuVL3a6TXe4Gd5IYNo2+QWDJA1zhp2JXp4cP84/6eTnzf0lroxEXrmlji1wwV4rSgIiIAiIgCu01PJVTshibqe47BV0dFPXVAhp2F7z+APMnst0tdtprLGXaubUuGHP7D0CAqpaB1FQsp4iIwN3Pxlzj5qh1U2KEQyOJxkanDqqpbgdeCcLDq5tTeZgFvddp0VtWY8kEzcyNfqB6YVtk5B0uaQV4ycszpJ0n+1JHNc3U3cKCSzVnlPjqG9Wnf2SV+icYxpcMhVENmic3qCFhyvLqVhP1RnSfshJLwOzFgKF0kvqm/dSNLIHRZWEzAuEjSNnAogZNku09puFLXU7sSwPDh647f6X0rb75BdLbT1kDgY5mBw9PMfYr5XjOlzmZ3BXSPh1f54C62SMlfA46mOa0nQ7y26ArFzsTcfOPaNnEnUvF+zuFNcgPCTusxlyixk4yFpElQWnOSP4V63urLnUPiibqa1mXOB3G+yy4sqlqXZsljro2SquEcsmBp91qd3uFO2Yt1NwT27qP4hrK205aYJemMhaJVXeWokyMtPqu/BS6O/otm13G8wU0JbGRrPQBc34orpJ4mNc7635x7LOfI6R+5LnHqVrt8mElcI2nIibg+5Wjj4kpGXk5PiYEYy0q4DkeoVDdmBOhytx5xXhkg0vAP+ljy0zmZc3xN/SvDYq5qPUbFctEpkcizpIWSjIwx/wDB/wCFhvjdG7S5pBXJJSiIgN+hgp7XTfL0w3O7nu6uPqsSacuzk4KtOqw/fKxnyayd8LpKjjsSuyckpDP1iduCrTn6sg7KznS7OTspB44GOV0ZPTofRewyYkLSdj0VNUdWmQdQrBf4vZAX2SGKo0n6XKmobh0rcbOGpUVJyA4e6rL+bGx/oQUJPbe840jGypl8FxacHxK1SO01GM9VLWy1yXniS3W+IHVPM1hI7DO5/GVDdbCVuiOgtlfW1miipJpnOfpGhhIyfM9l9V8JcPUPDXC9Hb2BrZxGHVD2jd8h3JJ/j7KRttkt9oo4qSjibDDGMANHX1PmVnchhGxXnZs0smq0b8eKMN2Yj4qZ4wCD7hWYKaKmkfJTNZG9+ztIA1LP+XHkqH07RuQFjcGtmlTXRFXajNyt8kMzIyXDAJbnC4JfrJW2GtMNXGMPJMcjd2uHou83OqNCBI3dp7Fc++JlXBU8NmoYNRicHjHUdj+0wZHHJ4/pbKN47OV1de2igLmnMx2b6LWvFJIS45JOSSq5531Ehc/7DyXjBp917kIeKPGyT82VHqF4vD1Xp6rsrPVV2Co6Beg5CA91L3UHN0vGpvkVbXvfChoFqan5Y1NOph79x7oshrsHpkHYgouaaOrRnPy0+HOFTr+6IupKmVxdopcc7d1aeS05RFB0eF+W47LHJwAeyIpBelOYmf8AqkLv6RbnfOQiKUCyDpkz5Fd3+EPCUL6T/uWcapiXR04/xHQn3RFn5P0LsH3OpSUznHOo/lW/l5h9Mjh90ReRKKs9JTZfh+bZnU4PHbthWZa17HFsrcIi5yNxjpnWNKUto1Pie48xrImnbO+FqFypxVUToH7xyDS4H1REx+maJLVHFpoTT1EkLvqY4tP2Kp7oi+gi7imfPS02DuqgiKSATkKnqiIB3QdyiIwMoiKAf//Z" alt="Anh Truong Nguyen"></div>
+    </div>
+    <div class="slabel" style="color:rgba(247,246,242,.28);margin-bottom:10px">Get in touch</div>
+    <h2 style="font-size:clamp(26px,4vw,44px);margin-bottom:12px">Let's build clinical IT<br>that actually works</h2>
+    <p>Open to Healthcare IT, Clinical Informatics, and Clinical System Analyst roles. Based in San Jose, CA — open to hybrid and remote.</p>
+    <div class="clinks">
+      <a href="/cdn-cgi/l/email-protection#214f465458444f404f455816161161464c40484d0f424e4c" class="cl cl-em">✉ <span class="__cf_email__" data-cfemail="b8d6dfcdc1ddd6d9d6dcc18f8f88f8dfd5d9d1d496dbd7d5">[email&#160;protected]</span></a>
+      <a href="https://www.linkedin.com/in/anh-truong-nguyen/" target="_blank" class="cl cl-li">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="tel:4087123221" class="cl cl-ph">☎ (408) 712-3221</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span style="font-family:'DM Mono',monospace;font-size:11px">Anh Truong Nguyen · Portfolio</span>
+  <span style="font-size:11px">San Jose, CA · Open to Healthcare IT &amp; Clinical Informatics roles</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
