@@ -213,7 +213,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <div class="stats">
       <div><span class="snum">5+</span><span class="slbl">Years IT &<br>cybersecurity</span></div>
       <div><span class="snum">3,000+</span><span class="slbl">Devices managed<br>via MDM</span></div>
-      <div><span class="snum">5</span><span class="slbl">Portfolio<br>projects</span></div>
+      <div><span class="snum">4</span><span class="slbl">Portfolio<br>projects</span></div>
       <div><span class="snum">98%</span><span class="slbl">Case resolution<br>rate (PAN)</span></div>
     </div>
   </div>
@@ -255,7 +255,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 <section id="projects" style="background:#fff">
   <div class="slabel fi">Portfolio</div>
   <h2 class="fi">Projects</h2>
-  <p class="intro fi">Five hands-on projects spanning clinical AI explainability, multi-outcome risk prediction, medical imaging, healthcare system analysis, and enterprise IT — showing the full range from infrastructure to clinical informatics.</p>
+  <p class="intro fi">Four hands-on projects spanning clinical AI explainability, healthcare system analysis, enterprise device management, and cybersecurity — showing the full range from infrastructure to clinical informatics.</p>
 
   <!-- PROJECT 1: CARDIAC AI -->
   <div style="margin-bottom:48px">
@@ -592,50 +592,9 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   dbRenderAll();
   </script>
 
-  <!-- PROJECT 2: HEART FAILURE RISK PREDICTION -->
+  <!-- PROJECT 2: CLINICAL SYSTEM ANALYST -->
   <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 02 — Predictive Analytics</div>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px"><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">Logistic Regression</span><span class="tag">Python</span></div>
-        <h3>Heart failure multi-outcome risk prediction</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Built a 3-model risk prediction system for 500 heart failure patients forecasting 30-day readmission, 6-month mortality, and 30-day ED visits simultaneously. Engineered 18 clinical features, applied risk stratification into 4 actionable tiers, and validated fairness across age, sex, and HF phenotype subgroups — all documented to hospital deployment standards.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(247,246,242,.28);margin-bottom:7px;letter-spacing:.08em">MODEL PERFORMANCE TARGETS</div>
-          <div class="srow"><span class="slb">Readmission AUC</span><div class="strk"><div class="sbar" style="width:78%;background:#1d9e75"></div></div><span class="sval" style="color:#1d9e75">0.78</span></div>
-          <div class="srow"><span class="slb">Mortality AUC</span><div class="strk"><div class="sbar" style="width:82%;background:#1d9e75"></div></div><span class="sval" style="color:#1d9e75">0.82</span></div>
-          <div class="srow"><span class="slb">ED Visit AUC</span><div class="strk"><div class="sbar" style="width:74%;background:#ef9f27"></div></div><span class="sval" style="color:#ef9f27">0.74</span></div>
-          <div class="srow"><span class="slb">Brier Score</span><div class="strk"><div class="sbar" style="width:83%;background:#1d9e75"></div></div><span class="sval" style="color:#1d9e75">0.083</span></div>
-        </div>
-      </div>
-      <div class="pan" style="display:flex;flex-direction:column;gap:12px">
-        <div>
-          <h3>4-tier risk stratification system</h3>
-          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Translated model probabilities into escalating intervention protocols — from weekly home nurse visits for Very High risk patients to routine follow-up for Low risk — with fairness validated across all subgroups (max disparity ratio 1.06).</p>
-        </div>
-        <div class="agrid">
-          <div class="acard"><div class="aname" style="color:#c0392b">Very High</div><div class="adesc">Home nurse + Palliative consult</div></div>
-          <div class="acard"><div class="aname" style="color:#e67e22">High</div><div class="adesc">Biweekly case mgmt + Transition clinic</div></div>
-          <div class="acard"><div class="aname" style="color:#1a6b3c">Low/Moderate</div><div class="adesc">Monthly check-in + PCP follow-up</div></div>
-        </div>
-        <div style="margin-top:auto">
-          <div class="mrow"><span class="mk">Dataset</span><span class="mv">500 heart failure patients</span></div>
-          <div class="mrow"><span class="mk">Outcomes predicted</span><span class="mv">Readmission · Mortality · ED visits</span></div>
-          <div class="mrow"><span class="mk">Fairness assessment</span><span class="mv ok">Disparity ratio 1.06 — Pass</span></div>
-          <div class="mrow"><span class="mk">Compliance</span><span class="mv">HIPAA · FDA governance aligned</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Feature engineering</span></div><div class="ctitle">18-predictor clinical model</div><div class="cdesc">Engineered frailty index, comorbidity score, BNP severity bands, and EF categories from raw clinical data. Recursive feature elimination retained 18 evidence-based predictors from 22 candidates.</div></div><div class="card-body"><div class="mrow"><span class="mk">Top predictor</span><span class="mv">BNP + EF + NYHA class</span></div><div class="mrow"><span class="mk">Selection method</span><span class="mv">RFE + univariate screening</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Multi-outcome modeling</span></div><div class="ctitle">Three simultaneous models</div><div class="cdesc">XGBoost for readmission, Logistic Regression with Platt scaling for mortality (best calibration), Random Forest for ED visits. Each algorithm chosen to match outcome characteristics and clinical priority.</div></div><div class="card-body"><div class="mrow"><span class="mk">Imbalance handling</span><span class="mv">SMOTE + class weighting</span></div><div class="mrow"><span class="mk">Calibration</span><span class="mv ok">Brier 0.048–0.192</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag g">Fairness & validation</span></div><div class="ctitle">Subgroup equity analysis</div><div class="cdesc">AUC validated across 10 demographic and clinical subgroups — age quartiles, sex, EF phenotype, CKD status, and NYHA severity. All disparity ratios under the 1.10 fairness threshold.</div></div><div class="card-body"><div class="mrow"><span class="mk">Subgroups tested</span><span class="mv">10 demographic + clinical</span></div><div class="mrow"><span class="mk">Max disparity ratio</span><span class="mv ok">1.06 — below 1.10 target</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 3: CLINICAL SYSTEM ANALYST (renumbered) -->
-  <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 03 — Clinical System Analysis</div>
+    <div class="proj-label fi">Project 02 — Clinical System Analysis</div>
     <div class="split fi">
       <div class="pan" style="display:flex;flex-direction:column;gap:14px">
         <div>
@@ -684,7 +643,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 
   <!-- PROJECT 4: MEDICAL IMAGE AI -->
   <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 04 — Medical AI &amp; Imaging</div>
+    <div class="proj-label fi">Project 03 — Medical AI &amp; Imaging</div>
     <div class="split fi">
       <div class="pan" style="display:flex;flex-direction:column;gap:14px">
         <div>
@@ -735,7 +694,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 
   <!-- PROJECT 3: JAMF MDM -->
   <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 05 — IT Operations</div>
+    <div class="proj-label fi">Project 04 — IT Operations</div>
     <div class="proj-grid-2 fi">
       <div class="card">
         <div class="card-head">
