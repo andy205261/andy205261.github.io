@@ -800,6 +800,156 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
       <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Exception handling</span></div><div class="ctitle">Human-in-the-loop QA</div><div class="cdesc">Confidence below 70% on any dimension triggers manual review via a Power Apps interface showing document preview, AI labels, and confidence scores. Reviewer corrections feed monthly retraining — exception rate dropped from 15% in Month 1 to under 5% by Month 3 as models improved.</div></div><div class="card-body"><div class="mrow"><span class="mk">Exception trigger</span><span class="mv">Any dimension &lt;70% confidence</span></div><div class="mrow"><span class="mk">STAT SLA</span><span class="mv ok">30-minute resolution window</span></div></div></div>
       <div class="card"><div class="card-head"><div class="tags"><span class="tag p">QA monitoring</span></div><div class="ctitle">Power BI accuracy dashboard</div><div class="cdesc">Three-page Power BI dashboard tracking classification accuracy, exception rates, and SLA compliance in real time. Automated alerts fire when daily accuracy drops below 85%, exception rate exceeds 15%, or any STAT document breaches its 30-minute resolution window.</div></div><div class="card-body"><div class="mrow"><span class="mk">Monthly time saved</span><span class="mv ok">520 hrs (3 FTE equivalent)</span></div><div class="mrow"><span class="mk">Billing backlog</span><span class="mv ok">5 days → &lt;1 day</span></div></div></div>
     </div>
+
+    <!-- POWER BI DASHBOARD MOCK -->
+    <div class="fi" style="margin-top:20px;margin-bottom:8px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div class="slabel" style="margin-bottom:4px">Live interactive demo</div>
+          <div style="font-size:14px;font-weight:500;color:var(--ink)">Power BI QA Dashboard — Classification Performance Monitor</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="tag b">Power BI</span>
+          <span class="tag g">90-day data</span>
+          <span class="tag p">4 classifiers</span>
+        </div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--paper2)">
+        <div id="pbi-dashboard" style="padding:18px">
+
+          <style>
+          .pbi-tab-bar{display:flex;gap:4px;margin-bottom:0}
+          .pbi-tab{padding:6px 14px;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.07);border-bottom:none;cursor:pointer;font-size:12px;color:var(--ink3);background:rgba(255,255,255,.03);transition:all .15s;font-family:'Outfit',sans-serif}
+          .pbi-tab.active{background:var(--paper3,#131b2e);color:var(--ink);font-weight:500;border-color:rgba(255,255,255,.1)}
+          .pbi-panel{display:none;border:1px solid rgba(255,255,255,.07);border-radius:0 8px 8px 8px;padding:16px;background:#0b0f1c}
+          .pbi-panel.active{display:block}
+          .pbi-kpi{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:10px 14px}
+          .pbi-kpi-label{font-size:10px;color:var(--ink3,#94a3b8);margin-bottom:4px;font-family:'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
+          .pbi-kpi-val{font-size:22px;font-weight:600;line-height:1}
+          .pbi-kpi-sub{font-size:10px;margin-top:3px}
+          .pbi-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+          .pbi-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+          .pbi-sec{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3,#94a3b8);margin:12px 0 6px}
+          .pbi-bar-row{display:flex;align-items:center;gap:8px;margin:5px 0}
+          .pbi-bar-lbl{font-size:11px;color:var(--ink,#f1f5f9);width:100px;flex-shrink:0}
+          .pbi-bar-track{flex:1;height:14px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;position:relative}
+          .pbi-bar-fill{height:100%;border-radius:3px;transition:width .6s ease}
+          .pbi-bar-val{font-size:11px;font-family:'DM Mono',monospace;width:44px;text-align:right;flex-shrink:0}
+          .pbi-table{width:100%;border-collapse:collapse;font-size:11px}
+          .pbi-table th{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3,#94a3b8);padding:5px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left}
+          .pbi-table td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--ink,#f1f5f9)}
+          .pbi-table tr:last-child td{border-bottom:none}
+          .pbi-badge{display:inline-block;padding:2px 7px;border-radius:100px;font-size:10px;font-weight:500}
+          .pbi-ok{background:rgba(52,211,153,.12);color:#34d399}.pbi-warn{background:rgba(251,191,36,.12);color:#fbbf24}.pbi-alert{background:rgba(248,113,113,.12);color:#f87171}
+          .pbi-line-chart{position:relative;height:80px;margin:4px 0}
+          .pbi-line-chart svg{width:100%;height:100%}
+          .pbi-alert-row{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.12);margin-bottom:5px}
+          .pbi-alert-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+          .pbi-alert-text{font-size:11px;color:var(--ink,#f1f5f9);flex:1}
+          .pbi-alert-time{font-size:10px;color:var(--ink3,#94a3b8);font-family:'DM Mono',monospace}
+          </style>
+
+          <div class="pbi-tab-bar">
+            <div class="pbi-tab active" onclick="pbiSwitch('perf')">Classification Performance</div>
+            <div class="pbi-tab" onclick="pbiSwitch('ops')">Operational Metrics</div>
+            <div class="pbi-tab" onclick="pbiSwitch('qa')">Quality Assurance</div>
+          </div>
+
+          <!-- PAGE 1: CLASSIFICATION PERFORMANCE -->
+          <div class="pbi-panel active" id="pbi-perf">
+            <div class="pbi-grid4">
+              <div class="pbi-kpi"><div class="pbi-kpi-label">Overall Accuracy</div><div class="pbi-kpi-val" style="color:#34d399">93.9%</div><div class="pbi-kpi-sub" style="color:#34d399">▲ +3.9% vs target</div></div>
+              <div class="pbi-kpi"><div class="pbi-kpi-label">Daily Volume</div><div class="pbi-kpi-val" style="color:#38bdf8">240</div><div class="pbi-kpi-sub" style="color:var(--ink3)">docs/day avg</div></div>
+              <div class="pbi-kpi"><div class="pbi-kpi-label">Exception Rate</div><div class="pbi-kpi-val" style="color:#fbbf24">7.8%</div><div class="pbi-kpi-sub" style="color:#34d399">▼ Below 10% target</div></div>
+              <div class="pbi-kpi"><div class="pbi-kpi-label">Avg Process Time</div><div class="pbi-kpi-val" style="color:#34d399">3.2s</div><div class="pbi-kpi-sub" style="color:#34d399">▼ 1.8s under target</div></div>
+            </div>
+            <div class="pbi-sec">Accuracy by Classification Dimension</div>
+            <div class="pbi-bar-row"><div class="pbi-bar-lbl">Document Type</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:94.2%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi-bar-val" style="color:#34d399">94.2%</div></div>
+            <div class="pbi-bar-row"><div class="pbi-bar-lbl">Urgency Level</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:96.8%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi-bar-val" style="color:#34d399">96.8%</div></div>
+            <div class="pbi-bar-row"><div class="pbi-bar-lbl">Department</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:91.5%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi-bar-val" style="color:#34d399">91.5%</div></div>
+            <div class="pbi-bar-row"><div class="pbi-bar-lbl">Billing Relevance</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:93.1%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi-bar-val" style="color:#34d399">93.1%</div></div>
+            <div style="margin-top:6px;display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:2px;background:#34d399;flex-shrink:0"></div><span style="font-size:10px;color:var(--ink3)">All dimensions above 90% target threshold</span><span class="pbi-badge pbi-ok" style="margin-left:auto">All Targets Met ✓</span></div>
+            <div class="pbi-sec">Daily Accuracy Trend (90 Days)</div>
+            <div class="pbi-line-chart">
+              <svg viewBox="0 0 500 80" preserveAspectRatio="none">
+                <defs><linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34d399" stop-opacity="0.3"/><stop offset="100%" stop-color="#34d399" stop-opacity="0"/></linearGradient></defs>
+                <path d="M0,60 L10,55 L25,52 L40,48 L55,45 L70,50 L85,44 L100,40 L115,38 L130,42 L145,36 L160,32 L175,34 L190,28 L205,26 L220,30 L235,24 L250,22 L265,20 L280,18 L295,22 L310,16 L325,14 L340,18 L355,12 L370,10 L385,14 L400,8 L415,6 L430,10 L445,8 L460,6 L475,4 L490,4 L500,4" fill="none" stroke="#34d399" stroke-width="2"/>
+                <path d="M0,60 L10,55 L25,52 L40,48 L55,45 L70,50 L85,44 L100,40 L115,38 L130,42 L145,36 L160,32 L175,34 L190,28 L205,26 L220,30 L235,24 L250,22 L265,20 L280,18 L295,22 L310,16 L325,14 L340,18 L355,12 L370,10 L385,14 L400,8 L415,6 L430,10 L445,8 L460,6 L475,4 L490,4 L500,4 L500,80 L0,80 Z" fill="url(#lineGrad)"/>
+                <line x1="0" y1="18" x2="500" y2="18" stroke="rgba(248,113,113,.4)" stroke-width="1" stroke-dasharray="4,4"/>
+                <text x="4" y="15" fill="rgba(248,113,113,.7)" font-size="8" font-family="monospace">85% alert threshold</text>
+              </svg>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--ink3);font-family:'DM Mono',monospace;margin-top:2px"><span>Day 1 (88.2%)</span><span>Day 30 (91.4%)</span><span>Day 60 (93.1%)</span><span>Day 90 (93.9%)</span></div>
+          </div>
+
+          <!-- PAGE 2: OPERATIONAL METRICS -->
+          <div class="pbi-panel" id="pbi-ops">
+            <div class="pbi-grid4" style="margin-bottom:14px">
+              <div class="pbi-kpi"><div class="pbi-kpi-label">Docs This Month</div><div class="pbi-kpi-val" style="color:#38bdf8">5,200</div><div class="pbi-kpi-sub" style="color:#34d399">▲ +4% vs prior month</div></div>
+              <div class="pbi-kpi"><div class="pbi-kpi-label">Auto-Routed</div><div class="pbi-kpi-val" style="color:#34d399">97.3%</div><div class="pbi-kpi-sub" style="color:var(--ink3)">4,780 of 4,912</div></div>
+              <div class="pbi-kpi"><div class="pbi-kpi-label">Human Review</div><div class="pbi-kpi-val" style="color:#fbbf24">406</div><div class="pbi-kpi-sub" style="color:var(--ink3)">7.8% of total</div></div>
+              <div class="pbi-kpi"><div class="pbi-kpi-label">STAT Docs</div><div class="pbi-kpi-val" style="color:#f87171">312</div><div class="pbi-kpi-sub" style="color:#34d399">All resolved ≤30 min</div></div>
+            </div>
+            <div class="pbi-sec">Document Volume by Type</div>
+            <div class="pbi-bar-row"><div class="pbi-bar-lbl">Progress Note</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:28%;background:#38bdf8"></div></div><div class="pbi-bar-val" style="color:#38bdf8">1,456</div></div>
+            <div class="pbi-bar-row"><div class="pbi-bar-lbl">Lab Report</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:22%;background:#38bdf8"></div></div><div class="pbi-bar-val" style="color:#38bdf8">1,144</div></div>
+            <div class="pbi-bar-row"><div class="pbi-bar-lbl">Discharge Summary</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:14%;background:#a78bfa"></div></div><div class="pbi-bar-val" style="color:#a78bfa">728</div></div>
+            <div class="pbi-bar-row"><div class="pbi-bar-lbl">Operative Report</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:10%;background:#f87171"></div></div><div class="pbi-bar-val" style="color:#f87171">520</div></div>
+            <div class="pbi-bar-row"><div class="pbi-bar-lbl">Consultation</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:9%;background:#fbbf24"></div></div><div class="pbi-bar-val" style="color:#fbbf24">468</div></div>
+            <div class="pbi-bar-row"><div class="pbi-bar-lbl">Other</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:17%;background:rgba(255,255,255,.2)"></div></div><div class="pbi-bar-val" style="color:var(--ink3)">884</div></div>
+            <div class="pbi-sec">Top Exception Reasons</div>
+            <table class="pbi-table">
+              <tr><th>Exception Reason</th><th>Count</th><th>% of Exceptions</th><th>Trend</th></tr>
+              <tr><td>Low department confidence</td><td>162</td><td>39.9%</td><td><span class="pbi-badge pbi-warn">▼ Improving</span></td></tr>
+              <tr><td>Novel document format</td><td>81</td><td>20.0%</td><td><span class="pbi-badge pbi-warn">→ Stable</span></td></tr>
+              <tr><td>Conflicting urgency signals</td><td>61</td><td>15.0%</td><td><span class="pbi-badge pbi-ok">▼ Improving</span></td></tr>
+              <tr><td>Low billing confidence</td><td>57</td><td>14.0%</td><td><span class="pbi-badge pbi-ok">▼ Improving</span></td></tr>
+              <tr><td>Operative report validation</td><td>45</td><td>11.1%</td><td><span class="pbi-badge pbi-ok">▼ Decreasing</span></td></tr>
+            </table>
+          </div>
+
+          <!-- PAGE 3: QUALITY ASSURANCE -->
+          <div class="pbi-panel" id="pbi-qa">
+            <div class="pbi-grid2" style="margin-bottom:14px">
+              <div>
+                <div class="pbi-sec">Human Correction Rate Over Time</div>
+                <div class="pbi-bar-row"><div class="pbi-bar-lbl">Month 1</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:15%;background:#f87171"></div></div><div class="pbi-bar-val" style="color:#f87171">15.2%</div></div>
+                <div class="pbi-bar-row"><div class="pbi-bar-lbl">Month 2</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:9%;background:#fbbf24"></div></div><div class="pbi-bar-val" style="color:#fbbf24">9.1%</div></div>
+                <div class="pbi-bar-row"><div class="pbi-bar-lbl">Month 3</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:5%;background:#34d399"></div></div><div class="pbi-bar-val" style="color:#34d399">4.8%</div></div>
+                <div style="font-size:10px;color:var(--ink3);margin-top:6px">↓ 68% reduction after 2 retraining cycles</div>
+              </div>
+              <div>
+                <div class="pbi-sec">SLA Compliance — This Month</div>
+                <div class="pbi-bar-row"><div class="pbi-bar-lbl">STAT (30 min)</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:100%;background:#34d399"></div></div><div class="pbi-bar-val" style="color:#34d399">100%</div></div>
+                <div class="pbi-bar-row"><div class="pbi-bar-lbl">Urgent (4 hr)</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:98%;background:#34d399"></div></div><div class="pbi-bar-val" style="color:#34d399">98.2%</div></div>
+                <div class="pbi-bar-row"><div class="pbi-bar-lbl">Routine (24 hr)</div><div class="pbi-bar-track"><div class="pbi-bar-fill" style="width:99%;background:#34d399"></div></div><div class="pbi-bar-val" style="color:#34d399">99.1%</div></div>
+              </div>
+            </div>
+            <div class="pbi-sec">System Alert Log</div>
+            <div class="pbi-alert-row"><div class="pbi-alert-dot" style="background:#34d399"></div><div class="pbi-alert-text">All accuracy metrics above 90% threshold — no alerts active</div><div class="pbi-alert-time">Now</div></div>
+            <div class="pbi-alert-row" style="background:rgba(251,191,36,.04);border-color:rgba(251,191,36,.15)"><div class="pbi-alert-dot" style="background:#fbbf24"></div><div class="pbi-alert-text">Exception rate spike (12.4%) detected — resolved after prompt tuning for Lab Reports</div><div class="pbi-alert-time">Day 41</div></div>
+            <div class="pbi-alert-row" style="background:rgba(248,113,113,.04);border-color:rgba(248,113,113,.12)"><div class="pbi-alert-dot" style="background:#f87171"></div><div class="pbi-alert-text">Accuracy dropped to 86.1% — triggered retraining with 200 new labeled docs</div><div class="pbi-alert-time">Day 18</div></div>
+            <div class="pbi-sec">Business Impact — 90 Days</div>
+            <table class="pbi-table">
+              <tr><th>Metric</th><th>Before</th><th>After</th><th>Improvement</th></tr>
+              <tr><td>Manual review time/doc</td><td>8–12 min</td><td>1–2 min</td><td><span class="pbi-badge pbi-ok">83% faster</span></td></tr>
+              <tr><td>Routing error rate</td><td>15.0%</td><td>2.7%</td><td><span class="pbi-badge pbi-ok">82% reduction</span></td></tr>
+              <tr><td>Billing backlog</td><td>5 days</td><td>&lt;1 day</td><td><span class="pbi-badge pbi-ok">80% reduction</span></td></tr>
+              <tr><td>STAT response time</td><td>45 min</td><td>5 min</td><td><span class="pbi-badge pbi-ok">89% faster</span></td></tr>
+              <tr><td>Monthly hours saved</td><td>0</td><td>520 hrs</td><td><span class="pbi-badge pbi-ok">3 FTE equivalent</span></td></tr>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+    function pbiSwitch(page) {
+      document.querySelectorAll('.pbi-tab').forEach((t,i)=>t.classList.toggle('active',['perf','ops','qa'][i]===page));
+      document.querySelectorAll('.pbi-panel').forEach(p=>p.classList.toggle('active',p.id==='pbi-'+page));
+    }
+    </script>
   </div>
 </section>
 
