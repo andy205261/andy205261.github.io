@@ -897,12 +897,6 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
         </script>
       </div>
     </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Classification pipeline</span></div><div class="ctitle">Four parallel classifiers</div><div class="cdesc">Four Azure AI Language custom text classification models run simultaneously per document — Document Type (8 classes), Urgency (3 classes), Department (6 classes), Billing Relevance (3 classes). Business rules layer on top: Operative Reports and Discharge Summaries always trigger High billing regardless of model confidence.</div></div><div class="card-body"><div class="mrow"><span class="mk">Processing time</span><span class="mv ok">3.2 sec avg (target &lt;5 sec)</span></div><div class="mrow"><span class="mk">Auto-routing success</span><span class="mv ok">97.3%</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Exception handling</span></div><div class="ctitle">Human-in-the-loop QA</div><div class="cdesc">Confidence below 70% on any dimension triggers manual review via a Power Apps interface showing document preview, AI labels, and confidence scores. Reviewer corrections feed monthly retraining — exception rate dropped from 15% in Month 1 to under 5% by Month 3 as models improved.</div></div><div class="card-body"><div class="mrow"><span class="mk">Exception trigger</span><span class="mv">Any dimension &lt;70% confidence</span></div><div class="mrow"><span class="mk">STAT SLA</span><span class="mv ok">30-minute resolution window</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">QA monitoring</span></div><div class="ctitle">Power BI accuracy dashboard</div><div class="cdesc">Three-page Power BI dashboard tracking classification accuracy, exception rates, and SLA compliance in real time. Automated alerts fire when daily accuracy drops below 85%, exception rate exceeds 15%, or any STAT document breaches its 30-minute resolution window.</div></div><div class="card-body"><div class="mrow"><span class="mk">Monthly time saved</span><span class="mv ok">520 hrs (3 FTE equivalent)</span></div><div class="mrow"><span class="mk">Billing backlog</span><span class="mv ok">5 days → &lt;1 day</span></div></div></div>
-    </div>
-
   </div>
 
   <!-- PROJECT 3: JAMF MDM -->
