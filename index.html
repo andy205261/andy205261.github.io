@@ -66,7 +66,7 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-
 .card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(14,17,23,.08);border-color:rgba(14,17,23,.18)}
 .card-head{padding:24px 24px 16px;border-bottom:1px solid var(--rule)}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.05em;padding:3px 8px;border-radius:2px;background:var(--paper2);color:var(--ink2)}
+.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.05em;padding:3px 8px;border-radius:2px;background:var(--paper2);color:var(--ink2);text-decoration:none;transition:opacity .15s}.tag:hover{opacity:.7;cursor:pointer}
 .tag.b{background:var(--accent2);color:var(--accent)}
 .tag.g{background:#f0fdf4;color:var(--green)}
 .tag.a{background:#fffbeb;color:var(--amber)}
@@ -261,7 +261,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <div class="slabel fi" style="margin-bottom:10px">Project 01 — Clinical AI</div>
     <div class="split fi">
       <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px"><span class="tag">XGBoost</span><span class="tag">SHAP</span><span class="tag">Azure ML</span><span class="tag">Python</span></div>
+        <div class="tags" style="margin-bottom:12px"><a href="https://xgboost.readthedocs.io" target="_blank" class="tag" style="text-decoration:none">XGBoost</a><a href="https://shap.readthedocs.io" target="_blank" class="tag" style="text-decoration:none">SHAP</a><a href="https://azure.microsoft.com/en-us/products/machine-learning" target="_blank" class="tag" style="text-decoration:none">Azure ML</a><a href="https://www.python.org" target="_blank" class="tag" style="text-decoration:none">Python</a></div>
         <h3>Cardiac risk prediction</h3>
         <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Built a multi-audience clinical decision support system on 200 real patient records. Used SHAP to explain why the model flagged each patient — then designed three separate interfaces for cardiologists, primary care physicians, and patients.</p>
         <div class="shap">
@@ -597,7 +597,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <div class="split fi">
       <div class="pan" style="display:flex;flex-direction:column;gap:14px">
         <div>
-          <div class="tags" style="margin-bottom:10px"><span class="tag p">HL7 FHIR</span><span class="tag t">EHR Integration</span><span class="tag b">SQL</span><span class="tag">Python</span></div>
+          <div class="tags" style="margin-bottom:10px"><a href="https://hl7.org/fhir" target="_blank" class="tag p" style="text-decoration:none">HL7 FHIR</a><a href="https://www.healthit.gov/topic/interoperability" target="_blank" class="tag t" style="text-decoration:none">EHR Integration</a><a href="https://en.wikipedia.org/wiki/SQL" target="_blank" class="tag b" style="text-decoration:none">SQL</a><a href="https://www.python.org" target="_blank" class="tag" style="text-decoration:none">Python</a></div>
           <h3>EHR workflow optimisation &amp; clinical system analysis</h3>
           <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Analysed clinical workflows across a multi-site hospital system to identify inefficiencies in EHR data entry, order management, and care coordination. Mapped current-state vs future-state workflows, identified integration gaps between systems, and designed a HL7 FHIR-based data pipeline to unify patient records across disparate platforms.</p>
         </div>
@@ -646,7 +646,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <div class="slabel fi" style="margin-bottom:10px">Project 03 — Clinical AI · ICU monitoring</div>
     <div class="split fi">
       <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px"><span class="tag">Python</span><span class="tag">Time-series</span><span class="tag p">Azure ADX</span><span class="tag">Power BI</span></div>
+        <div class="tags" style="margin-bottom:12px"><a href="https://www.python.org" target="_blank" class="tag" style="text-decoration:none">Python</a><a href="https://en.wikipedia.org/wiki/Time_series" target="_blank" class="tag" style="text-decoration:none">Time-series</a><a href="https://azure.microsoft.com/en-us/products/data-explorer" target="_blank" class="tag p" style="text-decoration:none">Azure ADX</a><a href="https://powerbi.microsoft.com" target="_blank" class="tag" style="text-decoration:none">Power BI</a></div>
         <h3>Multi-parameter anomaly detection</h3>
         <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Built a real-time ICU monitoring system that detects clinically significant anomalies across 6 physiological parameters — distinguishing true clinical events from sensor noise using multivariate co-occurrence logic.</p>
         <div style="margin:12px 0;display:flex;flex-direction:column;gap:6px">
@@ -769,7 +769,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <div class="proj-grid-2 fi">
       <div class="card">
         <div class="card-head">
-          <div class="tags"><span class="tag">JAMF Pro</span><span class="tag">MDM</span><span class="tag g">Apple ecosystem</span><span class="tag">IncidentIQ</span></div>
+          <div class="tags"><a href="https://www.jamf.com/products/jamf-pro" target="_blank" class="tag" style="text-decoration:none">JAMF Pro</a><a href="https://en.wikipedia.org/wiki/Mobile_device_management" target="_blank" class="tag" style="text-decoration:none">MDM</a><a href="https://www.apple.com/business" target="_blank" class="tag g" style="text-decoration:none">Apple ecosystem</a><a href="https://incidentiq.com" target="_blank" class="tag" style="text-decoration:none">IncidentIQ</a></div>
           <div class="ctitle">Large-scale MDM fleet management</div>
           <div class="cdesc">Designed and operated the complete device lifecycle for 3,000+ student and staff devices across a multi-school district — from zero-touch deployment through retirement. Reduced ticket escalations by 30% and standardised the onboarding process for new devices district-wide.</div>
         </div>
@@ -790,7 +790,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       <!-- PROJECT 4: CYBERSECURITY -->
       <div class="card">
         <div class="card-head">
-          <div class="tags"><span class="tag r">Cybersecurity</span><span class="tag">Palo Alto NGFW</span><span class="tag">VMware</span><span class="tag">Linux</span></div>
+          <div class="tags"><a href="https://www.cisa.gov/cybersecurity" target="_blank" class="tag r" style="text-decoration:none">Cybersecurity</a><a href="https://www.paloaltonetworks.com/network-security/next-generation-firewall" target="_blank" class="tag" style="text-decoration:none">Palo Alto NGFW</a><a href="https://www.vmware.com" target="_blank" class="tag" style="text-decoration:none">VMware</a><a href="https://www.linux.org" target="_blank" class="tag" style="text-decoration:none">Linux</a></div>
           <div class="ctitle">Enterprise endpoint hardening &amp; security tooling</div>
           <div class="cdesc">At Palo Alto Networks, built internal tooling to streamline Level 2 firewall troubleshooting and automated repetitive diagnostic steps — achieving 153% of case closure target. Also implemented endpoint hardening procedures adopted across the support team.</div>
         </div>
