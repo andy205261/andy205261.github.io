@@ -9,24 +9,24 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--ink:#f0efeb;--ink2:#b8b5ac;--ink3:#7a8094;--paper:#0e1117;--paper2:#161b24;--accent:#5b8ef0;--accent2:rgba(91,142,240,0.12);--red:#f87171;--green:#6ee7b7;--amber:#fbbf24;--purple:#a78bfa;--purple2:rgba(167,139,250,0.12);--teal:#34d399;--teal2:rgba(52,211,153,0.12);--rule:rgba(255,255,255,0.08)}
 html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;overflow-x:hidden}
+body{font-family:'Outfit',sans-serif;background:#0e1117;color:var(--ink);line-height:1.6;overflow-x:hidden}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(14,17,23,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
-.nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--ink);letter-spacing:-.3px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(14,17,23,0.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:#f0efeb;letter-spacing:-.3px}
 .nav-links{display:flex;gap:22px;align-items:center}
-.nav-links a{font-size:13px;font-weight:500;color:var(--ink3);text-decoration:none;transition:color .2s}
+.nav-links a{font-size:13px;font-weight:500;color:#7a8094;text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--ink)}
 .nav-cta{background:var(--accent)!important;color:#fff!important;padding:7px 16px;border-radius:2px!important;font-size:12px!important}
 .nav-cta:hover{background:var(--accent)!important}
 
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden}
 .hero-grid{position:absolute;inset:0;opacity:0.06;background-image:linear-gradient(rgba(255,255,255,0.3) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.3) 1px,transparent 1px);background-size:60px 60px}
-.htag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:var(--accent2);padding:5px 12px;border-radius:2px;letter-spacing:.08em;margin-bottom:28px}
+.htag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:rgba(91,142,240,0.1);padding:5px 12px;border-radius:2px;letter-spacing:.08em;margin-bottom:28px}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 h1{font-family:'DM Serif Display',serif;font-size:clamp(44px,6.5vw,82px);line-height:1.0;letter-spacing:-2px;color:var(--ink);max-width:820px;margin-bottom:24px}
 h1 em{font-style:italic;color:var(--accent)}
-.hero-sub{font-size:16px;font-weight:300;color:var(--ink2);max-width:560px;line-height:1.75;margin-bottom:40px}
+.hero-sub{font-size:16px;font-weight:300;color:#b8b5ac;max-width:560px;line-height:1.75;margin-bottom:40px}
 .ctas{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:2px;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.03em;transition:all .2s}
 .btn-dark{background:var(--ink);color:var(--paper)}
@@ -35,20 +35,20 @@ h1 em{font-style:italic;color:var(--accent)}
 .btn-li:hover{background:#005885;transform:translateY(-1px)}
 .btn-out{border:1px solid rgba(255,255,255,0.2);color:var(--ink)}
 .btn-out:hover{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05)}
-.btn-dl{background:var(--green);color:#fff}
-.btn-dl:hover{background:#145c30;transform:translateY(-1px)}
+.btn-dl{background:#059669;color:#fff}
+.btn-dl:hover{background:#047857;transform:translateY(-1px)}
 .stats{display:flex;gap:36px;margin-top:56px;padding-top:40px;border-top:1px solid var(--rule)}
 .snum{font-family:'DM Serif Display',serif;font-size:34px;color:var(--ink);display:block}
-.slbl{font-size:11px;color:var(--ink3);font-weight:400;line-height:1.4}
+.slbl{font-size:11px;color:#7a8094;font-weight:400;line-height:1.4}
 
 section{padding:92px 40px}
-.slabel{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--ink3);text-transform:uppercase;margin-bottom:14px}
+.slabel{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:#7a8094;text-transform:uppercase;margin-bottom:14px}
 h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-spacing:-1px;line-height:1.1;color:var(--ink);margin-bottom:14px}
-.intro{font-size:15px;font-weight:300;color:var(--ink2);max-width:560px;line-height:1.75;margin-bottom:48px}
+.intro{font-size:15px;font-weight:300;color:#b8b5ac;max-width:560px;line-height:1.75;margin-bottom:48px}
 
 /* ABOUT STRIP */
 .about-strip{background:#0a0d14;padding:64px 40px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.about-strip h2{color:#f7f6f2;margin-bottom:14px}
+.about-strip h2{color:#f0efeb;margin-bottom:14px}
 .about-strip p{font-size:15px;font-weight:300;color:rgba(247,246,242,.65);line-height:1.8;margin-bottom:12px}
 .pivot-list{list-style:none;margin-top:16px}
 .pivot-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(247,246,242,.7);margin-bottom:10px;line-height:1.5}
@@ -58,13 +58,13 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-
 .qrow{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .qrow:last-child{border-bottom:none}
 .qk{font-size:12px;color:rgba(247,246,242,.45)}
-.qv{font-size:13px;font-weight:500;color:#f7f6f2}
+.qv{font-size:13px;font-weight:500;color:#f0efeb}
 .qv.hi{color:#6ee7b7}
 
 /* PROJECT CARDS */
 .card{background:#161b24;border:1px solid var(--rule);border-radius:4px;overflow:hidden;transition:all .3s}
 .card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);border-color:rgba(255,255,255,.18)}
-.card-head{padding:24px 24px 16px;border-bottom:1px solid var(--rule)}
+.card-head{padding:24px 24px 16px;border-bottom:1px solid rgba(255,255,255,0.07)}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
 .tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.05em;padding:3px 8px;border-radius:2px;background:rgba(255,255,255,0.07);color:rgba(240,239,235,0.7);text-decoration:none;transition:opacity .15s}.tag:hover{opacity:.7;cursor:pointer}
 .tag.b{background:rgba(91,142,240,0.15);color:#93c5fd}
@@ -74,11 +74,11 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-
 .tag.t{background:rgba(52,211,153,0.12);color:#34d399}
 .tag.r{background:rgba(248,113,113,0.12);color:#fca5a5}
 .ctitle{font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:-.5px;color:var(--ink);margin-bottom:6px}
-.cdesc{font-size:13px;color:var(--ink2);line-height:1.65;font-weight:300}
+.cdesc{font-size:13px;color:#b8b5ac;line-height:1.65;font-weight:300}
 .card-body{padding:20px 24px}
 .mrow{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
 .mrow:last-child{border-bottom:none}
-.mk{font-size:12px;color:var(--ink3)}
+.mk{font-size:12px;color:#7a8094}
 .mv{font-size:13px;font-weight:500;color:var(--ink)}
 .mv.ok{color:#6ee7b7}
 .mv.warn{color:#fbbf24}
@@ -86,8 +86,8 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-
 /* MAIN PROJECT SPLIT */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-bottom:20px}
 .pan{background:#161b24;padding:28px}
-.pan.dk{background:var(--ink)}
-.pan.dk h3{color:#f7f6f2}
+.pan.dk{background:#0a0d14}
+.pan.dk h3{color:#f0efeb}
 .pan.dk p{color:rgba(247,246,242,.68)}
 h3{font-family:'DM Serif Display',serif;font-size:18px;letter-spacing:-.4px;margin-bottom:10px}
 .shap{margin:12px 0}
@@ -100,7 +100,7 @@ h3{font-family:'DM Serif Display',serif;font-size:18px;letter-spacing:-.4px;marg
 .acard{padding:13px;border:1px solid var(--rule);border-radius:3px;background:#161b24;transition:all .2s}
 .acard:hover{border-color:var(--accent);background:rgba(91,142,240,0.1)}
 .aname{font-size:12px;font-weight:500;margin-bottom:2px}
-.adesc{font-size:11px;color:var(--ink3);line-height:1.35}
+.adesc{font-size:11px;color:#7a8094;line-height:1.35}
 
 /* PROJECTS GRID */
 .proj-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
@@ -108,13 +108,13 @@ h3{font-family:'DM Serif Display',serif;font-size:18px;letter-spacing:-.4px;marg
 
 /* FEATURE LIST */
 .feat-list{list-style:none;margin:10px 0}
-.feat-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink2);margin-bottom:7px;line-height:1.5}
+.feat-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:#b8b5ac;margin-bottom:7px;line-height:1.5}
 .feat-list li::before{content:'·';color:var(--accent);font-size:16px;line-height:1;flex-shrink:0}
 
 /* SKILLS */
 .sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .sgroup{padding:20px;background:#161b24;border:1px solid var(--rule);border-radius:3px}
-.sgtitle{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:10px}
+.sgtitle{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7a8094;text-transform:uppercase;margin-bottom:10px}
 .si{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--paper2)}
 .si:last-child{border-bottom:none}
 .sn{font-size:12px;color:var(--ink)}
@@ -126,31 +126,31 @@ h3{font-family:'DM Serif Display',serif;font-size:18px;letter-spacing:-.4px;marg
 .tl::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:rgba(255,255,255,0.1)}
 .tli{position:relative;margin-bottom:24px;padding-left:16px}
 .tli::before{content:'';position:absolute;left:-23px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid #0e1117}
-.tdate{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:2px}
+.tdate{font-family:'DM Mono',monospace;font-size:10px;color:#7a8094;margin-bottom:2px}
 .ttitle{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
 .torg{font-size:11px;color:var(--accent);margin-bottom:4px;font-family:'DM Mono',monospace}
-.tdesc{font-size:12px;color:var(--ink2);line-height:1.6;font-weight:300}
+.tdesc{font-size:12px;color:#b8b5ac;line-height:1.6;font-weight:300}
 
 /* CERTS */
 .certs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
 .cert{padding:12px 14px;background:#161b24;border:1px solid var(--rule);border-radius:3px}
 .cert strong{color:var(--ink);display:block;font-size:13px;margin-bottom:2px}
-.cert span{font-size:11px;color:var(--ink3)}
+.cert span{font-size:11px;color:#7a8094}
 
 /* CONTACT */
 .csec{background:var(--ink);padding:80px 40px}
 .cinner{max-width:600px;margin:0 auto;text-align:center}
-.csec h2{color:#f7f6f2;margin-bottom:12px}
+.csec h2{color:#f0efeb;margin-bottom:12px}
 .csec p{color:rgba(247,246,242,.5);margin-bottom:32px;font-size:15px}
 .clinks{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .cl{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:2px;font-size:13px;font-weight:500;text-decoration:none;transition:all .2s}
-.cl-em{background:rgba(255,255,255,.1);color:#f7f6f2;border:1px solid rgba(255,255,255,.12)}
+.cl-em{background:rgba(255,255,255,.1);color:#f0efeb;border:1px solid rgba(255,255,255,.12)}
 .cl-em:hover{background:rgba(255,255,255,.16)}
 .cl-li{background:#0077b5;color:#fff}
 .cl-li:hover{background:#005885}
 .cl-ph{background:rgba(255,255,255,.06);color:rgba(247,246,242,.6);border:1px solid rgba(255,255,255,.07)}
 
-footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--rule);font-size:12px;color:var(--ink3);background:#0e1117}
+footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--rule);font-size:12px;color:#7a8094;background:#0e1117}
 
 
 .avatar-ring{width:80px;height:80px;border-radius:50%;border:3px solid rgba(255,255,255,0.15);overflow:hidden;flex-shrink:0}
@@ -194,7 +194,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       <div class="avatar-hero"><img src="data:image/jpeg;base64,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" alt="Anh Truong Nguyen"></div>
       <div>
         <div style="font-size:15px;font-weight:500;color:var(--ink)">Anh Truong Nguyen</div>
-        <div style="font-size:12px;color:var(--ink3);font-family:'DM Mono',monospace">Healthcare IT · Clinical Informatics</div>
+        <div style="font-size:12px;color:#7a8094;font-family:'DM Mono',monospace">Healthcare IT · Clinical Informatics</div>
       </div>
     </div>
     <div class="htag"><span class="dot"></span>Healthcare IT · Clinical Informatics · Cybersecurity</div>
@@ -225,7 +225,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
       <div class="avatar-ring"><img src="data:image/jpeg;base64,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" alt="Anh Truong Nguyen"></div>
       <div>
-        <div style="font-family:'DM Serif Display',serif;font-size:13px;color:#f7f6f2;letter-spacing:-.2px">Anh Truong Nguyen</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:13px;color:#f0efeb;letter-spacing:-.2px">Anh Truong Nguyen</div>
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(247,246,242,.4);margin-top:2px">San Jose, CA</div>
       </div>
     </div>
@@ -275,7 +275,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       <div class="pan" style="display:flex;flex-direction:column;gap:12px">
         <div>
           <h3>Three-audience interface design</h3>
-          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Same model, three completely different interfaces — each designed around how that audience thinks, what they need to decide, and how much time they have.</p>
+          <p style="font-size:13px;color:#b8b5ac;line-height:1.7;font-weight:300">Same model, three completely different interfaces — each designed around how that audience thinks, what they need to decide, and how much time they have.</p>
         </div>
         <div class="agrid">
           <div class="acard"><div class="aname">Cardiologist</div><div class="adesc">SHAP · CI · What-if simulator</div></div>
@@ -316,44 +316,44 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 
         <style>
         .db-tab-bar{display:flex;gap:4px;margin-bottom:0}
-        .db-tab{padding:7px 14px;border-radius:6px 6px 0 0;border:0.5px solid #d0ccc8;border-bottom:none;cursor:pointer;font-size:12px;color:#7a8094;background:#eeecea;transition:all .15s;font-family:'Outfit',sans-serif}
-        .db-tab.active{background:#fff;color:#0e1117;font-weight:500}
-        .db-panel{display:none;border:0.5px solid #d0ccc8;border-radius:0 8px 8px 8px;padding:16px;background:#fff}
+        .db-tab{padding:7px 14px;border-radius:6px 6px 0 0;border:0.5px solid #d0ccc8;border-bottom:none;cursor:pointer;font-size:12px;color:#7a8094;background:#161b24;transition:all .15s;font-family:'Outfit',sans-serif}
+        .db-tab.active{background:#161b24;color:#f0efeb;font-weight:500}
+        .db-panel{display:none;border:0.5px solid #d0ccc8;border-radius:0 8px 8px 8px;padding:16px;background:#161b24}
         .db-panel.active{display:block}
         .db-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-        .db-bred{background:#FCEBEB;color:#A32D2D}.db-bamb{background:#FAEEDA;color:#854F0B}.db-bgrn{background:#EAF3DE;color:#3B6D11}
+        .db-bred{background:rgba(226,75,74,0.15);color:#A32D2D}.db-bamb{background:rgba(239,159,39,0.12);color:#854F0B}.db-bgrn{background:rgba(110,231,183,0.1);color:#3B6D11}
         .db-mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
-        .db-mcard{background:#f7f6f2;border-radius:6px;padding:9px 11px}
-        .db-mlabel{font-size:10px;color:#7a8094;margin-bottom:2px}
-        .db-mval{font-size:18px;font-weight:500;color:#0e1117}
+        .db-mcard{background:#0e1117;border-radius:6px;padding:9px 11px}
+        .db-mlabel{font-size:10px;color:rgba(240,239,235,0.45);margin-bottom:2px}
+        .db-mval{font-size:18px;font-weight:500;color:#f0efeb}
         .db-shap-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:11px}
-        .db-shap-lbl{width:120px;color:#7a8094;font-size:11px}
-        .db-shap-wrap{flex:1;background:#eeecea;border-radius:3px;height:10px;overflow:hidden}
+        .db-shap-lbl{width:120px;color:rgba(240,239,235,0.5);font-size:11px}
+        .db-shap-wrap{flex:1;background:#161b24;border-radius:3px;height:10px;overflow:hidden}
         .db-shap-bar{height:100%;border-radius:3px}
         .db-shap-num{width:38px;text-align:right;font-size:10px}
-        .db-act-row{display:flex;align-items:flex-start;gap:8px;margin:6px 0;padding:9px 10px;border-radius:6px;background:#f7f6f2}
+        .db-act-row{display:flex;align-items:flex-start;gap:8px;margin:6px 0;padding:9px 10px;border-radius:6px;background:#0e1117}
         .db-act-num{width:18px;height:18px;border-radius:50%;background:#185FA5;color:#E6F1FB;font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-        .db-act-title{font-size:12px;font-weight:500;color:#0e1117}
+        .db-act-title{font-size:12px;font-weight:500;color:#f0efeb}
         .db-act-sub{font-size:11px;color:#7a8094;margin-top:1px}
-        .db-sec{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#7a8094;margin:12px 0 5px}
+        .db-sec{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,239,235,0.35);margin:12px 0 5px}
         .db-goal-row{display:flex;align-items:center;gap:8px;margin:5px 0}
-        .db-goal-lbl{font-size:11px;width:120px;color:#0e1117}
-        .db-goal-wrap{flex:1;background:#eeecea;border-radius:4px;height:8px;overflow:hidden}
+        .db-goal-lbl{font-size:11px;width:120px;color:#f0efeb}
+        .db-goal-wrap{flex:1;background:#161b24;border-radius:4px;height:8px;overflow:hidden}
         .db-goal-bar{height:100%;border-radius:4px}
         .db-goal-val{font-size:10px;color:#7a8094;width:30px;text-align:right}
         .db-icon-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:8px 0}
-        .db-icon-box{text-align:center;padding:7px 4px;border-radius:6px;background:#f7f6f2;font-size:10px;color:#7a8094}
-        .db-icon-box.mod{background:#E1F5EE;color:#085041}
-        .db-icon-box.fix{background:#FAEEDA;color:#633806}
+        .db-icon-box{text-align:center;padding:7px 4px;border-radius:6px;background:#0e1117;font-size:10px;color:#7a8094}
+        .db-icon-box.mod{background:rgba(52,211,153,0.12);color:#6ee7b7}
+        .db-icon-box.fix{background:rgba(239,159,39,0.12);color:#633806}
         .db-divider{border:none;border-top:0.5px solid #e0ddd8;margin:10px 0}
-        .db-ci-track{flex:1;height:6px;background:#eeecea;border-radius:3px;position:relative;overflow:visible}
+        .db-ci-track{flex:1;height:6px;background:#161b24;border-radius:3px;position:relative;overflow:visible}
         .db-ci-fill{position:absolute;top:0;height:6px;border-radius:3px;background:#85B7EB}
         .db-ci-dot{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:#185FA5;border:2px solid #fff;margin-left:-7px}
         .db-sim-row{display:flex;align-items:center;gap:8px;margin:6px 0}
         .db-sim-lbl{width:120px;font-size:11px;color:#7a8094}
         .db-sim-out{font-size:12px;font-weight:500;min-width:36px;text-align:right}
         .db-pt-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-        select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:0.5px solid #d0ccc8;border-radius:4px;background:#fff;color:#0e1117}
+        select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:0.5px solid #d0ccc8;border-radius:4px;background:#161b24;color:#f0efeb}
         </style>
 
         <div class="db-tab-bar">
@@ -370,7 +370,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
             <span id="db-badge-cardio" class="db-badge db-bred">High risk</span>
           </div>
           <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
-            <span id="db-c-name" style="font-size:14px;font-weight:500;color:#0e1117"></span>
+            <span id="db-c-name" style="font-size:14px;font-weight:500;color:#f0efeb"></span>
             <span id="db-c-demo" style="font-size:11px;color:#7a8094"></span>
           </div>
           <div class="db-mgrid">
@@ -552,13 +552,13 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     const feats=dbShapFeats(pt).filter(f=>f.val>0).slice(0,3);
     const aMap={'LDL cholesterol':`LDL ${pt.LDL} mg/dL — consider statin therapy`,'Systolic BP':`BP ${pt.Systolic_BP}/${pt.Diastolic_BP} — review antihypertensive`,'BMI':`BMI ${pt.BMI} — lifestyle counselling`,'Smoking':`Smoking: ${pt.Smoking_Status} — cessation referral`,'Diabetes':`Diabetes: ${pt.Diabetes} — optimise glycaemic control`,'Age':`Age ${pt.Age} — elevated baseline risk`,'Exercise':`Exercise: ${pt.Exercise_Frequency||'Unknown'} — 150 min/week target`,'HDL':`HDL ${pt.HDL} mg/dL — increase via lifestyle`};
     document.getElementById('db-pcp-actions').innerHTML=feats.map((f,i)=>`<div class="db-act-row"><div class="db-act-num">${i+1}</div><div><div class="db-act-title">${f.label}</div><div class="db-act-sub">${aMap[f.label]||f.label}</div></div></div>`).join('');
-    document.getElementById('db-pcp-details').innerHTML=[['LDL',pt.LDL+' mg/dL'],['HDL',pt.HDL+' mg/dL'],['BMI',pt.BMI],['BP',pt.Systolic_BP+'/'+pt.Diastolic_BP],['Diabetes',pt.Diabetes],['Smoker',pt.Smoking_Status]].map(([l,v])=>`<div class="db-mcard"><div class="db-mlabel">${l}</div><div style="font-size:13px;font-weight:500;color:#0e1117">${v||'—'}</div></div>`).join('');
+    document.getElementById('db-pcp-details').innerHTML=[['LDL',pt.LDL+' mg/dL'],['HDL',pt.HDL+' mg/dL'],['BMI',pt.BMI],['BP',pt.Systolic_BP+'/'+pt.Diastolic_BP],['Diabetes',pt.Diabetes],['Smoker',pt.Smoking_Status]].map(([l,v])=>`<div class="db-mcard"><div class="db-mlabel">${l}</div><div style="font-size:13px;font-weight:500;color:#f0efeb">${v||'—'}</div></div>`).join('');
   }
   function dbDrawGauge(pct,color){
     const c=document.getElementById('db-gauge');if(!c)return;
     const ctx=c.getContext('2d');ctx.clearRect(0,0,150,86);
     const cx=75,cy=78,r=58;
-    ctx.beginPath();ctx.arc(cx,cy,r,Math.PI,0);ctx.lineWidth=13;ctx.strokeStyle='#eeecea';ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,r,Math.PI,0);ctx.lineWidth=13;ctx.strokeStyle='#161b24';ctx.stroke();
     const angle=Math.PI+(pct/100)*Math.PI;
     ctx.beginPath();ctx.arc(cx,cy,r,Math.PI,angle);ctx.strokeStyle=color;ctx.stroke();
     ctx.beginPath();const nx=cx+r*Math.cos(angle),ny=cy+r*Math.sin(angle);
@@ -599,7 +599,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <div>
           <div class="tags" style="margin-bottom:10px"><a href="https://hl7.org/fhir" target="_blank" class="tag p" style="text-decoration:none">HL7 FHIR</a><a href="https://www.healthit.gov/topic/interoperability" target="_blank" class="tag t" style="text-decoration:none">EHR Integration</a><a href="https://en.wikipedia.org/wiki/SQL" target="_blank" class="tag b" style="text-decoration:none">SQL</a><a href="https://www.python.org" target="_blank" class="tag" style="text-decoration:none">Python</a></div>
           <h3>EHR workflow optimisation &amp; clinical system analysis</h3>
-          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Analysed clinical workflows across a multi-site hospital system to identify inefficiencies in EHR data entry, order management, and care coordination. Mapped current-state vs future-state workflows, identified integration gaps between systems, and designed a HL7 FHIR-based data pipeline to unify patient records across disparate platforms.</p>
+          <p style="font-size:13px;color:#b8b5ac;line-height:1.7;font-weight:300">Analysed clinical workflows across a multi-site hospital system to identify inefficiencies in EHR data entry, order management, and care coordination. Mapped current-state vs future-state workflows, identified integration gaps between systems, and designed a HL7 FHIR-based data pipeline to unify patient records across disparate platforms.</p>
         </div>
         <ul class="feat-list">
           <li>Conducted 12 stakeholder interviews across nursing, pharmacy, and physician teams to map clinical workflow pain points</li>
@@ -615,22 +615,22 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
           <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:10px 14px">
             <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(247,246,242,.4);margin-bottom:4px">LAYER 1 — SOURCE SYSTEMS</div>
-            <div style="font-size:12px;color:#f7f6f2">Epic EHR &nbsp;·&nbsp; LabCorp LIS &nbsp;·&nbsp; Pharmacy PIS</div>
+            <div style="font-size:12px;color:#f0efeb">Epic EHR &nbsp;·&nbsp; LabCorp LIS &nbsp;·&nbsp; Pharmacy PIS</div>
           </div>
           <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(247,246,242,.3)">↓ HL7 FHIR R4</div>
           <div style="background:rgba(26,79,214,.3);border:1px solid rgba(26,79,214,.5);border-radius:3px;padding:10px 14px">
             <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(147,197,253,.8);margin-bottom:4px">LAYER 2 — INTEGRATION ENGINE</div>
-            <div style="font-size:12px;color:#f7f6f2">FHIR API Gateway &nbsp;·&nbsp; Data validation &nbsp;·&nbsp; Audit logs</div>
+            <div style="font-size:12px;color:#f0efeb">FHIR API Gateway &nbsp;·&nbsp; Data validation &nbsp;·&nbsp; Audit logs</div>
           </div>
           <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(247,246,242,.3)">↓ Unified patient record</div>
           <div style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:3px;padding:10px 14px">
             <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(110,231,183,.8);margin-bottom:4px">LAYER 3 — CLINICAL APPS</div>
-            <div style="font-size:12px;color:#f7f6f2">Clinician dashboard &nbsp;·&nbsp; Analytics &nbsp;·&nbsp; Alerts</div>
+            <div style="font-size:12px;color:#f0efeb">Clinician dashboard &nbsp;·&nbsp; Analytics &nbsp;·&nbsp; Alerts</div>
           </div>
         </div>
         <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Data quality issues found</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">847 records</span></div>
         <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Integration gaps resolved</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">3 systems</span></div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1);border-bottom:none"><span class="qk">Standard</span><span style="font-size:13px;font-weight:500;color:#f7f6f2">ONC / HL7 FHIR R4</span></div>
+        <div class="mrow" style="border-color:rgba(255,255,255,.1);border-bottom:none"><span class="qk">Standard</span><span style="font-size:13px;font-weight:500;color:#f0efeb">ONC / HL7 FHIR R4</span></div>
       </div>
     </div>
     <div class="proj-grid-3 fi">
@@ -656,7 +656,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         </div>
       </div>
       <div class="pan" style="display:flex;flex-direction:column;gap:12px">
-        <div><h3>Live ICU dashboard</h3><p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Interactive multi-parameter chart with adjustable sensitivity, clinical event zoom filters, and real-time alert classification. Built on real simulated ICU data at 5-min intervals.</p></div>
+        <div><h3>Live ICU dashboard</h3><p style="font-size:13px;color:#b8b5ac;line-height:1.7;font-weight:300">Interactive multi-parameter chart with adjustable sensitivity, clinical event zoom filters, and real-time alert classification. Built on real simulated ICU data at 5-min intervals.</p></div>
         <div style="margin-top:auto">
           <div class="mrow"><span class="mk">Dataset</span><span class="mv">61 records · 5-min intervals</span></div>
           <div class="mrow"><span class="mk">Parameters</span><span class="mv">6 (HR, BP, RR, SpO2, Lactate)</span></div>
@@ -676,13 +676,13 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#0e1117;padding:18px">
         <style>
         .ig{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:12px}
-        .im{background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:7px;padding:9px 11px}
+        .im{background:rgba(255,255,255,0.07);border:0.5px solid rgba(255,255,255,0.1);border-radius:7px;padding:9px 11px}
         .iml{font-size:10px;color:rgba(247,246,242,0.45);margin-bottom:3px;font-family:monospace}
         .imv{font-size:18px;font-weight:500}
         .ial{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;margin-bottom:5px;font-size:12px}
         .ifb{padding:5px 12px;font-size:11px;border-radius:4px;cursor:pointer;border:0.5px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:rgba(247,246,242,0.6);transition:all .15s;font-family:monospace}
-        .ifb:hover{background:rgba(255,255,255,0.12);color:#f7f6f2}
-        .ifb.on{background:#1a4fd6;color:#f7f6f2;border-color:#1a4fd6}
+        .ifb:hover{background:rgba(255,255,255,0.12);color:#f0efeb}
+        .ifb.on{background:#1a4fd6;color:#f0efeb;border-color:#1a4fd6}
         .icu-sens-row{display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:14px}
         .icu-sens-row input[type=range]{flex:1;accent-color:#1a4fd6}
         </style>
@@ -709,7 +709,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <div style="display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:12px">
           <span style="font-size:11px;color:rgba(247,246,242,0.45);font-family:monospace">Sensitivity</span>
           <input type="range" id="icu-sr" min="1" max="3" value="2" step="1" style="flex:1" oninput="icuSr(this.value)">
-          <span style="font-size:12px;font-weight:500;min-width:130px;color:#f7f6f2;font-family:monospace" id="icu-sl">Medium — standard</span>
+          <span style="font-size:12px;font-weight:500;min-width:130px;color:#f0efeb;font-family:monospace" id="icu-sl">Medium — standard</span>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px">
           <div style="background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:7px;padding:9px;text-align:center"><div style="font-size:10px;color:rgba(247,246,242,0.45);font-family:monospace">Anomalies detected</div><div style="font-size:20px;font-weight:500;color:#F09595" id="icu-ac">2</div></div>
@@ -746,10 +746,10 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       {label:'HR',data:sl.map(r=>r[1]),borderColor:'#E24B4A',borderWidth:2,pointRadius:(c)=>(sens>=3&&c.dataIndex+sv===7?5:0),pointBackgroundColor:'#E24B4A',tension:0.3,fill:false}
     ];
     if(ch)ch.destroy();
-    ch=new Chart(document.getElementById('icu-c'),{type:'line',data:{labels:sl.map(r=>r[0]),datasets:ds},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(14,17,23,0.95)',titleColor:'#f7f6f2',bodyColor:'rgba(247,246,242,0.7)',borderColor:'rgba(255,255,255,0.1)',borderWidth:0.5,padding:10}},scales:{x:{ticks:{font:{size:9},maxTicksLimit:10,color:'rgba(247,246,242,0.4)'},grid:{color:'rgba(255,255,255,0.06)'},border:{color:'rgba(255,255,255,0.1)'}},y:{ticks:{font:{size:9},color:'rgba(247,246,242,0.4)'},grid:{color:'rgba(255,255,255,0.06)'},border:{color:'rgba(255,255,255,0.1)'},min:60,max:145}}},plugins:[bgP]});
+    ch=new Chart(document.getElementById('icu-c'),{type:'line',data:{labels:sl.map(r=>r[0]),datasets:ds},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(14,17,23,0.95)',titleColor:'#0e1117',bodyColor:'rgba(247,246,242,0.7)',borderColor:'rgba(255,255,255,0.1)',borderWidth:0.5,padding:10}},scales:{x:{ticks:{font:{size:9},maxTicksLimit:10,color:'rgba(247,246,242,0.4)'},grid:{color:'rgba(255,255,255,0.06)'},border:{color:'rgba(255,255,255,0.1)'}},y:{ticks:{font:{size:9},color:'rgba(247,246,242,0.4)'},grid:{color:'rgba(255,255,255,0.06)'},border:{color:'rgba(255,255,255,0.1)'},min:60,max:145}}},plugins:[bgP]});
     let h='';
-    if(sens>=1){h+=`<div class="ial" style="background:#FCEBEB"><div style="width:8px;height:8px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div><span style="color:#791F1F"><strong>CRITICAL 01:15–01:55</strong> — Sepsis: HR↑ SBP↓ Lactate↑ SpO2↓</span></div>`;h+=`<div class="ial" style="background:#FAEEDA"><div style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0"></div><span style="color:#633806"><strong>HIGH 03:30–04:10</strong> — Resp distress: RR↑ SpO2↓ BP↑</span></div>`;}
-    if(sens>=3) h+=`<div class="ial" style="background:#EAF3DE"><div style="width:8px;height:8px;border-radius:50%;background:#639922;flex-shrink:0"></div><span style="color:#27500A"><strong>NOISE 00:35</strong> — HR spike filtered</span></div>`;
+    if(sens>=1){h+=`<div class="ial" style="background:rgba(226,75,74,0.15)"><div style="width:8px;height:8px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div><span style="color:#791F1F"><strong>CRITICAL 01:15–01:55</strong> — Sepsis: HR↑ SBP↓ Lactate↑ SpO2↓</span></div>`;h+=`<div class="ial" style="background:rgba(239,159,39,0.12)"><div style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0"></div><span style="color:#633806"><strong>HIGH 03:30–04:10</strong> — Resp distress: RR↑ SpO2↓ BP↑</span></div>`;}
+    if(sens>=3) h+=`<div class="ial" style="background:rgba(110,231,183,0.1)"><div style="width:8px;height:8px;border-radius:50%;background:#639922;flex-shrink:0"></div><span style="color:#27500A"><strong>NOISE 00:35</strong> — HR spike filtered</span></div>`;
     document.getElementById('icu-alerts').innerHTML=h;
   }
   icuBld();
@@ -854,7 +854,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       <div style="background:#161b24;border:1px solid var(--rule);border-radius:3px;padding:18px;margin-bottom:16px">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:5px">B.S. CYBERSECURITY & INFORMATION ASSURANCE</div>
         <div style="font-size:15px;font-weight:500;margin-bottom:2px">Capella University</div>
-        <div style="font-size:12px;color:var(--ink3)">Online · Completed</div>
+        <div style="font-size:12px;color:#7a8094">Online · Completed</div>
       </div>
       <div class="slabel" style="margin-bottom:10px">Certifications</div>
       <div class="certs">
@@ -865,7 +865,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       </div>
       <div style="margin-top:16px;background:rgba(91,142,240,0.08);border:1px solid rgba(91,142,240,0.2);border-radius:3px;padding:16px">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:7px;letter-spacing:.06em">WHAT I BRING TO HEALTHCARE IT</div>
-        <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">My B.S. in Cybersecurity, ITIL v4 process knowledge, and hands-on HIPAA-adjacent compliance work give me a strong foundation for healthcare IT roles. I understand how to build systems that are both technically secure and human-centered — a combination that's rare and essential in clinical environments.</p>
+        <p style="font-size:13px;color:#b8b5ac;line-height:1.7;font-weight:300">My B.S. in Cybersecurity, ITIL v4 process knowledge, and hands-on HIPAA-adjacent compliance work give me a strong foundation for healthcare IT roles. I understand how to build systems that are both technically secure and human-centered — a combination that's rare and essential in clinical environments.</p>
       </div>
     </div>
   </div>
@@ -914,7 +914,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       <div class="si"><span class="sn">WCAG accessibility</span><span class="sd m"></span></div>
     </div>
   </div>
-  <p style="font-size:11px;color:var(--ink3);margin-top:10px;font-family:'DM Mono',monospace">
+  <p style="font-size:11px;color:#7a8094;margin-top:10px;font-family:'DM Mono',monospace">
     <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:4px;vertical-align:middle"></span>Proficient &nbsp;
     <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);margin-right:4px;vertical-align:middle"></span>Familiar
   </p>
