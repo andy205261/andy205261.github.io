@@ -7,169 +7,176 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --ink:#f1f5f9;--ink2:#cbd5e1;--ink3:#94a3b8;
-  --paper:#080c14;--paper2:#0e1420;--paper3:#131b2e;
-  --accent:#38bdf8;--accent-bright:#38bdf8;--accent2:rgba(56,189,248,0.1);
-  --teal:#2dd4bf;--teal2:rgba(45,212,191,0.1);
-  --green:#34d399;--green2:rgba(52,211,153,0.1);
-  --amber:#fbbf24;--amber2:rgba(251,191,36,0.1);
-  --purple:#a78bfa;--purple2:rgba(167,139,250,0.1);
-  --red:#f87171;--red2:rgba(248,113,113,0.1);
-  --rule:rgba(255,255,255,0.06);
-  --card-shadow:0 1px 3px rgba(0,0,0,0.4),0 4px 16px rgba(0,0,0,0.3);
-  --card-shadow-hover:0 0 0 1px rgba(56,189,248,0.25),0 8px 32px rgba(56,189,248,0.08),0 2px 8px rgba(0,0,0,0.4);
-}
+:root{--ink:#0e1117;--ink2:#3a3f4a;--ink3:#7a8094;--paper:#f7f6f2;--paper2:#eeecea;--accent:#1a4fd6;--accent2:#e8f0fe;--red:#c0392b;--green:#1a6b3c;--amber:#b45309;--purple:#5b21b6;--purple2:#ede9fe;--teal:#0f766e;--teal2:#ccfbf1;--rule:rgba(14,17,23,0.11)}
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,12,20,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--rule)}
-.nav-logo{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);letter-spacing:-.3px}
-.nav-logo span{color:var(--accent)}
-.nav-links{display:flex;gap:4px;align-items:center}
-.nav-links a{font-size:13px;font-weight:500;color:var(--ink3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .15s}
-.nav-links a:hover{color:var(--ink);background:rgba(255,255,255,0.06)}
-.nav-cta{background:var(--accent)!important;color:#080c14!important;padding:7px 16px!important;border-radius:6px!important;font-size:12px!important;font-weight:700!important}
-.nav-cta:hover{background:#7dd3fc!important}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden;background:var(--paper)}
-.hero::before{content:'';position:absolute;top:-200px;right:-100px;width:800px;height:800px;background:radial-gradient(ellipse,rgba(56,189,248,0.13) 0%,transparent 65%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-100px;left:10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(167,139,250,0.09) 0%,transparent 65%);pointer-events:none}
-.hero-glow{position:absolute;top:30%;left:-100px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(45,212,191,0.06) 0%,transparent 65%);pointer-events:none}
-.hero-grid{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);background-size:48px 48px}
-.htag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:rgba(56,189,248,0.08);padding:5px 14px;border-radius:100px;letter-spacing:.06em;margin-bottom:24px;border:1px solid rgba(56,189,248,0.2)}
-.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite;box-shadow:0 0 8px var(--accent)}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
-h1{font-family:'DM Serif Display',serif;font-size:clamp(48px,6.5vw,86px);line-height:.98;letter-spacing:-2.5px;color:var(--ink);max-width:760px;margin-bottom:22px;font-weight:400}
-h1 em{font-style:italic;color:var(--accent);text-shadow:0 0 40px rgba(56,189,248,0.3)}
-.hero-sub{font-size:16px;font-weight:400;color:var(--ink3);max-width:520px;line-height:1.75;margin-bottom:36px}
-.ctas{display:flex;gap:8px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.01em;transition:all .18s;font-family:'Outfit',sans-serif}
-.btn-dark{background:var(--accent);color:#080c14;font-weight:700}
-.btn-dark:hover{background:#7dd3fc;transform:translateY(-1px);box-shadow:0 4px 20px rgba(56,189,248,0.35)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(247,246,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--ink);letter-spacing:-.3px}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink3);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink)!important;color:var(--paper)!important;padding:7px 16px;border-radius:2px!important;font-size:12px!important}
+.nav-cta:hover{background:var(--accent)!important}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;opacity:0.03;background-image:linear-gradient(var(--ink) 1px,transparent 1px),linear-gradient(90deg,var(--ink) 1px,transparent 1px);background-size:60px 60px}
+.htag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:var(--accent2);padding:5px 12px;border-radius:2px;letter-spacing:.08em;margin-bottom:28px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(44px,6.5vw,82px);line-height:1.0;letter-spacing:-2px;color:var(--ink);max-width:820px;margin-bottom:24px}
+h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:16px;font-weight:300;color:var(--ink2);max-width:560px;line-height:1.75;margin-bottom:40px}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:2px;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.03em;transition:all .2s}
+.btn-dark{background:var(--ink);color:var(--paper)}
+.btn-dark:hover{background:var(--accent);transform:translateY(-1px)}
 .btn-li{background:#0077b5;color:#fff}
 .btn-li:hover{background:#005885;transform:translateY(-1px)}
-.btn-out{border:1px solid rgba(255,255,255,0.14);color:var(--ink);background:rgba(255,255,255,0.05)}
-.btn-out:hover{border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.1)}
-.btn-dl{background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-weight:600}
-.btn-dl:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(16,185,129,0.35)}
-.stats{display:flex;gap:40px;margin-top:52px;padding-top:36px;border-top:1px solid var(--rule)}
-.snum{font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1}
-.slbl{font-size:11px;color:var(--ink3);font-weight:400;line-height:1.5;margin-top:3px}
-section{padding:96px 40px}
-.slabel{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--ink3);text-transform:uppercase;margin-bottom:12px}
-.proj-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:12px;font-weight:500;background:rgba(56,189,248,0.08);display:inline-block;padding:4px 12px;border-radius:100px;border:1px solid rgba(56,189,248,0.2)}
-h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,3.8vw,46px);letter-spacing:-1.2px;line-height:1.05;color:var(--ink);margin-bottom:12px;font-weight:400}
-.intro{font-size:15px;font-weight:400;color:var(--ink3);max-width:540px;line-height:1.78;margin-bottom:48px}
-.about-strip{background:var(--paper3);padding:72px 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.about-strip h2{color:var(--ink);margin-bottom:14px;letter-spacing:-1px}
-.about-strip p{font-size:15px;font-weight:300;color:var(--ink3);line-height:1.82;margin-bottom:12px}
-.pivot-list{list-style:none;margin-top:18px}
-.pivot-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink3);margin-bottom:11px;line-height:1.55}
+.btn-out{border:1px solid var(--rule);color:var(--ink)}
+.btn-out:hover{border-color:var(--ink);background:var(--paper2)}
+.btn-dl{background:var(--green);color:#fff}
+.btn-dl:hover{background:#145c30;transform:translateY(-1px)}
+.stats{display:flex;gap:36px;margin-top:56px;padding-top:40px;border-top:1px solid var(--rule)}
+.snum{font-family:'DM Serif Display',serif;font-size:34px;color:var(--ink);display:block}
+.slbl{font-size:11px;color:var(--ink3);font-weight:400;line-height:1.4}
+
+section{padding:92px 40px}
+.slabel{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--ink3);text-transform:uppercase;margin-bottom:14px}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-spacing:-1px;line-height:1.1;color:var(--ink);margin-bottom:14px}
+.intro{font-size:15px;font-weight:300;color:var(--ink2);max-width:560px;line-height:1.75;margin-bottom:48px}
+
+/* ABOUT STRIP */
+.about-strip{background:var(--ink);padding:64px 40px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-strip h2{color:#f7f6f2;margin-bottom:14px}
+.about-strip p{font-size:15px;font-weight:300;color:rgba(247,246,242,.65);line-height:1.8;margin-bottom:12px}
+.pivot-list{list-style:none;margin-top:16px}
+.pivot-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(247,246,242,.7);margin-bottom:10px;line-height:1.5}
 .pivot-list li::before{content:'→';color:var(--accent);font-family:'DM Mono',monospace;flex-shrink:0;margin-top:1px}
-.about-right{padding:28px;background:rgba(255,255,255,.03);border:1px solid var(--rule);border-radius:12px}
-.about-right .slabel{color:var(--ink3)}
-.qrow{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule)}
+.about-right{padding:28px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px}
+.about-right .slabel{color:rgba(247,246,242,.3)}
+.qrow{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .qrow:last-child{border-bottom:none}
-.qk{font-size:12px;color:var(--ink3)}
-.qv{font-size:13px;font-weight:500;color:var(--ink)}
-.qv.hi{color:var(--green)}
-.card{background:var(--paper2);border:1px solid var(--rule);border-radius:12px;overflow:hidden;transition:all .25s;box-shadow:var(--card-shadow)}
-.card:hover{transform:translateY(-3px);box-shadow:var(--card-shadow-hover);border-color:rgba(56,189,248,0.25)}
-.card-head{padding:22px 22px 16px;border-bottom:1px solid var(--rule)}
-.tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
-.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.04em;padding:3px 9px;border-radius:100px;background:rgba(255,255,255,0.05);color:var(--ink3);border:1px solid var(--rule)}
-.tag.b{background:rgba(56,189,248,0.1);color:var(--accent);border-color:rgba(56,189,248,0.2)}
-.tag.g{background:rgba(52,211,153,0.1);color:var(--green);border-color:rgba(52,211,153,0.2)}
-.tag.a{background:rgba(251,191,36,0.1);color:var(--amber);border-color:rgba(251,191,36,0.2)}
-.tag.p{background:rgba(167,139,250,0.1);color:var(--purple);border-color:rgba(167,139,250,0.2)}
-.tag.t{background:rgba(45,212,191,0.1);color:var(--teal);border-color:rgba(45,212,191,0.2)}
-.tag.r{background:rgba(248,113,113,0.1);color:var(--red);border-color:rgba(248,113,113,0.2)}
-.ctitle{font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:-.4px;color:var(--ink);margin-bottom:6px;font-weight:400}
-.cdesc{font-size:13px;color:var(--ink3);line-height:1.65;font-weight:400}
-.card-body{padding:18px 22px}
-.mrow{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--rule)}
+.qk{font-size:12px;color:rgba(247,246,242,.45)}
+.qv{font-size:13px;font-weight:500;color:#f7f6f2}
+.qv.hi{color:#6ee7b7}
+
+/* PROJECT CARDS */
+.card{background:#fff;border:1px solid var(--rule);border-radius:4px;overflow:hidden;transition:all .3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(14,17,23,.08);border-color:rgba(14,17,23,.18)}
+.card-head{padding:24px 24px 16px;border-bottom:1px solid var(--rule)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.05em;padding:3px 8px;border-radius:2px;background:var(--paper2);color:var(--ink2)}
+.tag.b{background:var(--accent2);color:var(--accent)}
+.tag.g{background:#f0fdf4;color:var(--green)}
+.tag.a{background:#fffbeb;color:var(--amber)}
+.tag.p{background:var(--purple2);color:var(--purple)}
+.tag.t{background:var(--teal2);color:var(--teal)}
+.tag.r{background:#fef2f2;color:var(--red)}
+.ctitle{font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:-.5px;color:var(--ink);margin-bottom:6px}
+.cdesc{font-size:13px;color:var(--ink2);line-height:1.65;font-weight:300}
+.card-body{padding:20px 24px}
+.mrow{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--rule)}
 .mrow:last-child{border-bottom:none}
 .mk{font-size:12px;color:var(--ink3)}
-.mv{font-size:12px;font-weight:600;color:var(--ink)}
+.mv{font-size:13px;font-weight:500;color:var(--ink)}
 .mv.ok{color:var(--green)}
 .mv.warn{color:var(--amber)}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-bottom:20px;box-shadow:var(--card-shadow)}
-.pan{background:var(--paper2);padding:32px}
-.pan.dk{background:#050810}
-.pan.dk h3{color:var(--ink)}
-.pan.dk p{color:var(--ink3)}
-h3{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-.3px;margin-bottom:10px;font-weight:400}
-.shap{margin:14px 0}
-.srow{display:flex;align-items:center;gap:10px;margin:6px 0}
-.slb{font-size:11px;color:rgba(255,255,255,.3);width:88px;font-family:'DM Mono',monospace}
-.strk{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:10px;overflow:hidden}
-.sbar{height:100%;border-radius:10px}
+
+/* MAIN PROJECT SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-bottom:20px}
+.pan{background:#fff;padding:28px}
+.pan.dk{background:var(--ink)}
+.pan.dk h3{color:#f7f6f2}
+.pan.dk p{color:rgba(247,246,242,.68)}
+h3{font-family:'DM Serif Display',serif;font-size:18px;letter-spacing:-.4px;margin-bottom:10px}
+.shap{margin:12px 0}
+.srow{display:flex;align-items:center;gap:8px;margin:5px 0}
+.slb{font-size:11px;color:rgba(247,246,242,.4);width:82px;font-family:'DM Mono',monospace}
+.strk{flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.sbar{height:100%;border-radius:2px}
 .sval{font-size:10px;font-family:'DM Mono',monospace;width:36px;text-align:right}
-.agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.acard{padding:12px;border:1px solid var(--rule);border-radius:8px;background:rgba(255,255,255,0.03);transition:all .18s}
-.acard:hover{border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.06)}
-.aname{font-size:12px;font-weight:600;margin-bottom:2px;color:var(--ink)}
+.agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.acard{padding:13px;border:1px solid var(--rule);border-radius:3px;background:#fff;transition:all .2s}
+.acard:hover{border-color:var(--accent);background:var(--accent2)}
+.aname{font-size:12px;font-weight:500;margin-bottom:2px}
 .adesc{font-size:11px;color:var(--ink3);line-height:1.35}
-.proj-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.proj-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.feat-list{list-style:none;margin:12px 0}
-.feat-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink3);margin-bottom:7px;line-height:1.55}
-.feat-list li::before{content:'▸';color:var(--accent);font-size:10px;line-height:1.6;flex-shrink:0}
+
+/* PROJECTS GRID */
+.proj-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.proj-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+/* FEATURE LIST */
+.feat-list{list-style:none;margin:10px 0}
+.feat-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink2);margin-bottom:7px;line-height:1.5}
+.feat-list li::before{content:'·';color:var(--accent);font-size:16px;line-height:1;flex-shrink:0}
+
+/* SKILLS */
 .sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.sgroup{padding:20px;background:var(--paper2);border:1px solid var(--rule);border-radius:12px;box-shadow:var(--card-shadow)}
-.sgtitle{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
-.si{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.sgroup{padding:20px;background:#fff;border:1px solid var(--rule);border-radius:3px}
+.sgtitle{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:10px}
+.si{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--paper2)}
 .si:last-child{border-bottom:none}
 .sn{font-size:12px;color:var(--ink)}
-.sd{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(52,211,153,0.5)}
-.sd.m{background:var(--amber);box-shadow:0 0 6px rgba(251,191,36,0.4)}
+.sd{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.sd.m{background:var(--amber)}
+
+/* TIMELINE */
 .tl{position:relative;padding-left:20px}
-.tl::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--accent),transparent)}
-.tli{position:relative;margin-bottom:26px;padding-left:18px}
-.tli::before{content:'';position:absolute;left:-24px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2.5px solid var(--paper);box-shadow:0 0 0 3px rgba(56,189,248,0.2),0 0 12px rgba(56,189,248,0.3)}
-.tdate{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:3px;letter-spacing:.06em}
-.ttitle{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
-.torg{font-size:11px;color:var(--accent);margin-bottom:5px;font-family:'DM Mono',monospace}
-.tdesc{font-size:12px;color:var(--ink3);line-height:1.65;font-weight:400}
-.certs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.cert{padding:13px 16px;background:var(--paper2);border:1px solid var(--rule);border-radius:10px;box-shadow:var(--card-shadow)}
-.cert strong{color:var(--ink);display:block;font-size:13px;margin-bottom:2px;font-weight:600}
+.tl::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:var(--rule)}
+.tli{position:relative;margin-bottom:24px;padding-left:16px}
+.tli::before{content:'';position:absolute;left:-23px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--paper)}
+.tdate{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:2px}
+.ttitle{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.torg{font-size:11px;color:var(--accent);margin-bottom:4px;font-family:'DM Mono',monospace}
+.tdesc{font-size:12px;color:var(--ink2);line-height:1.6;font-weight:300}
+
+/* CERTS */
+.certs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.cert{padding:12px 14px;background:#fff;border:1px solid var(--rule);border-radius:3px}
+.cert strong{color:var(--ink);display:block;font-size:13px;margin-bottom:2px}
 .cert span{font-size:11px;color:var(--ink3)}
-.csec{background:var(--paper3);padding:88px 40px;position:relative;overflow:hidden;border-top:1px solid var(--rule)}
-.csec::before{content:'';position:absolute;top:-100px;right:-60px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(56,189,248,0.1) 0%,transparent 65%);pointer-events:none}
-.csec::after{content:'';position:absolute;bottom:-80px;left:-40px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(167,139,250,0.07) 0%,transparent 65%);pointer-events:none}
-.cinner{max-width:600px;margin:0 auto;text-align:center;position:relative;z-index:1}
-.csec h2{color:var(--ink);margin-bottom:12px}
-.csec p{color:var(--ink3);margin-bottom:32px;font-size:15px}
+
+/* CONTACT */
+.csec{background:var(--ink);padding:80px 40px}
+.cinner{max-width:600px;margin:0 auto;text-align:center}
+.csec h2{color:#f7f6f2;margin-bottom:12px}
+.csec p{color:rgba(247,246,242,.5);margin-bottom:32px;font-size:15px}
 .clinks{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.cl{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;transition:all .18s}
-.cl-em{background:rgba(56,189,248,0.08);color:var(--accent);border:1px solid rgba(56,189,248,0.2)}
-.cl-em:hover{background:rgba(56,189,248,0.14);box-shadow:0 0 20px rgba(56,189,248,0.15)}
+.cl{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:2px;font-size:13px;font-weight:500;text-decoration:none;transition:all .2s}
+.cl-em{background:rgba(255,255,255,.1);color:#f7f6f2;border:1px solid rgba(255,255,255,.12)}
+.cl-em:hover{background:rgba(255,255,255,.16)}
 .cl-li{background:#0077b5;color:#fff}
 .cl-li:hover{background:#005885}
-.cl-ph{background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)}
-footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--rule);font-size:12px;color:var(--ink3);background:var(--paper)}
-.avatar-ring{width:80px;height:80px;border-radius:50%;border:2px solid rgba(56,189,248,0.2);overflow:hidden;flex-shrink:0}
+.cl-ph{background:rgba(255,255,255,.06);color:rgba(247,246,242,.6);border:1px solid rgba(255,255,255,.07)}
+
+footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--rule);font-size:12px;color:var(--ink3)}
+
+
+.avatar-ring{width:80px;height:80px;border-radius:50%;border:3px solid rgba(255,255,255,0.15);overflow:hidden;flex-shrink:0}
 .avatar-ring img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.avatar-sm{width:56px;height:56px;border-radius:50%;border:2px solid rgba(56,189,248,0.2);overflow:hidden;flex-shrink:0}
+.avatar-sm{width:56px;height:56px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);overflow:hidden;flex-shrink:0}
 .avatar-sm img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.avatar-hero{width:64px;height:64px;border-radius:50%;border:2px solid rgba(56,189,248,0.3);overflow:hidden;flex-shrink:0;box-shadow:0 0 0 4px rgba(56,189,248,0.08),0 0 20px rgba(56,189,248,0.15)}
+.avatar-hero{width:68px;height:68px;border-radius:50%;border:2.5px solid var(--rule);overflow:hidden;flex-shrink:0}
 .avatar-hero img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.fi{opacity:0;transform:translateY(18px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+
+.fi{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
 .fi.v{opacity:1;transform:none}
+
 @media(max-width:768px){
-  nav{padding:0 20px}
+  nav{padding:14px 20px}
   .hero,section{padding-left:20px;padding-right:20px}
-  h1{font-size:42px;letter-spacing:-1.5px}
+  h1{font-size:38px}
   .split,.about-strip,.proj-grid-2,.proj-grid-3,.sgrid,.certs{grid-template-columns:1fr}
   .agrid{grid-template-columns:1fr}
-  .stats{gap:22px;flex-wrap:wrap}
+  .stats{gap:20px;flex-wrap:wrap}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <span class="nav-logo">Anh Truong <span>Nguyen</span></span>
+  <span class="nav-logo">Anh Truong Nguyen</span>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
@@ -182,7 +189,6 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
   <div style="position:relative;z-index:1">
     <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
       <div class="avatar-hero"><img src="data:image/jpeg;base64,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" alt="Anh Truong Nguyen"></div>
@@ -204,10 +210,10 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       <a href="Anh_Truong_Nguyen_Resume.docx" download="Anh_Truong_Nguyen_Resume.docx" class="btn btn-dl">↓ Download resume</a>
     </div>
     <div class="stats">
-      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">5+</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Years IT &<br>cybersecurity</span></div>
-      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">3,000+</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Devices managed<br>via MDM</span></div>
-      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">7</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Portfolio<br>projects</span></div>
-      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">98%</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Case resolution<br>rate (PAN)</span></div>
+      <div><span class="snum">5+</span><span class="slbl">Years IT &<br>cybersecurity</span></div>
+      <div><span class="snum">3,000+</span><span class="slbl">Devices managed<br>via MDM</span></div>
+      <div><span class="snum">4</span><span class="slbl">Portfolio<br>projects</span></div>
+      <div><span class="snum">98%</span><span class="slbl">Case resolution<br>rate (PAN)</span></div>
     </div>
   </div>
 </section>
@@ -215,15 +221,15 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 <!-- ABOUT -->
 <div class="about-strip" id="about">
   <div>
-    <div class="slabel" style="color:rgba(241,245,249,.3)">About me</div>
+    <div class="slabel" style="color:rgba(247,246,242,.3)">About me</div>
     <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
       <div class="avatar-ring"><img src="data:image/jpeg;base64,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" alt="Anh Truong Nguyen"></div>
       <div>
-        <div style="font-family:'DM Serif Display',serif;font-size:13px;color:var(--ink);letter-spacing:-.2px">Anh Truong Nguyen</div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-top:2px">San Jose, CA</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:13px;color:#f7f6f2;letter-spacing:-.2px">Anh Truong Nguyen</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(247,246,242,.4);margin-top:2px">San Jose, CA</div>
       </div>
     </div>
-    <h2>IT engineer turned<br><em style="font-style:italic;color:var(--accent)">clinical informatics</em><br>specialist</h2>
+    <h2>IT engineer turned<br><em style="font-style:italic;color:#93c5fd">clinical informatics</em><br>specialist</h2>
     <p>I started my career building and securing IT infrastructure — managing enterprise firewalls, deploying thousands of devices, and resolving complex technical issues for global organisations. That foundation taught me how systems fail, how people actually use technology, and how to design solutions that stick.</p>
     <p>Now I'm applying that same lens to healthcare — where the stakes are higher, the users are clinicians and patients, and a poorly designed interface can mean a life-saving AI tool gets ignored.</p>
     <ul class="pivot-list">
@@ -245,56 +251,110 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 </div>
 
 <!-- PROJECTS -->
-<section id="projects" style="background:var(--paper)">
+<section id="projects" style="background:#fff">
   <div class="slabel fi">Portfolio</div>
   <h2 class="fi">Projects</h2>
-  <p class="intro fi">Seven hands-on projects spanning clinical AI explainability, multi-outcome risk prediction, AI model evaluation, medical imaging, document intelligence, healthcare system analysis, and enterprise IT — showing the full range from infrastructure to clinical informatics.</p>
+  <p class="intro fi">Four hands-on projects spanning clinical AI explainability, healthcare system analysis, enterprise device management, and cybersecurity — showing the full range from infrastructure to clinical informatics.</p>
 
   <!-- PROJECT 1: CARDIAC AI -->
   <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 01 — Clinical AI</div>
+    <div class="slabel fi" style="margin-bottom:10px">Project 01 — Clinical AI</div>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px"><span class="tag">XGBoost</span><span class="tag">SHAP</span><span class="tag">Azure ML</span><span class="tag">Python</span></div>
+        <h3>Cardiac risk prediction</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Built a multi-audience clinical decision support system on 200 real patient records. Used SHAP to explain why the model flagged each patient — then designed three separate interfaces for cardiologists, primary care physicians, and patients.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(247,246,242,.28);margin-bottom:7px;letter-spacing:.08em">SHAP FEATURE CONTRIBUTIONS</div>
+          <div class="srow"><span class="slb">LDL chol.</span><div class="strk"><div class="sbar" style="width:82%;background:#e24b4a"></div></div><span class="sval" style="color:#e24b4a">+12%</span></div>
+          <div class="srow"><span class="slb">Age</span><div class="strk"><div class="sbar" style="width:55%;background:#ef9f27"></div></div><span class="sval" style="color:#ef9f27">+8%</span></div>
+          <div class="srow"><span class="slb">Smoking</span><div class="strk"><div class="sbar" style="width:42%;background:#ef9f27"></div></div><span class="sval" style="color:#ef9f27">+6%</span></div>
+          <div class="srow"><span class="slb">Exercise</span><div class="strk"><div class="sbar" style="width:18%;background:#1d9e75"></div></div><span class="sval" style="color:#1d9e75">−3%</span></div>
+        </div>
+      </div>
+      <div class="pan" style="display:flex;flex-direction:column;gap:12px">
+        <div>
+          <h3>Three-audience interface design</h3>
+          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Same model, three completely different interfaces — each designed around how that audience thinks, what they need to decide, and how much time they have.</p>
+        </div>
+        <div class="agrid">
+          <div class="acard"><div class="aname">Cardiologist</div><div class="adesc">SHAP · CI · What-if simulator</div></div>
+          <div class="acard"><div class="aname">Primary care</div><div class="adesc">Traffic light · Action lists</div></div>
+          <div class="acard"><div class="aname">Patient</div><div class="adesc">Plain language · Goals</div></div>
+        </div>
+        <div style="margin-top:auto">
+          <div class="mrow"><span class="mk">Dataset</span><span class="mv">200 real patient records</span></div>
+          <div class="mrow"><span class="mk">Model AUC</span><span class="mv ok">0.87 (XGBoost)</span></div>
+          <div class="mrow"><span class="mk">Explainability</span><span class="mv">SHAP TreeExplainer</span></div>
+          <div class="mrow"><span class="mk">Compliance</span><span class="mv">HIPAA · WCAG 2.1 AA</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Technical depth</span></div><div class="ctitle">Cardiologist view</div><div class="cdesc">Full SHAP waterfall, 95% CI, cohort percentile, interactive what-if intervention simulator.</div></div><div class="card-body"><div class="mrow"><span class="mk">Time to insight</span><span class="mv ok">~4 min/patient</span></div><div class="mrow"><span class="mk">Key feature</span><span class="mv">SHAP bar chart</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag g">Workflow first</span></div><div class="ctitle">Primary care view</div><div class="cdesc">Traffic-light badge, AHA/ACC-aligned action list, longitudinal trend, one-click referral templates.</div></div><div class="card-body"><div class="mrow"><span class="mk">Time to insight</span><span class="mv ok">&lt;1 min/patient</span></div><div class="mrow"><span class="mk">Key feature</span><span class="mv">Traffic light system</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag a">Accessible</span></div><div class="ctitle">Patient view</div><div class="cdesc">Risk gauge, icon-based factor breakdown, goal tracker. Grade 6–8 reading level, multilingual.</div></div><div class="card-body"><div class="mrow"><span class="mk">Comprehension</span><span class="mv ok">88% in testing</span></div><div class="mrow"><span class="mk">Reading level</span><span class="mv">Grade 6–8</span></div></div></div>
+    </div>
+  </div>
 
-<style>
-.db-tab-bar{display:flex;gap:4px;margin-bottom:0}
-.db-tab{padding:7px 14px;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:none;cursor:pointer;font-size:12px;color:var(--ink3);background:rgba(255,255,255,.03);transition:all .15s;font-family:'Outfit',sans-serif}
-.db-tab.active{background:var(--paper2);color:var(--ink);font-weight:500;border-color:rgba(255,255,255,.1)}
-.db-panel{display:none;border:1px solid rgba(255,255,255,.08);border-radius:0 8px 8px 8px;padding:16px;background:var(--paper2)}
-.db-panel.active{display:block}
-.db-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-.db-bred{background:rgba(248,113,113,.15);color:#f87171}.db-bamb{background:rgba(251,191,36,.12);color:#fbbf24}.db-bgrn{background:rgba(52,211,153,.12);color:#34d399}
-.db-mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
-.db-mcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:9px 11px}
-.db-mlabel{font-size:10px;color:var(--ink3);margin-bottom:2px}
-.db-mval{font-size:18px;font-weight:500;color:var(--ink)}
-.db-shap-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:11px}
-.db-shap-lbl{width:120px;color:var(--ink3);font-size:11px}
-.db-shap-wrap{flex:1;background:rgba(255,255,255,.06);border-radius:3px;height:10px;overflow:hidden}
-.db-shap-bar{height:100%;border-radius:3px}
-.db-shap-num{width:38px;text-align:right;font-size:10px}
-.db-act-row{display:flex;align-items:flex-start;gap:8px;margin:6px 0;padding:9px 10px;border-radius:6px;background:rgba(255,255,255,.04)}
-.db-act-num{width:18px;height:18px;border-radius:50%;background:var(--accent);color:#080c14;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.db-act-title{font-size:12px;font-weight:500;color:var(--ink)}
-.db-act-sub{font-size:11px;color:var(--ink3);margin-top:1px}
-.db-sec{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:12px 0 5px}
-.db-goal-row{display:flex;align-items:center;gap:8px;margin:5px 0}
-.db-goal-lbl{font-size:11px;width:120px;color:var(--ink)}
-.db-goal-wrap{flex:1;background:rgba(255,255,255,.06);border-radius:4px;height:8px;overflow:hidden}
-.db-goal-bar{height:100%;border-radius:4px}
-.db-goal-val{font-size:10px;color:var(--ink3);width:30px;text-align:right}
-.db-icon-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:8px 0}
-.db-icon-box{text-align:center;padding:7px 4px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);font-size:10px;color:var(--ink3)}
-.db-icon-box.mod{background:rgba(52,211,153,.08);color:var(--green);border-color:rgba(52,211,153,.15)}
-.db-icon-box.fix{background:rgba(251,191,36,.08);color:var(--amber);border-color:rgba(251,191,36,.15)}
-.db-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:10px 0}
-.db-ci-track{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;position:relative;overflow:visible}
-.db-ci-fill{position:absolute;top:0;height:6px;border-radius:3px;background:rgba(56,189,248,.3)}
-.db-ci-dot{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid var(--paper2);margin-left:-7px;box-shadow:0 0 8px rgba(56,189,248,.4)}
-.db-sim-row{display:flex;align-items:center;gap:8px;margin:6px 0}
-.db-sim-lbl{width:120px;font-size:11px;color:var(--ink3)}
-.db-sim-out{font-size:12px;font-weight:500;min-width:36px;text-align:right;color:var(--ink)}
-.db-pt-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,255,255,.1);border-radius:4px;background:rgba(255,255,255,.05);color:var(--ink)}
-</style>
+  <!-- LIVE DASHBOARD EMBED -->
+  <div class="fi" style="margin-top:20px;margin-bottom:48px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div>
+        <div class="slabel" style="margin-bottom:4px">Live interactive demo</div>
+        <div style="font-size:14px;font-weight:500;color:var(--ink)">Try the dashboard — select any of the 200 patients and switch between all three audience views</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <span class="tag b">XGBoost · SHAP</span>
+        <span class="tag g">200 patients</span>
+        <span class="tag a">3 interfaces</span>
+      </div>
+    </div>
+    <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#fff">
+      <!-- EMBEDDED DASHBOARD -->
+      <div id="live-dashboard" style="padding:18px">
+
+        <style>
+        .db-tab-bar{display:flex;gap:4px;margin-bottom:0}
+        .db-tab{padding:7px 14px;border-radius:6px 6px 0 0;border:0.5px solid #d0ccc8;border-bottom:none;cursor:pointer;font-size:12px;color:#7a8094;background:#eeecea;transition:all .15s;font-family:'Outfit',sans-serif}
+        .db-tab.active{background:#fff;color:#0e1117;font-weight:500}
+        .db-panel{display:none;border:0.5px solid #d0ccc8;border-radius:0 8px 8px 8px;padding:16px;background:#fff}
+        .db-panel.active{display:block}
+        .db-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
+        .db-bred{background:#FCEBEB;color:#A32D2D}.db-bamb{background:#FAEEDA;color:#854F0B}.db-bgrn{background:#EAF3DE;color:#3B6D11}
+        .db-mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
+        .db-mcard{background:#f7f6f2;border-radius:6px;padding:9px 11px}
+        .db-mlabel{font-size:10px;color:#7a8094;margin-bottom:2px}
+        .db-mval{font-size:18px;font-weight:500;color:#0e1117}
+        .db-shap-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:11px}
+        .db-shap-lbl{width:120px;color:#7a8094;font-size:11px}
+        .db-shap-wrap{flex:1;background:#eeecea;border-radius:3px;height:10px;overflow:hidden}
+        .db-shap-bar{height:100%;border-radius:3px}
+        .db-shap-num{width:38px;text-align:right;font-size:10px}
+        .db-act-row{display:flex;align-items:flex-start;gap:8px;margin:6px 0;padding:9px 10px;border-radius:6px;background:#f7f6f2}
+        .db-act-num{width:18px;height:18px;border-radius:50%;background:#185FA5;color:#E6F1FB;font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+        .db-act-title{font-size:12px;font-weight:500;color:#0e1117}
+        .db-act-sub{font-size:11px;color:#7a8094;margin-top:1px}
+        .db-sec{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#7a8094;margin:12px 0 5px}
+        .db-goal-row{display:flex;align-items:center;gap:8px;margin:5px 0}
+        .db-goal-lbl{font-size:11px;width:120px;color:#0e1117}
+        .db-goal-wrap{flex:1;background:#eeecea;border-radius:4px;height:8px;overflow:hidden}
+        .db-goal-bar{height:100%;border-radius:4px}
+        .db-goal-val{font-size:10px;color:#7a8094;width:30px;text-align:right}
+        .db-icon-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:8px 0}
+        .db-icon-box{text-align:center;padding:7px 4px;border-radius:6px;background:#f7f6f2;font-size:10px;color:#7a8094}
+        .db-icon-box.mod{background:#E1F5EE;color:#085041}
+        .db-icon-box.fix{background:#FAEEDA;color:#633806}
+        .db-divider{border:none;border-top:0.5px solid #e0ddd8;margin:10px 0}
+        .db-ci-track{flex:1;height:6px;background:#eeecea;border-radius:3px;position:relative;overflow:visible}
+        .db-ci-fill{position:absolute;top:0;height:6px;border-radius:3px;background:#85B7EB}
+        .db-ci-dot{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:#185FA5;border:2px solid #fff;margin-left:-7px}
+        .db-sim-row{display:flex;align-items:center;gap:8px;margin:6px 0}
+        .db-sim-lbl{width:120px;font-size:11px;color:#7a8094}
+        .db-sim-out{font-size:12px;font-weight:500;min-width:36px;text-align:right}
+        .db-pt-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+        select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:0.5px solid #d0ccc8;border-radius:4px;background:#fff;color:#0e1117}
+        </style>
 
         <div class="db-tab-bar">
           <div class="db-tab active" onclick="dbSwitch('cardio')">Cardiologist</div>
@@ -305,13 +365,13 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
         <!-- CARDIOLOGIST -->
         <div class="db-panel active" id="db-cardio">
           <div class="db-pt-row">
-            <label style="font-size:11px;color:var(--ink3)">Patient</label>
+            <label style="font-size:11px;color:#7a8094">Patient</label>
             <select class="db-sel" id="db-sel-cardio" onchange="dbLoad(this.value)"></select>
             <span id="db-badge-cardio" class="db-badge db-bred">High risk</span>
           </div>
           <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
-            <span id="db-c-name" style="font-size:14px;font-weight:500;color:var(--ink)"></span>
-            <span id="db-c-demo" style="font-size:11px;color:var(--ink3)"></span>
+            <span id="db-c-name" style="font-size:14px;font-weight:500;color:#0e1117"></span>
+            <span id="db-c-demo" style="font-size:11px;color:#7a8094"></span>
           </div>
           <div class="db-mgrid">
             <div class="db-mcard"><div class="db-mlabel">Predicted risk</div><div class="db-mval" id="db-c-risk"></div></div>
@@ -323,21 +383,21 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
           <div id="db-shap-chart"></div>
           <div class="db-sec">Confidence interval</div>
           <div style="display:flex;align-items:center;gap:8px;margin:6px 0">
-            <span style="font-size:10px;color:var(--ink3);width:24px">0%</span>
+            <span style="font-size:10px;color:#7a8094;width:24px">0%</span>
             <div class="db-ci-track"><div class="db-ci-fill" id="db-ci-fill"></div><div class="db-ci-dot" id="db-ci-dot"></div></div>
-            <span style="font-size:10px;color:var(--ink3);width:32px;text-align:right">100%</span>
+            <span style="font-size:10px;color:#7a8094;width:32px;text-align:right">100%</span>
           </div>
-          <p id="db-ci-note" style="font-size:10px;color:var(--ink3);margin:2px 0 0"></p>
+          <p id="db-ci-note" style="font-size:10px;color:#7a8094;margin:2px 0 0"></p>
           <div class="db-sec">What-if simulator</div>
           <div class="db-sim-row"><span class="db-sim-lbl">Lower LDL (mg/dL)</span><input type="range" id="db-ldl" min="0" max="60" value="0" step="5" style="flex:1" oninput="dbSim()"><span class="db-sim-out" id="db-ldl-out">−0</span></div>
           <div class="db-sim-row"><span class="db-sim-lbl">Smoking cessation</span><input type="range" id="db-smoke" min="0" max="1" value="0" step="1" style="flex:1" oninput="dbSim()"><span class="db-sim-out" id="db-smoke-out">No</span></div>
-          <p style="font-size:12px;margin:7px 0 0">Simulated risk: <span id="db-sim-risk" style="font-weight:500"></span> <span id="db-sim-delta" style="font-size:10px;color:var(--ink3)"></span></p>
+          <p style="font-size:12px;margin:7px 0 0">Simulated risk: <span id="db-sim-risk" style="font-weight:500"></span> <span id="db-sim-delta" style="font-size:10px;color:#7a8094"></span></p>
         </div>
 
         <!-- PRIMARY CARE -->
         <div class="db-panel" id="db-pcp">
           <div class="db-pt-row">
-            <label style="font-size:11px;color:var(--ink3)">Patient</label>
+            <label style="font-size:11px;color:#7a8094">Patient</label>
             <select class="db-sel" id="db-sel-pcp" onchange="dbLoad(this.value)"></select>
             <span id="db-badge-pcp" class="db-badge db-bred">High risk</span>
           </div>
@@ -359,13 +419,13 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
         <!-- PATIENT -->
         <div class="db-panel" id="db-patient">
           <div class="db-pt-row">
-            <label style="font-size:11px;color:var(--ink3)">Patient</label>
+            <label style="font-size:11px;color:#7a8094">Patient</label>
             <select class="db-sel" id="db-sel-patient" onchange="dbLoad(this.value)"></select>
           </div>
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
             <div style="text-align:center;flex-shrink:0">
               <canvas id="db-gauge" width="150" height="86"></canvas>
-              <div id="db-pat-risk-lbl" style="font-size:10px;color:var(--ink3);margin-top:1px"></div>
+              <div id="db-pat-risk-lbl" style="font-size:10px;color:#7a8094;margin-top:1px"></div>
             </div>
             <div id="db-pat-summary" style="font-size:12px;line-height:1.6;padding:11px;border-radius:8px;flex:1"></div>
           </div>
@@ -379,7 +439,7 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
     </div><!-- end border box -->
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
   const DB_RAW=[
     ["CR0001",75,"Female","White",27.1,129,59,111,80,"Current","1-2x/week","No","No","Moderate",1,0.976,0.034,0.044,-0.036,0.066,-0.002,0.031,0.065,0.046],
     ["CR0002",32,"Male","Other",18.6,82,61,114,69,"Current","3-5x/week","No","No","Moderate",0,0.572,0.129,0.11,0.013,0.116,0.122,0.058,0.028,0.077],
@@ -492,7 +552,7 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
     const feats=dbShapFeats(pt).filter(f=>f.val>0).slice(0,3);
     const aMap={'LDL cholesterol':`LDL ${pt.LDL} mg/dL — consider statin therapy`,'Systolic BP':`BP ${pt.Systolic_BP}/${pt.Diastolic_BP} — review antihypertensive`,'BMI':`BMI ${pt.BMI} — lifestyle counselling`,'Smoking':`Smoking: ${pt.Smoking_Status} — cessation referral`,'Diabetes':`Diabetes: ${pt.Diabetes} — optimise glycaemic control`,'Age':`Age ${pt.Age} — elevated baseline risk`,'Exercise':`Exercise: ${pt.Exercise_Frequency||'Unknown'} — 150 min/week target`,'HDL':`HDL ${pt.HDL} mg/dL — increase via lifestyle`};
     document.getElementById('db-pcp-actions').innerHTML=feats.map((f,i)=>`<div class="db-act-row"><div class="db-act-num">${i+1}</div><div><div class="db-act-title">${f.label}</div><div class="db-act-sub">${aMap[f.label]||f.label}</div></div></div>`).join('');
-    document.getElementById('db-pcp-details').innerHTML=[['LDL',pt.LDL+' mg/dL'],['HDL',pt.HDL+' mg/dL'],['BMI',pt.BMI],['BP',pt.Systolic_BP+'/'+pt.Diastolic_BP],['Diabetes',pt.Diabetes],['Smoker',pt.Smoking_Status]].map(([l,v])=>`<div class="db-mcard"><div class="db-mlabel">${l}</div><div style="font-size:13px;font-weight:500;color:var(--ink)">${v||'—'}</div></div>`).join('');
+    document.getElementById('db-pcp-details').innerHTML=[['LDL',pt.LDL+' mg/dL'],['HDL',pt.HDL+' mg/dL'],['BMI',pt.BMI],['BP',pt.Systolic_BP+'/'+pt.Diastolic_BP],['Diabetes',pt.Diabetes],['Smoker',pt.Smoking_Status]].map(([l,v])=>`<div class="db-mcard"><div class="db-mlabel">${l}</div><div style="font-size:13px;font-weight:500;color:#0e1117">${v||'—'}</div></div>`).join('');
   }
   function dbDrawGauge(pct,color){
     const c=document.getElementById('db-gauge');if(!c)return;
@@ -524,99 +584,16 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
     document.getElementById('db-pat-goals').innerHTML=goals.map(f=>{
       const g=gDet[f.label]||{label:f.label,tip:'',pct:50};
       const col=g.pct>=70?'#1D9E75':g.pct>=40?'#EF9F27':'#E24B4A';
-      return`<div class="db-goal-row"><span class="db-goal-lbl">${g.label}</span><div class="db-goal-wrap"><div class="db-goal-bar" style="width:${g.pct}%;background:${col}"></div></div><span class="db-goal-val">${g.pct}%</span></div><div style="font-size:10px;color:var(--ink3);margin:-3px 0 5px 128px">${g.tip}</div>`;
+      return`<div class="db-goal-row"><span class="db-goal-lbl">${g.label}</span><div class="db-goal-wrap"><div class="db-goal-bar" style="width:${g.pct}%;background:${col}"></div></div><span class="db-goal-val">${g.pct}%</span></div><div style="font-size:10px;color:#7a8094;margin:-3px 0 5px 128px">${g.tip}</div>`;
     }).join('');
   }
   dbPopulateSelects();
   dbRenderAll();
   </script>
 
-  <!-- PROJECT 2: HEART FAILURE RISK PREDICTION -->
+  <!-- PROJECT 2: CLINICAL SYSTEM ANALYST -->
   <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 02 — Predictive Analytics</div>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px"><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">Logistic Regression</span><span class="tag">Python</span></div>
-        <h3>Heart failure multi-outcome risk prediction</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Built a 3-model risk prediction system for 500 heart failure patients forecasting 30-day readmission, 6-month mortality, and 30-day ED visits simultaneously. Engineered 18 clinical features, applied risk stratification into 4 actionable tiers, and validated fairness across age, sex, and HF phenotype subgroups — all documented to hospital deployment standards.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(241,245,249,.28);margin-bottom:7px;letter-spacing:.08em">MODEL PERFORMANCE TARGETS</div>
-          <div class="srow"><span class="slb">Readmission AUC</span><div class="strk"><div class="sbar" style="width:78%;background:#1d9e75"></div></div><span class="sval" style="color:#1d9e75">0.78</span></div>
-          <div class="srow"><span class="slb">Mortality AUC</span><div class="strk"><div class="sbar" style="width:82%;background:#1d9e75"></div></div><span class="sval" style="color:#1d9e75">0.82</span></div>
-          <div class="srow"><span class="slb">ED Visit AUC</span><div class="strk"><div class="sbar" style="width:74%;background:#ef9f27"></div></div><span class="sval" style="color:#ef9f27">0.74</span></div>
-          <div class="srow"><span class="slb">Brier Score</span><div class="strk"><div class="sbar" style="width:83%;background:#1d9e75"></div></div><span class="sval" style="color:#1d9e75">0.083</span></div>
-        </div>
-      </div>
-      <div class="pan" style="display:flex;flex-direction:column;gap:12px">
-        <div>
-          <h3>4-tier risk stratification system</h3>
-          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Translated model probabilities into escalating intervention protocols — from weekly home nurse visits for Very High risk patients to routine follow-up for Low risk — with fairness validated across all subgroups (max disparity ratio 1.06).</p>
-        </div>
-        <div class="agrid">
-          <div class="acard"><div class="aname" style="color:#c0392b">Very High</div><div class="adesc">Home nurse + Palliative consult</div></div>
-          <div class="acard"><div class="aname" style="color:#e67e22">High</div><div class="adesc">Biweekly case mgmt + Transition clinic</div></div>
-          <div class="acard"><div class="aname" style="color:#1a6b3c">Low/Moderate</div><div class="adesc">Monthly check-in + PCP follow-up</div></div>
-        </div>
-        <div style="margin-top:auto">
-          <div class="mrow"><span class="mk">Dataset</span><span class="mv">500 heart failure patients</span></div>
-          <div class="mrow"><span class="mk">Outcomes predicted</span><span class="mv">Readmission · Mortality · ED visits</span></div>
-          <div class="mrow"><span class="mk">Fairness assessment</span><span class="mv ok">Disparity ratio 1.06 — Pass</span></div>
-          <div class="mrow"><span class="mk">Compliance</span><span class="mv">HIPAA · FDA governance aligned</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Feature engineering</span></div><div class="ctitle">18-predictor clinical model</div><div class="cdesc">Engineered frailty index, comorbidity score, BNP severity bands, and EF categories from raw clinical data. Recursive feature elimination retained 18 evidence-based predictors from 22 candidates.</div></div><div class="card-body"><div class="mrow"><span class="mk">Top predictor</span><span class="mv">BNP + EF + NYHA class</span></div><div class="mrow"><span class="mk">Selection method</span><span class="mv">RFE + univariate screening</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Multi-outcome modeling</span></div><div class="ctitle">Three simultaneous models</div><div class="cdesc">XGBoost for readmission, Logistic Regression with Platt scaling for mortality (best calibration), Random Forest for ED visits. Each algorithm chosen to match outcome characteristics and clinical priority.</div></div><div class="card-body"><div class="mrow"><span class="mk">Imbalance handling</span><span class="mv">SMOTE + class weighting</span></div><div class="mrow"><span class="mk">Calibration</span><span class="mv ok">Brier 0.048–0.192</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag g">Fairness & validation</span></div><div class="ctitle">Subgroup equity analysis</div><div class="cdesc">AUC validated across 10 demographic and clinical subgroups — age quartiles, sex, EF phenotype, CKD status, and NYHA severity. All disparity ratios under the 1.10 fairness threshold.</div></div><div class="card-body"><div class="mrow"><span class="mk">Subgroups tested</span><span class="mv">10 demographic + clinical</span></div><div class="mrow"><span class="mk">Max disparity ratio</span><span class="mv ok">1.06 — below 1.10 target</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 3: DR MODEL EVALUATION -->
-  <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 03 — AI Model Evaluation</div>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px"><span class="tag">Azure AI Catalog</span><span class="tag">Hugging Face</span><span class="tag">Model Selection</span><span class="tag">Python</span></div>
-        <h3>Diabetic retinopathy model library evaluation</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Evaluated five pre-built DR screening models — commercial, open-source, and cloud-native — across clinical performance, regulatory status, TCO, and integration complexity for a regional ophthalmology network. Applied a weighted scoring framework to select and justify IDx-DR v2.3 as the production model, then acquired and validated a pneumonia detection model for urgent care deployment.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(248,250,252,.28);margin-bottom:7px;letter-spacing:.08em">WEIGHTED SCORES — 5-MODEL COMPARISON</div>
-          <div class="srow"><span class="slb">IDx-DR v2.3</span><div class="strk"><div class="sbar" style="width:94%;background:#6ee7b7"></div></div><span class="sval" style="color:#6ee7b7">4.70</span></div>
-          <div class="srow"><span class="slb">EyeArt v3.1</span><div class="strk"><div class="sbar" style="width:88%;background:#6ee7b7"></div></div><span class="sval" style="color:#6ee7b7">4.40</span></div>
-          <div class="srow"><span class="slb">Azure DR ResNet</span><div class="strk"><div class="sbar" style="width:80%;background:#93c5fd"></div></div><span class="sval" style="color:#93c5fd">4.00</span></div>
-          <div class="srow"><span class="slb">Academic EffNet</span><div class="strk"><div class="sbar" style="width:76%;background:#fcd34d"></div></div><span class="sval" style="color:#fcd34d">3.80</span></div>
-          <div class="srow"><span class="slb">HF DR-ViT</span><div class="strk"><div class="sbar" style="width:74%;background:#fca5a5"></div></div><span class="sval" style="color:#fca5a5">3.70</span></div>
-        </div>
-      </div>
-      <div class="pan" style="display:flex;flex-direction:column;gap:12px">
-        <div>
-          <h3>5-criteria weighted decision framework</h3>
-          <p style="font-size:13px;color:var(--ink3);line-height:1.7;font-weight:400">Structured model selection across clinical performance (35%), implementation complexity (25%), TCO (20%), regulatory status (15%), and vendor support (5%) — with full trade-off analysis and stakeholder-ready justification.</p>
-        </div>
-        <div class="agrid">
-          <div class="acard"><div class="aname">FDA-cleared</div><div class="adesc">IDx-DR + EyeArt qualify — eliminates regulatory pathway risk</div></div>
-          <div class="acard"><div class="aname">AUC 0.95</div><div class="adesc">IDx-DR best clinical performance across all 5 models</div></div>
-          <div class="acard"><div class="aname">$0.35/screen</div><div class="adesc">80% lower cost than EyeArt at same regulatory status</div></div>
-        </div>
-        <div style="margin-top:auto">
-          <div class="mrow"><span class="mk">Models evaluated</span><span class="mv">5 DR models across 4 sources</span></div>
-          <div class="mrow"><span class="mk">Selected model</span><span class="mv ok">IDx-DR v2.3 — score 4.70/5.0</span></div>
-          <div class="mrow"><span class="mk">Pneumonia model</span><span class="mv ok">EfficientNet-B0 — AUC 0.95</span></div>
-          <div class="mrow"><span class="mk">Compliance</span><span class="mv">FDA 510(k) · HIPAA · Azure ML</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Model comparison</span></div><div class="ctitle">Weighted scoring matrix</div><div class="cdesc">Evaluated all five models on 5 clinical and operational criteria. IDx-DR v2.3 scored 4.70 — driven by FDA clearance, 0.93 sensitivity, and pre-certified Epic/Cerner HL7 connectors reducing integration timeline from 6 months to 6 weeks.</div></div><div class="card-body"><div class="mrow"><span class="mk">Top score</span><span class="mv ok">4.70 — IDx-DR v2.3</span></div><div class="mrow"><span class="mk">Criteria weighted</span><span class="mv">5 dimensions</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Regulatory analysis</span></div><div class="ctitle">FDA clearance assessment</div><div class="cdesc">Compared FDA 510(k)-cleared models (IDx-DR, EyeArt) against research-only models. FDA status weighted at 15% — disqualifier-level criterion ensuring immediate deployability without additional validation pathway costs ($120k–$180k avoided).</div></div><div class="card-body"><div class="mrow"><span class="mk">FDA-cleared models</span><span class="mv ok">2 of 5</span></div><div class="mrow"><span class="mk">Dev cost avoided</span><span class="mv ok">~$150k</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Pneumonia detection</span></div><div class="ctitle">Pre-built model acquisition</div><div class="cdesc">Sourced and validated EfficientNet-B0 pneumonia model from model metadata. AUC 0.95, sensitivity 0.92, MIT license. Deployed to Azure ML endpoint with Grad-CAM explainability and DICOM input wrapper for urgent care integration.</div></div><div class="card-body"><div class="mrow"><span class="mk">Model AUC</span><span class="mv ok">0.95 — EfficientNet-B0</span></div><div class="mrow"><span class="mk">Test accuracy</span><span class="mv ok">0.92 on 24-case set</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 4: CLINICAL SYSTEM ANALYST (renumbered) -->
-  <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 04 — Clinical System Analysis</div>
+    <div class="slabel fi" style="margin-bottom:10px">Project 02 — Clinical System Analysis</div>
     <div class="split fi">
       <div class="pan" style="display:flex;flex-direction:column;gap:14px">
         <div>
@@ -637,23 +614,23 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
         <p style="font-size:12px;font-weight:300;margin-bottom:16px">Unified three disconnected clinical systems through a FHIR-based integration layer.</p>
         <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
           <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(241,245,249,.4);margin-bottom:4px">LAYER 1 — SOURCE SYSTEMS</div>
-            <div style="font-size:12px;color:var(--ink)">Epic EHR &nbsp;·&nbsp; LabCorp LIS &nbsp;·&nbsp; Pharmacy PIS</div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(247,246,242,.4);margin-bottom:4px">LAYER 1 — SOURCE SYSTEMS</div>
+            <div style="font-size:12px;color:#f7f6f2">Epic EHR &nbsp;·&nbsp; LabCorp LIS &nbsp;·&nbsp; Pharmacy PIS</div>
           </div>
-          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(241,245,249,.3)">↓ HL7 FHIR R4</div>
-          <div style="background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);margin-bottom:4px">LAYER 2 — INTEGRATION ENGINE</div>
-            <div style="font-size:12px;color:var(--ink)">FHIR API Gateway &nbsp;·&nbsp; Data validation &nbsp;·&nbsp; Audit logs</div>
+          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(247,246,242,.3)">↓ HL7 FHIR R4</div>
+          <div style="background:rgba(26,79,214,.3);border:1px solid rgba(26,79,214,.5);border-radius:3px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(147,197,253,.8);margin-bottom:4px">LAYER 2 — INTEGRATION ENGINE</div>
+            <div style="font-size:12px;color:#f7f6f2">FHIR API Gateway &nbsp;·&nbsp; Data validation &nbsp;·&nbsp; Audit logs</div>
           </div>
-          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(241,245,249,.3)">↓ Unified patient record</div>
-          <div style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);margin-bottom:4px">LAYER 3 — CLINICAL APPS</div>
-            <div style="font-size:12px;color:var(--ink)">Clinician dashboard &nbsp;·&nbsp; Analytics &nbsp;·&nbsp; Alerts</div>
+          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(247,246,242,.3)">↓ Unified patient record</div>
+          <div style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:3px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(110,231,183,.8);margin-bottom:4px">LAYER 3 — CLINICAL APPS</div>
+            <div style="font-size:12px;color:#f7f6f2">Clinician dashboard &nbsp;·&nbsp; Analytics &nbsp;·&nbsp; Alerts</div>
           </div>
         </div>
         <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Data quality issues found</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">847 records</span></div>
         <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Integration gaps resolved</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">3 systems</span></div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1);border-bottom:none"><span class="qk">Standard</span><span style="font-size:13px;font-weight:500;color:var(--ink)">ONC / HL7 FHIR R4</span></div>
+        <div class="mrow" style="border-color:rgba(255,255,255,.1);border-bottom:none"><span class="qk">Standard</span><span style="font-size:13px;font-weight:500;color:#f7f6f2">ONC / HL7 FHIR R4</span></div>
       </div>
     </div>
     <div class="proj-grid-3 fi">
@@ -663,60 +640,121 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
     </div>
   </div>
 
-  <!-- PROJECT 4: MEDICAL IMAGE AI -->
+
+  <!-- PROJECT 3: ICU ANOMALY DETECTION -->
   <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 05 — Medical AI &amp; Imaging</div>
+    <div class="slabel fi" style="margin-bottom:10px">Project 03 — Clinical AI · ICU monitoring</div>
     <div class="split fi">
-      <div class="pan" style="display:flex;flex-direction:column;gap:14px">
-        <div>
-          <div class="tags" style="margin-bottom:10px"><span class="tag b">Deep Learning</span><span class="tag t">Azure ML</span><span class="tag p">Grad-CAM</span><span class="tag g">Clinical AI</span></div>
-          <h3>Chest X-ray AI analysis pipeline</h3>
-          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Designed and implemented an end-to-end AI pipeline for automated abnormality detection in chest radiographs — addressing a real radiology bottleneck of 800+ daily X-rays across three hospital sites with 12–24 hour reporting delays. The system preprocesses DICOM images, runs a fine-tuned ResNet-50 model, generates Grad-CAM explainability heat maps, and routes critical findings to on-call radiologists in under 2 minutes.</p>
-        </div>
-        <ul class="feat-list">
-          <li>Built a DICOM preprocessing pipeline with CLAHE contrast enhancement, 512×512 standardisation, and automated quality filtering (~2% exclusion rate)</li>
-          <li>Fine-tuned ResNet-50 (ImageNet pre-trained) with class-weighted binary cross-entropy loss — achieving AUC 0.94, Sensitivity 91%, Specificity 86%</li>
-          <li>Implemented Grad-CAM heat map generation aligned with radiologist annotations in 88% of cases; false localisations traced to motion artifact and underexposure</li>
-          <li>Designed a 0–10 composite priority scoring system with clinical modifiers (ED +2, "stat" flag = max) and alert fatigue prevention mechanisms</li>
-          <li>Integrated with Azure Logic Apps for automated Teams notifications on high-confidence critical findings — end-to-end latency under 2 minutes</li>
-          <li>Documented pipeline for FDA 510(k) pathway including intended use statement, failure mode analysis, and phased 4-month clinical rollout plan</li>
-        </ul>
-      </div>
       <div class="pan dk">
-        <h3>Pipeline architecture</h3>
-        <p style="font-size:12px;font-weight:300;margin-bottom:16px">DICOM ingestion to radiologist priority queue — fully automated.</p>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
-          <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(241,245,249,.4);margin-bottom:4px">STAGE 1 — PREPROCESSING</div>
-            <div style="font-size:12px;color:var(--ink)">DICOM parse &nbsp;·&nbsp; CLAHE &nbsp;·&nbsp; 512×512 resize &nbsp;·&nbsp; Quality filter</div>
-          </div>
-          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(241,245,249,.3)">↓ Augmentation (train only)</div>
-          <div style="background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);margin-bottom:4px">STAGE 2 — INFERENCE</div>
-            <div style="font-size:12px;color:var(--ink)">ResNet-50 (ImageNet) &nbsp;·&nbsp; Multi-label sigmoid &nbsp;·&nbsp; Grad-CAM</div>
-          </div>
-          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(241,245,249,.3)">↓ Priority scoring</div>
-          <div style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);margin-bottom:4px">STAGE 3 — CLINICAL ROUTING</div>
-            <div style="font-size:12px;color:var(--ink)">PACS worklist &nbsp;·&nbsp; Radiologist pager &nbsp;·&nbsp; Teams alert</div>
-          </div>
+        <div class="tags" style="margin-bottom:12px"><span class="tag">Python</span><span class="tag">Time-series</span><span class="tag p">Azure ADX</span><span class="tag">Power BI</span></div>
+        <h3>Multi-parameter anomaly detection</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Built a real-time ICU monitoring system that detects clinically significant anomalies across 6 physiological parameters — distinguishing true clinical events from sensor noise using multivariate co-occurrence logic.</p>
+        <div style="margin:12px 0;display:flex;flex-direction:column;gap:6px">
+          <div style="background:rgba(226,75,74,.18);border-left:3px solid #E24B4A;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#F09595">CRITICAL · 01:15–01:55</div><div style="font-size:10px;color:rgba(247,246,242,.6);margin-top:2px">HR↑ SBP↓ Lactate↑ SpO2↓ — Sepsis concern · 4 params</div></div>
+          <div style="background:rgba(239,159,39,.13);border-left:3px solid #EF9F27;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#FAC775">HIGH · 03:30–04:10</div><div style="font-size:10px;color:rgba(247,246,242,.6);margin-top:2px">RR↑ SpO2↓ BP↑ — Respiratory distress · 4 params</div></div>
+          <div style="background:rgba(99,153,34,.1);border-left:3px solid #639922;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#C0DD97">NOISE · 00:35</div><div style="font-size:10px;color:rgba(247,246,242,.6);margin-top:2px">HR spike 135 bpm — sensor artifact · filtered</div></div>
         </div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Model AUC</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">0.94</span></div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Sensitivity / Specificity</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">91% / 86%</span></div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">End-to-end latency</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">&lt;2 min</span></div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1);border-bottom:none"><span class="qk">Explainability</span><span style="font-size:13px;font-weight:500;color:var(--ink)">Grad-CAM · 88% alignment</span></div>
+      </div>
+      <div class="pan" style="display:flex;flex-direction:column;gap:12px">
+        <div><h3>Live ICU dashboard</h3><p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Interactive multi-parameter chart with adjustable sensitivity, clinical event zoom filters, and real-time alert classification. Built on real simulated ICU data at 5-min intervals.</p></div>
+        <div style="margin-top:auto">
+          <div class="mrow"><span class="mk">Dataset</span><span class="mv">61 records · 5-min intervals</span></div>
+          <div class="mrow"><span class="mk">Parameters</span><span class="mv">6 (HR, BP, RR, SpO2, Lactate)</span></div>
+          <div class="mrow"><span class="mk">Events detected</span><span class="mv ok">2 clinical · 1 noise filtered</span></div>
+          <div class="mrow"><span class="mk">Missing values</span><span class="mv">2 imputed</span></div>
+          <div class="mrow"><span class="mk">Standard</span><span class="mv">FHIR · Azure ADX · KQL</span></div>
+        </div>
       </div>
     </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Model performance</span></div><div class="ctitle">ResNet-50 classifier</div><div class="cdesc">Fine-tuned on 40,000 labelled chest X-rays. Class-weighted loss and per-class threshold tuning to handle imbalanced Normal/Pneumonia distribution (71%/29%).</div></div><div class="card-body"><div class="mrow"><span class="mk">AUC-ROC</span><span class="mv ok">0.94</span></div><div class="mrow"><span class="mk">Sensitivity (critical)</span><span class="mv ok">&gt;91%</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Explainability</span></div><div class="ctitle">Grad-CAM heat maps</div><div class="cdesc">Visualisations overlay on original X-rays highlighting abnormality regions. Validated against radiologist annotations — 88% spatial alignment, 76% IoU &gt;0.5.</div></div><div class="card-body"><div class="mrow"><span class="mk">Radiologist rating ≥4/5</span><span class="mv ok">82%</span></div><div class="mrow"><span class="mk">False localisation rate</span><span class="mv warn">12%</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag g">Clinical integration</span></div><div class="ctitle">Priority routing system</div><div class="cdesc">Composite 0–10 score combining abnormality severity, model confidence, patient acuity, and order urgency. Critical findings paged immediately; target false alarm rate &lt;15%.</div></div><div class="card-body"><div class="mrow"><span class="mk">Critical threshold</span><span class="mv">Score 9–10 → page</span></div><div class="mrow"><span class="mk">Target false alarm rate</span><span class="mv ok">&lt;15%</span></div></div></div>
+
+    <!-- ICU LIVE EMBED -->
+    <div class="fi" style="margin-top:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+        <div><div class="slabel" style="margin-bottom:3px">Live interactive demo</div><div style="font-size:14px;font-weight:500;color:var(--ink)">Adjust sensitivity · zoom into events · see multivariate co-occurrence logic</div></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag t">61 data points</span><span class="tag p">6 parameters</span><span class="tag r">2 clinical events</span></div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#fff;padding:16px">
+        <style>
+        .ig{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:12px}
+        .im{background:#f7f6f2;border-radius:7px;padding:9px 11px}
+        .iml{font-size:10px;color:#7a8094;margin-bottom:2px}
+        .imv{font-size:17px;font-weight:500}
+        .ial{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:7px;margin-bottom:5px;font-size:12px}
+        .ifb{padding:5px 11px;font-size:11px;border-radius:4px;cursor:pointer;border:0.5px solid #d0ccc8;background:#f7f6f2;color:#7a8094}
+        .ifb.on{background:#0e1117;color:#f7f6f2;border-color:#0e1117}
+        </style>
+        <div class="ig">
+          <div class="im"><div class="iml">Heart rate</div><div class="imv" style="color:#3B6D11">80 bpm</div></div>
+          <div class="im"><div class="iml">Systolic BP</div><div class="imv" style="color:#3B6D11">122 mmHg</div></div>
+          <div class="im"><div class="iml">SpO2</div><div class="imv" style="color:#3B6D11">98%</div></div>
+          <div class="im"><div class="iml">Lactate</div><div class="imv" style="color:#3B6D11">1.2 mmol/L</div></div>
+        </div>
+        <div id="icu-alerts"></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+          <button class="ifb on" onclick="icuV(this,0,61)">All</button>
+          <button class="ifb" onclick="icuV(this,10,28)">Event 1: sepsis</button>
+          <button class="ifb" onclick="icuV(this,38,55)">Event 2: resp distress</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;font-size:11px;color:#7a8094">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:2px;background:#E24B4A;display:inline-block"></span>Heart rate</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:2px;background:#185FA5;display:inline-block"></span>Systolic BP</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:2px;background:#1D9E75;display:inline-block"></span>SpO2</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:2px;background:#854F0B;display:inline-block"></span>Resp rate</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:2px;background:#7F77DD;display:inline-block"></span>Lactate ×20</span>
+        </div>
+        <div style="position:relative;width:100%;height:200px"><canvas id="icu-c" role="img" aria-label="ICU multi-parameter vitals chart with two anomaly zones"></canvas></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:12px">
+          <span style="font-size:11px;color:#7a8094">Sensitivity</span>
+          <input type="range" id="icu-sr" min="1" max="3" value="2" step="1" style="flex:1" oninput="icuSr(this.value)">
+          <span style="font-size:12px;font-weight:500;min-width:130px" id="icu-sl">Medium — standard</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px">
+          <div style="background:#f7f6f2;border-radius:7px;padding:9px;text-align:center"><div style="font-size:10px;color:#7a8094">Anomalies</div><div style="font-size:20px;font-weight:500;color:#A32D2D" id="icu-ac">2</div></div>
+          <div style="background:#f7f6f2;border-radius:7px;padding:9px;text-align:center"><div style="font-size:10px;color:#7a8094">Noise filtered</div><div style="font-size:20px;font-weight:500;color:#854F0B">1</div></div>
+          <div style="background:#f7f6f2;border-radius:7px;padding:9px;text-align:center"><div style="font-size:10px;color:#7a8094">Imputed</div><div style="font-size:20px;font-weight:500;color:#3B6D11">2</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-grid-3 fi" style="margin-top:16px">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Data prep</span></div><div class="ctitle">KQL + Azure ADX pipeline</div><div class="cdesc">Cleaned 61 time-series records using moving averages, missing value imputation, and timestamp synchronisation before anomaly detection.</div></div><div class="card-body"><div class="mrow"><span class="mk">Missing values</span><span class="mv ok">2 imputed</span></div><div class="mrow"><span class="mk">Noise spikes</span><span class="mv ok">1 filtered</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Multivariate</span></div><div class="ctitle">Co-occurrence detection</div><div class="cdesc">Alerts only trigger when ≥2 parameters deviate simultaneously for >10 minutes — reducing false positives from 6+ isolated spikes to 2 true clinical events.</div></div><div class="card-body"><div class="mrow"><span class="mk">Alert precision</span><span class="mv ok">100% (0 false pos)</span></div><div class="mrow"><span class="mk">Min duration</span><span class="mv">>10 min filter</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag r">Clinical</span></div><div class="ctitle">Escalation protocol</div><div class="cdesc">CRITICAL alerts (4+ params, sepsis pattern) route via Power Automate to ICU charge nurse in 2 min. HIGH alerts to bedside monitor. Noise suppressed.</div></div><div class="card-body"><div class="mrow"><span class="mk">CRITICAL escalation</span><span class="mv">Charge nurse · 2 min</span></div><div class="mrow"><span class="mk">Standard</span><span class="mv">FHIR · HL7</span></div></div></div>
     </div>
   </div>
 
-  <!-- PROJECT 3: JAMF MDM -->
+  <script>
+  (function(){
+  const D=[["00:00",85,120,16,98,1.1],["00:05",88,122,15,99,1.0],["00:10",86,118,16,98,1.2],["00:15",84,121,16,98,1.1],["00:20",90,123,17,97,1.3],["00:25",88,119,16,99,1.2],["00:30",87,120,15,98,1.1],["00:35",135,122,16,98,1.2],["00:40",89,118,17,97,1.4],["00:45",91,124,16,98,1.3],["00:50",90,121,16,98,1.2],["00:55",92,125,17,97,1.5],["01:00",93,126,16,98,1.4],["01:05",95,128,17,97,1.6],["01:10",94,127,18,96,1.7],["01:15",105,115,19,95,2.0],["01:20",110,105,20,94,2.5],["01:25",115,95,22,93,3.0],["01:30",120,90,24,92,3.5],["01:35",118,92,23,93,3.2],["01:40",116,94,22,94,2.8],["01:45",110,100,20,95,2.4],["01:50",102,110,19,96,2.1],["01:55",98,115,18,97,1.8],["02:00",95,118,17,98,1.5],["02:05",93,120,16,98,1.3],["02:10",92,121,16,99,1.2],["02:15",90,119,15,98,1.1],["02:20",91,122,16,98,1.2],["02:25",89,120,16,99,1.3],["02:30",88,120,17,97,1.2],["02:35",86,118,16,98,1.1],["02:40",87,121,15,99,1.0],["02:45",85,119,16,98,1.2],["02:50",86,122,16,98,1.1],["02:55",84,120,17,97,1.3],["03:00",85,123,16,98,1.2],["03:05",83,119,15,99,1.1],["03:10",84,121,16,98,1.0],["03:15",82,118,16,98,1.2],["03:20",83,122,17,97,1.4],["03:25",81,120,16,98,1.3],["03:30",90,124,18,96,1.9],["03:35",92,130,20,95,2.2],["03:40",95,135,24,93,2.6],["03:45",98,138,26,92,2.9],["03:50",96,136,25,93,2.7],["03:55",94,132,22,94,2.4],["04:00",91,128,20,95,2.1],["04:05",88,124,18,96,1.8],["04:10",86,122,17,97,1.5],["04:15",85,120,16,98,1.3],["04:20",84,121,16,98,1.2],["04:25",82,119,15,99,1.1],["04:30",83,120,16,98,1.0],["04:35",81,118,16,98,1.2],["04:40",82,122,17,97,1.3],["04:45",80,120,16,98,1.2],["04:50",81,121,15,99,1.1],["04:55",79,119,16,98,1.0],["05:00",80,122,16,98,1.2]];
+  let sv=0,ev=D.length,sens=2,ch=null;
+  window.icuV=function(btn,s,e){sv=s;ev=e;document.querySelectorAll('.ifb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');icuBld();};
+  window.icuSr=function(v){sens=parseInt(v);const l=['Low — critical only','Medium — standard','High — all deviations'];document.getElementById('icu-sl').textContent=l[sens-1];document.getElementById('icu-ac').textContent=sens>=1?(sens>=3?3:2):0;icuBld();};
+  function icuBld(){
+    const sl=D.slice(sv,ev);
+    const a1s=Math.max(0,15-sv),a1e=Math.min(sl.length,24-sv);
+    const a2s=Math.max(0,43-sv),a2e=Math.min(sl.length,51-sv);
+    const bgP={id:'icuBg',beforeDatasetsDraw(chart){const{ctx,chartArea:{top,bottom},scales:{x}}=chart;[[a1s,a1e,'rgba(252,235,235,0.65)'],[a2s,a2e,'rgba(250,238,218,0.65)']].forEach(([s2,e2,col])=>{if(s2>=sl.length||e2<=0||s2>=e2)return;ctx.save();ctx.fillStyle=col;ctx.fillRect(x.getPixelForValue(Math.max(0,s2)),top,x.getPixelForValue(Math.min(sl.length-1,e2))-x.getPixelForValue(Math.max(0,s2)),bottom-top);ctx.restore();});}};
+    const ds=[
+      {label:'Lactate',data:sl.map(r=>r[5]*20),borderColor:'#7F77DD',borderWidth:1.5,pointRadius:0,tension:0.3,fill:false,borderDash:[4,3]},
+      {label:'RR',data:sl.map(r=>r[3]),borderColor:'#854F0B',borderWidth:1.5,pointRadius:0,tension:0.3,fill:false,borderDash:[3,2]},
+      {label:'SpO2',data:sl.map(r=>r[4]),borderColor:'#1D9E75',borderWidth:2,pointRadius:0,tension:0.3,fill:false},
+      {label:'SBP',data:sl.map(r=>r[2]),borderColor:'#185FA5',borderWidth:2,pointRadius:0,tension:0.3,fill:false},
+      {label:'HR',data:sl.map(r=>r[1]),borderColor:'#E24B4A',borderWidth:2,pointRadius:(c)=>(sens>=3&&c.dataIndex+sv===7?5:0),pointBackgroundColor:'#E24B4A',tension:0.3,fill:false}
+    ];
+    if(ch)ch.destroy();
+    ch=new Chart(document.getElementById('icu-c'),{type:'line',data:{labels:sl.map(r=>r[0]),datasets:ds},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:9},maxTicksLimit:10,color:'#7a8094'},grid:{color:'rgba(0,0,0,0.04)'}},y:{ticks:{font:{size:9},color:'#7a8094'},grid:{color:'rgba(0,0,0,0.05)'},min:60,max:145}}},plugins:[bgP]});
+    let h='';
+    if(sens>=1){h+=`<div class="ial" style="background:#FCEBEB"><div style="width:8px;height:8px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div><span style="color:#791F1F"><strong>CRITICAL 01:15–01:55</strong> — Sepsis: HR↑ SBP↓ Lactate↑ SpO2↓</span></div>`;h+=`<div class="ial" style="background:#FAEEDA"><div style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0"></div><span style="color:#633806"><strong>HIGH 03:30–04:10</strong> — Resp distress: RR↑ SpO2↓ BP↑</span></div>`;}
+    if(sens>=3) h+=`<div class="ial" style="background:#EAF3DE"><div style="width:8px;height:8px;border-radius:50%;background:#639922;flex-shrink:0"></div><span style="color:#27500A"><strong>NOISE 00:35</strong> — HR spike filtered</span></div>`;
+    document.getElementById('icu-alerts').innerHTML=h;
+  }
+  icuBld();
+  })();
+  </script>
+
+  <!-- PROJECT 4: JAMF MDM -->
   <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 06 — IT Operations</div>
+    <div class="slabel fi" style="margin-bottom:10px">Project 04 — IT Operations</div>
     <div class="proj-grid-2 fi">
       <div class="card">
         <div class="card-head">
@@ -760,146 +798,6 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
       </div>
     </div>
   </div>
-
-  <!-- PROJECT 7: DOCUMENT CLASSIFICATION SYSTEM -->
-  <div style="margin-bottom:48px">
-    <div class="proj-label fi">Project 07 — Document Intelligence</div>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px"><span class="tag">Azure AI Language</span><span class="tag">Custom Text Classification</span><span class="tag">Logic Apps</span><span class="tag">Power BI</span></div>
-        <h3>Multi-level medical document classification system</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Built a four-dimensional automated classification pipeline for 5,000+ monthly clinical documents at Central Health System — categorising by document type, urgency, department, and billing relevance simultaneously. Replaced 8–12 min manual review with 3.2-second automated routing, cutting billing backlog from 5 days to under 1 day and reducing routing errors from 15% to 2.7%.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:7px;letter-spacing:.08em">90-DAY CLASSIFICATION ACCURACY</div>
-          <div class="srow"><span class="slb">Document Type</span><div class="strk"><div class="sbar" style="width:94%;background:#34d399"></div></div><span class="sval" style="color:#34d399">94.2%</span></div>
-          <div class="srow"><span class="slb">Urgency Level</span><div class="strk"><div class="sbar" style="width:97%;background:#34d399"></div></div><span class="sval" style="color:#34d399">96.8%</span></div>
-          <div class="srow"><span class="slb">Department</span><div class="strk"><div class="sbar" style="width:92%;background:#34d399"></div></div><span class="sval" style="color:#34d399">91.5%</span></div>
-          <div class="srow"><span class="slb">Billing Relevance</span><div class="strk"><div class="sbar" style="width:93%;background:#34d399"></div></div><span class="sval" style="color:#34d399">93.1%</span></div>
-        </div>
-      </div>
-      <div class="pan" style="padding:0;overflow:hidden">
-        <div style="background:#0b0f1c;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <div style="font-size:12px;font-weight:600;color:var(--ink)">Power BI — Classification Performance Monitor</div>
-            <div style="display:flex;gap:5px">
-              <div style="width:8px;height:8px;border-radius:50%;background:#f87171"></div>
-              <div style="width:8px;height:8px;border-radius:50%;background:#fbbf24"></div>
-              <div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div>
-            </div>
-          </div>
-          <div style="display:flex;gap:4px;margin-bottom:0">
-            <div class="pbi2-tab active" onclick="pbi2Switch('perf')">Classification</div>
-            <div class="pbi2-tab" onclick="pbi2Switch('ops')">Operations</div>
-            <div class="pbi2-tab" onclick="pbi2Switch('qa')">QA &amp; Alerts</div>
-          </div>
-        </div>
-
-        <style>
-        .pbi2-tab{padding:5px 12px;border-radius:4px 4px 0 0;cursor:pointer;font-size:11px;color:rgba(148,163,184,.6);background:transparent;font-family:'Outfit',sans-serif;border:none;transition:all .15s}
-        .pbi2-tab.active{color:#38bdf8;background:rgba(56,189,248,.08);font-weight:500}
-        .pbi2-panel{display:none;padding:14px 16px;background:#0b0f1c}
-        .pbi2-panel.active{display:block}
-        .pbi2-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
-        .pbi2-kpi{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:8px 10px}
-        .pbi2-lbl{font-size:9px;color:#94a3b8;font-family:'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
-        .pbi2-val{font-size:18px;font-weight:700;line-height:1}
-        .pbi2-sub{font-size:9px;margin-top:2px}
-        .pbi2-bar{display:flex;align-items:center;gap:8px;margin:5px 0}
-        .pbi2-blbl{font-size:10px;color:#94a3b8;width:86px;flex-shrink:0;font-family:'DM Mono',monospace}
-        .pbi2-btrack{flex:1;height:12px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden}
-        .pbi2-bfill{height:100%;border-radius:3px}
-        .pbi2-bval{font-size:10px;font-family:'DM Mono',monospace;width:40px;text-align:right;flex-shrink:0}
-        .pbi2-section{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8;margin:10px 0 5px}
-        .pbi2-table{width:100%;border-collapse:collapse;font-size:10px}
-        .pbi2-table th{font-size:9px;color:#94a3b8;padding:4px 6px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;letter-spacing:.06em;text-transform:uppercase}
-        .pbi2-table td{padding:5px 6px;border-bottom:1px solid rgba(255,255,255,.04);color:#f1f5f9}
-        .pbi2-table tr:last-child td{border:none}
-        .pbi2-badge{display:inline-block;padding:1px 6px;border-radius:100px;font-size:9px;font-weight:500}
-        .ok2{background:rgba(52,211,153,.12);color:#34d399}
-        .warn2{background:rgba(251,191,36,.12);color:#fbbf24}
-        .alert2{background:rgba(248,113,113,.12);color:#f87171}
-        .pbi2-alert{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:5px;margin-bottom:4px;border:1px solid}
-        </style>
-
-        <!-- PAGE 1 -->
-        <div class="pbi2-panel active" id="pbi2-perf">
-          <div class="pbi2-kpis">
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Accuracy</div><div class="pbi2-val" style="color:#34d399">93.9%</div><div class="pbi2-sub" style="color:#34d399">▲ +3.9% vs target</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Volume/day</div><div class="pbi2-val" style="color:#38bdf8">240</div><div class="pbi2-sub" style="color:#94a3b8">docs avg</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Exceptions</div><div class="pbi2-val" style="color:#fbbf24">7.8%</div><div class="pbi2-sub" style="color:#34d399">▼ Below 10%</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Proc. Time</div><div class="pbi2-val" style="color:#34d399">3.2s</div><div class="pbi2-sub" style="color:#34d399">▼ vs 5s target</div></div>
-          </div>
-          <div class="pbi2-section">Accuracy by Dimension</div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Doc Type</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:94.2%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi2-bval" style="color:#34d399">94.2%</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Urgency</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:96.8%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi2-bval" style="color:#34d399">96.8%</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Department</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:91.5%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi2-bval" style="color:#34d399">91.5%</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Billing</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:93.1%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi2-bval" style="color:#34d399">93.1%</div></div>
-          <div class="pbi2-section">90-Day Accuracy Trend</div>
-          <svg viewBox="0 0 300 52" style="width:100%;height:52px">
-            <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34d399" stop-opacity="0.25"/><stop offset="100%" stop-color="#34d399" stop-opacity="0"/></linearGradient></defs>
-            <line x1="0" y1="12" x2="300" y2="12" stroke="rgba(248,113,113,.35)" stroke-width="1" stroke-dasharray="3,3"/>
-            <text x="2" y="10" fill="rgba(248,113,113,.6)" font-size="6" font-family="monospace">85% alert line</text>
-            <path d="M0,42 L20,38 L50,34 L80,30 L110,28 L130,32 L155,24 L175,20 L200,16 L225,14 L250,10 L270,8 L300,6" fill="none" stroke="#34d399" stroke-width="1.5"/>
-            <path d="M0,42 L20,38 L50,34 L80,30 L110,28 L130,32 L155,24 L175,20 L200,16 L225,14 L250,10 L270,8 L300,6 L300,52 L0,52Z" fill="url(#g2)"/>
-          </svg>
-          <div style="display:flex;justify-content:space-between;font-size:9px;color:#94a3b8;font-family:monospace;margin-top:2px"><span>D1: 88.2%</span><span>D30: 91.4%</span><span>D60: 93.1%</span><span>D90: 93.9%</span></div>
-        </div>
-
-        <!-- PAGE 2 -->
-        <div class="pbi2-panel" id="pbi2-ops">
-          <div class="pbi2-kpis">
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Monthly Docs</div><div class="pbi2-val" style="color:#38bdf8">5,200</div><div class="pbi2-sub" style="color:#34d399">▲ +4% MoM</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Auto-Routed</div><div class="pbi2-val" style="color:#34d399">97.3%</div><div class="pbi2-sub" style="color:#94a3b8">4,780 docs</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Human Review</div><div class="pbi2-val" style="color:#fbbf24">406</div><div class="pbi2-sub" style="color:#94a3b8">7.8% of total</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">STAT Resolved</div><div class="pbi2-val" style="color:#34d399">100%</div><div class="pbi2-sub" style="color:#34d399">All ≤30 min</div></div>
-          </div>
-          <div class="pbi2-section">Volume by Document Type</div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Progress Note</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:28%;background:#38bdf8"></div></div><div class="pbi2-bval" style="color:#38bdf8">1,456</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Lab Report</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:22%;background:#38bdf8"></div></div><div class="pbi2-bval" style="color:#38bdf8">1,144</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Discharge Summ.</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:14%;background:#a78bfa"></div></div><div class="pbi2-bval" style="color:#a78bfa">728</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Operative Rpt</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:10%;background:#f87171"></div></div><div class="pbi2-bval" style="color:#f87171">520</div></div>
-          <div class="pbi2-section">Top Exception Reasons</div>
-          <table class="pbi2-table">
-            <tr><th>Reason</th><th>Count</th><th>Trend</th></tr>
-            <tr><td>Low dept confidence</td><td>162</td><td><span class="pbi2-badge warn2">▼ Improving</span></td></tr>
-            <tr><td>Novel doc format</td><td>81</td><td><span class="pbi2-badge warn2">→ Stable</span></td></tr>
-            <tr><td>Conflicting urgency</td><td>61</td><td><span class="pbi2-badge ok2">▼ Declining</span></td></tr>
-            <tr><td>Low billing confidence</td><td>57</td><td><span class="pbi2-badge ok2">▼ Declining</span></td></tr>
-          </table>
-        </div>
-
-        <!-- PAGE 3 -->
-        <div class="pbi2-panel" id="pbi2-qa">
-          <div class="pbi2-section">Human Correction Rate — Improving Over Time</div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Month 1</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:15.2%;background:#f87171"></div></div><div class="pbi2-bval" style="color:#f87171">15.2%</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Month 2</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:9.1%;background:#fbbf24"></div></div><div class="pbi2-bval" style="color:#fbbf24">9.1%</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Month 3</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:4.8%;background:#34d399"></div></div><div class="pbi2-bval" style="color:#34d399">4.8%</div></div>
-          <div style="font-size:9px;color:#94a3b8;margin:3px 0 10px">↓ 68% reduction after 2 retraining cycles</div>
-          <div class="pbi2-section">Alert Log</div>
-          <div class="pbi2-alert" style="background:rgba(52,211,153,.05);border-color:rgba(52,211,153,.15)"><div style="width:6px;height:6px;border-radius:50%;background:#34d399;flex-shrink:0"></div><div style="font-size:10px;color:#f1f5f9;flex:1">All metrics green — no active alerts</div><div style="font-size:9px;color:#94a3b8;font-family:monospace">Now</div></div>
-          <div class="pbi2-alert" style="background:rgba(251,191,36,.04);border-color:rgba(251,191,36,.15)"><div style="width:6px;height:6px;border-radius:50%;background:#fbbf24;flex-shrink:0"></div><div style="font-size:10px;color:#f1f5f9;flex:1">Exception spike 12.4% — resolved after Lab Report prompt tuning</div><div style="font-size:9px;color:#94a3b8;font-family:monospace">Day 41</div></div>
-          <div class="pbi2-alert" style="background:rgba(248,113,113,.04);border-color:rgba(248,113,113,.12)"><div style="width:6px;height:6px;border-radius:50%;background:#f87171;flex-shrink:0"></div><div style="font-size:10px;color:#f1f5f9;flex:1">Accuracy 86.1% — triggered retraining with 200 new labeled docs</div><div style="font-size:9px;color:#94a3b8;font-family:monospace">Day 18</div></div>
-          <div class="pbi2-section">Business Impact</div>
-          <table class="pbi2-table">
-            <tr><th>Metric</th><th>Before</th><th>After</th><th></th></tr>
-            <tr><td>Review time/doc</td><td>8–12 min</td><td>1–2 min</td><td><span class="pbi2-badge ok2">83% ↓</span></td></tr>
-            <tr><td>Routing errors</td><td>15.0%</td><td>2.7%</td><td><span class="pbi2-badge ok2">82% ↓</span></td></tr>
-            <tr><td>Billing backlog</td><td>5 days</td><td>&lt;1 day</td><td><span class="pbi2-badge ok2">80% ↓</span></td></tr>
-            <tr><td>STAT response</td><td>45 min</td><td>5 min</td><td><span class="pbi2-badge ok2">89% ↓</span></td></tr>
-          </table>
-        </div>
-
-        <script>
-        function pbi2Switch(p){
-          document.querySelectorAll('.pbi2-tab').forEach((t,i)=>t.classList.toggle('active',['perf','ops','qa'][i]===p));
-          document.querySelectorAll('.pbi2-panel').forEach(el=>el.classList.toggle('active',el.id==='pbi2-'+p));
-        }
-        </script>
-      </div>
-    </div>
-  </div>
-
-  <!-- PROJECT 3: JAMF MDM -->
 </section>
 
 <!-- EXPERIENCE -->
@@ -942,7 +840,7 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
     </div>
     <div class="fi">
       <div class="slabel" style="margin-bottom:10px">Education</div>
-      <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:3px;padding:18px;margin-bottom:16px">
+      <div style="background:#fff;border:1px solid var(--rule);border-radius:3px;padding:18px;margin-bottom:16px">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:5px">B.S. CYBERSECURITY & INFORMATION ASSURANCE</div>
         <div style="font-size:15px;font-weight:500;margin-bottom:2px">Capella University</div>
         <div style="font-size:12px;color:var(--ink3)">Online · Completed</div>
@@ -954,7 +852,7 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
         <div class="cert"><strong>Palo Alto Networks</strong><span>Cybersecurity Specialization</span></div>
         <div class="cert"><strong>Google IT Support</strong><span>Professional Certificate</span></div>
       </div>
-      <div style="margin-top:16px;background:rgba(56,189,248,0.06);border:1px solid rgba(56,189,248,0.15);border-radius:10px;padding:18px">
+      <div style="margin-top:16px;background:var(--accent2);border:1px solid rgba(26,79,214,.15);border-radius:3px;padding:16px">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:7px;letter-spacing:.06em">WHAT I BRING TO HEALTHCARE IT</div>
         <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">My B.S. in Cybersecurity, ITIL v4 process knowledge, and hands-on HIPAA-adjacent compliance work give me a strong foundation for healthcare IT roles. I understand how to build systems that are both technically secure and human-centered — a combination that's rare and essential in clinical environments.</p>
       </div>
@@ -963,7 +861,7 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
 </section>
 
 <!-- SKILLS -->
-<section id="skills" style="background:var(--paper2)">
+<section id="skills" style="background:#fff">
   <div class="slabel fi">Capabilities</div>
   <h2 class="fi">Full tech stack</h2>
   <p class="intro fi">From enterprise firewalls and MDM at scale to clinical AI dashboards and FHIR integration — technical breadth with healthcare informatics depth.</p>
@@ -971,7 +869,6 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
     <div class="sgroup">
       <div class="sgtitle">Clinical AI & informatics</div>
       <div class="si"><span class="sn">Python / XGBoost / SHAP</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">ResNet-50 / Grad-CAM</span><span class="sd m"></span></div>
       <div class="si"><span class="sn">HL7 FHIR R4</span><span class="sd m"></span></div>
       <div class="si"><span class="sn">Azure Machine Learning</span><span class="sd m"></span></div>
       <div class="si"><span class="sn">CDSS design</span><span class="sd"></span></div>
@@ -1018,7 +915,7 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
     <div style="display:flex;justify-content:center;margin-bottom:20px">
       <div class="avatar-sm"><img src="data:image/jpeg;base64,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" alt="Anh Truong Nguyen"></div>
     </div>
-    <div class="slabel" style="color:rgba(241,245,249,.28);margin-bottom:10px">Get in touch</div>
+    <div class="slabel" style="color:rgba(247,246,242,.28);margin-bottom:10px">Get in touch</div>
     <h2 style="font-size:clamp(26px,4vw,44px);margin-bottom:12px">Let's build clinical IT<br>that actually works</h2>
     <p>Open to Healthcare IT, Clinical Informatics, and Clinical System Analyst roles. Based in San Jose, CA — open to hybrid and remote.</p>
     <div class="clinks">
@@ -1033,15 +930,13 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
 </div>
 
 <footer>
-  <span style="font-family:'DM Mono',monospace;font-size:11px">Anh Truong Nguyen · Portfolio</span>
-  <span style="font-size:11px">San Jose, CA · Open to Healthcare IT &amp; Clinical Informatics roles</span>
+  <span>Anh Truong Nguyen · Clinical AI & Healthcare IT Portfolio · 2025</span>
+  <span style="font-family:'DM Mono',monospace;font-size:11px">San Jose, CA</span>
 </footer>
 
 <script>
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
-}, { threshold: 0.08 });
-document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')}),{threshold:.07});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
