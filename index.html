@@ -177,20 +177,33 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 
 <nav>
   <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="text-decoration:none;display:flex;align-items:center">
-    <div id="nav-logo-svg" style="width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#060f1e,#0a1a2e);border:1.5px solid rgba(45,212,191,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;box-shadow:0 0 16px rgba(45,212,191,0.12)" onmouseover="this.style.borderColor='rgba(45,212,191,0.85)';this.style.boxShadow='0 0 24px rgba(45,212,191,0.45)';this.style.transform='scale(1.08)'" onmouseout="this.style.borderColor='rgba(45,212,191,0.4)';this.style.boxShadow='0 0 16px rgba(45,212,191,0.12)';this.style.transform='scale(1)'">
-            <svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <div id="nav-logo-svg" style="width:44px;height:44px;border-radius:10px;background:#060d18;border:1.5px solid rgba(45,212,191,0.45);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;box-shadow:0 0 14px rgba(45,212,191,0.12)" onmouseover="this.style.borderColor='rgba(45,212,191,1)';this.style.boxShadow='0 0 22px rgba(45,212,191,0.5)';this.style.transform='scale(1.09)'" onmouseout="this.style.borderColor='rgba(45,212,191,0.45)';this.style.boxShadow='0 0 14px rgba(45,212,191,0.12)';this.style.transform='scale(1)'">
+      <svg width="28" height="30" viewBox="0 0 28 30" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="cg" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#67e8f9"/>
+          <linearGradient id="aFill" x1="0" y1="0" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#38bdf8"/>
             <stop offset="100%" stop-color="#2dd4bf"/>
           </linearGradient>
         </defs>
-        <path d="M17 4 L7 28 L10.5 28 L13 22 L21 22 L23.5 28 L27 28 Z" stroke="url(#cg)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-        <line x1="11.8" y1="19" x2="22.2" y2="19" stroke="url(#cg)" stroke-width="1.8" stroke-linecap="round"/>
-        <polyline points="4,19 8,19 9.5,15.5 11,22 12.5,17 14,21 15.5,19 18.5,19 20,15 21.5,23 22.5,19 26,19 30,19" stroke="#f87171" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+        <!-- Left leg: thick stroke going down-left with serif curl -->
+        <path d="M14 2 C13 2 7 22 5 28" stroke="url(#aFill)" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <!-- Right leg: thinner going down-right with serif -->
+        <path d="M14 2 C15 2 21 22 23 28" stroke="url(#aFill)" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <!-- Crossbar -->
+        <path d="M8.5 18 Q14 17 19.5 18" stroke="url(#aFill)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <!-- Top flourish/serif -->
+        <path d="M12 3 C12 1.5 16 1.5 16 3" stroke="url(#aFill)" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <!-- Left bottom serif -->
+        <path d="M5 28 C3.5 28.5 3 29.5 5 29.5 C7 29.5 7 28 5 28" stroke="url(#aFill)" stroke-width="1.2" fill="none"/>
+        <!-- Right bottom serif -->
+        <path d="M23 28 C21.5 28.5 21 29.5 23 29.5 C25 29.5 25 28 23 28" stroke="url(#aFill)" stroke-width="1.2" fill="none"/>
       </svg>
     </div>
   </a>
+  <script>
+  var nl=document.getElementById('nav-logo-svg');
+  if(nl){nl.addEventListener('mouseover',function(){this.style.transform='scale(1.12) rotate(-3deg)';this.style.filter='drop-shadow(0 0 12px rgba(45,212,191,0.9))';});nl.addEventListener('mouseout',function(){this.style.transform='scale(1) rotate(0deg)';this.style.filter='none';});}
+  </script>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
@@ -200,6 +213,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
   <div style="position:relative;z-index:1">
@@ -230,7 +244,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
       </a>
-      <a href="/cdn-cgi/l/email-protection#127c75676b777c737c766b25252252757f737b7e3c717d7f" class="btn btn-out" style="font-family:'DM Mono',monospace;font-size:12px"><span class="__cf_email__" data-cfemail="99f7feece0fcf7f8f7fde0aeaea9d9fef4f8f0f5b7faf6f4">[email&#160;protected]</span></a>
+      <a href="mailto:nguyenandy770@gmail.com" class="btn btn-out" style="font-family:'DM Mono',monospace;font-size:12px">nguyenandy770@gmail.com</a>
       <a href="Anh_Truong_Nguyen_Resume.docx" download="Anh_Truong_Nguyen_Resume.docx" class="btn btn-dl">↓ Download resume</a>
     </div>
 
@@ -241,8 +255,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       <div><span class="snum">5</span><span class="slbl">Portfolio<br>projects</span></div>
       <div><span class="snum">98%</span><span class="slbl">Case resolution<br>rate (PAN)</span></div>
     </div>
-  </div>
-</section>
+  </div></section>
 
 <!-- ABOUT -->
 <div class="about-strip" id="about">
@@ -465,7 +478,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     </div><!-- end border box -->
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
   const DB_RAW=[
     ["CR0001",75,"Female","White",27.1,129,59,111,80,"Current","1-2x/week","No","No","Moderate",1,0.976,0.034,0.044,-0.036,0.066,-0.002,0.031,0.065,0.046],
     ["CR0002",32,"Male","Other",18.6,82,61,114,69,"Current","3-5x/week","No","No","Moderate",0,0.572,0.129,0.11,0.013,0.116,0.122,0.058,0.028,0.077],
@@ -986,7 +999,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <h2 style="font-size:clamp(26px,4vw,44px);margin-bottom:12px">Let's build clinical IT<br>that actually works</h2>
     <p>Open to Healthcare IT, Clinical Informatics, and Clinical System Analyst roles. Based in San Jose, CA — open to hybrid and remote.</p>
     <div class="clinks">
-      <a href="/cdn-cgi/l/email-protection#620c05171b070c030c061b55555222050f030b0e4c010d0f" class="cl cl-em">✉ <span class="__cf_email__" data-cfemail="137d74666a767d727d776a24242353747e727a7f3d707c7e">[email&#160;protected]</span></a>
+      <a href="mailto:nguyenandy770@gmail.com" class="cl cl-em">✉ nguyenandy770@gmail.com</a>
       <a href="https://www.linkedin.com/in/anh-truong-nguyen/" target="_blank" class="cl cl-li">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
@@ -997,3 +1010,13 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 </div>
 
 <footer>
+  <span>Anh Truong Nguyen · Clinical AI & Healthcare IT Portfolio · 2025</span>
+  <span style="font-family:'DM Mono',monospace;font-size:11px">San Jose, CA</span>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')}),{threshold:.07});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
