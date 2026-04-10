@@ -68,7 +68,7 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
 .tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.05em;padding:3px 8px;border-radius:2px;background:rgba(255,255,255,0.09);color:rgba(240,239,235,0.7);text-decoration:none;transition:opacity .15s}.tag:hover{opacity:.7;cursor:pointer}
 .tag.b{background:rgba(91,142,240,0.15);color:#93c5fd}
-.tag.g{background:rgba(110,231,183,0.12);color:#6ee7b7}
+.tag.g{background:rgba(110,231,183,0.15);color:#6ee7b7}
 .tag.a{background:rgba(251,191,36,0.12);color:#fbbf24}
 .tag.p{background:rgba(167,139,250,0.12);color:#c4b5fd}
 .tag.t{background:rgba(52,211,153,0.12);color:#34d399}
@@ -321,7 +321,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         .db-panel{display:none;border:0.5px solid #d0ccc8;border-radius:0 8px 8px 8px;padding:16px;background:#1a2030}
         .db-panel.active{display:block}
         .db-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-        .db-bred{background:rgba(226,75,74,0.18);color:#A32D2D}.db-bamb{background:rgba(239,159,39,0.14);color:#854F0B}.db-bgrn{background:rgba(110,231,183,0.12);color:#3B6D11}
+        .db-bred{background:rgba(226,75,74,0.25);color:#A32D2D}.db-bamb{background:rgba(239,159,39,0.2);color:#854F0B}.db-bgrn{background:rgba(110,231,183,0.15);color:#3B6D11}
         .db-mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
         .db-mcard{background:#111827;border-radius:6px;padding:9px 11px}
         .db-mlabel{font-size:10px;color:rgba(240,239,235,0.45);margin-bottom:2px}
@@ -344,7 +344,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         .db-icon-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:8px 0}
         .db-icon-box{text-align:center;padding:7px 4px;border-radius:6px;background:#111827;font-size:10px;color:#7a8094}
         .db-icon-box.mod{background:rgba(52,211,153,0.12);color:#6ee7b7}
-        .db-icon-box.fix{background:rgba(239,159,39,0.14);color:#633806}
+        .db-icon-box.fix{background:rgba(239,159,39,0.2);color:#fcd34d}
         .db-divider{border:none;border-top:0.5px solid #e0ddd8;margin:10px 0}
         .db-ci-track{flex:1;height:6px;background:#1a2030;border-radius:3px;position:relative;overflow:visible}
         .db-ci-fill{position:absolute;top:0;height:6px;border-radius:3px;background:#85B7EB}
@@ -401,7 +401,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
             <select class="db-sel" id="db-sel-pcp" onchange="dbLoad(this.value)"></select>
             <span id="db-badge-pcp" class="db-badge db-bred">High risk</span>
           </div>
-          <div id="db-pcp-alert" style="display:flex;align-items:center;gap:10px;padding:11px;border-radius:8px;margin-bottom:11px">
+          <div id="db-pcp-alert" style="border:0.5px solid rgba(255,255,255,0.1)" style="display:flex;align-items:center;gap:10px;padding:11px;border-radius:8px;margin-bottom:11px">
             <div id="db-pcp-icon" style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 4v9m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
             <div><div id="db-pcp-title" style="font-weight:500;font-size:13px"></div><div id="db-pcp-sub" style="font-size:11px;margin-top:1px"></div></div>
           </div>
@@ -650,9 +650,9 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <h3>Multi-parameter anomaly detection</h3>
         <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Built a real-time ICU monitoring system that detects clinically significant anomalies across 6 physiological parameters — distinguishing true clinical events from sensor noise using multivariate co-occurrence logic.</p>
         <div style="margin:12px 0;display:flex;flex-direction:column;gap:6px">
-          <div style="background:rgba(226,75,74,.18);border-left:3px solid #E24B4A;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#F09595">CRITICAL · 01:15–01:55</div><div style="font-size:10px;color:rgba(247,246,242,.6);margin-top:2px">HR↑ SBP↓ Lactate↑ SpO2↓ — Sepsis concern · 4 params</div></div>
-          <div style="background:rgba(239,159,39,.13);border-left:3px solid #EF9F27;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#FAC775">HIGH · 03:30–04:10</div><div style="font-size:10px;color:rgba(247,246,242,.6);margin-top:2px">RR↑ SpO2↓ BP↑ — Respiratory distress · 4 params</div></div>
-          <div style="background:rgba(99,153,34,.1);border-left:3px solid #639922;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#C0DD97">NOISE · 00:35</div><div style="font-size:10px;color:rgba(247,246,242,.6);margin-top:2px">HR spike 135 bpm — sensor artifact · filtered</div></div>
+          <div style="background:rgba(226,75,74,.18);border-left:3px solid #f87171;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#f87171;letter-spacing:.03em">CRITICAL · 01:15–01:55</div><div style="font-size:10px;color:rgba(247,246,242,.6);margin-top:2px">HR↑ SBP↓ Lactate↑ SpO2↓ — Sepsis concern · 4 params</div></div>
+          <div style="background:rgba(239,159,39,.13);border-left:3px solid #fbbf24;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#fbbf24;letter-spacing:.03em">HIGH · 03:30–04:10</div><div style="font-size:10px;color:rgba(247,246,242,.6);margin-top:2px">RR↑ SpO2↓ BP↑ — Respiratory distress · 4 params</div></div>
+          <div style="background:rgba(99,153,34,.1);border-left:3px solid #34d399;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#34d399;letter-spacing:.03em">NOISE · 00:35</div><div style="font-size:10px;color:rgba(247,246,242,.6);margin-top:2px">HR spike 135 bpm — sensor artifact · filtered</div></div>
         </div>
       </div>
       <div class="pan" style="display:flex;flex-direction:column;gap:12px">
@@ -748,8 +748,8 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     if(ch)ch.destroy();
     ch=new Chart(document.getElementById('icu-c'),{type:'line',data:{labels:sl.map(r=>r[0]),datasets:ds},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(14,17,23,0.95)',titleColor:'#0e1117',bodyColor:'rgba(247,246,242,0.7)',borderColor:'rgba(255,255,255,0.1)',borderWidth:0.5,padding:10}},scales:{x:{ticks:{font:{size:9},maxTicksLimit:10,color:'rgba(247,246,242,0.4)'},grid:{color:'rgba(255,255,255,0.06)'},border:{color:'rgba(255,255,255,0.1)'}},y:{ticks:{font:{size:9},color:'rgba(247,246,242,0.4)'},grid:{color:'rgba(255,255,255,0.06)'},border:{color:'rgba(255,255,255,0.1)'},min:60,max:145}}},plugins:[bgP]});
     let h='';
-    if(sens>=1){h+=`<div class="ial" style="background:rgba(226,75,74,0.18)"><div style="width:8px;height:8px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div><span style="color:#791F1F"><strong>CRITICAL 01:15–01:55</strong> — Sepsis: HR↑ SBP↓ Lactate↑ SpO2↓</span></div>`;h+=`<div class="ial" style="background:rgba(239,159,39,0.14)"><div style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0"></div><span style="color:#633806"><strong>HIGH 03:30–04:10</strong> — Resp distress: RR↑ SpO2↓ BP↑</span></div>`;}
-    if(sens>=3) h+=`<div class="ial" style="background:rgba(110,231,183,0.12)"><div style="width:8px;height:8px;border-radius:50%;background:#639922;flex-shrink:0"></div><span style="color:#27500A"><strong>NOISE 00:35</strong> — HR spike filtered</span></div>`;
+    if(sens>=1){h+=`<div class="ial" style="background:rgba(226,75,74,0.2);border:0.5px solid rgba(248,113,113,0.3)"><div style="width:8px;height:8px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div><span style="color:#fca5a5"><strong style="color:#f87171">CRITICAL 01:15–01:55</strong> — Sepsis: HR↑ SBP↓ Lactate↑ SpO2↓</span></div>`;h+=`<div class="ial" style="background:rgba(239,159,39,0.15);border:0.5px solid rgba(251,191,36,0.25)"><div style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0"></div><span style="color:#fcd34d"><strong style="color:#fbbf24">HIGH 03:30–04:10</strong> — Resp distress: RR↑ SpO2↓ BP↑</span></div>`;}
+    if(sens>=3) h+=`<div class="ial" style="background:rgba(110,231,183,0.1);border:0.5px solid rgba(52,211,153,0.2)"><div style="width:8px;height:8px;border-radius:50%;background:#639922;flex-shrink:0"></div><span style="color:#6ee7b7"><strong style="color:#34d399">NOISE 00:35</strong> — HR spike filtered</span></div>`;
     document.getElementById('icu-alerts').innerHTML=h;
   }
   icuBld();
