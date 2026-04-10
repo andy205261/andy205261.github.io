@@ -673,21 +673,24 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <div><div class="slabel" style="margin-bottom:3px">Live interactive demo</div><div style="font-size:14px;font-weight:500;color:var(--ink)">Adjust sensitivity · zoom into events · see multivariate co-occurrence logic</div></div>
         <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag t">61 data points</span><span class="tag p">6 parameters</span><span class="tag r">2 clinical events</span></div>
       </div>
-      <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#fff;padding:16px">
+      <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#0e1117;padding:18px">
         <style>
         .ig{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:12px}
-        .im{background:#f7f6f2;border-radius:7px;padding:9px 11px}
-        .iml{font-size:10px;color:#7a8094;margin-bottom:2px}
-        .imv{font-size:17px;font-weight:500}
-        .ial{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:7px;margin-bottom:5px;font-size:12px}
-        .ifb{padding:5px 11px;font-size:11px;border-radius:4px;cursor:pointer;border:0.5px solid #d0ccc8;background:#f7f6f2;color:#7a8094}
-        .ifb.on{background:#0e1117;color:#f7f6f2;border-color:#0e1117}
+        .im{background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:7px;padding:9px 11px}
+        .iml{font-size:10px;color:rgba(247,246,242,0.45);margin-bottom:3px;font-family:monospace}
+        .imv{font-size:18px;font-weight:500}
+        .ial{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;margin-bottom:5px;font-size:12px}
+        .ifb{padding:5px 12px;font-size:11px;border-radius:4px;cursor:pointer;border:0.5px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:rgba(247,246,242,0.6);transition:all .15s;font-family:monospace}
+        .ifb:hover{background:rgba(255,255,255,0.12);color:#f7f6f2}
+        .ifb.on{background:#1a4fd6;color:#f7f6f2;border-color:#1a4fd6}
+        .icu-sens-row{display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:14px}
+        .icu-sens-row input[type=range]{flex:1;accent-color:#1a4fd6}
         </style>
         <div class="ig">
-          <div class="im"><div class="iml">Heart rate</div><div class="imv" style="color:#3B6D11">80 bpm</div></div>
-          <div class="im"><div class="iml">Systolic BP</div><div class="imv" style="color:#3B6D11">122 mmHg</div></div>
-          <div class="im"><div class="iml">SpO2</div><div class="imv" style="color:#3B6D11">98%</div></div>
-          <div class="im"><div class="iml">Lactate</div><div class="imv" style="color:#3B6D11">1.2 mmol/L</div></div>
+          <div class="im"><div class="iml">Heart rate (last)</div><div class="imv" style="color:#6ee7b7">80 bpm</div></div>
+          <div class="im"><div class="iml">Systolic BP</div><div class="imv" style="color:#6ee7b7">122 mmHg</div></div>
+          <div class="im"><div class="iml">SpO2</div><div class="imv" style="color:#6ee7b7">98%</div></div>
+          <div class="im"><div class="iml">Lactate</div><div class="imv" style="color:#6ee7b7">1.2 mmol/L</div></div>
         </div>
         <div id="icu-alerts"></div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
@@ -695,7 +698,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
           <button class="ifb" onclick="icuV(this,10,28)">Event 1: sepsis</button>
           <button class="ifb" onclick="icuV(this,38,55)">Event 2: resp distress</button>
         </div>
-        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;font-size:11px;color:#7a8094">
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;font-size:11px;color:rgba(247,246,242,0.45)">
           <span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:2px;background:#E24B4A;display:inline-block"></span>Heart rate</span>
           <span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:2px;background:#185FA5;display:inline-block"></span>Systolic BP</span>
           <span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:2px;background:#1D9E75;display:inline-block"></span>SpO2</span>
@@ -704,14 +707,14 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         </div>
         <div style="position:relative;width:100%;height:200px"><canvas id="icu-c" role="img" aria-label="ICU multi-parameter vitals chart with two anomaly zones"></canvas></div>
         <div style="display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:12px">
-          <span style="font-size:11px;color:#7a8094">Sensitivity</span>
+          <span style="font-size:11px;color:rgba(247,246,242,0.45);font-family:monospace">Sensitivity</span>
           <input type="range" id="icu-sr" min="1" max="3" value="2" step="1" style="flex:1" oninput="icuSr(this.value)">
-          <span style="font-size:12px;font-weight:500;min-width:130px" id="icu-sl">Medium — standard</span>
+          <span style="font-size:12px;font-weight:500;min-width:130px;color:#f7f6f2;font-family:monospace" id="icu-sl">Medium — standard</span>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px">
-          <div style="background:#f7f6f2;border-radius:7px;padding:9px;text-align:center"><div style="font-size:10px;color:#7a8094">Anomalies</div><div style="font-size:20px;font-weight:500;color:#A32D2D" id="icu-ac">2</div></div>
-          <div style="background:#f7f6f2;border-radius:7px;padding:9px;text-align:center"><div style="font-size:10px;color:#7a8094">Noise filtered</div><div style="font-size:20px;font-weight:500;color:#854F0B">1</div></div>
-          <div style="background:#f7f6f2;border-radius:7px;padding:9px;text-align:center"><div style="font-size:10px;color:#7a8094">Imputed</div><div style="font-size:20px;font-weight:500;color:#3B6D11">2</div></div>
+          <div style="background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:7px;padding:9px;text-align:center"><div style="font-size:10px;color:rgba(247,246,242,0.45);font-family:monospace">Anomalies detected</div><div style="font-size:20px;font-weight:500;color:#F09595" id="icu-ac">2</div></div>
+          <div style="background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:7px;padding:9px;text-align:center"><div style="font-size:10px;color:rgba(247,246,242,0.45);font-family:monospace">Noise filtered</div><div style="font-size:20px;font-weight:500;color:#FAC775">1</div></div>
+          <div style="background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:7px;padding:9px;text-align:center"><div style="font-size:10px;color:rgba(247,246,242,0.45);font-family:monospace">Values imputed</div><div style="font-size:20px;font-weight:500;color:#6ee7b7">2</div></div>
         </div>
       </div>
     </div>
@@ -725,6 +728,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 
   <script>
   (function(){
+  function initICU(){
   const D=[["00:00",85,120,16,98,1.1],["00:05",88,122,15,99,1.0],["00:10",86,118,16,98,1.2],["00:15",84,121,16,98,1.1],["00:20",90,123,17,97,1.3],["00:25",88,119,16,99,1.2],["00:30",87,120,15,98,1.1],["00:35",135,122,16,98,1.2],["00:40",89,118,17,97,1.4],["00:45",91,124,16,98,1.3],["00:50",90,121,16,98,1.2],["00:55",92,125,17,97,1.5],["01:00",93,126,16,98,1.4],["01:05",95,128,17,97,1.6],["01:10",94,127,18,96,1.7],["01:15",105,115,19,95,2.0],["01:20",110,105,20,94,2.5],["01:25",115,95,22,93,3.0],["01:30",120,90,24,92,3.5],["01:35",118,92,23,93,3.2],["01:40",116,94,22,94,2.8],["01:45",110,100,20,95,2.4],["01:50",102,110,19,96,2.1],["01:55",98,115,18,97,1.8],["02:00",95,118,17,98,1.5],["02:05",93,120,16,98,1.3],["02:10",92,121,16,99,1.2],["02:15",90,119,15,98,1.1],["02:20",91,122,16,98,1.2],["02:25",89,120,16,99,1.3],["02:30",88,120,17,97,1.2],["02:35",86,118,16,98,1.1],["02:40",87,121,15,99,1.0],["02:45",85,119,16,98,1.2],["02:50",86,122,16,98,1.1],["02:55",84,120,17,97,1.3],["03:00",85,123,16,98,1.2],["03:05",83,119,15,99,1.1],["03:10",84,121,16,98,1.0],["03:15",82,118,16,98,1.2],["03:20",83,122,17,97,1.4],["03:25",81,120,16,98,1.3],["03:30",90,124,18,96,1.9],["03:35",92,130,20,95,2.2],["03:40",95,135,24,93,2.6],["03:45",98,138,26,92,2.9],["03:50",96,136,25,93,2.7],["03:55",94,132,22,94,2.4],["04:00",91,128,20,95,2.1],["04:05",88,124,18,96,1.8],["04:10",86,122,17,97,1.5],["04:15",85,120,16,98,1.3],["04:20",84,121,16,98,1.2],["04:25",82,119,15,99,1.1],["04:30",83,120,16,98,1.0],["04:35",81,118,16,98,1.2],["04:40",82,122,17,97,1.3],["04:45",80,120,16,98,1.2],["04:50",81,121,15,99,1.1],["04:55",79,119,16,98,1.0],["05:00",80,122,16,98,1.2]];
   let sv=0,ev=D.length,sens=2,ch=null;
   window.icuV=function(btn,s,e){sv=s;ev=e;document.querySelectorAll('.ifb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');icuBld();};
@@ -733,7 +737,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     const sl=D.slice(sv,ev);
     const a1s=Math.max(0,15-sv),a1e=Math.min(sl.length,24-sv);
     const a2s=Math.max(0,43-sv),a2e=Math.min(sl.length,51-sv);
-    const bgP={id:'icuBg',beforeDatasetsDraw(chart){const{ctx,chartArea:{top,bottom},scales:{x}}=chart;[[a1s,a1e,'rgba(252,235,235,0.65)'],[a2s,a2e,'rgba(250,238,218,0.65)']].forEach(([s2,e2,col])=>{if(s2>=sl.length||e2<=0||s2>=e2)return;ctx.save();ctx.fillStyle=col;ctx.fillRect(x.getPixelForValue(Math.max(0,s2)),top,x.getPixelForValue(Math.min(sl.length-1,e2))-x.getPixelForValue(Math.max(0,s2)),bottom-top);ctx.restore();});}};
+    const bgP={id:'icuBg',beforeDatasetsDraw(chart){const{ctx,chartArea:{top,bottom},scales:{x}}=chart;[[a1s,a1e,'rgba(226,75,74,0.15)'],[a2s,a2e,'rgba(239,159,39,0.12)']].forEach(([s2,e2,col])=>{if(s2>=sl.length||e2<=0||s2>=e2)return;ctx.save();ctx.fillStyle=col;ctx.fillRect(x.getPixelForValue(Math.max(0,s2)),top,x.getPixelForValue(Math.min(sl.length-1,e2))-x.getPixelForValue(Math.max(0,s2)),bottom-top);ctx.restore();});}};
     const ds=[
       {label:'Lactate',data:sl.map(r=>r[5]*20),borderColor:'#7F77DD',borderWidth:1.5,pointRadius:0,tension:0.3,fill:false,borderDash:[4,3]},
       {label:'RR',data:sl.map(r=>r[3]),borderColor:'#854F0B',borderWidth:1.5,pointRadius:0,tension:0.3,fill:false,borderDash:[3,2]},
@@ -742,13 +746,20 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       {label:'HR',data:sl.map(r=>r[1]),borderColor:'#E24B4A',borderWidth:2,pointRadius:(c)=>(sens>=3&&c.dataIndex+sv===7?5:0),pointBackgroundColor:'#E24B4A',tension:0.3,fill:false}
     ];
     if(ch)ch.destroy();
-    ch=new Chart(document.getElementById('icu-c'),{type:'line',data:{labels:sl.map(r=>r[0]),datasets:ds},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:9},maxTicksLimit:10,color:'#7a8094'},grid:{color:'rgba(0,0,0,0.04)'}},y:{ticks:{font:{size:9},color:'#7a8094'},grid:{color:'rgba(0,0,0,0.05)'},min:60,max:145}}},plugins:[bgP]});
+    ch=new Chart(document.getElementById('icu-c'),{type:'line',data:{labels:sl.map(r=>r[0]),datasets:ds},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(14,17,23,0.95)',titleColor:'#f7f6f2',bodyColor:'rgba(247,246,242,0.7)',borderColor:'rgba(255,255,255,0.1)',borderWidth:0.5,padding:10}},scales:{x:{ticks:{font:{size:9},maxTicksLimit:10,color:'rgba(247,246,242,0.4)'},grid:{color:'rgba(255,255,255,0.06)'},border:{color:'rgba(255,255,255,0.1)'}},y:{ticks:{font:{size:9},color:'rgba(247,246,242,0.4)'},grid:{color:'rgba(255,255,255,0.06)'},border:{color:'rgba(255,255,255,0.1)'},min:60,max:145}}},plugins:[bgP]});
     let h='';
     if(sens>=1){h+=`<div class="ial" style="background:#FCEBEB"><div style="width:8px;height:8px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div><span style="color:#791F1F"><strong>CRITICAL 01:15–01:55</strong> — Sepsis: HR↑ SBP↓ Lactate↑ SpO2↓</span></div>`;h+=`<div class="ial" style="background:#FAEEDA"><div style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0"></div><span style="color:#633806"><strong>HIGH 03:30–04:10</strong> — Resp distress: RR↑ SpO2↓ BP↑</span></div>`;}
     if(sens>=3) h+=`<div class="ial" style="background:#EAF3DE"><div style="width:8px;height:8px;border-radius:50%;background:#639922;flex-shrink:0"></div><span style="color:#27500A"><strong>NOISE 00:35</strong> — HR spike filtered</span></div>`;
     document.getElementById('icu-alerts').innerHTML=h;
   }
   icuBld();
+  }
+  if(typeof Chart!=='undefined'){initICU();}else{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js';
+    s.onload=initICU;
+    document.head.appendChild(s);
+  }
   })();
   </script>
 
