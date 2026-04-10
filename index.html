@@ -19,7 +19,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .nav-cta{background:linear-gradient(135deg,#2563eb,#7c3aed)!important;color:#fff!important;padding:7px 16px;border-radius:4px!important;font-size:12px!important;font-weight:500!important}
 .nav-cta:hover{background:#34d399!important;transform:translateY(-1px)}
 
-.hero{min-height:100vh;display:block;padding:120px 40px 80px;position:relative;overflow:hidden;background:#111827}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 10% 50%,rgba(37,99,235,0.12) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 70% 80%,rgba(139,92,246,0.07) 0%,transparent 50%),#111827}
 .hero-grid{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(rgba(147,197,253,0.4) 1px,transparent 1px),linear-gradient(90deg,rgba(147,197,253,0.4) 1px,transparent 1px);background-size:60px 60px}
 .htag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:rgba(91,142,240,0.1);padding:5px 12px;border-radius:2px;letter-spacing:.08em;margin-bottom:28px}
 .dot{width:8px;height:8px;border-radius:50%;background:#60a5fa;animation:pulse 1.5s infinite;box-shadow:0 0 6px rgba(96,165,250,0.8)}
@@ -177,20 +177,33 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 
 <nav>
   <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="text-decoration:none;display:flex;align-items:center">
-    <div id="nav-logo-svg" style="width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#060f1e,#0a1a2e);border:1.5px solid rgba(45,212,191,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;box-shadow:0 0 16px rgba(45,212,191,0.12)" onmouseover="this.style.borderColor='rgba(45,212,191,0.85)';this.style.boxShadow='0 0 24px rgba(45,212,191,0.45)';this.style.transform='scale(1.08)'" onmouseout="this.style.borderColor='rgba(45,212,191,0.4)';this.style.boxShadow='0 0 16px rgba(45,212,191,0.12)';this.style.transform='scale(1)'">
-            <svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <div id="nav-logo-svg" style="width:44px;height:44px;border-radius:10px;background:#060d18;border:1.5px solid rgba(45,212,191,0.45);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;box-shadow:0 0 14px rgba(45,212,191,0.12)" onmouseover="this.style.borderColor='rgba(45,212,191,1)';this.style.boxShadow='0 0 22px rgba(45,212,191,0.5)';this.style.transform='scale(1.09)'" onmouseout="this.style.borderColor='rgba(45,212,191,0.45)';this.style.boxShadow='0 0 14px rgba(45,212,191,0.12)';this.style.transform='scale(1)'">
+      <svg width="28" height="30" viewBox="0 0 28 30" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="cg" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#67e8f9"/>
+          <linearGradient id="aFill" x1="0" y1="0" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#38bdf8"/>
             <stop offset="100%" stop-color="#2dd4bf"/>
           </linearGradient>
         </defs>
-        <path d="M17 4 L7 28 L10.5 28 L13 22 L21 22 L23.5 28 L27 28 Z" stroke="url(#cg)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-        <line x1="11.8" y1="19" x2="22.2" y2="19" stroke="url(#cg)" stroke-width="1.8" stroke-linecap="round"/>
-        <polyline points="4,19 8,19 9.5,15.5 11,22 12.5,17 14,21 15.5,19 18.5,19 20,15 21.5,23 22.5,19 26,19 30,19" stroke="#f87171" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+        <!-- Left leg: thick stroke going down-left with serif curl -->
+        <path d="M14 2 C13 2 7 22 5 28" stroke="url(#aFill)" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <!-- Right leg: thinner going down-right with serif -->
+        <path d="M14 2 C15 2 21 22 23 28" stroke="url(#aFill)" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <!-- Crossbar -->
+        <path d="M8.5 18 Q14 17 19.5 18" stroke="url(#aFill)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <!-- Top flourish/serif -->
+        <path d="M12 3 C12 1.5 16 1.5 16 3" stroke="url(#aFill)" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <!-- Left bottom serif -->
+        <path d="M5 28 C3.5 28.5 3 29.5 5 29.5 C7 29.5 7 28 5 28" stroke="url(#aFill)" stroke-width="1.2" fill="none"/>
+        <!-- Right bottom serif -->
+        <path d="M23 28 C21.5 28.5 21 29.5 23 29.5 C25 29.5 25 28 23 28" stroke="url(#aFill)" stroke-width="1.2" fill="none"/>
       </svg>
     </div>
   </a>
+  <script>
+  var nl=document.getElementById('nav-logo-svg');
+  if(nl){nl.addEventListener('mouseover',function(){this.style.transform='scale(1.12) rotate(-3deg)';this.style.filter='drop-shadow(0 0 12px rgba(45,212,191,0.9))';});nl.addEventListener('mouseout',function(){this.style.transform='scale(1) rotate(0deg)';this.style.filter='none';});}
+  </script>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
@@ -200,6 +213,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
   <div style="position:relative;z-index:1">
@@ -230,7 +244,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
       </a>
-      <a href="/cdn-cgi/l/email-protection#127c75676b777c737c766b25252252757f737b7e3c717d7f" class="btn btn-out" style="font-family:'DM Mono',monospace;font-size:12px"><span class="__cf_email__" data-cfemail="99f7feece0fcf7f8f7fde0aeaea9d9fef4f8f0f5b7faf6f4">[email&#160;protected]</span></a>
+      <a href="mailto:nguyenandy770@gmail.com" class="btn btn-out" style="font-family:'DM Mono',monospace;font-size:12px">nguyenandy770@gmail.com</a>
       <a href="Anh_Truong_Nguyen_Resume.docx" download="Anh_Truong_Nguyen_Resume.docx" class="btn btn-dl">↓ Download resume</a>
     </div>
 
@@ -238,11 +252,10 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <div class="stats">
       <div><span class="snum">5+</span><span class="slbl">Years IT &<br>cybersecurity</span></div>
       <div><span class="snum">3,000+</span><span class="slbl">Devices managed<br>via MDM</span></div>
-      <div><span class="snum">6</span><span class="slbl">Portfolio<br>projects</span></div>
+      <div><span class="snum">5</span><span class="slbl">Portfolio<br>projects</span></div>
       <div><span class="snum">98%</span><span class="slbl">Case resolution<br>rate (PAN)</span></div>
     </div>
-  </div>
-</section>
+  </div></section>
 
 <!-- ABOUT -->
 <div class="about-strip" id="about">
@@ -465,7 +478,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     </div><!-- end border box -->
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
   const DB_RAW=[
     ["CR0001",75,"Female","White",27.1,129,59,111,80,"Current","1-2x/week","No","No","Moderate",1,0.976,0.034,0.044,-0.036,0.066,-0.002,0.031,0.065,0.046],
     ["CR0002",32,"Male","Other",18.6,82,61,114,69,"Current","3-5x/week","No","No","Moderate",0,0.572,0.129,0.11,0.013,0.116,0.122,0.058,0.028,0.077],
@@ -819,215 +832,6 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   })();
   </script>
 
-  <!-- PROJECT 6: CLINICAL ALERT SYSTEM -->
-  <div style="margin-bottom:48px">
-    <div class="slabel fi" style="margin-bottom:10px">Project 06 — Clinical Alert System</div>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px"><span class="tag">Power Automate</span><span class="tag p">HL7 FHIR</span><span class="tag r">IoT Integration</span><span class="tag b">Azure Logic Apps</span></div>
-        <h3>Intelligent clinical alert &amp; routing system</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Designed a multi-tier clinical alert system that classifies ICU events, routes notifications to the right clinician, and applies smart suppression to eliminate alert fatigue — reducing false positives to 0% while maintaining 100% critical event detection.</p>
-        <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px">
-          <div style="background:rgba(226,75,74,0.2);border-left:3px solid #f87171;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#fca5a5;letter-spacing:.03em">CRITICAL → 2 min response</div><div style="font-size:10px;color:rgba(247,246,242,.55);margin-top:2px">4+ params → Bedside nurse + Attending physician STAT page</div></div>
-          <div style="background:rgba(239,159,39,0.15);border-left:3px solid #fbbf24;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#fcd34d;letter-spacing:.03em">WARNING → 10 min response</div><div style="font-size:10px;color:rgba(247,246,242,.55);margin-top:2px">1-3 params → Charge nurse mobile notification</div></div>
-          <div style="background:rgba(107,114,128,0.15);border-left:3px solid #9ca3af;padding:7px 10px;border-radius:0 4px 4px 0"><div style="font-size:11px;font-weight:500;color:#d1d5db;letter-spacing:.03em">SUPPRESSED → no alert sent</div><div style="font-size:10px;color:rgba(247,246,242,.55);margin-top:2px">Single-param spike &lt;2 min → sensor noise, audit log only</div></div>
-        </div>
-      </div>
-      <div class="pan" style="display:flex;flex-direction:column;gap:12px">
-        <div><h3>Live alert simulator</h3><p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Adjust patient vitals to see real-time alert classification, routing decisions, and escalation timeline. Switch tabs to review 24-hour alert log and governance framework.</p></div>
-        <div style="margin-top:auto">
-          <div class="mrow"><span class="mk">Alert levels</span><span class="mv">Critical · Warning · Info · Suppressed</span></div>
-          <div class="mrow"><span class="mk">False positive rate</span><span class="mv ok">0% (smart suppression)</span></div>
-          <div class="mrow"><span class="mk">Critical response</span><span class="mv">2 min escalation</span></div>
-          <div class="mrow"><span class="mk">Integration</span><span class="mv">HL7 FHIR · Power Automate</span></div>
-          <div class="mrow"><span class="mk">IoT data source</span><span class="mv">Wearables · ICU monitors</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ALERT SYSTEM LIVE EMBED -->
-    <div class="fi" style="margin-top:16px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
-        <div><div class="slabel" style="margin-bottom:3px">Live interactive demo</div><div style="font-size:14px;font-weight:500;color:var(--ink)">Simulate conditions · see routing logic · explore governance framework</div></div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag r">4 alert levels</span><span class="tag b">smart suppression</span><span class="tag p">escalation protocols</span></div>
-      </div>
-      <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#111827;padding:18px">
-
-      <style>
-      .cas-tab{padding:5px 12px;font-size:11px;border-radius:4px;cursor:pointer;border:0.5px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:rgba(247,246,242,0.6);font-family:monospace;transition:all .15s}
-      .cas-tab:hover{background:rgba(255,255,255,0.1);color:#f9fafb}
-      .cas-tab.on{background:rgba(45,212,191,0.18);color:#2dd4bf;border-color:rgba(45,212,191,0.4);font-weight:600}
-      .cas-card{background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:7px;padding:9px 11px}
-      .cas-lbl{font-size:10px;color:rgba(247,246,242,0.45);margin-bottom:3px;font-family:monospace}
-      .cas-val{font-size:17px;font-weight:500}
-      .cas-sl{display:flex;align-items:center;gap:8px;margin:5px 0}
-      .cas-sl label{font-size:11px;color:rgba(247,246,242,0.5);width:130px;font-family:monospace;flex-shrink:0}
-      .cas-sl input{flex:1;accent-color:#2dd4bf}
-      .cas-sl span{font-size:11px;font-weight:600;color:#f9fafb;min-width:44px;text-align:right;font-family:monospace}
-      .cas-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.05em}
-      .cas-crit{background:rgba(239,68,68,0.2);color:#fca5a5;border:0.5px solid rgba(239,68,68,0.3)}
-      .cas-warn{background:rgba(245,158,11,0.18);color:#fcd34d;border:0.5px solid rgba(245,158,11,0.3)}
-      .cas-info{background:rgba(59,130,246,0.15);color:#93c5fd;border:0.5px solid rgba(59,130,246,0.25)}
-      .cas-supp{background:rgba(107,114,128,0.15);color:#9ca3af;border:0.5px solid rgba(107,114,128,0.25)}
-      .cas-route{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;background:rgba(255,255,255,0.05);margin-bottom:4px;font-size:11px}
-      .cas-tl{position:relative;padding-left:18px}
-      .cas-tl::before{content:'';position:absolute;left:5px;top:4px;bottom:4px;width:1px;background:rgba(255,255,255,0.12)}
-      .cas-tli{position:relative;margin-bottom:10px;padding-left:12px}
-      .cas-tli::before{content:'';position:absolute;left:-13px;top:4px;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.2)}
-      .cas-tli.done::before{background:#34d399}
-      .cas-tli.pend::before{background:rgba(255,255,255,0.15)}
-      </style>
-
-      <div style="display:flex;gap:6px;margin-bottom:14px">
-        <div class="cas-tab on" onclick="casTab('sim',this)">Alert simulator</div>
-        <div class="cas-tab" onclick="casTab('log',this)">Alert log</div>
-        <div class="cas-tab" onclick="casTab('gov',this)">Governance</div>
-      </div>
-
-      <div id="cas-sim">
-        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:12px" id="cas-vitals"></div>
-        <div id="cas-alerts" style="margin-bottom:10px"></div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
-          <div class="cas-tab on" id="casp-normal" onclick="casPreset('normal')">Normal</div>
-          <div class="cas-tab" id="casp-sepsis" onclick="casPreset('sepsis')" style="color:#fca5a5">Sepsis</div>
-          <div class="cas-tab" id="casp-resp" onclick="casPreset('resp')" style="color:#fcd34d">Resp distress</div>
-          <div class="cas-tab" id="casp-noise" onclick="casPreset('noise')" style="color:#9ca3af">Noise spike</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 16px;margin-bottom:12px">
-          <div class="cas-sl"><label>Heart rate (bpm)</label><input type="range" id="cas-hr" min="40" max="150" value="85" step="1" oninput="casRender()"><span id="casv-hr">85</span></div>
-          <div class="cas-sl"><label>Systolic BP (mmHg)</label><input type="range" id="cas-sbp" min="60" max="180" value="120" step="1" oninput="casRender()"><span id="casv-sbp">120</span></div>
-          <div class="cas-sl"><label>SpO2 (%)</label><input type="range" id="cas-spo2" min="80" max="100" value="98" step="1" oninput="casRender()"><span id="casv-spo2">98</span></div>
-          <div class="cas-sl"><label>Resp rate (/min)</label><input type="range" id="cas-rr" min="8" max="40" value="16" step="1" oninput="casRender()"><span id="casv-rr">16</span></div>
-          <div class="cas-sl"><label>Lactate (mmol/L)</label><input type="range" id="cas-lac" min="0" max="6" value="1.2" step="0.1" oninput="casRender()"><span id="casv-lac">1.2</span></div>
-          <div class="cas-sl"><label>Duration (min)</label><input type="range" id="cas-dur" min="1" max="60" value="5" step="1" oninput="casRender()"><span id="casv-dur">5</span></div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div>
-            <div style="font-size:10px;color:rgba(247,246,242,0.35);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Routing</div>
-            <div id="cas-routing"></div>
-          </div>
-          <div>
-            <div style="font-size:10px;color:rgba(247,246,242,0.35);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Escalation timeline</div>
-            <div class="cas-tl" id="cas-esc"></div>
-          </div>
-        </div>
-      </div>
-
-      <div id="cas-log" style="display:none">
-        <div id="cas-log-content"></div>
-        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px">
-          <div class="cas-card"><div class="cas-lbl">Total alerts</div><div class="cas-val" style="color:#f9fafb">14</div></div>
-          <div class="cas-card"><div class="cas-lbl">Suppressed</div><div class="cas-val" style="color:#fbbf24">6</div></div>
-          <div class="cas-card"><div class="cas-lbl">False positive rate</div><div class="cas-val" style="color:#34d399">0%</div></div>
-        </div>
-      </div>
-
-      <div id="cas-gov" style="display:none">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-          <div class="cas-card">
-            <div style="font-size:12px;font-weight:500;color:#f9fafb;margin-bottom:8px">Threshold rules</div>
-            <div style="font-size:11px;color:rgba(247,246,242,0.6);line-height:2">
-              <div style="display:flex;justify-content:space-between;border-bottom:0.5px solid rgba(255,255,255,0.07);padding:2px 0"><span>HR critical</span><span style="color:#fca5a5">&gt;120 or &lt;45 bpm</span></div>
-              <div style="display:flex;justify-content:space-between;border-bottom:0.5px solid rgba(255,255,255,0.07);padding:2px 0"><span>SBP critical</span><span style="color:#fca5a5">&lt;85 mmHg</span></div>
-              <div style="display:flex;justify-content:space-between;border-bottom:0.5px solid rgba(255,255,255,0.07);padding:2px 0"><span>SpO2 critical</span><span style="color:#fca5a5">&lt;92%</span></div>
-              <div style="display:flex;justify-content:space-between;border-bottom:0.5px solid rgba(255,255,255,0.07);padding:2px 0"><span>RR critical</span><span style="color:#fca5a5">&gt;28 /min</span></div>
-              <div style="display:flex;justify-content:space-between;padding:2px 0"><span>Lactate critical</span><span style="color:#fca5a5">&gt;3.0 mmol/L</span></div>
-            </div>
-          </div>
-          <div class="cas-card">
-            <div style="font-size:12px;font-weight:500;color:#f9fafb;margin-bottom:8px">Suppression rules</div>
-            <div style="font-size:11px;color:rgba(247,246,242,0.6);line-height:2">
-              <div style="border-bottom:0.5px solid rgba(255,255,255,0.07);padding:2px 0">Single param spike &lt;2 min → noise</div>
-              <div style="border-bottom:0.5px solid rgba(255,255,255,0.07);padding:2px 0">Duplicate within 5 min → cluster</div>
-              <div style="border-bottom:0.5px solid rgba(255,255,255,0.07);padding:2px 0">Known artifact pattern → auto-filter</div>
-              <div style="padding:2px 0">≥2 params abnormal → always alert</div>
-            </div>
-          </div>
-        </div>
-        <div style="font-size:10px;color:rgba(247,246,242,0.35);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">Escalation matrix</div>
-        <div style="font-size:11px">
-          <div style="display:grid;grid-template-columns:100px 1fr 80px 1fr;gap:8px;padding:6px 8px;background:rgba(255,255,255,0.05);border-radius:4px;margin-bottom:3px;font-weight:500;color:rgba(247,246,242,0.45)"><span>Level</span><span>First responder</span><span>Window</span><span>Escalation</span></div>
-          <div style="display:grid;grid-template-columns:100px 1fr 80px 1fr;gap:8px;padding:6px 8px;border-bottom:0.5px solid rgba(255,255,255,0.07);color:rgba(247,246,242,0.8)"><span><span class="cas-badge cas-crit">CRITICAL</span></span><span>Bedside nurse</span><span style="color:#fca5a5">2 min</span><span>Attending → ICU director</span></div>
-          <div style="display:grid;grid-template-columns:100px 1fr 80px 1fr;gap:8px;padding:6px 8px;border-bottom:0.5px solid rgba(255,255,255,0.07);color:rgba(247,246,242,0.8)"><span><span class="cas-badge cas-warn">WARNING</span></span><span>Charge nurse</span><span style="color:#fcd34d">10 min</span><span>Attending physician</span></div>
-          <div style="display:grid;grid-template-columns:100px 1fr 80px 1fr;gap:8px;padding:6px 8px;border-bottom:0.5px solid rgba(255,255,255,0.07);color:rgba(247,246,242,0.8)"><span><span class="cas-badge cas-info">INFO</span></span><span>Assigned nurse</span><span>30 min</span><span>Charge nurse</span></div>
-          <div style="display:grid;grid-template-columns:100px 1fr 80px 1fr;gap:8px;padding:6px 8px;color:rgba(247,246,242,0.4)"><span><span class="cas-badge cas-supp">SUPP.</span></span><span>No action</span><span>—</span><span>Audit log only</span></div>
-        </div>
-      </div>
-
-      </div>
-    </div>
-
-    <div class="proj-grid-3 fi" style="margin-top:16px">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag r">Alert fatigue</span></div><div class="ctitle">Smart suppression</div><div class="cdesc">Evidence-based alerting filters single-parameter spikes under 2 minutes as sensor noise — reducing non-actionable alerts by 43% while maintaining 100% critical event detection.</div></div><div class="card-body"><div class="mrow"><span class="mk">False positive rate</span><span class="mv ok">0%</span></div><div class="mrow"><span class="mk">Noise suppressed</span><span class="mv">43% of signals</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Routing</span></div><div class="ctitle">Condition-based routing</div><div class="cdesc">Alerts routed based on severity, parameter count, and clinician role. CRITICAL events trigger simultaneous multi-channel notification — pager, mobile, and EHR banner.</div></div><div class="card-body"><div class="mrow"><span class="mk">Critical response</span><span class="mv">2 min SLA</span></div><div class="mrow"><span class="mk">Channels</span><span class="mv">Pager · Mobile · EHR</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Governance</span></div><div class="ctitle">Alert governance framework</div><div class="cdesc">Dedicated alert committee, real-time performance dashboard, and quarterly threshold review cycle aligned with ONC 21st Century Cures Act and HIPAA requirements.</div></div><div class="card-body"><div class="mrow"><span class="mk">Standard</span><span class="mv">ONC · HIPAA · FHIR</span></div><div class="mrow"><span class="mk">Review cycle</span><span class="mv">Quarterly</span></div></div></div>
-    </div>
-  </div>
-
-  <script>
-  (function(){
-  const CAS_LOG=[
-    {t:'00:35',l:'supp',m:'HR spike 135 bpm — isolated 1 reading, sensor artifact',p:1},
-    {t:'01:15',l:'crit',m:'Hypotensive event: SBP↓ HR↑ Lactate↑ SpO2↓ — 4 params co-triggered',p:4},
-    {t:'01:20',l:'crit',m:'Escalation: no response in 2 min → attending paged',p:4},
-    {t:'01:30',l:'crit',m:'Peak: SBP 90mmHg, HR 120, Lactate 3.5, SpO2 92%',p:4},
-    {t:'01:45',l:'warn',m:'Recovery: vitals improving, continued monitoring',p:3},
-    {t:'02:00',l:'info',m:'Stabilising — SBP 118, HR 95',p:1},
-    {t:'02:25',l:'info',m:'Missing SBP reading — imputed from trend',p:1},
-    {t:'03:30',l:'warn',m:'Resp rate rising: RR 18, SpO2 96%',p:2},
-    {t:'03:40',l:'crit',m:'Respiratory distress: RR 24, SpO2 93%, BP↑ HR↑',p:4},
-    {t:'03:45',l:'crit',m:'Peak: RR 26, SpO2 92% — attending at bedside',p:4},
-    {t:'04:00',l:'warn',m:'Improving: RR 20, SpO2 95%',p:2},
-    {t:'04:10',l:'info',m:'Recovery: all vitals normal range',p:1},
-    {t:'04:45',l:'info',m:'Missing SpO2 reading — imputed',p:1},
-    {t:'05:00',l:'supp',m:'Minor HR variability — within bounds',p:1},
-  ];
-  function casTab(id,el){
-    ['sim','log','gov'].forEach(t=>document.getElementById('cas-'+t).style.display=t===id?'block':'none');
-    document.querySelectorAll('.cas-tab').forEach(b=>b.classList.remove('on'));
-    el.classList.add('on');
-    if(id==='log'){
-      const bc={crit:'rgba(239,68,68,0.12)',warn:'rgba(245,158,11,0.08)',info:'rgba(59,130,246,0.06)',supp:'transparent'};
-      const bl={crit:'cas-crit',warn:'cas-warn',info:'cas-info',supp:'cas-supp'};
-      const ll={crit:'CRITICAL',warn:'WARNING',info:'INFO',supp:'SUPPRESSED'};
-      document.getElementById('cas-log-content').innerHTML=CAS_LOG.map(e=>`<div style="display:flex;align-items:flex-start;gap:8px;padding:7px 9px;border-radius:5px;margin-bottom:3px;background:${bc[e.l]};border:0.5px solid rgba(255,255,255,0.07)${e.l==='supp'?';opacity:.55':''}"><span style="font-family:monospace;font-size:10px;color:rgba(247,246,242,0.4);white-space:nowrap;min-width:36px">${e.t}</span><span class="cas-badge ${bl[e.l]}">${ll[e.l]}</span><span style="font-size:11px;color:rgba(247,246,242,0.8);line-height:1.5">${e.m}</span><span style="margin-left:auto;font-size:10px;color:rgba(247,246,242,0.35);white-space:nowrap">${e.p}p</span></div>`).join('');
-    }
-  }
-  window.casTab=casTab;
-  function casPreset(p){
-    const P={normal:{hr:85,sbp:120,spo2:98,rr:16,lac:1.2,dur:15},sepsis:{hr:118,sbp:90,spo2:92,rr:24,lac:3.4,dur:25},resp:{hr:94,sbp:136,spo2:92,rr:26,lac:2.1,dur:20},noise:{hr:135,sbp:121,spo2:98,rr:16,lac:1.2,dur:1}};
-    const v=P[p];
-    ['hr','sbp','spo2','rr','lac','dur'].forEach(k=>{document.getElementById('cas-'+k).value=v[k];});
-    casRender();
-  }
-  window.casPreset=casPreset;
-  function casRender(){
-    const hr=+document.getElementById('cas-hr').value,sbp=+document.getElementById('cas-sbp').value,spo2=+document.getElementById('cas-spo2').value,rr=+document.getElementById('cas-rr').value,lac=+parseFloat(document.getElementById('cas-lac').value).toFixed(1),dur=+document.getElementById('cas-dur').value;
-    ['hr','sbp','spo2','rr','lac','dur'].forEach(k=>{const el=document.getElementById('casv-'+k);if(el)el.textContent=k==='lac'?lac.toFixed(1):document.getElementById('cas-'+k).value;});
-    const hrC=hr>120||hr<45,sbpC=sbp<85,spo2C=spo2<92,rrC=rr>28,lacC=lac>3.0;
-    const hrW=(hr>100&&hr<=120)||(hr>=45&&hr<55),sbpW=sbp>=85&&sbp<100,spo2W=spo2>=92&&spo2<95,rrW=rr>20&&rr<=28,lacW=lac>2.0&&lac<=3.0;
-    const cc=[hrC,sbpC,spo2C,rrC,lacC].filter(Boolean).length,wc=[hrW,sbpW,spo2W,rrW,lacW].filter(Boolean).length;
-    const noise=cc+wc===1&&dur<2;
-    const vd=[{l:'Heart rate',v:hr,u:'bpm',c:hrC,w:hrW},{l:'Systolic BP',v:sbp,u:'mmHg',c:sbpC,w:sbpW},{l:'SpO2',v:spo2,u:'%',c:spo2C,w:spo2W},{l:'Resp rate',v:rr,u:'/min',c:rrC,w:rrW}];
-    document.getElementById('cas-vitals').innerHTML=vd.map(x=>`<div class="cas-card"><div class="cas-lbl">${x.l}</div><div class="cas-val" style="color:${x.c?'#fca5a5':x.w?'#fcd34d':'#6ee7b7'}">${x.v}</div><div style="font-size:10px;color:rgba(247,246,242,0.4)">${x.u}</div></div>`).join('');
-    let level=noise?'supp':cc>=2?'crit':cc===1||wc>=1?'warn':'info';
-    const lconf={crit:{cls:'cas-crit',lbl:'CRITICAL',desc:'Immediate intervention — ≥2 critical params'},warn:{cls:'cas-warn',lbl:'WARNING',desc:'Monitoring required'},info:{cls:'cas-info',lbl:'INFORMATIONAL',desc:'All vitals normal'},supp:{cls:'cas-supp',lbl:'SUPPRESSED',desc:'Sensor noise — no alert sent'}};
-    const lc=lconf[level];
-    const reasons=[];
-    if(noise){reasons.push('Single-parameter deviation &lt;2 min — classified as artifact');}
-    else{if(hrC)reasons.push('HR: '+hr+' bpm (critical)');if(sbpC)reasons.push('SBP: '+sbp+' mmHg (critical)');if(spo2C)reasons.push('SpO2: '+spo2+'% (critical)');if(rrC)reasons.push('RR: '+rr+'/min (critical)');if(lacC)reasons.push('Lactate: '+lac.toFixed(1)+' mmol/L (critical)');if(!reasons.length)reasons.push('All parameters within normal range');}
-    document.getElementById('cas-alerts').innerHTML=`<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:7px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);margin-bottom:8px"><div><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span class="cas-badge ${lc.cls}">${lc.lbl}</span><span style="font-size:11px;color:rgba(247,246,242,0.5)">${lc.desc}</span><span style="margin-left:auto;font-size:10px;font-family:monospace;color:rgba(247,246,242,0.35)">${cc} crit · ${wc} warn</span></div>${reasons.map(r=>`<div style="font-size:11px;color:rgba(247,246,242,0.75);margin-bottom:2px">→ ${r}</div>`).join('')}</div></div>`;
-    const routes={crit:[{r:'Bedside nurse',c:'Pager + monitor alarm',t:'Immediate'},{r:'Charge nurse',c:'Mobile notification',t:'Immediate'},{r:'Attending physician',c:'STAT page',t:'If no response 2min'}],warn:[{r:'Charge nurse',c:'Mobile notification',t:'Within 10 min'},{r:'Assigned nurse',c:'EHR alert banner',t:'Immediate'}],info:[{r:'Assigned nurse',c:'EHR banner',t:'Within 30 min'}],supp:[{r:'System log',c:'Audit trail only',t:'No notification'}]};
-    const rc={crit:'#fca5a5',warn:'#fcd34d',info:'#93c5fd',supp:'#9ca3af'};
-    document.getElementById('cas-routing').innerHTML=routes[level].map((r,i)=>`<div class="cas-route"><span style="width:16px;height:16px;border-radius:50%;background:${rc[level]};color:#111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0">${i+1}</span><span style="font-weight:600;color:#f9fafb">${r.r}</span><span style="color:rgba(247,246,242,0.4);margin-left:2px">· ${r.c}</span><span style="margin-left:auto;font-size:10px;color:${rc[level]};font-family:monospace;white-space:nowrap">${r.t}</span></div>`).join('');
-    const esc={crit:[{t:'T+0:00',m:'Alert fired — bedside nurse + charge nurse',d:true},{t:'T+2:00',m:'No response → attending paged',d:dur>=2},{t:'T+5:00',m:'No response → ICU director notified',d:dur>=5},{t:'T+10:00',m:'Rapid response team activated',d:dur>=10}],warn:[{t:'T+0:00',m:'Charge nurse notified',d:true},{t:'T+10:00',m:'No response → attending notified',d:dur>=10},{t:'T+20:00',m:'Escalate to critical if unresolved',d:dur>=20}],info:[{t:'T+0:00',m:'EHR banner updated',d:true},{t:'T+30:00',m:'No ack → reminder sent',d:dur>=30}],supp:[{t:'T+0:00',m:'Signal detected, pattern analysis applied',d:true},{t:'T+0:01',m:'Classified as noise — suppressed',d:true},{t:'—',m:'Logged in audit trail',d:true}]};
-    document.getElementById('cas-esc').innerHTML=esc[level].map(e=>`<div class="cas-tli ${e.d?'done':'pend'}"><span style="font-family:monospace;font-size:10px;color:rgba(247,246,242,0.4)">${e.t}</span> <span style="font-size:11px;color:${e.d?'rgba(247,246,242,0.85)':'rgba(247,246,242,0.35)'}">${e.m}</span></div>`).join('');
-  }
-  window.casRender=casRender;
-  casRender();
-  })();
-  </script>
-
   <!-- PROJECT 4: JAMF MDM -->
   <div style="margin-bottom:48px">
     <div class="slabel fi" style="margin-bottom:10px">Project 04 — IT Operations</div>
@@ -1195,7 +999,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <h2 style="font-size:clamp(26px,4vw,44px);margin-bottom:12px">Let's build clinical IT<br>that actually works</h2>
     <p>Open to Healthcare IT, Clinical Informatics, and Clinical System Analyst roles. Based in San Jose, CA — open to hybrid and remote.</p>
     <div class="clinks">
-      <a href="/cdn-cgi/l/email-protection#620c05171b070c030c061b55555222050f030b0e4c010d0f" class="cl cl-em">✉ <span class="__cf_email__" data-cfemail="137d74666a767d727d776a24242353747e727a7f3d707c7e">[email&#160;protected]</span></a>
+      <a href="mailto:nguyenandy770@gmail.com" class="cl cl-em">✉ nguyenandy770@gmail.com</a>
       <a href="https://www.linkedin.com/in/anh-truong-nguyen/" target="_blank" class="cl cl-li">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
@@ -1206,3 +1010,13 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 </div>
 
 <footer>
+  <span>Anh Truong Nguyen · Clinical AI & Healthcare IT Portfolio · 2025</span>
+  <span style="font-family:'DM Mono',monospace;font-size:11px">San Jose, CA</span>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')}),{threshold:.07});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
