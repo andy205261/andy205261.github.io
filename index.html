@@ -12,7 +12,7 @@ html{scroll-behavior:smooth}
 .slabel{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;font-weight:700;padding-left:14px;border-left:3px solid #2dd4bf;background:linear-gradient(90deg,#2dd4bf,#e2e8f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block}
 body{font-family:'Outfit',sans-serif;background:#111827;color:var(--ink);line-height:1.6;overflow-x:hidden}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(14,17,23,0.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,16,32,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(45,212,191,0.08)}
 .nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:#f9fafb;letter-spacing:-.3px}
 .nav-links{display:flex;gap:8px;align-items:center}
 .nav-links a{font-size:13px;font-weight:700;color:#e2e8f0 !important;text-decoration:none;transition:all .2s;padding:8px 20px;border-radius:6px}
@@ -20,14 +20,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .nav-cta{background:linear-gradient(135deg,#2563eb,#7c3aed)!important;color:#fff!important;padding:7px 16px;border-radius:4px!important;font-size:12px!important;font-weight:500!important}
 .nav-cta:hover{background:#34d399!important;transform:translateY(-1px)}
 
-.hero{min-height:100vh;display:block;padding:120px 40px 80px;position:relative;overflow:hidden;background:#111827}
-.hero-grid{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(rgba(147,197,253,0.4) 1px,transparent 1px),linear-gradient(90deg,rgba(147,197,253,0.4) 1px,transparent 1px);background-size:60px 60px}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 60px 100px;position:relative;overflow:hidden;background:linear-gradient(135deg,#0d1321 0%,#111827 50%,#0d1a2e 100%)}
+.hero-grid{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 15% 60%,rgba(45,212,191,0.06) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 85% 20%,rgba(56,189,248,0.05) 0%,transparent 55%)}
 .htag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:rgba(91,142,240,0.1);padding:5px 12px;border-radius:2px;letter-spacing:.08em;margin-bottom:28px}
 .dot{width:8px;height:8px;border-radius:50%;background:#60a5fa;animation:pulse 1.5s infinite;box-shadow:0 0 6px rgba(96,165,250,0.8)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-h1{font-family:'DM Serif Display',serif;font-size:clamp(44px,6.5vw,82px);line-height:1.0;letter-spacing:-2px;color:#f9fafb;max-width:820px;margin-bottom:24px}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(48px,7vw,90px);line-height:0.95;letter-spacing:-3px;color:#f9fafb;max-width:900px;margin-bottom:28px}
 h1 em{font-style:normal;font-family:'DM Serif Display',serif;background:linear-gradient(135deg,#38bdf8,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:16px;font-weight:300;color:#b8b5ac;max-width:560px;line-height:1.75;margin-bottom:40px}
+.hero-sub{font-size:17px;font-weight:300;color:#94a3b8;max-width:580px;line-height:1.85;margin-bottom:48px}
 .ctas{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:2px;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.03em;transition:all .2s}
 .btn-dark{background:linear-gradient(135deg,#1e3a5f,#1e1b4b);color:#f0f9ff;border:1px solid rgba(99,102,241,0.3)}
@@ -38,8 +38,8 @@ h1 em{font-style:normal;font-family:'DM Serif Display',serif;background:linear-g
 .btn-out:hover{border-color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.07)}
 .btn-dl{background:#059669;color:#fff}
 .btn-dl:hover{background:#047857;transform:translateY(-1px)}
-.stats{display:flex;gap:36px;margin-top:56px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.12)}
-.snum{font-family:'DM Serif Display',serif;font-size:34px;color:#2dd4bf;display:block}
+.stats{display:flex;gap:48px;margin-top:60px;padding-top:40px;border-top:1px solid rgba(45,212,191,0.15)}
+.snum{font-family:'DM Serif Display',serif;font-size:38px;font-weight:400;background:linear-gradient(135deg,#2dd4bf,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1}
 .slbl{font-size:11px;color:#7a8094;font-weight:400;line-height:1.4}
 
 section{padding:92px 40px}
@@ -48,7 +48,7 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-
 .intro{font-size:15px;font-weight:300;color:#b8b5ac;max-width:560px;line-height:1.75;margin-bottom:48px}
 
 /* ABOUT STRIP */
-.about-strip{background:#0d1119;padding:64px 40px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-strip{background:linear-gradient(135deg,#0a1020,#0d1321);padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .about-strip h2{color:#f0efeb;margin-bottom:14px}
 .about-strip p{font-size:15px;font-weight:300;color:rgba(247,246,242,.65);line-height:1.8;margin-bottom:12px}
 .pivot-list{list-style:none;margin-top:16px}
@@ -63,7 +63,7 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-
 .qv.hi{color:#6ee7b7}
 
 /* PROJECT CARDS */
-.card{background:#1a2030;border:1px solid var(--rule);border-radius:4px;overflow:hidden;transition:all .3s}
+.card{background:#161e2e;border:0.5px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;transition:all .3s}
 .card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(99,102,241,0.15);border-color:rgba(99,102,241,0.35)}
 .card-head{padding:24px 24px 16px;border-bottom:1px solid rgba(255,255,255,0.07)}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
@@ -74,19 +74,19 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-
 .tag.p{background:rgba(167,139,250,0.12);color:#c4b5fd}
 .tag.t{background:rgba(52,211,153,0.12);color:#34d399}
 .tag.r{background:rgba(248,113,113,0.12);color:#fca5a5}
-.ctitle{font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:-.5px;color:#f9fafb;margin-bottom:6px}
+.ctitle{font-family:'DM Serif Display',serif;font-size:21px;letter-spacing:-.6px;color:#f9fafb;margin-bottom:8px;line-height:1.2}
 .cdesc{font-size:13px;color:#b8b5ac;line-height:1.65;font-weight:300}
 .card-body{padding:20px 24px}
 .mrow{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
 .mrow:last-child{border-bottom:none}
 .mk{font-size:12px;color:#7a8094}
 .mv{font-size:13px;font-weight:500;color:var(--ink)}
-.mv.ok{color:#34d399}
-.mv.warn{color:#fbbf24}
+.mv.ok{color:#34d399;font-weight:600}
+.mv.warn{color:#fbbf24;font-weight:600}
 
 /* MAIN PROJECT SPLIT */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-bottom:20px}
-.pan{background:#1a2030;padding:28px}
+.pan{background:#161e2e;padding:32px}
 .pan.dk{background:#0d1119}
 .pan.dk h3{color:#f0efeb}
 .pan.dk p{color:rgba(247,246,242,.68)}
@@ -165,12 +165,32 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 .fi.v{opacity:1;transform:none}
 
 @media(max-width:768px){
-  nav{padding:14px 20px}
-  .hero,section{padding-left:20px;padding-right:20px}
-  h1{font-size:38px}
+  nav{padding:12px 16px}
+  .nav-links a{padding:6px 10px;font-size:12px}
+  .hero{padding:100px 20px 60px}
+  section{padding:60px 20px}
+  h1{font-size:clamp(36px,9vw,52px);letter-spacing:-1.5px}
+  .hero-sub{font-size:15px}
   .split,.about-strip,.proj-grid-2,.proj-grid-3,.sgrid,.certs{grid-template-columns:1fr}
   .agrid{grid-template-columns:1fr}
-  .stats{gap:20px;flex-wrap:wrap}
+  .stats{gap:24px;flex-wrap:wrap}
+  .snum{font-size:28px}
+  .ctas{flex-direction:column;align-items:flex-start}
+  .btn{width:100%;justify-content:center}
+  .pan,.pan.dk{padding:20px}
+  .ig{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .db-mgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cas-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .as-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  footer{flex-direction:column;gap:8px;text-align:center}
+}
+@media(max-width:480px){
+  nav{padding:10px 14px}
+  .nav-links{gap:0px}
+  .nav-links a{padding:5px 8px;font-size:11px}
+  h1{font-size:32px;letter-spacing:-1px}
+  .stats{gap:16px}
+  .snum{font-size:24px}
 }
 </style>
 </head>
@@ -278,7 +298,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 </div>
 
 <!-- PROJECTS -->
-<section id="projects" style="background:#1a2030">
+<section id="projects" style="background:#0f172a">
   <div class="slabel fi">Portfolio</div>
   <h2 class="fi">Projects</h2>
   <p class="intro fi">Four hands-on projects spanning clinical AI explainability, healthcare system analysis, enterprise device management, and cybersecurity — showing the full range from infrastructure to clinical informatics.</p>
@@ -1210,6 +1230,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3)">Anh Truong Nguyen · Healthcare IT · Clinical Informatics</span>
   <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3)">Built with clinical precision · 2025</span>
 </footer>
+<button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:28px;right:28px;width:42px;height:42px;border-radius:50%;background:rgba(45,212,191,0.15);border:1.5px solid rgba(45,212,191,0.4);color:#2dd4bf;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:50;backdrop-filter:blur(8px)" onmouseover="this.style.background='rgba(45,212,191,0.25)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(45,212,191,0.15)';this.style.transform='translateY(0)'">↑</button>
 
 <script>
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')}),{threshold:.07});
