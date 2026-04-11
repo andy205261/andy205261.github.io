@@ -9,6 +9,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--ink:#f0efeb;--ink2:#b8b5ac;--ink3:#7a8094;--paper:#111827;--paper2:#161b24;--accent:#5b8ef0;--accent2:rgba(91,142,240,0.12);--red:#f87171;--green:#6ee7b7;--amber:#fbbf24;--purple:#a78bfa;--purple2:rgba(167,139,250,0.12);--teal:#34d399;--teal2:rgba(52,211,153,0.12);--rule:rgba(255,255,255,0.11)}
 html{scroll-behavior:smooth}
+.slabel{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;font-weight:700;padding-left:14px;border-left:3px solid #2dd4bf;background:linear-gradient(90deg,#2dd4bf,#e2e8f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block}
 body{font-family:'Outfit',sans-serif;background:#111827;color:var(--ink);line-height:1.6;overflow-x:hidden}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(14,17,23,0.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07)}
@@ -25,7 +26,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .dot{width:8px;height:8px;border-radius:50%;background:#60a5fa;animation:pulse 1.5s infinite;box-shadow:0 0 6px rgba(96,165,250,0.8)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 h1{font-family:'DM Serif Display',serif;font-size:clamp(44px,6.5vw,82px);line-height:1.0;letter-spacing:-2px;color:#f9fafb;max-width:820px;margin-bottom:24px}
-h1 em{font-style:italic;background:linear-gradient(135deg,#38bdf8,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+h1 em{font-style:normal;font-family:'DM Serif Display',serif;background:linear-gradient(135deg,#38bdf8,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-sub{font-size:16px;font-weight:300;color:#b8b5ac;max-width:560px;line-height:1.75;margin-bottom:40px}
 .ctas{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:2px;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.03em;transition:all .2s}
@@ -42,7 +43,7 @@ h1 em{font-style:italic;background:linear-gradient(135deg,#38bdf8,#2dd4bf);-webk
 .slbl{font-size:11px;color:#7a8094;font-weight:400;line-height:1.4}
 
 section{padding:92px 40px}
-.slabel{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:#7a8094;text-transform:uppercase;margin-bottom:14px}
+
 h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-spacing:-1px;line-height:1.1;color:#f9fafb;margin-bottom:14px}
 .intro{font-size:15px;font-weight:300;color:#b8b5ac;max-width:560px;line-height:1.75;margin-bottom:48px}
 
@@ -54,7 +55,7 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.8vw,44px);letter-
 .pivot-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(247,246,242,.7);margin-bottom:10px;line-height:1.5}
 .pivot-list li::before{content:'→';color:var(--accent);font-family:'DM Mono',monospace;flex-shrink:0;margin-top:1px}
 .about-right{padding:28px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px}
-.about-right .slabel{color:rgba(247,246,242,.3)}
+.about-right 
 .qrow{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .qrow:last-child{border-bottom:none}
 .qk{font-size:12px;color:rgba(247,246,242,.45)}
@@ -219,7 +220,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     </div>
 
     <!-- Main headline -->
-    <h1>Where IT infrastructure<br>meets <em>clinical AI</em></h1>
+    <h1>Where IT infrastructure<br>meets <em>clinical <span style="font-style:normal;letter-spacing:-.5px">AI</span></em></h1>
 
     <p class="hero-sub">5+ years solving complex IT and security problems at Palo Alto Networks, Infineon, and school districts — now applying that systems depth to clinical decision support, explainable AI, and healthcare data workflows.</p>
 
@@ -230,7 +231,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
       </a>
-      <a href="/cdn-cgi/l/email-protection#127c75676b777c737c766b25252252757f737b7e3c717d7f" class="btn btn-out" style="font-family:'DM Mono',monospace;font-size:12px"><span class="__cf_email__" data-cfemail="99f7feece0fcf7f8f7fde0aeaea9d9fef4f8f0f5b7faf6f4">[email&#160;protected]</span></a>
+      <a href="mailto:nguyenandy770@gmail.com" onclick="window.location.href='mailto:nguyenandy770@gmail.com';return false;" class="btn btn-out" style="font-family:'DM Mono',monospace;font-size:12px">nguyenandy770@gmail.com</a>
       <a href="Anh_Truong_Nguyen_Resume.docx" download="Anh_Truong_Nguyen_Resume.docx" class="btn btn-dl">↓ Download resume</a>
     </div>
 
@@ -1195,7 +1196,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <h2 style="font-size:clamp(26px,4vw,44px);margin-bottom:12px">Let's build clinical IT<br>that actually works</h2>
     <p>Open to Healthcare IT, Clinical Informatics, and Clinical System Analyst roles. Based in San Jose, CA — open to hybrid and remote.</p>
     <div class="clinks">
-      <a href="/cdn-cgi/l/email-protection#620c05171b070c030c061b55555222050f030b0e4c010d0f" class="cl cl-em">✉ <span class="__cf_email__" data-cfemail="137d74666a767d727d776a24242353747e727a7f3d707c7e">[email&#160;protected]</span></a>
+      <a href="mailto:nguyenandy770@gmail.com" onclick="window.location.href='mailto:nguyenandy770@gmail.com';return false;" class="btn btn-out" style="font-family:'DM Mono',monospace;font-size:12px">nguyenandy770@gmail.com</a>
       <a href="https://www.linkedin.com/in/anh-truong-nguyen/" target="_blank" class="cl cl-li">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
