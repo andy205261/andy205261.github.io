@@ -128,7 +128,7 @@ h3{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-.3px;marg
 .tl{position:relative;padding-left:20px}
 .tl::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--accent),transparent)}
 .tli{position:relative;margin-bottom:26px;padding-left:18px}
-.tli::before{content:'';position:absolute;left:-24px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2.5px solid var(--paper);box-shadow:0 0 0 3px rgba(56,189,248,0.2),0 0 12px rgba(56,189,248,0.3)}
+.tli::before{content:'';position:absolute;left:-24px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--dot-color,var(--accent));border:2.5px solid var(--paper);box-shadow:0 0 0 3px rgba(56,189,248,0.2),0 0 12px rgba(56,189,248,0.3)}
 .tdate{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:3px;letter-spacing:.06em}
 .ttitle{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
 .torg{font-size:11px;color:var(--accent);margin-bottom:5px;font-family:'DM Mono',monospace}
@@ -216,7 +216,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     </div>
     <div class="htag"><span class="dot"></span>Healthcare IT · Clinical Informatics · Cybersecurity</div>
     <h1>Where IT infrastructure<br>meets <em>clinical AI</em></h1>
-    <p class="hero-sub">5+ years in enterprise IT and cybersecurity at Palo Alto Networks, Infineon, and Palo Alto Unified School District, now building clinical AI systems that turn EEG signals, medical imaging, and clinical documents into actionable insights.</p>
+    <p class="hero-sub">5+ years in enterprise IT and cybersecurity at Palo Alto Networks, Infineon, and Stanford Health Care, now building clinical AI systems that turn EEG signals, medical imaging, and clinical documents into actionable insights.</p>
     <div class="ctas">
       <a href="#projects" class="btn btn-dark">View projects →</a>
       <a href="https://www.linkedin.com/in/anh-truong-nguyen/" target="_blank" class="btn btn-li">
@@ -227,7 +227,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
       <a href="Anh_Truong_Nguyen_Resume.docx" download="Anh_Truong_Nguyen_Resume.docx" class="btn btn-dl">↓ Download resume</a>
     </div>
     <div class="stats">
-      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">5+</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Years enterprise<br>IT & cybersecurity</span></div>
+      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">5+</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Years enterprise<br>IT & health IT</span></div>
       <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">6</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Clinical AI<br>projects built</span></div>
       <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">97.4%</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Peak model<br>accuracy (EEG)</span></div>
       <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">4</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Azure AI<br>services deployed</span></div>
@@ -302,7 +302,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <div class="qrow"><span class="qk">Location</span><span class="qv">San Jose, CA</span></div>
     <div class="qrow"><span class="qk">Education</span><span class="qv" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span>MBA Healthcare Mgmt · Capella</span><span style="color:var(--green);font-size:10px;font-family:'DM Mono',monospace;font-weight:600">IN PROGRESS</span></span></div>
     <div class="qrow"><span class="qk"></span><span class="qv" style="color:var(--ink3);font-size:12px">B.S. Cybersecurity · Capella</span></div>
-    <div class="qrow"><span class="qk">Current role</span><span class="qv">IT Specialist · PAUSD</span></div>
+    <div class="qrow"><span class="qk">Current role</span><span class="qv hi">Sr. Solutions Tech Specialist · Stanford Health Care</span></div>
     <div class="qrow"><span class="qk">Devices managed</span><span class="qv hi">3,000+</span></div>
     <div class="qrow"><span class="qk">Case resolution</span><span class="qv hi">98% (Palo Alto Networks)</span></div>
     <div class="qrow"><span class="qk">Target roles</span><span class="qv">Clinical Informatics · Health IT</span></div>
@@ -1130,14 +1130,19 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
   <p class="intro fi">Consistent track record of high performance — 98% case resolution, 153% target achievement, 30% ticket reduction — across enterprise tech, government, and education sectors.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start">
     <div class="tl fi">
-      <div class="tli">
-        <div class="tdate">2025 — Present</div>
-        <div class="ttitle">MBA — Healthcare Management</div>
-        <div class="torg" style="color:var(--green)">Capella University · Online · <span style="background:rgba(52,211,153,.12);padding:1px 7px;border-radius:100px;font-size:10px;color:var(--green)">In Progress</span></div>
-        <div class="tdesc">Accelerating the transition into clinical informatics and health IT leadership. Curriculum covers healthcare systems, policy, operations, and strategic management — complementing the technical clinical AI portfolio with business and organisational context required for senior Health IT roles.</div>
+      <div class="tli" style="--dot-color:var(--green)">
+        <div class="tdate">Jun 2026 — Present</div>
+        <div class="ttitle">Senior Solutions Tech Specialist</div>
+        <div class="torg" style="color:var(--accent)">Stanford Health Care · Palo Alto, CA · Contract</div>
+        <div class="tdesc">Embedded senior IT specialist supporting clinical operations across Stanford Health Care field locations — one of the top-ranked academic medical centres in the US. Supporting 500+ clinical staff across SHC sites with HIPAA-compliant endpoint management, EMR workstation configuration, and escalated incident resolution. Partner directly with desktop engineering and network teams to identify root causes of recurring clinical workflow disruptions and drive permanent fixes.</div>
+        <ul class="feat-list" style="margin-top:8px">
+          <li>Oversee lifecycle management of clinical endpoints — desktops, laptops, tablets, and mobile devices — across SHC locations ensuring zero-downtime for patient care workflows</li>
+          <li>Coordinate onsite network troubleshooting, port activation, and hardware/software configuration in live clinical environments</li>
+          <li>Manage asset tracking, warranty, and compliance documentation across the SHC environment aligned to healthcare IT governance standards</li>
+        </ul>
       </div>
       <div class="tli">
-        <div class="tdate">Feb 2024 — Present</div>
+        <div class="tdate">Feb 2024 — Jun 2026</div>
         <div class="ttitle">Computer Support Specialist II</div>
         <div class="torg">Palo Alto Unified School District · Palo Alto, CA</div>
         <div class="tdesc">Primary IT lead for 2 elementary schools (~800 students/staff). Manage 3,000+ devices via JAMF Pro MDM. Lead hardware refresh cycles. Cut ticket escalations 30% through Tier 2/3 troubleshooting and staff training programs.</div>
@@ -1177,10 +1182,11 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
           <span style="background:rgba(52,211,153,.15);color:var(--green);font-size:10px;font-family:'DM Mono',monospace;font-weight:600;padding:2px 8px;border-radius:100px">IN PROGRESS</span>
         </div>
       </div>
-      <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:3px;padding:18px;margin-bottom:16px">
+      <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:10px;padding:18px;margin-bottom:16px">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:5px">B.S. CYBERSECURITY & INFORMATION ASSURANCE</div>
-        <div style="font-size:15px;font-weight:500;margin-bottom:2px">Capella University</div>
-        <div style="font-size:12px;color:var(--ink3)">Online · Completed</div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:4px">Capella University</div>
+        <div style="font-size:12px;color:var(--ink3);margin-bottom:6px">Online · Completed</div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.6">Foundation in enterprise security, network architecture, and IT governance — directly applicable to HIPAA compliance and healthcare data security.</div>
       </div>
       <div class="slabel" style="margin-bottom:10px">Certifications</div>
       <div class="certs">
