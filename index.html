@@ -322,8 +322,10 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <a href="#proj-04" class="proj-nav-tab">04 Document Intel</a>
     <a href="#proj-05" class="proj-nav-tab">05 Clinical Systems</a>
     <a href="#proj-06" class="proj-nav-tab">06 IT Operations</a>
+    <a href="#proj-07" class="proj-nav-tab">07 FHIR Data Engineering</a>
+    <a href="#proj-08" class="proj-nav-tab">08 Clinical AI Assistant</a>
   </div>
-  <p class="intro fi">Six hands-on projects spanning neurological signal analysis, clinical AI explainability, medical imaging, document intelligence, healthcare system analysis, and enterprise IT — showing the full range from infrastructure to clinical informatics.</p>
+  <p class="intro fi">Eight hands-on projects spanning neurological signal analysis, clinical AI explainability, medical imaging, document intelligence, healthcare system analysis, and enterprise IT — showing the full range from infrastructure to clinical informatics.</p>
 
   <!-- PROJECT 1: Neurological AI -->
   <div id="proj-01" style="margin-bottom:48px">
@@ -1121,6 +1123,127 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
     </div>
   </div>
 
+  <!-- PROJECT 7: FHIR Data Engineering -->
+  <div id="proj-07" style="margin-bottom:48px">
+    <a href="#proj-07" class="proj-label fi" style="text-decoration:none">Project 07 — FHIR Data Engineering</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">Google Cloud Healthcare API</span><span class="tag">FHIR R4</span><span class="tag">BigQuery</span><span class="tag">SQL</span>
+        </div>
+        <h3>Ingesting FHIR data with the Healthcare API</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Hands-on implementation of Google Cloud Healthcare API for FHIR R4 data ingestion, management, and de-identification. Created FHIR datasets and stores on GCP, imported Patient and clinical resources, exported FHIR data to BigQuery, and queried structured clinical data using FHIR-aware SQL. Completed with 100% grade — Google Cloud certified project.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">GCP OPERATIONS COMPLETED</div>
+          <div class="srow"><span class="slb">CreateDataset</span><div class="strk"><div class="sbar" style="width:100%;background:#34d399"></div></div><span class="sval" style="color:#34d399">✓ OK</span></div>
+          <div class="srow"><span class="slb">ImportResources</span><div class="strk"><div class="sbar" style="width:100%;background:#34d399"></div></div><span class="sval" style="color:#34d399">✓ OK</span></div>
+          <div class="srow"><span class="slb">ExportResources</span><div class="strk"><div class="sbar" style="width:100%;background:#34d399"></div></div><span class="sval" style="color:#34d399">✓ OK</span></div>
+          <div class="srow"><span class="slb">DeidentifyFHIR</span><div class="strk"><div class="sbar" style="width:100%;background:#34d399"></div></div><span class="sval" style="color:#34d399">✓ OK</span></div>
+        </div>
+        <div style="margin-top:10px;padding:8px 10px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:6px;display:flex;align-items:center;gap:8px">
+          <span style="font-size:18px">🏅</span>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--green)">Google Cloud · Project Certificate</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace">Jun 13, 2026 · Grade: 100% · <a href="https://coursera.org/verify/IQYFXD5OFF3E" target="_blank" style="color:var(--accent);text-decoration:none">Verify ↗</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+          <div style="font-size:11px;font-weight:600;color:var(--ink);margin-bottom:4px">BigQuery — FHIR Patient Query</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">FHIR R4 · Cloud Healthcare API export → BigQuery</div>
+        </div>
+        <div style="background:#0d1117;padding:16px;flex:1;font-family:'DM Mono',monospace;font-size:12px;line-height:1.8">
+          <div><span style="color:#ff7b72">SELECT</span></div>
+          <div>&nbsp;&nbsp;id <span style="color:#79c0ff">AS</span> patient_id,</div>
+          <div>&nbsp;&nbsp;name[safe_offset(<span style="color:#a5f3fc">0</span>)].given <span style="color:#79c0ff">AS</span> given_name,</div>
+          <div>&nbsp;&nbsp;name[safe_offset(<span style="color:#a5f3fc">0</span>)].family <span style="color:#79c0ff">AS</span> family,</div>
+          <div>&nbsp;&nbsp;birthDate <span style="color:#79c0ff">AS</span> birth_date</div>
+          <div><span style="color:#ff7b72">FROM</span> <span style="color:#a5f3fc">`dataset1.Patient`</span></div>
+          <div><span style="color:#ff7b72">WHERE</span> name[safe_offset(<span style="color:#a5f3fc">0</span>)].family = <span style="color:#a5d18a">"Smith"</span></div>
+          <div style="margin-top:12px;padding:8px;background:rgba(52,211,153,.08);border-radius:4px;border:1px solid rgba(52,211,153,.15)">
+            <div style="font-size:10px;color:var(--green);margin-bottom:6px">✓ Query completed · 1 row returned</div>
+            <div style="font-size:10px;color:var(--ink3)">patient_id &nbsp;&nbsp; given_name &nbsp;&nbsp; family &nbsp;&nbsp; birth_date</div>
+            <div style="font-size:10px;color:var(--ink);margin-top:3px">c38aa8ba-... &nbsp;&nbsp; Darcy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Smith &nbsp;&nbsp;&nbsp; 1970-01-01</div>
+          </div>
+        </div>
+        <div style="padding:12px 16px;border-top:1px solid rgba(255,255,255,.06);display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="mrow" style="border:none;padding:4px 0"><span class="mk">Standard</span><span class="mv">HL7 FHIR R4</span></div>
+          <div class="mrow" style="border:none;padding:4px 0"><span class="mk">Platform</span><span class="mv">Google Cloud</span></div>
+          <div class="mrow" style="border:none;padding:4px 0"><span class="mk">Operations</span><span class="mv ok">5/5 ✓ Zero errors</span></div>
+          <div class="mrow" style="border:none;padding:4px 0"><span class="mk">De-identify</span><span class="mv ok">HIPAA-compliant</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PROJECT 8: CLINICAL AI ASSISTANT -->
+  <div id="proj-08" style="margin-bottom:48px">
+    <a href="#proj-08" class="proj-label fi" style="text-decoration:none">Project 08 — Clinical AI Assistant</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">Claude API</span><span class="tag">RAG</span><span class="tag">Prompt Engineering</span><span class="tag">Clinical NLP</span><span class="tag">SBAR</span>
+        </div>
+        <h3>Discharge summary generator</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">Live LLM-powered clinical documentation tool — paste a physician dictation, select your audience, and receive a structured, clinically appropriate summary in seconds. Three audience-specific modes with distinct formatting requirements, safety constraints, and reading-level calibration.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">AUDIENCE MODES</div>
+          <div class="srow"><span class="slb">PCP Handoff</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">Clinical</span></div>
+          <div class="srow"><span class="slb">Nursing SBAR</span><div class="strk"><div class="sbar" style="width:100%;background:#34d399"></div></div><span class="sval" style="color:#34d399">Action</span></div>
+          <div class="srow"><span class="slb">Patient Portal</span><div class="strk"><div class="sbar" style="width:100%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">6th grade</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">MODEL</div>
+            <div style="font-size:13px;color:var(--ink)">claude-sonnet-4-6</div>
+          </div>
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">SAFETY</div>
+            <div style="font-size:13px;color:var(--amber)">Human-in-loop</div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Clinical AI Assistant — Live Demo</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Powered by Claude · 3 audience modes · Real-time generation</div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:6px">
+            <div style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25)">🩺 PCP Handoff</div>
+            <div style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)">💊 Nursing</div>
+            <div style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)">👤 Patient</div>
+          </div>
+          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
+            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">DISCHARGE SUMMARY — PCP HANDOFF</div>
+            <div style="color:var(--accent)">PRINCIPAL DIAGNOSIS</div>
+            <div>COPD Exacerbation, Moderate (J44.1)</div>
+            <div style="margin-top:6px;color:var(--accent)">CRITICAL FOLLOW-UP</div>
+            <div>• PCP within 5-7 days ⚡</div>
+            <div>• Pulmonology referral — 4 weeks</div>
+            <div>• Repeat spirometry 6-8 weeks</div>
+            <div style="margin-top:6px;color:var(--ink3)">ALLERGY: Penicillin (rash) — flagged</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+            <a href="clinical-summary-demo.html" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open Live Demo →</a>
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+          </div>
+          <div class="mrow"><span class="mk">Cases supported</span><span class="mv">COPD · AMI · Sepsis · Stroke · CHF</span></div>
+          <div class="mrow"><span class="mk">Safety</span><span class="mv warn">Human review required — demo only</span></div>
+          <div class="mrow"><span class="mk">Reading levels</span><span class="mv ok">Medical · Nursing · 6th grade</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Prompt engineering</span></div><div class="ctitle">3 audience-specific prompts</div><div class="cdesc">Separate system prompts engineered for each audience. PCP mode generates ICD-10 codes, medication reconciliation tables, and critical follow-up flags. Nursing mode outputs structured SBAR with action-oriented bullet points. Patient mode enforces 6th-grade reading level, plain language, and avoids jargon entirely.</div></div><div class="card-body"><div class="mrow"><span class="mk">Technique</span><span class="mv">Role + format + constraint prompting</span></div><div class="mrow"><span class="mk">Validation</span><span class="mv ok">Format enforced via structured headers</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Clinical safety</span></div><div class="ctitle">Human-in-the-loop design</div><div class="cdesc">Every generated summary displays a mandatory clinical safety notice requiring licensed clinician review before use in patient care. Fallback outputs for API errors ensure the demo never fails silently. Allergy detection and critical follow-up items are surfaced with visual flags in every summary type.</div></div><div class="card-body"><div class="mrow"><span class="mk">Safety pattern</span><span class="mv">Decision support, not autonomous</span></div><div class="mrow"><span class="mk">Error handling</span><span class="mv ok">Graceful fallback outputs</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Clinical coverage</span></div><div class="ctitle">Multi-condition support</div><div class="cdesc">Pre-loaded example cases covering 5 high-volume clinical scenarios: COPD exacerbation, acute MI with PCI, septic shock, ischemic stroke with thrombectomy, and CHF exacerbation. Each case tests different medication complexity, allergy documentation, and follow-up requirements across all three audience modes.</div></div><div class="card-body"><div class="mrow"><span class="mk">Cases built</span><span class="mv">5 clinical scenarios</span></div><div class="mrow"><span class="mk">Audiences</span><span class="mv ok">PCP · Nursing · Patient × 5 = 15</span></div></div></div>
+    </div>
+  </div>
+
 </section>
 
 <!-- EXPERIENCE -->
@@ -1275,7 +1398,7 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
 
 <script>
 // Highlight active project tab on scroll
-const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05','proj-06'];
+const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05','proj-06','proj-07','proj-08'];
 const navTabs = document.querySelectorAll('.proj-nav-tab');
 window.addEventListener('scroll', () => {
   let current = '';
