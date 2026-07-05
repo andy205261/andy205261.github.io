@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CySA+ CS0-003 · Threat Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a1120; --panel:#0f1c33; --panel-2:#0c1730; --raise:#132443;
+  --border:#1e3350; --border-soft:#182a45;
+  --cyan:#22d3ee; --cyan-dim:#0e7490; --cyan-glow:rgba(34,211,238,.18);
+  --green:#34d399; --rose:#fb5c74; --amber:#fbbf24;
+  --text:#e6eef8; --muted:#8ba0bd; --faint:#5b7091;
+  --d1:#22d3ee; --d2:#a78bfa; --d3:#fbbf24; --d4:#34d399;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'Inter',system-ui,sans-serif; line-height:1.55;
+  min-height:100vh;
+  background-image:
+    linear-gradient(rgba(34,211,238,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(34,211,238,.025) 1px,transparent 1px),
+    radial-gradient(1200px 600px at 80% -10%,rgba(34,211,238,.06),transparent 60%);
+  background-size:44px 44px,44px 44px,100% 100%;
+}
+.wrap{max-width:860px;margin:0 auto;padding:26px 20px 80px}
+
+/* top console bar */
+.console-bar{
+  display:flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--faint);
+  border:1px solid var(--border-soft);border-radius:10px;
+  background:var(--panel-2);padding:9px 14px;margin-bottom:22px;letter-spacing:.02em;
+}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.console-bar .cur{color:var(--cyan);animation:blink 1.1s steps(1) infinite}
+.console-bar .grow{flex:1}
+@keyframes blink{50%{opacity:0}}
+
+h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+h1 .plus{color:var(--cyan)}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 24px;max-width:60ch}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan-dim);margin-bottom:10px}
+
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px}
+.card + .card{margin-top:16px}
+
+/* exam facts strip */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-soft);border:1px solid var(--border-soft);border-radius:12px;overflow:hidden;margin-bottom:22px}
+.fact{background:var(--panel-2);padding:13px 14px}
+.fact .n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;color:var(--text)}
+.fact .l{font-size:11px;color:var(--muted);margin-top:2px}
+@media(max-width:620px){.facts{grid-template-columns:repeat(2,1fr)}}
+
+.field{margin:18px 0}
+.field > label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-family:'Inter';font-size:13.5px;color:var(--muted);
+  border:1px solid var(--border);background:var(--panel-2);
+  padding:9px 14px;border-radius:9px;cursor:pointer;transition:.14s;user-select:none;
+}
+.chip:hover{border-color:var(--cyan-dim);color:var(--text)}
+.chip[aria-pressed="true"]{border-color:var(--cyan);color:var(--bg);background:var(--cyan);font-weight:600}
+.chip .tag{font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.7;margin-left:5px}
+
+.btn{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;
+  background:var(--cyan);color:#04141b;border:none;border-radius:10px;
+  padding:13px 24px;cursor:pointer;transition:.14s;letter-spacing:.01em;
+}
+.btn:hover{box-shadow:0 0 0 3px var(--cyan-glow);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--cyan);border:1px solid var(--cyan-dim)}
+.btn.ghost:hover{border-color:var(--cyan);box-shadow:none}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+
+.best{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--faint);margin-top:16px}
+.best b{color:var(--green)}
+
+/* quiz screen */
+.qhead{display:flex;align-items:center;gap:14px;margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.qhead .count{color:var(--text)}
+.timer{margin-left:auto;padding:4px 11px;border:1px solid var(--border);border-radius:20px;color:var(--cyan);letter-spacing:.05em}
+.timer.warn{color:var(--rose);border-color:var(--rose)}
+.pbar{height:4px;background:var(--border-soft);border-radius:4px;overflow:hidden;margin-bottom:22px}
+.pfill{height:100%;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan));width:0;transition:width .3s ease}
+
+.dbadge{display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.dbadge .sq{width:9px;height:9px;border-radius:2px}
+.qtext{font-size:18px;font-weight:500;line-height:1.5;margin:0 0 8px}
+pre.snippet{font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--panel-2);border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:8px;padding:12px 14px;overflow-x:auto;color:#bfe9f5;margin:14px 0}
+
+.answers{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.ans{
+  display:flex;gap:13px;align-items:flex-start;text-align:left;
+  border:1px solid var(--border);background:var(--panel-2);
+  border-radius:11px;padding:14px 16px;cursor:pointer;transition:.13s;color:var(--text);font-size:15px;font-family:'Inter';
+}
+.ans:hover:not(.locked){border-color:var(--cyan-dim);background:var(--raise)}
+.ans .key{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--faint);border:1px solid var(--border);border-radius:6px;min-width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ans.sel{border-color:var(--cyan);background:var(--raise)}
+.ans.sel .key{color:var(--cyan);border-color:var(--cyan)}
+.ans.correct{border-color:var(--green);background:rgba(52,211,153,.08)}
+.ans.correct .key{color:var(--green);border-color:var(--green)}
+.ans.wrong{border-color:var(--rose);background:rgba(251,92,116,.07)}
+.ans.wrong .key{color:var(--rose);border-color:var(--rose)}
+.ans.locked{cursor:default}
+
+.explain{margin-top:16px;border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:8px;background:var(--panel-2);padding:14px 16px;font-size:14.5px;color:#cdddf0;display:none}
+.explain.show{display:block;animation:fade .25s ease}
+.explain .verdict{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}
+.explain .verdict.ok{color:var(--green)} .explain .verdict.no{color:var(--rose)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+
+.navrow{display:flex;gap:10px;margin-top:22px;align-items:center}
+.navrow .grow{flex:1}
+
+/* results */
+.score-hero{text-align:center;padding:30px 20px 24px}
+.score-ring{font-family:'Space Grotesk';font-weight:700;font-size:58px;line-height:1;color:var(--text)}
+.score-ring .pct{color:var(--cyan)}
+.verdict-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-top:14px}
+.verdict-badge.pass{color:var(--green);border:1px solid var(--green);background:rgba(52,211,153,.08)}
+.verdict-badge.fail{color:var(--amber);border:1px solid var(--amber);background:rgba(251,191,36,.07)}
+.score-meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--faint);margin-top:14px}
+
+.dom-row{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--border-soft)}
+.dom-row:last-child{border-bottom:none}
+.dom-name{font-size:14px;min-width:150px;display:flex;align-items:center;gap:9px}
+.dom-name .sq{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.dom-track{flex:1;height:8px;background:var(--panel-2);border-radius:6px;overflow:hidden}
+.dom-fill{height:100%;width:0;border-radius:6px;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.dom-val{font-family:'JetBrains Mono',monospace;font-size:12.5px;min-width:74px;text-align:right;color:var(--muted)}
+.dom-val .weak{color:var(--rose)}
+.weak-note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--rose);margin-left:6px}
+
+.review-item{border:1px solid var(--border);border-radius:11px;padding:15px 16px;margin-top:12px;background:var(--panel-2)}
+.review-item .rq{font-size:14.5px;font-weight:500;margin:0 0 10px}
+.review-item .line{font-size:13.5px;margin:4px 0;display:flex;gap:8px}
+.review-item .line .lab{font-family:'JetBrains Mono',monospace;font-size:11px;min-width:64px;color:var(--faint);flex-shrink:0;padding-top:2px}
+.review-item .yours{color:var(--rose)} .review-item .right{color:var(--green)}
+.review-item .exp{color:var(--muted);font-size:13.5px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border-soft)}
+
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan-dim);margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+.section-label::after{content:"";flex:1;height:1px;background:var(--border-soft)}
+
+.hide{display:none!important}
+
+/* learn screen */
+.learn-topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--panel-2)}
+.seg-btn{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--muted);background:transparent;border:none;padding:9px 16px;cursor:pointer;transition:.13s}
+.seg-btn[aria-pressed="true"]{background:var(--cyan);color:#04141b;font-weight:700}
+.learn-topbar .btn{margin-left:auto;padding:9px 16px;font-size:13px}
+
+.lib-dom{margin:26px 0 12px;display:flex;align-items:center;gap:11px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px}
+.lib-dom:first-child{margin-top:4px}
+.lib-dom .sq{width:12px;height:12px;border-radius:3px}
+.lib-dom .wt{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);margin-left:auto;letter-spacing:.05em}
+
+.topic{border:1px solid var(--border);border-radius:11px;background:var(--panel);margin-bottom:9px;overflow:hidden}
+.topic-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none;font-weight:500;font-size:15px;transition:.13s}
+.topic-head:hover{background:var(--raise)}
+.topic-head .chev{margin-left:auto;color:var(--faint);font-family:'JetBrains Mono',monospace;transition:transform .2s;flex-shrink:0}
+.topic.open .chev{transform:rotate(90deg);color:var(--cyan)}
+.topic-head .idx{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan-dim);flex-shrink:0}
+.topic-body{display:none;padding:2px 18px 18px;border-top:1px solid var(--border-soft)}
+.topic.open .topic-body{display:block;animation:fade .2s ease}
+.kpt{display:flex;gap:10px;font-size:14px;color:#cddcef;margin:11px 0;line-height:1.5}
+.kpt::before{content:"▸";color:var(--cyan-dim);flex-shrink:0}
+.kpt b{color:var(--text)}
+.ktable{width:100%;border-collapse:collapse;margin:14px 0 4px;font-size:13px}
+.ktable th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:7px 10px;border-bottom:1px solid var(--border)}
+.ktable td{padding:8px 10px;border-bottom:1px solid var(--border-soft);color:#cddcef;vertical-align:top}
+.ktable td:first-child{font-family:'JetBrains Mono',monospace;color:var(--cyan);white-space:nowrap}
+.ktable tr:last-child td{border-bottom:none}
+
+/* flashcards */
+.flash-meta{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--faint);margin-bottom:12px}
+.flash{position:relative;min-height:240px;perspective:1400px;cursor:pointer;margin-bottom:16px}
+.flash-face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--border);border-radius:16px;padding:30px 26px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:transform .5s cubic-bezier(.3,.8,.3,1)}
+.flash-front{background:var(--panel);transform:rotateY(0)}
+.flash-back{background:linear-gradient(160deg,var(--raise),var(--panel-2));border-color:var(--cyan-dim);transform:rotateY(180deg)}
+.flash.flipped .flash-front{transform:rotateY(-180deg)}
+.flash.flipped .flash-back{transform:rotateY(0)}
+.flash-lab{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;color:var(--cyan-dim);margin-bottom:16px}
+.flash-front>div,.flash-back>div{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500;line-height:1.35}
+.flash-back>div{color:var(--cyan);font-size:18px}
+.flash-hint{position:absolute;bottom:16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--faint);letter-spacing:.1em}
+.flash-nav{display:flex;gap:10px}
+.flash-nav .btn{flex:1}
+@media(prefers-reduced-motion:reduce){.flash-face{transition:none}}
+
+/* cvss calculator */
+.cvss-score{text-align:center;padding:24px 20px}
+.cvss-big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:64px;line-height:1;color:var(--text)}
+.cvss-sev{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-top:12px;border:1px solid var(--border)}
+.cvss-vector{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--cyan);margin-top:16px;word-break:break-all;background:var(--panel-2);border:1px solid var(--border);border-radius:8px;padding:9px 12px}
+.cvss-sub{display:flex;justify-content:center;gap:24px;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.cvss-sub b{color:var(--text)}
+.mrow{border:1px solid var(--border);border-radius:11px;background:var(--panel);padding:13px 15px;margin-bottom:9px}
+.mrow-top{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.mrow-name{font-size:14px;font-weight:500}
+.mrow-abbr{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan-dim);letter-spacing:.05em}
+.mrow-opts{display:flex;flex-wrap:wrap;gap:7px}
+.mopt{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);border:1px solid var(--border);background:var(--panel-2);padding:7px 12px;border-radius:8px;cursor:pointer;transition:.12s}
+.mopt:hover{border-color:var(--cyan-dim);color:var(--text)}
+.mopt.on{background:var(--cyan);color:#04141b;border-color:var(--cyan);font-weight:700}
+.cvss-tip{font-size:13px;color:var(--muted);border-left:3px solid var(--cyan-dim);padding:10px 14px;background:var(--panel-2);border-radius:0 8px 8px 0;margin-top:16px;line-height:1.55}
+.cvss-tip b{color:var(--text)}
+.foot{text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);margin-top:36px;line-height:1.7}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:560px){h1{font-size:25px}.dom-name{min-width:120px}.wrap{padding:20px 15px 60px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="console-bar">
+    <span class="dot"></span>
+    <span>SOC-TRAINER v1 · CS0-003 · target 750/900</span>
+    <span class="grow"></span>
+    <span>ready<span class="cur">_</span></span>
+  </div>
+
+  <!-- ============ START SCREEN ============ -->
+  <section id="start">
+    <div class="eyebrow">CompTIA Cybersecurity Analyst+</div>
+    <h1>CySA<span class="plus">+</span> Threat Console</h1>
+    <p class="sub">Active-recall trainer for CS0-003. Practice mode gives instant feedback; exam mode runs the clock and grades you at the end — with a per-domain breakdown that flags exactly where you're leaking points.</p>
+
+    <div class="facts">
+      <div class="fact"><div class="n">85</div><div class="l">max questions</div></div>
+      <div class="fact"><div class="n">165<span style="font-size:12px;color:var(--muted)">m</span></div><div class="l">time limit</div></div>
+      <div class="fact"><div class="n">750</div><div class="l">pass / 900</div></div>
+      <div class="fact"><div class="n">4</div><div class="l">domains</div></div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label>Mode</label>
+        <div class="opts" id="modeOpts">
+          <button class="chip" data-mode="learn" aria-pressed="false">Learn <span class="tag">study concepts</span></button>
+          <button class="chip" data-mode="practice" aria-pressed="true">Practice <span class="tag">instant feedback</span></button>
+          <button class="chip" data-mode="exam" aria-pressed="false">Exam <span class="tag">timed · graded</span></button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Domain focus</label>
+        <div class="opts" id="domOpts">
+          <button class="chip" data-dom="all" aria-pressed="true">All domains</button>
+          <button class="chip" data-dom="1" aria-pressed="false">1 · Security Ops <span class="tag">33%</span></button>
+          <button class="chip" data-dom="2" aria-pressed="false">2 · Vuln Mgmt <span class="tag">30%</span></button>
+          <button class="chip" data-dom="3" aria-pressed="false">3 · Incident Resp <span class="tag">20%</span></button>
+          <button class="chip" data-dom="4" aria-pressed="false">4 · Reporting <span class="tag">17%</span></button>
+        </div>
+      </div>
+
+      <div class="field" id="lenField">
+        <label>Length</label>
+        <div class="opts" id="lenOpts">
+          <button class="chip" data-len="10" aria-pressed="false">10 questions</button>
+          <button class="chip" data-len="20" aria-pressed="true">20 questions</button>
+          <button class="chip" data-len="0" aria-pressed="false">Full bank <span class="tag">120</span></button>
+          <button class="chip" data-len="85" aria-pressed="false">Exam sim <span class="tag">85 · 165 min</span></button>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn" id="startBtn">Start session →</button>
+      </div>
+      <div class="best" id="bestLine"></div>
+    </div>
+
+    <div class="foot">Original question bank · healthcare-flavored · not a braindump<br>Pair with CertMaster / Jason Dion for full coverage · exam retires 22 Dec 2026</div>
+  </section>
+
+  <!-- ============ QUIZ SCREEN ============ -->
+  <section id="quiz" class="hide">
+    <div class="qhead">
+      <span class="count"><span id="qNow">1</span>/<span id="qTot">20</span></span>
+      <span id="qMode">PRACTICE</span>
+      <span class="timer" id="timer">00:00</span>
+    </div>
+    <div class="pbar"><div class="pfill" id="pfill"></div></div>
+
+    <div class="card">
+      <div class="dbadge" id="dBadge"><span class="sq"></span><span id="dName"></span></div>
+      <p class="qtext" id="qText"></p>
+      <div id="qSnip"></div>
+      <div class="answers" id="answers"></div>
+      <div class="explain" id="explain"></div>
+    </div>
+
+    <div class="navrow">
+      <button class="btn ghost" id="prevBtn">← Prev</button>
+      <span class="grow"></span>
+      <button class="btn ghost" id="quitBtn">Quit</button>
+      <button class="btn" id="nextBtn">Next →</button>
+    </div>
+  </section>
+
+  <!-- ============ LEARN SCREEN ============ -->
+  <section id="learn" class="hide">
+    <div class="eyebrow" id="learnEyebrow">Study library</div>
+    <div class="learn-topbar">
+      <div class="seg" id="learnSeg">
+        <button class="seg-btn" data-view="concepts" aria-pressed="true">Concepts</button>
+        <button class="seg-btn" data-view="cards" aria-pressed="false">Flashcards</button>
+        <button class="seg-btn" data-view="cvss" aria-pressed="false">CVSS Calc</button>
+      </div>
+      <button class="btn ghost" id="learnHome">← Console</button>
+    </div>
+
+    <div id="conceptsView">
+      <div id="libBody"></div>
+    </div>
+
+    <div id="cardsView" class="hide">
+      <div class="flash-meta"><span id="flashCount">1 / 1</span><span id="flashDom"></span></div>
+      <div class="flash" id="flashCard" tabindex="0" role="button" aria-label="Flip card">
+        <div class="flash-face flash-front"><span class="flash-lab">PROMPT</span><div id="flashFront"></div><span class="flash-hint">tap to reveal</span></div>
+        <div class="flash-face flash-back"><span class="flash-lab">ANSWER</span><div id="flashBack"></div></div>
+      </div>
+      <div class="flash-nav">
+        <button class="btn ghost" id="flashPrev">← Prev</button>
+        <button class="btn ghost" id="flashShuffle">Shuffle</button>
+        <button class="btn" id="flashNext">Next →</button>
+      </div>
+    </div>
+
+    <div id="cvssView" class="hide">
+      <div class="cvss-score card">
+        <div class="cvss-big"><span id="cvssNum">0.0</span></div>
+        <div id="cvssSev" class="cvss-sev">—</div>
+        <div class="cvss-vector" id="cvssVec">—</div>
+        <div class="cvss-sub"><span>Impact <b id="cvssImpact">0.0</b></span><span>Exploitability <b id="cvssExp">0.0</b></span></div>
+      </div>
+      <div id="cvssMetrics"></div>
+      <div class="cvss-tip">Tip: <b>AV:N + AC:L + PR:N + UI:N</b> pushes the exploitability sub-score up; <b>S:C</b> lets impact cross a boundary and adds a 1.08× multiplier. Those four are the usual reason a score reaches Critical.</div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS SCREEN ============ -->
+  <section id="results" class="hide">
+    <div class="eyebrow">Assessment report</div>
+    <div class="card">
+      <div class="score-hero">
+        <div class="score-ring"><span class="pct" id="rPct">0</span>%</div>
+        <div id="rBadge" class="verdict-badge">—</div>
+        <div class="score-meta" id="rMeta"></div>
+      </div>
+    </div>
+
+    <div class="section-label">Signal by domain</div>
+    <div class="card" id="domBreakdown"></div>
+
+    <div class="section-label" id="reviewLabel">Missed — review these</div>
+    <div id="reviewList"></div>
+
+    <div class="btn-row" style="margin-top:26px">
+      <button class="btn" id="againBtn">Retry weak domains →</button>
+      <button class="btn ghost" id="homeBtn">Back to console</button>
+    </div>
+    <div class="foot">Track your misses by domain. The one you fail most is the one to cram first.</div>
+  </section>
+
+</div>
+
+<script>
+/* ============ QUESTION BANK (original) ============ */
+const DOMAINS={
+ 1:{name:"Security Operations",color:"var(--d1)"},
+ 2:{name:"Vulnerability Management",color:"var(--d2)"},
+ 3:{name:"Incident Response & Mgmt",color:"var(--d3)"},
+ 4:{name:"Reporting & Communication",color:"var(--d4)"}
+};
+const Q=[
+{d:1,q:"A nursing-station workstation opens an outbound HTTPS connection to the same external IP every 60 seconds, with small consistent payloads — even at 2–3 AM. Most indicative of what?",o:["Normal Windows Update","C2 beaconing","DDoS attack","Normal backup job"],a:1,e:"Fixed interval + small consistent payloads + off-hours = classic beaconing to a C2 server. Updates aren't a steady 60s cadence all night; a DDoS is inbound flooding; backups run scheduled with larger volumes."},
+{d:1,q:"An analyst sees Windows Event ID 1102 on a Domain Controller. Primary concern?",o:["Multiple failed logons","The audit log was cleared — attacker covering tracks","A new user account was created","A new process was launched"],a:1,e:"1102 = 'audit log was cleared' — an anti-forensics red flag (MITRE Defense Evasion – Indicator Removal). 4625 = failed logon, 4720 = user created, 4688 = new process."},
+{d:1,q:"Which email-authentication mechanism uses a digital signature to verify a message wasn't altered in transit?",o:["SPF","DKIM","DMARC","TLS"],a:1,e:"DKIM signs with a private key, verified via the public key in DNS → integrity + sender authentication. SPF only lists authorized senders; DMARC is the policy + alignment; TLS encrypts transport but doesn't sign the body."},
+{d:1,q:"Core principle of a Zero Trust architecture?",o:["Trust every device inside the perimeter","Never trust, always verify — continuous auth + least privilege","A strong perimeter firewall is enough","A VPN secures everything"],a:1,e:"Zero Trust removes implicit internal trust; every request is authenticated/authorized regardless of location, plus microsegmentation + least privilege. The others are the old castle-and-moat model or single controls."},
+{d:1,q:"In threat-intelligence sharing, which component is the transport protocol?",o:["STIX","TAXII","MITRE ATT&CK","OVAL"],a:1,e:"TAXII = the delivery pipeline; STIX = the language describing threats. 'STIX = language, TAXII = pipe.' ATT&CK is a TTP framework; OVAL is a SCAP assessment language."},
+{d:1,q:"Which technique detects a compromised account by comparing current behavior to a user's normal baseline?",o:["DLP","UEBA","SPF","NAC"],a:1,e:"UEBA baselines behavior (logon times, locations, resources) and alerts on deviation — strong against insider threats / account takeover. DLP prevents exfil, SPF authenticates email, NAC controls device access."},
+{d:1,q:"An attacker uses certutil.exe to download a payload. This technique is best classified as:",o:["Zero-day exploit","Living-off-the-Land (LOLBin)","SQL injection","Buffer overflow"],a:1,e:"certutil, mshta, rundll32, regsvr32, wmic, powershell are LOLBins — legitimate OS binaries abused to evade AV (Defense Evasion). It exploits no vulnerability."},
+{d:1,q:"On the Pyramid of Pain, which indicator is hardest for an attacker to change when blocked?",o:["Hash values","IP addresses","Domain names","TTPs"],a:3,e:"Hashes/IPs/domains change trivially; changing TTPs (how they operate) is costly and hard → hunting on TTPs is more durable. That's the ATT&CK philosophy."},
+{d:1,q:"Why is time synchronization (NTP) a prerequisite for a SIEM?",o:["To save bandwidth","To correlate events across sources on an accurate timeline","To encrypt logs","To compress logs"],a:1,e:"Out-of-sync logs make event sequencing impossible → flawed investigations. NTP/UTC normalization gives every timestamp a common reference."},
+{d:1,q:"Which correctly distinguishes an IOC from an IOA?",o:["IOC is behavior in progress; IOA is a past artifact","IOC = artifact of something that already happened (reactive); IOA = behavior/intent in progress (proactive)","They are identical","IOCs are network-only, IOAs host-only"],a:1,e:"IOC (hash/IP/domain) = a compromise already occurred (reactive). IOA = behavior/intent in progress, detected earlier (proactive). Both span network and host."},
+{d:1,q:"Key difference between EDR and XDR?",o:["EDR is Linux-only; XDR is Windows-only","EDR focuses on endpoints; XDR extends correlation across endpoint + network + email + cloud","XDR requires no agent","EDR is a next-gen firewall"],a:1,e:"EDR = endpoint telemetry/response. XDR = 'extended', correlating multiple sources for a broader picture."},
+{d:1,q:"In Wireshark, which display filter shows only DNS queries?",o:["tcp.port == 443","http.request","dns","ip.addr == 8.8.8.8"],a:2,e:"'dns' filters on the DNS protocol. 443 = HTTPS, http.request = HTTP requests, ip.addr = all traffic to/from one IP (not DNS-specific)."},
+{d:1,q:"Running a suspicious file in an isolated environment to observe runtime behavior is called:",o:["Static analysis","Dynamic analysis (sandboxing)","Hashing","Fuzzing"],a:1,e:"Sandboxing = dynamic analysis (execute to observe). Static analysis inspects without running; hashing only fingerprints; fuzzing injects malformed input to find bugs."},
+{d:1,q:"An executable exhibits very high entropy. This most often suggests:",o:["The file is clean and normal","The file may be packed/encrypted (possible malware)","The file is plain text","The file is corrupted"],a:1,e:"High entropy = randomized data, typically from packing/encryption to evade AV signatures — a malware red flag. Plain text has low entropy."},
+{d:1,q:"A parent process explorer.exe spawns powershell.exe, which spawns cmd.exe running an encoded command. Best next step?",o:["Ignore — normal Windows behavior","Investigate the process tree as a likely malicious execution chain","Reboot the machine immediately","Delete powershell.exe"],a:1,e:"Encoded PowerShell in an unusual process tree is a strong Execution/Defense-Evasion signal. Rebooting destroys volatile evidence; deleting the binary breaks legitimate use and doesn't remove the threat."},
+{d:1,q:"Steady DNS queries to long, random-looking subdomains of one domain, carrying data, indicate:",o:["Normal CDN traffic","DNS tunneling (covert channel / exfiltration)","A DHCP issue","SSL stripping"],a:1,e:"Encoding data into DNS subdomain labels to a controlled domain = DNS tunneling, used for C2/exfil over an often-allowed protocol. CDN/DHCP don't produce encoded random labels."},
+{d:1,q:"Which MFA factor is considered the most phishing-resistant?",o:["SMS one-time code","FIDO2 / WebAuthn hardware key","Email verification link","Security questions"],a:1,e:"FIDO2/WebAuthn binds the credential to the origin and uses hardware-backed keys → resistant to phishing/replay. SMS is SIM-swap/interception-prone; email links and security questions are weak."},
+
+{d:2,q:"Given CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H — which is correct?",o:["Requires admin privileges to exploit","Remotely exploitable, no privileges, no user interaction — very high severity","Requires user interaction","Only affects availability"],a:1,e:"AV:N remote, AC:L easy, PR:N no privileges, UI:N no interaction, C/I/A:H full impact → Critical. PR:N means NO privileges needed; UI:N means no interaction; impact spans C, I, and A."},
+{d:2,q:"Which scan type gives the deepest results with the fewest false positives?",o:["Non-credentialed","Credentialed (authenticated)","Passive","External"],a:1,e:"Credentialed scans log in → see patch level, config, registry → accurate, fewer false positives. Non-credentialed and external are shallower; passive only listens."},
+{d:2,q:"Assessing vulnerabilities on a PACS imaging system and infusion pumps — safest approach?",o:["High-intensity active scan","Passive scanning","Credentialed active scan","Aggressive Nmap -A"],a:1,e:"IoMT/OT devices are fragile; active scanning can crash a device treating a patient (safety risk). Passive scanning is non-intrusive. The others are intrusive."},
+{d:2,q:"Which scan result is most dangerous because it creates a false sense of security?",o:["True positive","False positive","False negative","True negative"],a:2,e:"A false negative = a real vulnerability the scanner misses → you believe you're secure while exposed. False positives waste effort but don't let real risk slip through."},
+{d:2,q:"The CISA KEV catalog is used to prioritize:",o:["Vulnerabilities with the lowest CVSS","Vulnerabilities being actively exploited in the wild → patch urgently","Theoretical vulnerabilities with no PoC","Expired vulnerabilities"],a:1,e:"KEV lists vulns actively exploited in the wild → top priority regardless of CVSS. Combine with EPSS (exploitation probability)."},
+{d:2,q:"How do CVE and CWE differ?",o:["CVE is a weakness type; CWE is a specific vuln","CVE is a specific vulnerability ID; CWE is a weakness category","Both are numeric scores","CVE is for web, CWE for network"],a:1,e:"CVE identifies a specific vuln (CVE-2024-xxxxx); CWE classifies a weakness type (CWE-89 SQLi, CWE-79 XSS). CVSS is the score."},
+{d:2,q:"Which are components of SCAP?",o:["STIX and TAXII","OVAL and XCCDF","SPF and DKIM","RTO and RPO"],a:1,e:"SCAP includes OVAL, XCCDF, CCE, CPE, CVE, CVSS — automation standards for vuln/compliance. The others are threat-intel sharing, email auth, and DR metrics."},
+{d:2,q:"What does the Nmap flag -sV do?",o:["UDP scan","Detect the version of services on open ports","OS detection","Skip host discovery"],a:1,e:"-sV = service/version detection. -sU UDP, -O OS detection, -Pn no ping."},
+{d:2,q:"A medical device can't be patched due to vendor lock-in. Best way to reduce risk?",o:["Ignore it","Compensating controls: isolate on a segmented VLAN + enhanced monitoring","Remove the device from the hospital","Continuously run active scans"],a:1,e:"When direct remediation isn't possible, apply compensating controls — segmentation/isolation + monitoring. Ignoring = blind risk acceptance; removal is infeasible; active scans risk crashing it."},
+{d:2,q:"Most effective defense against SQL Injection?",o:["Longer passwords","Parameterized queries / prepared statements","Enabling HTTPS","Installing antivirus"],a:1,e:"Parameterized queries separate data from the SQL command so input can't become code. HTTPS/AV/passwords don't prevent SQLi."},
+{d:2,q:"Primary defense against Cross-Site Scripting (XSS)?",o:["Parameterized queries","Output encoding + Content Security Policy (CSP)","Rate limiting","Port knocking"],a:1,e:"XSS is stopped by encoding output (escaping HTML/JS) + CSP + input validation. Parameterized queries address SQLi."},
+{d:2,q:"Which techniques reduce buffer-overflow exploitability?",o:["ASLR + DEP/NX + stack canaries","HTTPS everywhere","MFA","DNS filtering"],a:0,e:"ASLR (address randomization), DEP/NX (non-executable data), and stack canaries (detect overwrites) are the classic trio against overflows."},
+{d:2,q:"What does EPSS add on top of CVSS?",o:["Patch cost","The probability a vulnerability will be exploited soon","Lines of buggy code","Vendor name"],a:1,e:"CVSS measures severity; EPSS measures likelihood of real-world exploitation. Combine both + KEV to prioritize."},
+{d:2,q:"Staff laptops roam and are frequently offline. Best scan type?",o:["Agentless network scan","Agent-based scan","External scan","Passive-only"],a:1,e:"Agent-based scans keep collecting and reporting offline, syncing when back online. Agentless/external need the device online in-network during the scan."},
+{d:2,q:"In CVSS, what does Scope: Changed (S:C) mean?",o:["The score changes over time","The exploit can impact resources beyond the vulnerable component's security authority","The vendor changed the CVE","The attack requires physical access"],a:1,e:"Scope: Changed means the impact crosses a security boundary (e.g., a hypervisor bug affecting guest VMs), which raises the score. Temporal metrics handle change-over-time."},
+{d:2,q:"Which tool is a web-application scanner rather than a network scanner?",o:["Nmap","OWASP ZAP","hping","Angry IP Scanner"],a:1,e:"OWASP ZAP (and Burp Suite) scan web apps for issues like XSS/SQLi. Nmap/hping/Angry IP are network/host discovery tools."},
+
+{d:3,q:"By order of volatility, which data is collected FIRST?",o:["Hard disk","Backup tapes","RAM (memory)","Archived logs"],a:2,e:"Order: registers/cache → RAM → network state → disk → logs → backups (last). RAM holds processes, connections, keys — lost on power-off, so collect first."},
+{d:3,q:"Purpose of chain of custody in forensics?",o:["Speed up the investigation","Document who held evidence, when and where — ensuring legal admissibility/integrity","Compress evidence","Encrypt the disk"],a:1,e:"Chain of custody is the evidence-handling log. Without it evidence can be thrown out in court. Unrelated to speed/compression/encryption."},
+{d:3,q:"An analyst hashes a disk image at acquisition and again after analysis. Why?",o:["To compress the image","To prove integrity — data wasn't altered during handling","To encrypt the image","To remove malware"],a:1,e:"Matching before/after hashes proves the evidence is unchanged and trustworthy. Hashing doesn't compress/encrypt/clean."},
+{d:3,q:"Correct order of the NIST SP 800-61 IR lifecycle?",o:["Detection → Preparation → Recovery → Lessons Learned","Preparation → Detection & Analysis → Containment/Eradication/Recovery → Post-Incident Activity","Containment → Preparation → Detection → Recovery","Recovery → Containment → Detection → Preparation"],a:1,e:"NIST 4 phases: Preparation → Detection & Analysis → Containment/Eradication/Recovery → Post-Incident. Prep is first; lessons learned feeds back into prep."},
+{d:3,q:"During a ransomware incident, the most appropriate FIRST containment action is:",o:["Immediately re-image all servers","Isolate infected hosts from the network to stop the spread","Pay the ransom","Delete all logs"],a:1,e:"Containment = stop the spread first (isolate/segment). Re-imaging is recovery; paying isn't a standard step; deleting logs destroys evidence."},
+{d:3,q:"An attacker uses stolen credentials to move host-to-host inside the network. Which ATT&CK tactic?",o:["Initial Access","Lateral Movement","Exfiltration","Reconnaissance"],a:1,e:"Moving sideways between hosts = Lateral Movement. Initial Access is first entry; Exfiltration is data-out; Reconnaissance is scouting."},
+{d:3,q:"In the Cyber Kill Chain, packaging an exploit + payload into a weapon (e.g., a macro-laden doc) is which step?",o:["Delivery","Weaponization","Exploitation","Installation"],a:1,e:"Weaponization = coupling exploit with payload. Delivery = sending it; Exploitation = triggering the vuln; Installation = persistence."},
+{d:3,q:"The Diamond Model of Intrusion Analysis has which four vertices?",o:["People, Process, Technology, Data","Adversary, Capability, Infrastructure, Victim","Prepare, Detect, Contain, Recover","Confidentiality, Integrity, Availability, Safety"],a:1,e:"Diamond Model = Adversary – Capability – Infrastructure – Victim per intrusion event."},
+{d:3,q:"After eradicating malware, the team re-images a server and restores from a clean backup. Which phase?",o:["Preparation","Detection","Recovery","Reconnaissance"],a:2,e:"Re-image + restore from clean backup + validate + monitor = Recovery (return to safe operation)."},
+
+{d:4,q:"Under the HIPAA Breach Notification Rule, a breach affecting ≥ 500 individuals requires:",o:["No reporting","Notify affected individuals, HHS OCR, and the media — within 60 days","Report internally only","Report to the FBI within 24 hours"],a:1,e:"≥ 500 records → notify individuals + HHS OCR + media within 60 days. Under 500 is reported annually."},
+{d:4,q:"Under GDPR, the supervisory authority must be notified of a breach within:",o:["30 days","60 days","72 hours","7 days"],a:2,e:"GDPR: notify the supervisory authority within 72 hours of becoming aware, where there's risk to individuals."},
+{d:4,q:"A typical inhibitor to remediation in healthcare is:",o:["A vendor patch is available","A proprietary/legacy medical device that can't be patched due to vendor lock-in","The IT team is overstaffed","The budget is unlimited"],a:1,e:"Inhibitors = barriers: proprietary/legacy systems, MOU/SLA, disallowed downtime, degrading functionality, governance. Vendor-locked devices are the classic case."},
+{d:4,q:"How do MTTD and MTTR differ?",o:["MTTD = time to recover; MTTR = time to detect","MTTD = mean time to detect; MTTR = mean time to respond/remediate","They measure the same thing","MTTD is only for vulns, MTTR only for email"],a:1,e:"MTTD = average time to detect; MTTR = average time to respond/remediate. Related: MTTC (contain) and dwell time."},
+{d:4,q:"Reporting vulnerability posture to the executive board — best approach?",o:["List every CVE with detailed CVSS vectors","Focus on business risk, financial impact; use dashboards; avoid jargon","Send raw scan output only","Send packet captures"],a:1,e:"Executives want business risk + cost + trends. Technical teams get the CVE/CVSS detail. Tailoring to the audience is the Domain 4 skill."},
+{d:4,q:"What does dwell time measure?",o:["How long a scan takes","How long an attacker persists before being detected","Server boot time","Network latency"],a:1,e:"Dwell time = compromise-to-detection duration. Longer dwell = more damage; reduce it by improving MTTD."},
+{d:4,q:"In an incident with likely legal implications, which stakeholder must be engaged early for reporting obligations and evidence preservation?",o:["Marketing","Legal / General Counsel","Facilities","Sales"],a:1,e:"Legal advises on regulatory obligations, legal hold, chain of custody, and law-enforcement coordination. PR handles messaging; legal duties belong to Legal."},
+
+{d:1,q:"SIEM sequence on one host in 3 minutes: 4625 (x40) → 4624 → 4672 → 4720 → 1102. Best interpretation?",snip:"4625 (x40)  →  4624  →  4672  →  4720  →  1102",o:["Routine user activity","Brute force → successful logon → admin rights → new account (persistence) → log cleared (evasion)","A failed backup job","Scheduled patch installation"],a:1,e:"40 failures (brute force) → one success → 4672 admin privileges → 4720 new account (persistence) → 1102 log cleared (anti-forensics). Isolate the host, disable the new account, capture RAM before power-off, hunt lateral movement."},
+{d:2,q:"Vector CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H — severity rating?",snip:"AV:N  AC:L  PR:N  UI:N  S:C  C:H  I:H  A:H",o:["Low","Medium","High","Critical"],a:3,e:"Remote (AV:N), easy (AC:L), no privileges/interaction (PR:N/UI:N), Scope Changed (impact beyond the component), full C/I/A impact → Critical (9.0–10.0). If it's Epic/PACS and in KEV, patch as an emergency."},
+{d:3,q:"Order these ransomware actions: (a) Lessons learned (b) Isolate hosts (c) Restore from clean backup (d) Identify scope & IoCs (e) Remove malware. Correct sequence?",o:["b → d → e → c → a","d → b → e → c → a","d → e → b → c → a","a → d → b → e → c"],a:1,e:"d Identify (Detection) → b Isolate (Containment) → e Remove (Eradication) → c Restore (Recovery) → a Lessons learned (Post-Incident). Collect volatile evidence (RAM before disk) BEFORE re-imaging."},
+{d:3,q:"Match to ATT&CK: HTTPS beaconing every 60s to an external IP is which tactic?",o:["Initial Access","Command & Control","Exfiltration","Persistence"],a:1,e:"Regular beaconing to an external controller = Command & Control (C2). Initial Access is first entry; Exfiltration is data-out; Persistence maintains access."},
+{d:4,q:"Which report tells leadership WHAT to fix, WHO owns it, and BY WHEN?",o:["Compliance report","Action plan","Packet capture","CVSS vector list"],a:1,e:"An action plan assigns remediation tasks, owners, and deadlines. A compliance report states adherence status; the others are raw technical artifacts."},
+{d:1,q:"Which threat-intel source is freely/publicly gathered rather than paid/proprietary?",o:["Closed vendor feed","OSINT (Open-Source Intelligence)","HUMINT from a paid informant","A proprietary ISAC premium feed"],a:1,e:"OSINT is publicly available intel (blogs, public feeds, WHOIS). Closed/proprietary feeds and premium ISAC tiers are paid; HUMINT is human-sourced."}
+,
+{d:1,q:"Which protocol is primarily used for enterprise SSO with XML-based assertions?",o:["OAuth 2.0","SAML","RADIUS","LDAP"],a:1,e:"SAML uses XML assertions for enterprise SSO/federation. OAuth 2.0 handles authorization (often with OIDC for auth); RADIUS/LDAP are directory/AAA protocols."},
+{d:1,q:"An IDS differs from an IPS in that:",o:["An IDS blocks traffic inline; an IPS only alerts","An IDS detects and alerts; an IPS can also block inline","They are identical","An IPS only works on hosts"],a:1,e:"IDS = detect + alert (passive/out-of-band). IPS = inline, can drop/block malicious traffic. Snort/Suricata can run in either mode."},
+{d:1,q:"Snort and Suricata primarily rely on what to detect known threats?",o:["Machine learning only","Signatures/rules","Blockchain","DNS caching"],a:1,e:"Both are signature/rule-based (with some anomaly features). Zeek focuses on network behavior analysis rather than signatures."},
+{d:1,q:"NetFlow data is most useful for:",o:["Reading full packet payloads","Analyzing traffic metadata (who talked to whom, volume, ports)","Decrypting TLS","Editing firewall rules"],a:1,e:"NetFlow captures flow metadata (src/dst, ports, bytes) — great for detecting exfil/beaconing patterns at scale. It doesn't capture payload; full packet capture does."},
+{d:1,q:"What does Sysmon add beyond default Windows logging?",o:["Nothing new","Detailed process creation, network connections, and hashes for richer telemetry","Disk encryption","A firewall"],a:1,e:"Sysmon logs granular events (process creation with command line & hashes, network connections, image loads) that default auditing lacks — valuable for EDR-style detection."},
+{d:1,q:"A honeypot is deployed primarily to:",o:["Serve production traffic","Lure and observe attackers / detect intrusions","Replace a firewall","Encrypt backups"],a:1,e:"A honeypot is a decoy to attract and study attackers and to alert on unauthorized access (active defense). It carries no production value, so any interaction is suspicious."},
+{d:1,q:"Regular C2 beaconing that adds random delay between check-ins is using:",o:["Encryption","Jitter (to evade interval-based detection)","Compression","Tunneling"],a:1,e:"Jitter randomizes the beacon interval to avoid the tell-tale fixed cadence that defenders detect. It's an evasion technique layered on C2."},
+{d:1,q:"A phishing email links to a page that mimics the Office 365 login. The goal is most likely:",o:["Denial of service","Credential harvesting","Data encryption","Port scanning"],a:1,e:"A fake login page is built to capture credentials (Credential Access via phishing). It's the entry to account takeover."},
+{d:1,q:"Which detection method flags activity that deviates from a learned normal baseline?",o:["Signature-based","Anomaly-based","Allow-list","Hashing"],a:1,e:"Anomaly-based detection alerts on deviations from baseline (good for novel/zero-day behavior). Signature-based needs a known pattern."},
+{d:1,q:"A DNS sinkhole is used to:",o:["Speed up DNS","Redirect malicious domain lookups to a controlled server to block/observe C2","Encrypt DNS","Cache all queries"],a:1,e:"A sinkhole answers known-bad domains with a controlled IP, cutting off C2 and letting defenders see which hosts tried to reach them."},
+{d:1,q:"Base64-encoded PowerShell launched with -EncodedCommand most likely indicates:",o:["Normal admin scripting","An attempt to obfuscate a malicious command","A Windows Update","A backup job"],a:1,e:"Encoded PowerShell is a common obfuscation to hide intent from analysts/AV. Combined with an odd process tree it's a strong malicious-execution signal."},
+{d:1,q:"Which is the most reliable indicator to hunt on because it is costly for an attacker to change?",o:["File hash","Source IP","Behavioral TTP","User-agent string"],a:2,e:"On the Pyramid of Pain, TTPs are hardest and most expensive to change. Hashes/IPs/strings are trivially rotated."},
+{d:1,q:"CASB is deployed primarily to:",o:["Scan for buffer overflows","Enforce policy and visibility over cloud application usage (including shadow IT)","Replace antivirus","Manage certificates"],a:1,e:"A Cloud Access Security Broker sits between users and cloud apps to enforce DLP, access policy, and surface shadow IT."},
+{d:1,q:"Which log field is essential to correlate events across multiple systems?",o:["Font color","Accurate timestamp (synchronized clock)","File icon","Screen resolution"],a:1,e:"Synchronized timestamps (via NTP) let a SIEM order events across sources. Without them, correlation and timelines break."},
+{d:1,q:"Full packet capture vs flow data — the main trade-off is:",o:["Flow data stores payloads; PCAP does not","PCAP gives full payload detail but huge storage; flow data is lightweight metadata","They are the same","PCAP cannot see IPs"],a:1,e:"Full PCAP captures everything (deep analysis) but is storage-heavy. NetFlow-style flow data is compact metadata, ideal for long-term, large-scale visibility."},
+{d:1,q:"Kerberos is the default authentication protocol in which environment?",o:["Public web apps","On-prem Windows Active Directory domains","IoT sensors","Email relays"],a:1,e:"Kerberos underpins Windows AD authentication (tickets). Attacks like Kerberoasting/Golden Ticket target it (Credential Access)."},
+{d:1,q:"Which is a host-based indicator of compromise?",o:["Beaconing to an external IP","A new unauthorized local admin account","DNS tunneling","Large outbound data transfer"],a:1,e:"A new unauthorized admin account is host-based. Beaconing, DNS tunneling, and large outbound transfers are network-based indicators."},
+{d:1,q:"Deprecated protocols like SSLv3 and TLS 1.0 should be:",o:["Kept for compatibility","Disabled in favor of TLS 1.2/1.3","Used only for admin traffic","Encrypted twice"],a:1,e:"Old SSL/TLS versions have known cryptographic weaknesses (POODLE, BEAST). Disable them; require TLS 1.2+ (ideally 1.3)."},
+{d:1,q:"A rogue device suddenly appearing on a segmented clinical VLAN should be treated as:",o:["Routine","A potential unauthorized/malicious device requiring investigation","A printer","A DNS server"],a:1,e:"Unexpected devices on a controlled segment are a network IOC — could be an attacker foothold or an unmanaged/unauthorized asset. Investigate and quarantine."},
+{d:1,q:"OSINT differs from a closed/proprietary feed because OSINT is:",o:["Always more accurate","Publicly and freely gathered","Paid subscription only","Human-source only"],a:1,e:"OSINT is publicly available (blogs, public feeds, WHOIS). Closed/proprietary feeds are paid; HUMINT is human-sourced intelligence."},
+{d:1,q:"Which artifact best reveals what a suspicious process actually did at runtime?",o:["A static string dump","Dynamic (sandbox) execution behavior","The file icon","The file name"],a:1,e:"Dynamic analysis observes real behavior (network calls, file/registry changes) that static inspection alone may miss."},
+
+{d:2,q:"A CVE identifier like CVE-2024-1234 represents:",o:["A weakness category","A single specific, publicly disclosed vulnerability","A CVSS score","A product name"],a:1,e:"CVE = a unique ID for one specific disclosed vulnerability. CWE is the weakness category, CPE the product name, CVSS the score."},
+{d:2,q:"Changing Privileges Required from None to High in CVSS will:",o:["Raise the score","Lower the score","Not affect the score","Change the CVE ID"],a:1,e:"Requiring higher privileges makes exploitation harder, lowering the exploitability sub-score and thus the base score."},
+{d:2,q:"An authenticated (credentialed) scan requires:",o:["Physical access","Valid host credentials to log in and inspect internally","A packet capture","A honeypot"],a:1,e:"Credentialed scans log in to read patch level, config, and registry — deeper and more accurate than external, non-credentialed scans."},
+{d:2,q:"Nmap reports a port as 'filtered'. This usually means:",o:["The port is open and responding","A firewall is dropping/blocking probes so state is undetermined","The service crashed","The host is offline"],a:1,e:"'Filtered' = probes are blocked (often by a firewall), so Nmap can't determine open/closed. 'Open' responds; 'closed' is reachable but no service."},
+{d:2,q:"In risk terms, a vulnerability is:",o:["A potential danger source","A weakness that a threat could exploit","The likelihood times impact","An attacker"],a:1,e:"Vulnerability = a weakness. Threat = the potential danger/actor. Risk = likelihood × impact of a threat exploiting a vulnerability."},
+{d:2,q:"Before deploying a patch to production clinical systems, best practice is to:",o:["Deploy immediately everywhere","Test in a staging environment first, then roll out","Skip testing to save time","Only patch on weekends"],a:1,e:"Patches can break functionality (a remediation inhibitor). Test in staging, validate, then deploy — especially for patient-facing systems."},
+{d:2,q:"Quantitative risk uses SLE × ARO to calculate:",o:["CVSS base score","ALE (Annualized Loss Expectancy)","Dwell time","MTTR"],a:1,e:"ALE = SLE (Single Loss Expectancy) × ARO (Annual Rate of Occurrence). It expresses expected annual loss for cost-benefit decisions."},
+{d:2,q:"According to OWASP Top 10, which has ranked as the #1 web application risk?",o:["Broken Access Control","Clickjacking","Weak passwords","Open ports"],a:0,e:"Broken Access Control topped the OWASP Top 10 (2021). It covers IDOR, privilege bypass, and missing authorization checks."},
+{d:2,q:"A payload of ../../../../etc/passwd is characteristic of:",o:["SQL injection","Directory/path traversal","XSS","CSRF"],a:1,e:"Traversal sequences (../) attempt to escape the web root to read arbitrary files. Mitigate by canonicalizing paths and validating input."},
+{d:2,q:"Insecure deserialization can lead to:",o:["Only cosmetic bugs","Remote code execution or object injection","Faster performance","Better logging"],a:1,e:"Untrusted serialized objects can be crafted to execute code or tamper with application logic. Validate/avoid deserializing untrusted data."},
+{d:2,q:"Hardcoded credentials found in a code repository should be:",o:["Left in place","Rotated immediately and moved to a secrets manager","Emailed to the team","Committed to a public branch"],a:1,e:"Exposed secrets must be rotated (assume compromised) and stored in a vault/secrets manager, never in code. SCA/secret scanners catch these."},
+{d:2,q:"Container images should be scanned to detect:",o:["Only CPU usage","Vulnerable packages and misconfigurations before deployment","Screen resolution","Font issues"],a:1,e:"Image scanning finds vulnerable dependencies and misconfig in the image supply chain, ideally enforced in CI/CD and admission control."},
+{d:2,q:"After remediating a vulnerability, you should:",o:["Close the ticket immediately","Rescan/validate that the fix actually resolved the finding","Delete the asset","Ignore it"],a:1,e:"Validation via rescan confirms remediation worked (no lingering false negative). Only then is the finding truly closed."},
+{d:2,q:"A scanner flags a vulnerability, but manual review shows the service is not actually present. This is a:",o:["True positive","False positive","False negative","True negative"],a:1,e:"A false positive = flagged but not real. Triage/validation reduces wasted effort; contrast with the more dangerous false negative (missed real vuln)."},
+{d:2,q:"An SBOM (Software Bill of Materials) primarily helps you:",o:["Encrypt traffic","Know which components/dependencies you run so you can react to new CVEs","Scan ports","Manage passwords"],a:1,e:"An SBOM inventories software components so that when a new CVE (e.g., in a library) drops, you can quickly find affected systems — key for supply-chain risk."},
+{d:2,q:"The safest prioritization approach combines CVSS with:",o:["Alphabetical order","Asset criticality, KEV, and EPSS (real-world exploit context)","Vendor name","Scan duration"],a:1,e:"Raw CVSS isn't enough. Weight by asset value and whether it's actively exploited (KEV) or likely to be (EPSS)."},
+{d:2,q:"Nmap flag -sS performs a:",o:["UDP scan","SYN (half-open) stealth scan","Version detection","OS fingerprint"],a:1,e:"-sS sends SYN without completing the handshake (stealthier, faster). -sU UDP, -sV version, -O OS."},
+{d:2,q:"A control applied when you cannot patch a legacy device is called a:",o:["Corrective root fix","Compensating control","Preventive patch","Detective baseline"],a:1,e:"A compensating control (e.g., isolate + monitor) reduces risk when direct remediation isn't feasible — common for vendor-locked medical devices."},
+{d:2,q:"Infrastructure as Code (IaC) templates should be scanned for:",o:["Only syntax errors","Security misconfigurations before provisioning","Font kerning","Battery level"],a:1,e:"IaC scanning catches insecure defaults (open security groups, public buckets) before resources are deployed — shift-left cloud security."},
+
+{d:3,q:"Copying patient data to an external server over HTTPS is which ATT&CK tactic?",o:["Persistence","Exfiltration","Reconnaissance","Execution"],a:1,e:"Moving data out of the environment = Exfiltration. Often preceded by Collection (staging/compressing) internally."},
+{d:3,q:"Creating a scheduled task that re-launches malware after reboot is which tactic?",o:["Persistence","Exfiltration","Discovery","Impact"],a:0,e:"Scheduled tasks, Run keys, and services that survive reboot are Persistence mechanisms."},
+{d:3,q:"Vertical privilege escalation means:",o:["Accessing another user's account at the same level","Gaining higher privileges than originally granted (e.g., user to admin)","Moving between hosts","Deleting logs"],a:1,e:"Vertical = gaining higher privileges (user→admin). Horizontal = accessing another account at the same privilege level."},
+{d:3,q:"A write blocker is used during acquisition to:",o:["Speed up copying","Prevent any modification to the source evidence","Encrypt the disk","Compress data"],a:1,e:"A write blocker ensures the original media is read-only during imaging, preserving integrity (verified by matching hashes)."},
+{d:3,q:"A legal hold requires the organization to:",o:["Delete relevant data","Preserve data relevant to anticipated litigation","Encrypt all backups","Notify the media"],a:1,e:"Legal hold suspends normal deletion so potentially relevant evidence is preserved for litigation/investigation."},
+{d:3,q:"A playbook differs from a runbook in that a playbook is:",o:["A single automated script","A broader response strategy for a scenario; a runbook is step-by-step procedures","Only for executives","A hardware device"],a:1,e:"Playbook = the overall response approach for an incident type; runbook = the detailed operational steps. SOAR often automates runbook actions."},
+{d:3,q:"In DR planning, a hot site is:",o:["An empty facility","A fully equipped, near-real-time replica ready for immediate failover","A cloud backup only","A tape archive"],a:1,e:"Hot = ready immediately (lowest RTO, highest cost); warm = partial; cold = empty space needing setup."},
+{d:3,q:"Short-term containment during an incident typically means:",o:["Rebuilding all systems","Quickly isolating affected hosts to limit spread while preserving evidence","Deleting the malware source","Notifying customers"],a:1,e:"Short-term containment (e.g., network isolation) stops spread fast without destroying forensic data; long-term containment applies more durable fixes before recovery."},
+{d:3,q:"MAC times (Modified, Accessed, Created) on files are useful in forensics to:",o:["Encrypt files","Build a timeline of activity","Compress evidence","Assign CVSS scores"],a:1,e:"File timestamps help reconstruct when files were created/altered/accessed, supporting timeline analysis during Detection & Analysis."},
+{d:3,q:"When would re-imaging be preferred over cleaning malware in place?",o:["Never","When the extent of compromise is uncertain or persistence may remain","Only for printers","Only on weekends"],a:1,e:"If you can't be certain all persistence/backdoors are removed, re-image from a known-good baseline and restore clean data — safer than in-place cleaning."},
+{d:3,q:"The FIRST responder priority when a running compromised host is found is to:",o:["Power it off immediately","Capture volatile evidence (memory, connections) before it's lost","Format the disk","Reinstall the OS"],a:1,e:"Powering off destroys RAM/volatile data. Follow the order of volatility — capture memory and network state first, then proceed."},
+{d:3,q:"Isolation vs segmentation as containment: isolation is:",o:["Grouping many systems together","Cutting a specific compromised host off entirely","Encrypting traffic","Adding users"],a:1,e:"Isolation removes a host from communication entirely; segmentation restricts groups of systems into zones to limit blast radius."},
+{d:3,q:"Root cause analysis primarily answers:",o:["Who to blame","Why the incident happened so it can be prevented from recurring","How to bill the client","What color to use in reports"],a:1,e:"RCA (5 Whys, fishbone) identifies the underlying cause to drive corrective action and improve the IR plan — a post-incident activity."},
+
+{d:4,q:"An executive summary in a security report should emphasize:",o:["Raw packet captures","Business impact and risk in plain language","Full CVE lists","Regex patterns"],a:1,e:"Executives need business context and risk/cost, not technical minutiae. Technical detail goes to the technical audience."},
+{d:4,q:"A compliance report primarily communicates:",o:["Attacker TTPs","Adherence status to a standard or regulation","Packet flows","Server temperatures"],a:1,e:"Compliance reports show whether controls meet a framework/regulation (HIPAA, PCI DSS). Action plans define remediation tasks and owners."},
+{d:4,q:"Including SLA compliance in vulnerability reporting helps leadership see:",o:["Font choices","Whether remediation is happening within agreed timeframes","Attacker identities","Disk usage"],a:1,e:"SLA metrics show if the team is remediating within committed windows — a key KPI for accountability and trend tracking."},
+{d:4,q:"Under HIPAA, breaches are reported to which federal body?",o:["FBI only","HHS Office for Civil Rights (OCR)","SEC","FCC"],a:1,e:"HIPAA breaches go to HHS OCR (and affected individuals; media if ≥500 in a jurisdiction), within 60 days."},
+{d:4,q:"When law enforcement is involved in an incident, it is critical to:",o:["Wipe the systems","Maintain chain of custody for all evidence","Post details publicly","Skip documentation"],a:1,e:"Preserving chain of custody keeps evidence admissible. Coordinate with Legal and law enforcement before altering systems."},
+{d:4,q:"Reducing dwell time indicates:",o:["Slower detection","Improved detection speed (attackers caught sooner)","More false positives","Longer investigations"],a:1,e:"Dwell time is compromise-to-detection. Lower is better — it means detection (MTTD) improved, limiting damage."},
+{d:4,q:"Lessons learned from an incident should primarily:",o:["Be discarded","Feed back into preparation to improve the IR plan and playbooks","Only go to marketing","Stay with one analyst"],a:1,e:"Post-incident lessons close the loop, updating the IRP, playbooks, and controls to prevent recurrence."},
+{d:4,q:"Which stakeholder controls external messaging during a breach?",o:["Facilities","Public Relations / Communications","Warehouse","Procurement"],a:1,e:"PR/Communications manages public and customer messaging; Legal advises on obligations; both coordinate to avoid missteps."},
+{d:4,q:"An action plan differs from a compliance report because the action plan specifies:",o:["Only historical data","What to fix, who owns it, and by when","Attacker motives","Server uptime"],a:1,e:"Action plans are forward-looking task lists with owners and deadlines; compliance reports state current adherence status."},
+{d:4,q:"The NIST Cybersecurity Framework core functions are:",o:["Plan, Do, Check, Act","Identify, Protect, Detect, Respond, Recover","Scan, Patch, Report","Encrypt, Backup, Restore"],a:1,e:"NIST CSF: Identify, Protect, Detect, Respond, Recover — a common structure for organizing security programs and reporting."},
+{d:4,q:"A metric showing MTTR trending downward over quarters indicates:",o:["Worsening response","Improving response/remediation speed","More vulnerabilities","Less staff"],a:1,e:"Falling MTTR means the team responds/remediates faster over time — a positive trend worth highlighting to leadership."},
+{d:4,q:"An MOU that limits when a vendor system can be touched is best described as:",o:["A remediation accelerator","An inhibitor to remediation","A CVSS metric","A forensic tool"],a:1,e:"Contractual constraints (MOU/SLA) that restrict changes are inhibitors to remediation, alongside legacy/proprietary systems and downtime limits."}
+];
+
+/* ============ STATE ============ */
+let cfg={mode:"practice",dom:"all",len:20};
+let sess=null,timerId=null;
+
+/* chip groups */
+document.querySelectorAll('#modeOpts .chip').forEach(c=>c.onclick=()=>{
+  setChip('modeOpts',c);cfg.mode=c.dataset.mode;
+  const learn=cfg.mode==='learn';
+  document.getElementById('lenField').classList.toggle('hide',learn);
+  document.getElementById('startBtn').textContent=learn?'Open study library →':'Start session →';
+});
+document.querySelectorAll('#domOpts .chip').forEach(c=>c.onclick=()=>{setChip('domOpts',c);cfg.dom=c.dataset.dom});
+document.querySelectorAll('#lenOpts .chip').forEach(c=>c.onclick=()=>{setChip('lenOpts',c);cfg.len=parseInt(c.dataset.len)});
+function setChip(group,el){document.querySelectorAll('#'+group+' .chip').forEach(x=>x.setAttribute('aria-pressed','false'));el.setAttribute('aria-pressed','true');}
+
+/* ============ START ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+document.getElementById('startBtn').onclick=()=>{
+  if(cfg.mode==='learn'){openLibrary();return;}
+  if(cfg.len===85){ startExamSim(); return; }
+  let pool=Q.map((q,i)=>({...q,_i:i}));
+  if(cfg.dom!=="all") pool=pool.filter(q=>q.d==+cfg.dom);
+  shuffle(pool);
+  let n=cfg.len===0?pool.length:Math.min(cfg.len,pool.length);
+  pool=pool.slice(0,n);
+  sess={list:pool,cur:0,ans:new Array(pool.length).fill(null),mode:cfg.mode,start:Date.now()};
+  show('quiz');
+  document.getElementById('qMode').textContent=cfg.mode.toUpperCase();
+  document.getElementById('qTot').textContent=pool.length;
+  document.getElementById('prevBtn').style.visibility=cfg.mode==='exam'?'visible':'hidden';
+  startTimer();
+  renderQ();
+};
+
+function startExamSim(){
+  // full weighted 85-question paper (33/30/20/17), all domains, timed 165 min
+  const want={1:28,2:26,3:17,4:14};
+  let paper=[];
+  Object.keys(want).forEach(d=>{
+    let dp=Q.map((q,i)=>({...q,_i:i})).filter(q=>q.d==+d);
+    shuffle(dp);paper=paper.concat(dp.slice(0,want[d]));
+  });
+  shuffle(paper);
+  sess={list:paper,cur:0,ans:new Array(paper.length).fill(null),mode:'exam',start:Date.now(),sim:true};
+  show('quiz');
+  document.getElementById('qMode').textContent='EXAM · SIM';
+  document.getElementById('qTot').textContent=paper.length;
+  document.getElementById('prevBtn').style.visibility='visible';
+  startTimer();renderQ();
+}
+
+function startTimer(){
+  clearInterval(timerId);
+  const tEl=document.getElementById('timer');
+  if(sess.mode==='exam'){
+    let left=sess.sim?165*60:sess.list.length*90;
+    const tick=()=>{
+      const m=String(left/60|0).padStart(2,'0'),s=String(left%60).padStart(2,'0');
+      tEl.textContent=m+':'+s; tEl.classList.toggle('warn',left<=Math.max(30,sess.list.length*10));
+      if(left<=0){clearInterval(timerId);finish();} left--;
+    };tick();timerId=setInterval(tick,1000);
+  }else{
+    let up=0;
+    const tick=()=>{const m=String(up/60|0).padStart(2,'0'),s=String(up%60).padStart(2,'0');tEl.textContent=m+':'+s;up++;};
+    tick();timerId=setInterval(tick,1000);
+  }
+}
+
+/* ============ RENDER QUESTION ============ */
+function renderQ(){
+  const it=sess.list[sess.cur];
+  const dm=DOMAINS[it.d];
+  document.getElementById('qNow').textContent=sess.cur+1;
+  document.getElementById('pfill').style.width=((sess.cur)/sess.list.length*100)+'%';
+  const badge=document.getElementById('dBadge');
+  badge.querySelector('.sq').style.background=dm.color;
+  document.getElementById('dName').textContent='Domain '+it.d+' · '+dm.name;
+  document.getElementById('qText').textContent=it.q;
+  document.getElementById('qSnip').innerHTML=it.snip?('<pre class="snippet">'+it.snip+'</pre>'):'';
+
+  const box=document.getElementById('answers');box.innerHTML='';
+  const chosen=sess.ans[sess.cur];
+  it.o.forEach((opt,idx)=>{
+    const b=document.createElement('button');
+    b.className='ans';b.innerHTML='<span class="key">'+'ABCD'[idx]+'</span><span>'+opt+'</span>';
+    if(chosen!==null){
+      if(sess.mode==='practice'){
+        b.classList.add('locked');
+        if(idx===it.a) b.classList.add('correct');
+        else if(idx===chosen) b.classList.add('wrong');
+      }else{ if(idx===chosen) b.classList.add('sel'); }
+    }
+    b.onclick=()=>choose(idx);
+    box.appendChild(b);
+  });
+
+  const exp=document.getElementById('explain');
+  if(sess.mode==='practice' && chosen!==null){
+    const ok=chosen===it.a;
+    exp.className='explain show';
+    exp.innerHTML='<div class="verdict '+(ok?'ok':'no')+'">'+(ok?'✓ Correct':'✕ Incorrect — answer: '+'ABCD'[it.a])+'</div>'+it.e;
+  }else{exp.className='explain';exp.innerHTML='';}
+
+  const next=document.getElementById('nextBtn');
+  next.textContent=(sess.cur===sess.list.length-1)?'Finish →':'Next →';
+  document.getElementById('prevBtn').disabled=sess.cur===0;
+}
+
+function choose(idx){
+  if(sess.mode==='practice' && sess.ans[sess.cur]!==null) return; // lock after answer in practice
+  sess.ans[sess.cur]=idx;
+  renderQ();
+}
+
+document.getElementById('nextBtn').onclick=()=>{
+  if(sess.mode==='practice' && sess.ans[sess.cur]===null) return; // must answer first
+  if(sess.cur<sess.list.length-1){sess.cur++;renderQ();}
+  else finish();
+};
+document.getElementById('prevBtn').onclick=()=>{if(sess.cur>0){sess.cur--;renderQ();}};
+document.getElementById('quitBtn').onclick=()=>{if(confirm('Quit this session? Progress is lost.')){clearInterval(timerId);show('start');refreshBest();}};
+
+/* ============ RESULTS ============ */
+function finish(){
+  clearInterval(timerId);
+  const perDom={1:{c:0,t:0},2:{c:0,t:0},3:{c:0,t:0},4:{c:0,t:0}};
+  let correct=0;const missed=[];
+  sess.list.forEach((it,i)=>{
+    perDom[it.d].t++;
+    if(sess.ans[i]===it.a){correct++;perDom[it.d].c++;}
+    else missed.push({it,chosen:sess.ans[i]});
+  });
+  const pct=Math.round(correct/sess.list.length*100);
+  const pass=pct>=83;
+  const secs=Math.round((Date.now()-sess.start)/1000);
+
+  document.getElementById('rPct').textContent=pct;
+  const badge=document.getElementById('rBadge');
+  badge.className='verdict-badge '+(pass?'pass':'fail');
+  badge.textContent=pass?'On target ✓':'Below 750 target';
+  document.getElementById('rMeta').textContent=correct+' / '+sess.list.length+' correct  ·  '+Math.floor(secs/60)+'m '+(secs%60)+'s  ·  '+sess.mode+' mode';
+
+  // domain bars
+  const bd=document.getElementById('domBreakdown');bd.innerHTML='';
+  Object.keys(perDom).forEach(d=>{
+    const o=perDom[d];if(o.t===0)return;
+    const p=Math.round(o.c/o.t*100);const weak=p<70;
+    const dm=DOMAINS[d];
+    const row=document.createElement('div');row.className='dom-row';
+    row.innerHTML=
+      '<div class="dom-name"><span class="sq" style="background:'+dm.color+'"></span>D'+d+' · '+dm.name+'</div>'+
+      '<div class="dom-track"><div class="dom-fill" style="background:'+dm.color+'"></div></div>'+
+      '<div class="dom-val"><span class="'+(weak?'weak':'')+'">'+o.c+'/'+o.t+' · '+p+'%</span>'+(weak?'<span class="weak-note"> ⚑</span>':'')+'</div>';
+    bd.appendChild(row);
+    requestAnimationFrame(()=>{setTimeout(()=>{row.querySelector('.dom-fill').style.width=p+'%';},60);});
+  });
+
+  // review
+  const rl=document.getElementById('reviewList');rl.innerHTML='';
+  document.getElementById('reviewLabel').style.display=missed.length?'flex':'none';
+  if(!missed.length){
+    rl.innerHTML='<div class="card" style="text-align:center;color:var(--green);font-family:JetBrains Mono,monospace;font-size:13px">Clean sweep — no misses. Nice.</div>';
+  }
+  missed.forEach(m=>{
+    const it=m.it;const div=document.createElement('div');div.className='review-item';
+    div.innerHTML=
+      '<div class="dbadge" style="margin-bottom:8px"><span class="sq" style="width:8px;height:8px;border-radius:2px;background:'+DOMAINS[it.d].color+'"></span>Domain '+it.d+'</div>'+
+      '<p class="rq">'+it.q+'</p>'+
+      (m.chosen!==null?'<div class="line"><span class="lab">You</span><span class="yours">'+'ABCD'[m.chosen]+'. '+it.o[m.chosen]+'</span></div>':'<div class="line"><span class="lab">You</span><span class="yours">— (skipped)</span></div>')+
+      '<div class="line"><span class="lab">Correct</span><span class="right">'+'ABCD'[it.a]+'. '+it.o[it.a]+'</span></div>'+
+      '<div class="exp">'+it.e+'</div>';
+    rl.appendChild(div);
+  });
+
+  // persist (works on GitHub Pages; silently skipped where storage is blocked)
+  try{
+    const key='cysa_best';
+    const prev=JSON.parse(localStorage.getItem(key)||'{"best":0,"runs":0}');
+    const rec={best:Math.max(prev.best||0,pct),runs:(prev.runs||0)+1};
+    localStorage.setItem(key,JSON.stringify(rec));
+  }catch(e){}
+
+  // set retry to weakest domain
+  const weakest=Object.keys(perDom).filter(d=>perDom[d].t).sort((a,b)=>(perDom[a].c/perDom[a].t)-(perDom[b].c/perDom[b].t))[0];
+  document.getElementById('againBtn').dataset.dom=weakest||'all';
+
+  show('results');
+}
+
+document.getElementById('againBtn').onclick=(e)=>{
+  const d=e.currentTarget.dataset.dom||'all';
+  cfg.dom=d;
+  // reflect on start chips
+  setChip('domOpts',document.querySelector('#domOpts .chip[data-dom="'+d+'"]')||document.querySelector('#domOpts .chip[data-dom="all"]'));
+  document.getElementById('startBtn').click();
+};
+document.getElementById('homeBtn').onclick=()=>{show('start');refreshBest();};
+
+/* ============ LEARN: KNOWLEDGE BASE ============ */
+const KNOWLEDGE={
+1:[
+ {h:"Network architecture & Zero Trust",p:[
+   "<b>Zero Trust</b> = never trust, always verify. Pillars: least privilege, microsegmentation, continuous verification, SDP (software-defined perimeter), identity-centric access.",
+   "<b>Segmentation</b> limits lateral movement — critical for isolating medical devices / PACS from the office network.",
+   "<b>SASE</b> unifies network+security on the cloud (SWG, CASB, ZTNA, FWaaS). <b>SDN</b> separates control from data plane. <b>CASB</b> governs cloud-app access & shadow IT. <b>NAC (802.1X)</b> authenticates devices before network access."]},
+ {h:"Cloud & infrastructure concepts",p:[
+   "<b>Shared responsibility:</b> cloud provider secures the infrastructure, customer secures data, config & access.",
+   "<b>Serverless</b> (Lambda/Functions): attack surface shifts to IAM misconfig & function permissions.",
+   "<b>Virtualization:</b> hypervisor Type 1 (bare-metal) vs Type 2 (hosted); risk = VM escape, VM sprawl.",
+   "<b>Containers</b> (Docker/K8s): risks = malicious images, container escape, secrets in images → need image scanning + admission control."]},
+ {h:"OS concepts & system hardening",p:[
+   "<b>Windows Registry:</b> config DB; Run keys (HKLM\\...\\Run) used for persistence. Hives: HKLM, HKCU, HKCR, HKU, HKCC.",
+   "<b>Hardening:</b> disable unused services, remove default accounts, apply baselines (<b>CIS Benchmarks, DISA STIG</b>), least functionality.",
+   "<b>Linux:</b> key paths /etc, /var/log, /tmp, /home; permissions rwx (chmod/chown).",
+   "<b>ADS</b> (NTFS Alternate Data Streams) can hide files. <b>TPM / UEFI Secure Boot / HSM</b> anchor hardware trust."]},
+ {h:"IAM & authentication",p:[
+   "<b>MFA factors:</b> know (password), have (token), are (biometric), somewhere (location), do (behavior).",
+   "<b>SSO/Federation:</b> SAML (enterprise XML), OAuth 2.0 (authorization), OIDC (auth on OAuth), Kerberos (on-prem Windows).",
+   "<b>PAM</b> = vault privileged credentials, session recording, just-in-time access.",
+   "<b>Passwordless:</b> FIDO2/WebAuthn, passkeys — phishing-resistant, hardware-backed."]},
+ {h:"Encryption, PKI & data protection",p:[
+   "<b>PKI:</b> CA issues certs; public/private keys; revocation via <b>CRL / OCSP</b>.",
+   "<b>TLS inspection</b> decrypts traffic to inspect (legit MITM) — weigh privacy/compliance.",
+   "<b>DLP</b> (endpoint/network/cloud) prevents exfiltration; <b>data classification</b>: public → internal → confidential → restricted.",
+   "Protect <b>PII, PHI/ePHI, PCI/cardholder data, IP</b> — encrypt at rest + in transit."]},
+ {h:"Log ingestion & SIEM / SOAR",p:[
+   "<b>NTP time sync (UTC)</b> is mandatory — out-of-sync logs can't be correlated → broken timelines.",
+   "<b>SIEM</b> = aggregate + normalize + correlate logs → alerts/dashboards (Splunk/SPL, Sentinel/KQL, QRadar, Elastic).",
+   "<b>SOAR</b> automates response via playbooks. <b>EDR</b> = endpoint telemetry/response; <b>XDR</b> = correlation across endpoint+network+email+cloud.",
+   "Balance log verbosity vs noise; honor <b>retention</b> (HIPAA audit logs often 6+ years)."]},
+ {h:"Log sources & what to watch",p:[
+   "<b>Network:</b> firewall, IDS/IPS (Snort/Suricata/Zeek), NetFlow/sFlow, proxy, DNS logs.",
+   "<b>Host:</b> Windows Event Log, Sysmon, EDR telemetry, Linux syslog/auth.log.",
+   "<b>Baseline first</b> — you can only spot anomalies against a known-normal baseline."]},
+ {h:"Windows Event IDs",table:{head:["ID","Meaning"],rows:[["4624","Logon success"],["4625","Logon failure (brute force if spammed)"],["4634/4647","Logoff"],["4672","Admin/special privileges assigned"],["4688","New process created"],["4720","User account created"],["4728/4732","Added to security/privileged group"],["1102","Audit log cleared (anti-forensics)"]]}},
+ {h:"Indicators: IOC vs IOA",p:[
+   "<b>IOC</b> = artifact of something that already happened (hash, IP, domain) → reactive.",
+   "<b>IOA</b> = behavior/intent in progress (abnormal process spawn, C2 pattern) → proactive, earlier detection."]},
+ {h:"Network / host / app indicators",p:[
+   "<b>Network:</b> beaconing (C2), DNS tunneling, off-hours/large outbound (exfil), rogue devices, scans/sweeps, bandwidth spikes.",
+   "<b>Host:</b> high CPU/mem, disk filling (staging), new admin account, unauthorized process/service/scheduled task, registry changes, abnormal OS process behavior.",
+   "<b>Application:</b> anomalous activity, new accounts, unexpected output/outbound comms, service interruption."]},
+ {h:"Email authentication & phishing",p:[
+   "<b>SPF</b> = which IPs/domains may send. <b>DKIM</b> = digital signature (integrity + sender auth). <b>DMARC</b> = policy (none/quarantine/reject) + SPF/DKIM alignment.",
+   "Analyze headers (Received, Return-Path, Reply-To mismatch), spoofing, malicious links (obfuscation/homograph), attachments (macros, double extensions)."]},
+ {h:"Threat intelligence",p:[
+   "<b>STIX</b> = language describing threats; <b>TAXII</b> = transport protocol. 'STIX = language, TAXII = pipe.'",
+   "<b>ISAC</b> = sector intel sharing; healthcare = <b>H-ISAC</b>. Also MISP, OpenIOC.",
+   "<b>Sources:</b> OSINT (public), closed/proprietary, dark web, HUMINT. Rate source reliability (Admiralty/confidence levels).",
+   "<b>Threat actors:</b> APT/nation-state, organized crime, hacktivist, insider, script kiddie, supply chain."]},
+ {h:"Threat hunting & active defense",p:[
+   "<b>Hypothesis-driven:</b> assume a breach, predict attacker behavior, hunt for evidence — mapped to MITRE ATT&CK.",
+   "<b>Pyramid of Pain:</b> TTPs are hardest for attackers to change → hunt on TTPs, not just hashes/IPs.",
+   "<b>Focus areas:</b> config/change management, isolated systems, business-critical assets, network traffic.",
+   "<b>Active defense:</b> honeypots, honeynets, decoys, deception."]},
+ {h:"Analysis tools & malware analysis",p:[
+   "<b>Wireshark/tcpdump</b> — filters: <code>dns</code>, <code>tcp.port==443</code>, <code>http.request</code>, <code>ip.addr==x</code>.",
+   "<b>Static analysis</b> (no execution): strings, hashing (MD5/SHA-256), disassembly, entropy. <b>Dynamic</b> = sandbox execution (Cuckoo/Any.run).",
+   "High <b>entropy</b> = likely packed/encrypted → malware red flag.",
+   "<b>LOLBins</b> (legit binaries abused to evade AV): certutil, mshta, rundll32, regsvr32, wmic, powershell."]},
+ {h:"Scripting & regex reference",p:[
+   "Read (not necessarily write): <b>Python, PowerShell, Bash, XML/JSON</b>. Watch for encoded PowerShell (base64, IEX, DownloadString).",
+   "<b>Regex tokens:</b> <code>\\d</code> digit, <code>\\w</code> word, <code>\\s</code> space, <code>.</code> any, <code>^</code> start, <code>$</code> end, <code>*</code> 0+, <code>+</code> 1+, <code>?</code> 0/1.",
+   "<b>Shell parsing:</b> grep, awk, cut, sort, uniq, tail — for log triage."]}
+],
+2:[
+ {h:"Vulnerability management lifecycle",p:[
+   "Cycle: <b>discover</b> assets → <b>scan</b> → <b>prioritize</b> → <b>remediate</b> → <b>validate</b> (rescan) → <b>report</b> → repeat.",
+   "Driven by asset inventory, risk tolerance, SLAs, and compliance requirements."]},
+ {h:"Asset discovery & attack surface",p:[
+   "You can only protect what you know exists — maintain an <b>asset inventory</b>.",
+   "<b>Attack Surface Management (ASM):</b> continuously map external-facing exposure.",
+   "Active vs passive discovery; network mapping (Nmap)."]},
+ {h:"Scan types",table:{head:["Type","Note / when"],rows:[["Credentialed","Deep, few false positives — login-based"],["Non-credentialed","Shallow, attacker view"],["Agent-based","Works offline / roaming laptops"],["Agentless","Scans over network"],["Active","Intrusive — can crash fragile hosts"],["Passive","Safe — use for IoMT / OT / PACS"],["Internal / External","Inside perimeter vs Internet view"],["SAST / DAST","Static code / running-app testing"]]}},
+ {h:"Scan special considerations",p:[
+   "<b>Windows/scheduling:</b> run in low-traffic windows.",
+   "<b>Fragile systems</b> (medical, ICS/SCADA) → passive only; active scans can crash patient-facing devices.",
+   "<b>Regulatory:</b> HIPAA/PCI DSS mandate periodic scans. Segmentation affects scan scope."]},
+ {h:"CVSS base metrics",table:{head:["Metric","Worst → least"],rows:[["Attack Vector (AV)","Network > Adjacent > Local > Physical"],["Attack Complexity (AC)","Low > High"],["Privileges Req (PR)","None > Low > High"],["User Interaction (UI)","None > Required"],["Scope (S)","Changed > Unchanged"],["C / I / A","High > Low > None"]]}},
+ {h:"CVSS severity ranges",table:{head:["Score","Rating"],rows:[["0.0","None"],["0.1–3.9","Low"],["4.0–6.9","Medium"],["7.0–8.9","High"],["9.0–10.0","Critical"]]}},
+ {h:"CVSS temporal & environmental",p:[
+   "<b>Temporal:</b> Exploit Code Maturity, Remediation Level, Report Confidence — adjust over time.",
+   "<b>Environmental:</b> re-score for your environment (modified base + CIA requirements).",
+   "CS0-003 uses <b>CVSS v3.1</b>; be aware v4.0 exists."]},
+ {h:"Enumerations & standards",p:[
+   "<b>CVE</b> = specific vuln ID · <b>CWE</b> = weakness type · <b>CPE</b> = product name · <b>CVSS</b> = severity score.",
+   "<b>SCAP</b> = automation suite (OVAL, XCCDF, CCE, CPE, CVE, CVSS).",
+   "Frameworks: OWASP, PTES, NIST, ISO/IEC 27001."]},
+ {h:"Prioritization",p:[
+   "<b>KEV</b> = actively exploited in the wild → patch urgently. <b>EPSS</b> = probability of exploitation.",
+   "Prioritize = CVSS × <b>asset criticality</b> × exploitability (KEV/EPSS) × context (internal/external/isolated) — not raw CVSS alone.",
+   "<b>Zero-day / unpatchable</b> → compensating controls. Risk responses: mitigate, accept, transfer, avoid."]},
+ {h:"Validation of results",p:[
+   "<b>True positive</b> (real, found) · <b>False positive</b> (flagged, not real — wastes effort) · <b>True negative</b> · <b>False negative</b> (missed real vuln — most dangerous).",
+   "<b>Validate remediation</b> by rescanning; confirm the fix actually closed the finding."]},
+ {h:"Assessment tools",table:{head:["Category","Tools"],rows:[["Network / mapping","Nmap (-sS/-sV/-O/-Pn), Angry IP, Maltego"],["Web app","Burp Suite, OWASP ZAP, Nikto, Arachni"],["Vuln scanners","Nessus, Qualys, OpenVAS, Nexpose"],["Multipurpose","Metasploit, hping, Recon-ng"],["Cloud","ScoutSuite, Prowler, Pacu"]]}},
+ {h:"Web / injection attacks (OWASP)",p:[
+   "<b>XSS</b> (reflected/stored/DOM) → output encoding + CSP. <b>SQLi</b> → parameterized queries. <b>Command injection</b> → input validation, avoid shell exec.",
+   "<b>CSRF</b> → anti-CSRF token + SameSite. <b>SSRF</b> → allowlist, block metadata endpoints. <b>Path traversal / LFI / RFI</b> → canonicalize + validate.",
+   "<b>IDOR</b> → server-side access checks. Plus broken access control, cryptographic failures, insecure design, security misconfig."]},
+ {h:"Memory & binary attacks",p:[
+   "<b>Buffer overflow</b> (stack/heap) → ASLR, DEP/NX, stack canaries, bounds checking.",
+   "<b>Integer overflow</b> → safe math + input validation.",
+   "<b>Race condition (TOCTOU)</b> → locking, atomic operations."]},
+ {h:"Other attacks & controls",p:[
+   "<b>Privilege escalation</b> (vertical/horizontal) → least privilege, patch, PAM. <b>Pass-the-Hash</b> → Credential Guard, disable NTLM, LAPS.",
+   "<b>SSL stripping</b> (HTTPS→HTTP) → HSTS. <b>VM escape</b> → hypervisor patch/isolation. <b>Rootkit</b> → Secure Boot + integrity monitoring.",
+   "<b>Supply chain</b> → SBOM, vendor assessment, code signing. <b>Data poisoning</b> (ML training) → data validation & provenance."]},
+ {h:"Secure coding & SDLC",p:[
+   "Input validation, output encoding, parameterized queries, least privilege, secure defaults.",
+   "Testing: <b>SAST</b> (code), <b>DAST</b> (running app), <b>IAST</b>, <b>SCA</b> (dependency scanning)."]}
+],
+3:[
+ {h:"Attack methodology frameworks",p:[
+   "<b>Cyber Kill Chain (7):</b> linear attacker view. <b>Diamond Model:</b> relationship analysis. <b>MITRE ATT&CK:</b> detailed TTP matrix.",
+   "Also: OSSTMM (testing methodology), OWASP Testing Guide."]},
+ {h:"MITRE ATT&CK — 14 tactics",table:{head:["#","Tactic"],rows:[["1","Reconnaissance"],["2","Resource Development"],["3","Initial Access"],["4","Execution"],["5","Persistence"],["6","Privilege Escalation"],["7","Defense Evasion"],["8","Credential Access"],["9","Discovery"],["10","Lateral Movement"],["11","Collection"],["12","Command & Control"],["13","Exfiltration"],["14","Impact"]]}},
+ {h:"Cyber Kill Chain (7 steps)",p:[
+   "1 Reconnaissance → 2 Weaponization → 3 Delivery → 4 Exploitation → 5 Installation → 6 Command & Control → 7 Actions on Objectives.",
+   "Break the chain at any step to stop the attack."]},
+ {h:"Diamond Model",p:[
+   "Four vertices per intrusion event: <b>Adversary · Capability · Infrastructure · Victim</b>.",
+   "Used to pivot: from one vertex you can discover the others."]},
+ {h:"IR lifecycle (NIST vs SANS)",table:{head:["NIST (4)","SANS (6)"],rows:[["Preparation","Preparation"],["Detection & Analysis","Identification"],["Containment/Eradication/Recovery","Containment"],["Post-Incident Activity","Eradication"],["—","Recovery"],["—","Lessons Learned"]]}},
+ {h:"Detection & analysis",p:[
+   "Confirm the incident, determine <b>scope</b> and <b>impact</b>, classify <b>severity</b>.",
+   "<b>Data & log analysis:</b> SIEM correlation, timeline reconstruction, memory & disk forensics.",
+   "Metrics: severity, downtime, data-integrity impact, detection time."]},
+ {h:"Containment → Eradication → Recovery",p:[
+   "<b>Contain</b> first (isolate/segment; short-term vs long-term) → <b>eradicate</b> (remove malware/persistence, close vector) → <b>recover</b> (re-image, restore clean backup, validate, enhanced monitoring).",
+   "Unpatchable asset → <b>compensating controls</b>."]},
+ {h:"Order of volatility",p:[
+   "Collect first → last: CPU registers/cache → <b>RAM</b> (processes, connections, keys) → network state (ARP/routes) → temp/swap → disk → remote logs → <b>archival/backups</b>.",
+   "RAM is lost on power-off → capture it BEFORE re-imaging."]},
+ {h:"Evidence handling & chain of custody",p:[
+   "<b>Chain of custody</b> — who/when/where held evidence (legal admissibility).",
+   "<b>Hash before & after</b> → prove integrity. <b>Write blocker</b> + bit-for-bit <b>forensic image</b> (dd/FTK Imager). <b>Legal hold</b> preserves data; <b>preservation</b> prevents tampering."]},
+ {h:"Digital forensics tools & artifacts",p:[
+   "<b>Memory:</b> Volatility. <b>Disk:</b> Autopsy, FTK, EnCase. <b>Imaging:</b> dd, FTK Imager.",
+   "Artifacts: process lists, network connections, prefetch, registry, browser history, event logs, file timestamps (MAC times)."]},
+ {h:"IR preparation",p:[
+   "<b>Incident Response Plan (IRP):</b> roles, responsibilities, escalation, communication.",
+   "<b>Playbooks/runbooks</b> (SOAR-driven) per scenario; <b>tabletop exercises</b> validate the plan.",
+   "<b>BC/DR:</b> Business Continuity / Disaster Recovery — RTO (recovery time objective), RPO (recovery point objective)."]},
+ {h:"Post-incident activity",p:[
+   "<b>Forensic analysis</b> of artifacts. <b>Root Cause Analysis (RCA):</b> 5 Whys, fishbone diagram.",
+   "<b>Lessons learned</b> meeting → improve the IRP → feed back into Preparation (continuous-improvement loop)."]}
+],
+4:[
+ {h:"Vulnerability reporting",p:[
+   "<b>Report:</b> vuln, affected hosts, risk score (CVSS), mitigation/remediation, recurrence, prioritization.",
+   "Tailor: technical team gets CVE/CVSS detail; executives get business risk + cost."]},
+ {h:"Report types & components",p:[
+   "<b>Compliance report</b> = adherence status. <b>Action plan</b> = what to fix, who owns it, by when.",
+   "<b>Executive summary</b> vs <b>technical detail</b> — same data, different depth."]},
+ {h:"Inhibitors to remediation",p:[
+   "MOU / SLA constraints, business-process interruption, degrading functionality, legacy systems, <b>proprietary systems</b> (vendor-locked medical devices), organizational governance."]},
+ {h:"Metrics & KPIs",p:[
+   "SLA compliance, mean time to remediate, top-10 vulnerabilities, critical count, scan coverage %, recurrence rate.",
+   "<b>Trend analysis</b> over time is more useful to leadership than a single snapshot."]},
+ {h:"Stakeholders & escalation",p:[
+   "<b>Internal:</b> IT, security, legal, HR, PR, management, executives. <b>External:</b> customers, regulators, law enforcement, media, vendors, partners.",
+   "Define incident declaration criteria and a clear escalation path (right person, right time)."]},
+ {h:"Communication types",p:[
+   "<b>Legal</b> — reporting obligations, legal hold. <b>PR / customer</b> — controlled messaging. <b>Regulatory</b> — mandated notifications. <b>Law enforcement</b> — preserve chain of custody."]},
+ {h:"Regulatory breach timelines",table:{head:["Regulation","Timeline"],rows:[["HIPAA","60 days; ≥500 records → HHS OCR + media"],["GDPR","72 hours to supervisory authority"],["PCI DSS","Notify card brand / acquirer"],["SOX","Financial-controls disclosure"]]}},
+ {h:"Compliance frameworks",p:[
+   "<b>HIPAA</b> (healthcare: administrative/physical/technical safeguards), <b>PCI DSS</b> (cardholder data), <b>GDPR</b> (EU privacy), <b>SOX</b> (financial).",
+   "<b>NIST CSF</b> (Identify/Protect/Detect/Respond/Recover), <b>ISO/IEC 27001</b> (ISMS)."]},
+ {h:"IR metrics",p:[
+   "<b>MTTD</b> detect · <b>MTTC</b> contain · <b>MTTR</b> respond/remediate · <b>dwell time</b> = compromise→detection.",
+   "Track false-positive rate and incident counts by category to improve detection tuning."]},
+ {h:"Reporting & lessons learned",p:[
+   "Post-incident report: timeline, root cause, impact, actions taken, recommendations.",
+   "<b>Lessons learned</b> feed process improvements and update playbooks — close the loop."]}
+]
+};
+
+const FLASHCARDS=[
+ {d:2,f:"CVSS 'Low' score range?",b:"0.1 – 3.9"},
+ {d:2,f:"CVSS 'Medium' score range?",b:"4.0 – 6.9"},
+ {d:2,f:"CVSS 'High' score range?",b:"7.0 – 8.9"},
+ {d:2,f:"CVSS 'Critical' score range?",b:"9.0 – 10.0"},
+ {d:2,f:"Worst Attack Vector value?",b:"Network (AV:N)"},
+ {d:2,f:"CVSS Scope: Changed means?",b:"Impact crosses a security boundary → higher score"},
+ {d:2,f:"CVSS version used on CS0-003?",b:"CVSS v3.1"},
+ {d:2,f:"Temporal metrics adjust for?",b:"Exploit maturity, remediation level, report confidence"},
+ {d:1,f:"Event ID 1102?",b:"Audit log cleared (anti-forensics)"},
+ {d:1,f:"Event ID 4624?",b:"Logon success"},
+ {d:1,f:"Event ID 4625?",b:"Logon failure"},
+ {d:1,f:"Event ID 4672?",b:"Admin / special privileges assigned"},
+ {d:1,f:"Event ID 4688?",b:"New process created"},
+ {d:1,f:"Event ID 4720?",b:"User account created"},
+ {d:1,f:"STIX vs TAXII?",b:"STIX = language, TAXII = transport"},
+ {d:1,f:"DKIM provides what?",b:"Integrity via digital signature + sender auth"},
+ {d:1,f:"SPF checks what?",b:"Authorized sending IPs/domains"},
+ {d:1,f:"DMARC provides what?",b:"Policy (none/quarantine/reject) + SPF/DKIM alignment"},
+ {d:1,f:"Pyramid of Pain — hardest to change?",b:"TTPs"},
+ {d:1,f:"3 LOLBin examples?",b:"certutil, mshta, rundll32 (also regsvr32, wmic)"},
+ {d:1,f:"Nmap -sV does what?",b:"Service/version detection"},
+ {d:1,f:"Nmap -Pn does what?",b:"Skip host discovery (no ping)"},
+ {d:1,f:"IOC vs IOA?",b:"IOC = past artifact (reactive); IOA = behavior in progress (proactive)"},
+ {d:1,f:"Healthcare intel sharing group?",b:"H-ISAC"},
+ {d:1,f:"High file entropy suggests?",b:"Packed/encrypted → possible malware"},
+ {d:1,f:"Static vs dynamic malware analysis?",b:"Static = no execution; Dynamic = sandbox run"},
+ {d:1,f:"SAML vs OAuth vs OIDC?",b:"SAML = enterprise SSO; OAuth = authorization; OIDC = auth on OAuth"},
+ {d:1,f:"PAM does what?",b:"Vaults privileged credentials + JIT access + session recording"},
+ {d:1,f:"Most phishing-resistant MFA?",b:"FIDO2 / WebAuthn hardware key"},
+ {d:1,f:"NTFS ADS abused for?",b:"Hiding files (Alternate Data Streams)"},
+ {d:1,f:"Registry Run keys used for?",b:"Persistence"},
+ {d:1,f:"Type 1 vs Type 2 hypervisor?",b:"Type 1 = bare-metal; Type 2 = hosted"},
+ {d:1,f:"Certificate revocation methods?",b:"CRL and OCSP"},
+ {d:2,f:"Most dangerous scan result?",b:"False negative (missed real vuln)"},
+ {d:2,f:"KEV stands for?",b:"Known Exploited Vulnerabilities (active in wild)"},
+ {d:2,f:"EPSS measures?",b:"Probability of exploitation"},
+ {d:2,f:"Scan type for fragile medical devices?",b:"Passive scanning"},
+ {d:2,f:"Deepest scan, fewest false positives?",b:"Credentialed (authenticated)"},
+ {d:2,f:"Scan for offline/roaming laptops?",b:"Agent-based"},
+ {d:2,f:"SQL Injection mitigation?",b:"Parameterized queries"},
+ {d:2,f:"XSS mitigation?",b:"Output encoding + CSP"},
+ {d:2,f:"CSRF mitigation?",b:"Anti-CSRF token + SameSite cookie"},
+ {d:2,f:"SSRF mitigation?",b:"Allowlist + block metadata endpoints"},
+ {d:2,f:"Buffer overflow mitigations?",b:"ASLR + DEP/NX + stack canary"},
+ {d:2,f:"Pass-the-Hash mitigation?",b:"Credential Guard, disable NTLM, LAPS"},
+ {d:2,f:"SSL stripping mitigation?",b:"HSTS"},
+ {d:2,f:"Race condition type?",b:"TOCTOU (time-of-check to time-of-use)"},
+ {d:2,f:"CVE vs CWE?",b:"CVE = specific vuln; CWE = weakness type"},
+ {d:2,f:"CPE is?",b:"Standardized product/platform name"},
+ {d:2,f:"SCAP contains?",b:"OVAL, XCCDF, CCE, CPE, CVE, CVSS"},
+ {d:2,f:"SAST vs DAST?",b:"SAST = static code; DAST = running app"},
+ {d:2,f:"SCA scans?",b:"Third-party dependencies"},
+ {d:2,f:"Supply-chain defense?",b:"SBOM + vendor assessment + code signing"},
+ {d:2,f:"Web app scanners?",b:"Burp Suite, OWASP ZAP, Nikto"},
+ {d:3,f:"Diamond Model — 4 vertices?",b:"Adversary, Capability, Infrastructure, Victim"},
+ {d:3,f:"Kill Chain step 2?",b:"Weaponization"},
+ {d:3,f:"Kill Chain — 7 steps?",b:"Recon→Weaponize→Deliver→Exploit→Install→C2→Actions"},
+ {d:3,f:"MITRE ATT&CK final (14th) tactic?",b:"Impact"},
+ {d:3,f:"ATT&CK tactic for host-to-host movement?",b:"Lateral Movement"},
+ {d:3,f:"NIST IR — 4 phases?",b:"Prep → Detection&Analysis → Containment/Eradication/Recovery → Post-Incident"},
+ {d:3,f:"SANS IR — 6 steps?",b:"Prep, Identification, Containment, Eradication, Recovery, Lessons Learned"},
+ {d:3,f:"Order of volatility — collect first?",b:"CPU registers/cache, then RAM"},
+ {d:3,f:"How to prove evidence integrity?",b:"Hash before & after (must match)"},
+ {d:3,f:"Chain of custody documents?",b:"Who/when/where held evidence (legal admissibility)"},
+ {d:3,f:"Memory forensics tool?",b:"Volatility"},
+ {d:3,f:"Bit-for-bit disk copy tool?",b:"dd / FTK Imager (with a write blocker)"},
+ {d:3,f:"First containment in ransomware?",b:"Isolate infected hosts"},
+ {d:3,f:"RTO vs RPO?",b:"RTO = time to recover; RPO = max data-loss window"},
+ {d:3,f:"RCA methods?",b:"5 Whys, fishbone diagram"},
+ {d:3,f:"Tabletop exercise purpose?",b:"Validate the IR plan on paper"},
+ {d:4,f:"HIPAA breach timeline?",b:"60 days (≥500 → HHS OCR + media)"},
+ {d:4,f:"GDPR breach timeline?",b:"72 hours"},
+ {d:4,f:"MTTD vs MTTR?",b:"Detect vs Respond/Remediate"},
+ {d:4,f:"MTTC measures?",b:"Mean time to contain"},
+ {d:4,f:"Dwell time?",b:"Compromise → detection duration"},
+ {d:4,f:"Action plan states?",b:"What to fix, who owns it, by when"},
+ {d:4,f:"Inhibitor to remediation (healthcare)?",b:"Proprietary/legacy vendor-locked device"},
+ {d:4,f:"Engage early for legal implications?",b:"Legal / General Counsel"},
+ {d:4,f:"NIST CSF 5 functions?",b:"Identify, Protect, Detect, Respond, Recover"},
+ {d:4,f:"Board-level reporting focus?",b:"Business risk + cost, not CVE detail"}
+];
+
+/* ---- Library render ---- */
+function openLibrary(){
+  const scope=cfg.dom;
+  document.getElementById('learnEyebrow').textContent=scope==='all'?'Study library · all domains':'Study library · Domain '+scope;
+  buildConcepts(scope);
+  buildFlash(scope);
+  buildCVSS();
+  // default to concepts view
+  setSeg('concepts');
+  show('learn');
+}
+function buildConcepts(scope){
+  const body=document.getElementById('libBody');body.innerHTML='';
+  const doms=scope==='all'?[1,2,3,4]:[+scope];
+  const wt={1:'33%',2:'30%',3:'20%',4:'17%'};
+  doms.forEach(d=>{
+    const head=document.createElement('div');head.className='lib-dom';
+    head.innerHTML='<span class="sq" style="background:'+DOMAINS[d].color+'"></span>Domain '+d+' · '+DOMAINS[d].name+'<span class="wt">'+wt[d]+'</span>';
+    body.appendChild(head);
+    KNOWLEDGE[d].forEach((t,i)=>{
+      const card=document.createElement('div');card.className='topic'+((scope!=='all'&&i===0)?' open':(scope==='all'&&d===doms[0]&&i===0?' open':''));
+      let inner='';
+      if(t.p) t.p.forEach(pt=>inner+='<div class="kpt"><span>'+pt+'</span></div>');
+      if(t.table){
+        inner+='<table class="ktable"><thead><tr>'+t.table.head.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>';
+        t.table.rows.forEach(r=>inner+='<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>');
+        inner+='</tbody></table>';
+      }
+      card.innerHTML='<div class="topic-head"><span class="idx">'+String(i+1).padStart(2,'0')+'</span>'+t.h+'<span class="chev">›</span></div><div class="topic-body">'+inner+'</div>';
+      card.querySelector('.topic-head').onclick=()=>card.classList.toggle('open');
+      body.appendChild(card);
+    });
+  });
+}
+
+/* ---- Flashcards ---- */
+let fcList=[],fcIdx=0;
+function buildFlash(scope){
+  fcList=(scope==='all'?FLASHCARDS.slice():FLASHCARDS.filter(c=>c.d==+scope));
+  shuffle(fcList);fcIdx=0;renderFlash();
+}
+function renderFlash(){
+  if(!fcList.length)return;
+  const c=fcList[fcIdx];
+  const card=document.getElementById('flashCard');card.classList.remove('flipped');
+  document.getElementById('flashFront').textContent=c.f;
+  document.getElementById('flashBack').textContent=c.b;
+  document.getElementById('flashCount').textContent=(fcIdx+1)+' / '+fcList.length;
+  const dn=document.getElementById('flashDom');dn.textContent='Domain '+c.d;dn.style.color=DOMAINS[c.d].color;
+}
+document.getElementById('flashCard').onclick=function(){this.classList.toggle('flipped');};
+document.getElementById('flashCard').onkeydown=function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();this.classList.toggle('flipped');}};
+document.getElementById('flashNext').onclick=()=>{fcIdx=(fcIdx+1)%fcList.length;renderFlash();};
+document.getElementById('flashPrev').onclick=()=>{fcIdx=(fcIdx-1+fcList.length)%fcList.length;renderFlash();};
+document.getElementById('flashShuffle').onclick=()=>{shuffle(fcList);fcIdx=0;renderFlash();};
+
+/* ---- CVSS v3.1 base score calculator ---- */
+const CVSS_M=[
+ {k:'AV',name:'Attack Vector',opts:[['N','Network',.85],['A','Adjacent',.62],['L','Local',.55],['P','Physical',.2]]},
+ {k:'AC',name:'Attack Complexity',opts:[['L','Low',.77],['H','High',.44]]},
+ {k:'PR',name:'Privileges Required',opts:[['N','None',null],['L','Low',null],['H','High',null]]},
+ {k:'UI',name:'User Interaction',opts:[['N','None',.85],['R','Required',.62]]},
+ {k:'S',name:'Scope',opts:[['U','Unchanged',null],['C','Changed',null]]},
+ {k:'C',name:'Confidentiality',opts:[['H','High',.56],['L','Low',.22],['N','None',0]]},
+ {k:'I',name:'Integrity',opts:[['H','High',.56],['L','Low',.22],['N','None',0]]},
+ {k:'A',name:'Availability',opts:[['H','High',.56],['L','Low',.22],['N','None',0]]}
+];
+const PR_VAL={U:{N:.85,L:.62,H:.27},C:{N:.85,L:.68,H:.50}};
+let cvssState={AV:'N',AC:'L',PR:'N',UI:'N',S:'U',C:'H',I:'H',A:'H'};
+
+function buildCVSS(){
+  const box=document.getElementById('cvssMetrics');box.innerHTML='';
+  CVSS_M.forEach(m=>{
+    const row=document.createElement('div');row.className='mrow';
+    let opts='';
+    m.opts.forEach(o=>{opts+='<button class="mopt'+(cvssState[m.k]===o[0]?' on':'')+'" data-k="'+m.k+'" data-v="'+o[0]+'">'+o[0]+' · '+o[1]+'</button>';});
+    row.innerHTML='<div class="mrow-top"><span class="mrow-name">'+m.name+'</span><span class="mrow-abbr">'+m.k+'</span></div><div class="mrow-opts">'+opts+'</div>';
+    box.appendChild(row);
+  });
+  box.querySelectorAll('.mopt').forEach(b=>b.onclick=()=>{
+    cvssState[b.dataset.k]=b.dataset.v;
+    const parent=b.closest('.mrow-opts');parent.querySelectorAll('.mopt').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    computeCVSS();
+  });
+  computeCVSS();
+}
+function roundup(x){var i=Math.round(x*100000);return (i%10000===0)?i/100000:(Math.floor(i/10000)+1)/10;}
+function computeCVSS(){
+  const s=cvssState;
+  const av={N:.85,A:.62,L:.55,P:.2}[s.AV];
+  const ac={L:.77,H:.44}[s.AC];
+  const pr=PR_VAL[s.S][s.PR];
+  const ui={N:.85,R:.62}[s.UI];
+  const cia={H:.56,L:.22,N:0};
+  const iss=1-((1-cia[s.C])*(1-cia[s.I])*(1-cia[s.A]));
+  let impact;
+  if(s.S==='U') impact=6.42*iss;
+  else impact=7.52*(iss-0.029)-3.25*Math.pow(iss-0.02,15);
+  const exploit=8.22*av*ac*pr*ui;
+  let score;
+  if(impact<=0) score=0;
+  else if(s.S==='U') score=roundup(Math.min(impact+exploit,10));
+  else score=roundup(Math.min(1.08*(impact+exploit),10));
+
+  const sev = score===0?['None','var(--muted)']:score<4?['Low','var(--cyan)']:score<7?['Medium','var(--amber)']:score<9?['High','#fb923c']:['Critical','var(--rose)'];
+  document.getElementById('cvssNum').textContent=score.toFixed(1);
+  document.getElementById('cvssNum').style.color=sev[1];
+  const sv=document.getElementById('cvssSev');sv.textContent=sev[0];sv.style.color=sev[1];sv.style.borderColor=sev[1];
+  document.getElementById('cvssVec').textContent='CVSS:3.1/AV:'+s.AV+'/AC:'+s.AC+'/PR:'+s.PR+'/UI:'+s.UI+'/S:'+s.S+'/C:'+s.C+'/I:'+s.I+'/A:'+s.A;
+  document.getElementById('cvssImpact').textContent=Math.max(0,impact).toFixed(1);
+  document.getElementById('cvssExp').textContent=exploit.toFixed(1);
+}
+
+/* segmented control */
+document.querySelectorAll('#learnSeg .seg-btn').forEach(b=>b.onclick=()=>setSeg(b.dataset.view));
+function setSeg(view){
+  document.querySelectorAll('#learnSeg .seg-btn').forEach(x=>x.setAttribute('aria-pressed',x.dataset.view===view?'true':'false'));
+  document.getElementById('conceptsView').classList.toggle('hide',view!=='concepts');
+  document.getElementById('cardsView').classList.toggle('hide',view!=='cards');
+  document.getElementById('cvssView').classList.toggle('hide',view!=='cvss');
+}
+document.getElementById('learnHome').onclick=()=>{show('start');refreshBest();};
+
+/* ============ NAV ============ */
+function show(id){['start','quiz','results','learn'].forEach(s=>document.getElementById(s).classList.toggle('hide',s!==id));window.scrollTo({top:0,behavior:'smooth'});}
+function refreshBest(){
+  try{
+    const r=JSON.parse(localStorage.getItem('cysa_best')||'null');
+    document.getElementById('bestLine').innerHTML=r?('Best score: <b>'+r.best+'%</b> · '+r.runs+' sessions logged'):'';
+  }catch(e){}
+}
+refreshBest();
+</script>
+</body>
+</html>
