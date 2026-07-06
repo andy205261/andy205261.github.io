@@ -42,6 +42,15 @@ body{
 .console-bar .grow{flex:1}
 @keyframes blink{50%{opacity:0}}
 
+/* persistent nav */
+.nav-brand{display:flex;align-items:center;gap:9px;background:none;border:none;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;cursor:pointer;padding:0;transition:.13s}
+.nav-brand:hover{color:var(--cyan)}
+.nav-tabs{display:flex;gap:4px}
+.nav-tab{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.05em;color:var(--muted);background:none;border:1px solid transparent;border-radius:7px;padding:5px 12px;cursor:pointer;transition:.13s}
+.nav-tab:hover{color:var(--text);border-color:var(--border)}
+.nav-tab.active{color:var(--cyan);border-color:var(--cyan-dim);background:var(--panel)}
+@media(max-width:460px){.nav-tab{padding:5px 9px}.nav-brand span:last-child{display:none}}
+
 h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
 h1 .plus{color:var(--cyan)}
 .sub{color:var(--muted);font-size:14.5px;margin:0 0 24px;max-width:60ch}
@@ -214,6 +223,21 @@ pre.snippet{font-family:'JetBrains Mono',monospace;font-size:13px;background:var
 .mopt.on{background:var(--cyan);color:#04141b;border-color:var(--cyan);font-weight:700}
 .cvss-tip{font-size:13px;color:var(--muted);border-left:3px solid var(--cyan-dim);padding:10px 14px;background:var(--panel-2);border-radius:0 8px 8px 0;margin-top:16px;line-height:1.55}
 .cvss-tip b{color:var(--text)}
+
+/* progress dashboard */
+.btn-row.sub{margin-top:10px}
+.btn.mini{font-size:13px;padding:10px 16px}
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-soft);border:1px solid var(--border-soft);border-radius:12px;overflow:hidden;margin-bottom:18px}
+.prog-cell{background:var(--panel-2);padding:15px 14px;text-align:center}
+.prog-cell .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:var(--cyan)}
+.prog-cell .l{font-size:11px;color:var(--muted);margin-top:3px}
+.hist{display:flex;align-items:flex-end;gap:5px;height:80px;padding:8px 0;margin-top:6px}
+.hist-bar{flex:1;min-width:8px;background:var(--cyan-dim);border-radius:3px 3px 0 0;position:relative;transition:height .5s ease}
+.hist-bar.pass{background:var(--green)}
+.hist-bar span{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--faint)}
+.hist-empty{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--faint);padding:20px 0;text-align:center}
+.prog-reset{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);background:none;border:none;cursor:pointer;text-decoration:underline;margin-top:20px}
+.prog-reset:hover{color:var(--rose)}
 .foot{text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);margin-top:36px;line-height:1.7}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -224,10 +248,13 @@ pre.snippet{font-family:'JetBrains Mono',monospace;font-size:13px;background:var
 <div class="wrap">
 
   <div class="console-bar">
-    <span class="dot"></span>
-    <span>SOC-TRAINER v1 · CS0-003 · target 750/900</span>
+    <button class="nav-brand" id="navBrand"><span class="dot"></span><span>SOC-TRAINER</span></button>
     <span class="grow"></span>
-    <span>ready<span class="cur">_</span></span>
+    <nav class="nav-tabs" id="navTabs">
+      <button class="nav-tab" data-nav="home">Home</button>
+      <button class="nav-tab" data-nav="learn">Learn</button>
+      <button class="nav-tab" data-nav="progress">Progress</button>
+    </nav>
   </div>
 
   <!-- ============ START SCREEN ============ -->
@@ -276,6 +303,10 @@ pre.snippet{font-family:'JetBrains Mono',monospace;font-size:13px;background:var
 
       <div class="btn-row">
         <button class="btn" id="startBtn">Start session →</button>
+      </div>
+      <div class="btn-row sub">
+        <button class="btn ghost mini" id="progBtn">📊 View progress</button>
+        <button class="btn ghost mini" id="drillBtn">Drill my mistakes</button>
       </div>
       <div class="best" id="bestLine"></div>
     </div>
@@ -371,6 +402,28 @@ pre.snippet{font-family:'JetBrains Mono',monospace;font-size:13px;background:var
       <button class="btn ghost" id="homeBtn">Back to console</button>
     </div>
     <div class="foot">Track your misses by domain. The one you fail most is the one to cram first.</div>
+  </section>
+
+  <!-- ============ PROGRESS SCREEN ============ -->
+  <section id="progress" class="hide">
+    <div class="eyebrow">Progress · lifetime</div>
+    <div class="prog-grid">
+      <div class="prog-cell"><div class="n" id="pgBest">0%</div><div class="l">best score</div></div>
+      <div class="prog-cell"><div class="n" id="pgAcc">0%</div><div class="l">lifetime accuracy</div></div>
+      <div class="prog-cell"><div class="n" id="pgSessions">0</div><div class="l">sessions</div></div>
+    </div>
+
+    <div class="section-label">Accuracy by domain (all sessions)</div>
+    <div class="card" id="pgDomains"></div>
+
+    <div class="section-label">Recent scores</div>
+    <div class="card"><div id="pgHist"></div></div>
+
+    <div class="btn-row" style="margin-top:24px">
+      <button class="btn" id="pgDrill">Drill my mistakes →</button>
+      <button class="btn ghost" id="pgHome">Back to console</button>
+    </div>
+    <button class="prog-reset" id="pgReset">reset all progress</button>
   </section>
 
 </div>
@@ -691,10 +744,25 @@ function finish(){
 
   // persist (works on GitHub Pages; silently skipped where storage is blocked)
   try{
-    const key='cysa_best';
-    const prev=JSON.parse(localStorage.getItem(key)||'{"best":0,"runs":0}');
-    const rec={best:Math.max(prev.best||0,pct),runs:(prev.runs||0)+1};
-    localStorage.setItem(key,JSON.stringify(rec));
+    const prev=JSON.parse(localStorage.getItem('cysa_best')||'{"best":0,"runs":0}');
+    localStorage.setItem('cysa_best',JSON.stringify({best:Math.max(prev.best||0,pct),runs:(prev.runs||0)+1}));
+
+    // lifetime domain stats + score history
+    const st=JSON.parse(localStorage.getItem('cysa_stats')||'{"dom":{"1":{"c":0,"t":0},"2":{"c":0,"t":0},"3":{"c":0,"t":0},"4":{"c":0,"t":0}},"hist":[],"sessions":0}');
+    [1,2,3,4].forEach(d=>{st.dom[d].c+=perDom[d].c;st.dom[d].t+=perDom[d].t;});
+    st.hist.push({pct:pct,mode:sess.sim?'sim':sess.mode});
+    if(st.hist.length>20) st.hist=st.hist.slice(-20);
+    st.sessions=(st.sessions||0)+1;
+    localStorage.setItem('cysa_stats',JSON.stringify(st));
+
+    // mistakes bank: add missed question ids, remove ones now answered correctly
+    let wrong=new Set(JSON.parse(localStorage.getItem('cysa_wrong')||'[]'));
+    sess.list.forEach((it,i)=>{
+      if(it._i===undefined) return;
+      if(sess.ans[i]===it.a) wrong.delete(it._i);
+      else wrong.add(it._i);
+    });
+    localStorage.setItem('cysa_wrong',JSON.stringify([...wrong]));
   }catch(e){}
 
   // set retry to weakest domain
@@ -1101,14 +1169,122 @@ function setSeg(view){
 document.getElementById('learnHome').onclick=()=>{show('start');refreshBest();};
 
 /* ============ NAV ============ */
-function show(id){['start','quiz','results','learn'].forEach(s=>document.getElementById(s).classList.toggle('hide',s!==id));window.scrollTo({top:0,behavior:'smooth'});}
+function show(id){
+  ['start','quiz','results','learn','progress'].forEach(s=>document.getElementById(s).classList.toggle('hide',s!==id));
+  const map={start:'home',results:'home',learn:'learn',progress:'progress',quiz:''};
+  const active=map[id];
+  document.querySelectorAll('#navTabs .nav-tab').forEach(t=>t.classList.toggle('active',t.dataset.nav===active));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function navGo(target){
+  const inQuiz=!document.getElementById('quiz').classList.contains('hide');
+  if(inQuiz && !confirm('Leave this session? Progress in the current quiz will be lost.')) return;
+  clearInterval(timerId);
+  if(target==='home'){show('start');refreshBest();}
+  else if(target==='learn'){openLibrary();}
+  else if(target==='progress'){openProgress();}
+}
+document.getElementById('navBrand').onclick=()=>navGo('home');
+document.querySelectorAll('#navTabs .nav-tab').forEach(t=>t.onclick=()=>navGo(t.dataset.nav));
 function refreshBest(){
   try{
     const r=JSON.parse(localStorage.getItem('cysa_best')||'null');
     document.getElementById('bestLine').innerHTML=r?('Best score: <b>'+r.best+'%</b> · '+r.runs+' sessions logged'):'';
+    const w=JSON.parse(localStorage.getItem('cysa_wrong')||'[]');
+    const db=document.getElementById('drillBtn');
+    db.textContent='Drill my mistakes'+(w.length?' ('+w.length+')':'');
+    db.disabled=w.length===0;
   }catch(e){}
 }
+
+/* ============ PROGRESS ============ */
+function openProgress(){
+  let st,best;
+  try{ st=JSON.parse(localStorage.getItem('cysa_stats')||'null'); best=JSON.parse(localStorage.getItem('cysa_best')||'null'); }catch(e){}
+  st=st||{dom:{1:{c:0,t:0},2:{c:0,t:0},3:{c:0,t:0},4:{c:0,t:0}},hist:[],sessions:0};
+  let tc=0,tt=0;[1,2,3,4].forEach(d=>{tc+=st.dom[d].c;tt+=st.dom[d].t;});
+  document.getElementById('pgBest').textContent=(best?best.best:0)+'%';
+  document.getElementById('pgAcc').textContent=(tt?Math.round(tc/tt*100):0)+'%';
+  document.getElementById('pgSessions').textContent=st.sessions||0;
+
+  const bd=document.getElementById('pgDomains');bd.innerHTML='';
+  [1,2,3,4].forEach(d=>{
+    const o=st.dom[d];const p=o.t?Math.round(o.c/o.t*100):0;const weak=o.t&&p<70;
+    const row=document.createElement('div');row.className='dom-row';
+    row.innerHTML='<div class="dom-name"><span class="sq" style="background:'+DOMAINS[d].color+'"></span>D'+d+' · '+DOMAINS[d].name+'</div>'+
+      '<div class="dom-track"><div class="dom-fill" style="background:'+DOMAINS[d].color+'"></div></div>'+
+      '<div class="dom-val"><span class="'+(weak?'weak':'')+'">'+(o.t?o.c+'/'+o.t+' · '+p+'%':'—')+'</span>'+(weak?'<span class="weak-note"> ⚑</span>':'')+'</div>';
+    bd.appendChild(row);
+    requestAnimationFrame(()=>setTimeout(()=>{row.querySelector('.dom-fill').style.width=p+'%';},60));
+  });
+
+  const h=document.getElementById('pgHist');
+  if(!st.hist.length){h.innerHTML='<div class="hist-empty">No sessions yet — finish a quiz to start tracking.</div>';}
+  else{
+    h.className='hist';h.innerHTML='';
+    st.hist.slice(-12).forEach(e=>{
+      const bar=document.createElement('div');bar.className='hist-bar'+(e.pct>=83?' pass':'');
+      bar.innerHTML='<span>'+e.pct+'</span>';h.appendChild(bar);
+      requestAnimationFrame(()=>setTimeout(()=>{bar.style.height=Math.max(6,e.pct)+'%';},60));
+    });
+  }
+  show('progress');
+}
+function drillMistakes(){
+  let w=[];try{w=JSON.parse(localStorage.getItem('cysa_wrong')||'[]');}catch(e){}
+  if(!w.length){alert('No saved mistakes yet — take a quiz first, and any misses land here to drill.');return;}
+  let pool=w.map(i=>({...Q[i],_i:i})).filter(q=>q.q);
+  shuffle(pool);
+  sess={list:pool,cur:0,ans:new Array(pool.length).fill(null),mode:'practice',start:Date.now()};
+  show('quiz');
+  document.getElementById('qMode').textContent='DRILL · MISTAKES';
+  document.getElementById('qTot').textContent=pool.length;
+  document.getElementById('prevBtn').style.visibility='hidden';
+  startTimer();renderQ();
+}
+document.getElementById('progBtn').onclick=openProgress;
+document.getElementById('drillBtn').onclick=drillMistakes;
+document.getElementById('pgDrill').onclick=drillMistakes;
+document.getElementById('pgHome').onclick=()=>{show('start');refreshBest();};
+document.getElementById('pgReset').onclick=()=>{
+  if(confirm('Reset all saved progress (scores, domain stats, mistakes)? This cannot be undone.')){
+    try{['cysa_best','cysa_stats','cysa_wrong'].forEach(k=>localStorage.removeItem(k));}catch(e){}
+    refreshBest();openProgress();
+  }
+};
+
+/* ============ KEYBOARD SHORTCUTS (quiz) ============ */
+document.addEventListener('keydown',(e)=>{
+  if(document.getElementById('quiz').classList.contains('hide')) return;
+  if(['1','2','3','4'].includes(e.key)){
+    const idx=+e.key-1;const it=sess.list[sess.cur];
+    if(it&&idx<it.o.length){ if(!(sess.mode==='practice'&&sess.ans[sess.cur]!==null)) choose(idx); }
+  } else if(e.key==='Enter'||e.key==='ArrowRight'){ document.getElementById('nextBtn').click(); }
+  else if(e.key==='ArrowLeft'){ const p=document.getElementById('prevBtn'); if(p.style.visibility!=='hidden') p.click(); }
+});
+
+/* ============ DEEP-LINK ROUTING (from portfolio card) ============ */
+function selectChip(group,val,attr){const el=document.querySelector('#'+group+' .chip[data-'+attr+'="'+val+'"]');if(el)el.click();}
+function applyHash(){
+  const h=(location.hash||'').toLowerCase().replace('#','');
+  if(h==='learn'){cfg.mode='learn';openLibrary();}
+  else if(h==='practice'){selectChip('modeOpts','practice','mode');show('start');}
+  else if(h==='exam'||h==='examsim'){selectChip('modeOpts','exam','mode');selectChip('lenOpts','85','len');show('start');}
+}
+window.addEventListener('hashchange',applyHash);
+
+/* ============ DEEP-LINK ROUTING (from portfolio) ============ */
+function routeHash(){
+  const h=(location.hash||'').toLowerCase().replace('#','');
+  if(h==='learn'){ openLibrary(); }
+  else if(h==='practice'){ cfg.mode='practice'; cfg.dom='all'; cfg.len=20; document.getElementById('startBtn').click(); }
+  else if(h==='exam'||h==='exam-sim'||h==='sim'){ cfg.len=85; startExamSim(); }
+  else if(h==='progress'){ openProgress(); }
+}
+window.addEventListener('hashchange',routeHash);
 refreshBest();
+routeHash();
+applyHash();
 </script>
 </body>
 </html>
