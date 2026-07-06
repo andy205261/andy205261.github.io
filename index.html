@@ -1213,11 +1213,11 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
         </div>
         <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
           <div style="display:flex;gap:6px">
-            <div style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25)">🩺 PCP Handoff</div>
-            <div style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)">💊 Nursing</div>
-            <div style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)">👤 Patient</div>
+            <div id="caa-tab-pcp" onclick="caaTab('pcp')" style="cursor:pointer;padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25)">🩺 PCP Handoff</div>
+            <div id="caa-tab-nursing" onclick="caaTab('nursing')" style="cursor:pointer;padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)">💊 Nursing</div>
+            <div id="caa-tab-patient" onclick="caaTab('patient')" style="cursor:pointer;padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)">👤 Patient</div>
           </div>
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
+          <div id="caa-out" style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
             <div style="color:var(--ink);margin-bottom:6px;font-size:12px">DISCHARGE SUMMARY — PCP HANDOFF</div>
             <div style="color:var(--accent)">PRINCIPAL DIAGNOSIS</div>
             <div>COPD Exacerbation, Moderate (J44.1)</div>
@@ -1227,6 +1227,25 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
             <div>• Repeat spirometry 6-8 weeks</div>
             <div style="margin-top:6px;color:var(--ink3)">ALLERGY: Penicillin (rash) — flagged</div>
           </div>
+          <script>
+          (function(){
+            const OUT={
+              pcp:'<div style="color:var(--ink);margin-bottom:6px;font-size:12px">DISCHARGE SUMMARY — PCP HANDOFF</div><div style="color:var(--accent)">PRINCIPAL DIAGNOSIS</div><div>COPD Exacerbation, Moderate (J44.1)</div><div style="margin-top:6px;color:var(--accent)">CRITICAL FOLLOW-UP</div><div>• PCP within 5-7 days ⚡</div><div>• Pulmonology referral — 4 weeks</div><div>• Repeat spirometry 6-8 weeks</div><div style="margin-top:6px;color:var(--ink3)">ALLERGY: Penicillin (rash) — flagged</div>',
+              nursing:'<div style="color:var(--ink);margin-bottom:6px;font-size:12px">NURSING HANDOFF — SBAR</div><div style="color:var(--accent)">S — SITUATION</div><div>64F, COPD exacerbation, cleared for discharge</div><div style="margin-top:6px;color:var(--accent)">B — BACKGROUND</div><div>3-day stay · IV steroids + nebulizers · now on room air</div><div style="margin-top:6px;color:var(--accent)">A — ASSESSMENT</div><div>SpO₂ 94% RA · ambulating independently · afebrile</div><div style="margin-top:6px;color:var(--accent)">R — RECOMMENDATION</div><div>• Inhaler technique teach-back before discharge</div><div>• Confirm PCP appt booked (5-7 days)</div><div style="margin-top:6px;color:var(--ink3)">ALLERGY: Penicillin (rash) — flagged</div>',
+              patient:'<div style="color:var(--ink);margin-bottom:6px;font-size:12px">YOUR DISCHARGE SUMMARY</div><div style="color:var(--accent)">WHY YOU WERE HERE</div><div>Your COPD (a lung condition) flared up. You are better now.</div><div style="margin-top:6px;color:var(--accent)">WHAT TO DO AT HOME</div><div>• Use your inhalers the way we showed you</div><div>• See your regular doctor in 5-7 days</div><div>• See a lung doctor in about 4 weeks</div><div style="margin-top:6px;color:var(--accent)">CALL YOUR DOCTOR IF</div><div>You feel more short of breath, or you get a fever.</div><div style="margin-top:6px;color:var(--ink3)">Remember: you are allergic to penicillin.</div>'
+            };
+            const ON={bg:'rgba(56,189,248,.12)',fg:'var(--accent)',bd:'1px solid rgba(56,189,248,.25)'};
+            const OFF={bg:'rgba(255,255,255,.04)',fg:'var(--ink3)',bd:'1px solid var(--rule)'};
+            window.caaTab=function(m){
+              const out=document.getElementById('caa-out'); if(!out) return;
+              out.innerHTML=OUT[m];
+              ['pcp','nursing','patient'].forEach(k=>{
+                const t=document.getElementById('caa-tab-'+k); if(!t) return;
+                const s=(k===m)?ON:OFF; t.style.background=s.bg; t.style.color=s.fg; t.style.border=s.bd;
+              });
+            };
+          })();
+          </script>
           <div style="display:flex;gap:8px;align-items:center">
             <div style="flex:1;height:1px;background:var(--rule)"></div>
             <a href="https://clinical-ai-demo-six.vercel.app/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open Live Demo →</a>
