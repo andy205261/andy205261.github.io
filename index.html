@@ -324,8 +324,9 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <a href="#proj-06" class="proj-nav-tab">06 IT Operations</a>
     <a href="#proj-07" class="proj-nav-tab">07 FHIR Data Engineering</a>
     <a href="#proj-08" class="proj-nav-tab">08 Clinical AI Assistant</a>
+    <a href="#proj-09" class="proj-nav-tab">09 Security Training</a>
   </div>
-  <p class="intro fi">Eight hands-on projects spanning neurological signal analysis, clinical AI explainability, medical imaging, document intelligence, healthcare system analysis, and enterprise IT — showing the full range from infrastructure to clinical informatics.</p>
+  <p class="intro fi">Nine hands-on projects spanning neurological signal analysis, clinical AI explainability, medical imaging, document intelligence, healthcare system analysis, enterprise IT, and security exam tooling — showing the full range from infrastructure to clinical informatics.</p>
 
   <!-- PROJECT 1: Neurological AI -->
   <div id="proj-01" style="margin-bottom:48px">
@@ -1241,6 +1242,69 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
       <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Prompt engineering</span></div><div class="ctitle">3 audience-specific prompts</div><div class="cdesc">Separate system prompts engineered for each audience. PCP mode generates ICD-10 codes, medication reconciliation tables, and critical follow-up flags. Nursing mode outputs structured SBAR with action-oriented bullet points. Patient mode enforces 6th-grade reading level, plain language, and avoids jargon entirely.</div></div><div class="card-body"><div class="mrow"><span class="mk">Technique</span><span class="mv">Role + format + constraint prompting</span></div><div class="mrow"><span class="mk">Validation</span><span class="mv ok">Format enforced via structured headers</span></div></div></div>
       <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Clinical safety</span></div><div class="ctitle">Human-in-the-loop design</div><div class="cdesc">Every generated summary displays a mandatory clinical safety notice requiring licensed clinician review before use in patient care. Fallback outputs for API errors ensure the demo never fails silently. Allergy detection and critical follow-up items are surfaced with visual flags in every summary type.</div></div><div class="card-body"><div class="mrow"><span class="mk">Safety pattern</span><span class="mv">Decision support, not autonomous</span></div><div class="mrow"><span class="mk">Error handling</span><span class="mv ok">Graceful fallback outputs</span></div></div></div>
       <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Clinical coverage</span></div><div class="ctitle">Multi-condition support</div><div class="cdesc">Pre-loaded example cases covering 5 high-volume clinical scenarios: COPD exacerbation, acute MI with PCI, septic shock, ischemic stroke with thrombectomy, and CHF exacerbation. Each case tests different medication complexity, allergy documentation, and follow-up requirements across all three audience modes.</div></div><div class="card-body"><div class="mrow"><span class="mk">Cases built</span><span class="mv">5 clinical scenarios</span></div><div class="mrow"><span class="mk">Audiences</span><span class="mv ok">PCP · Nursing · Patient × 5 = 15</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- PROJECT 9: CYSA+ THREAT CONSOLE -->
+  <div id="proj-09" style="margin-bottom:48px">
+    <a href="#proj-09" class="proj-label fi" style="text-decoration:none">Project 09 — Security Training Tool</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">Vanilla JS</span><span class="tag">CVSS 3.1</span><span class="tag">MITRE ATT&amp;CK</span><span class="tag">localStorage</span><span class="tag">Zero deps</span>
+        </div>
+        <h3>CySA+ Threat Console</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">Clinical systems run on ePHI, so understanding their security and compliance layer is core to systems analysis — which is why I built this interactive CompTIA CySA+ (CS0-003) trainer, grounded in healthcare security context (IoMT, HIPAA, PACS, hospital ransomware). Learn, Practice, and a full timed exam simulator, with per-domain progress tracking and a spaced-repetition mistakes drill.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">EXAM DOMAIN WEIGHTING</div>
+          <div class="srow"><span class="slb">Security Operations</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">33%</span></div>
+          <div class="srow"><span class="slb">Vulnerability Mgmt</span><div class="strk"><div class="sbar" style="width:91%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">30%</span></div>
+          <div class="srow"><span class="slb">Incident Response</span><div class="strk"><div class="sbar" style="width:61%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">20%</span></div>
+          <div class="srow"><span class="slb">Reporting &amp; Comms</span><div class="strk"><div class="sbar" style="width:52%;background:#34d399"></div></div><span class="sval" style="color:#34d399">17%</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">QUESTION BANK</div>
+            <div style="font-size:13px;color:var(--ink)">120 original items</div>
+          </div>
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">EXAM SIM</div>
+            <div style="font-size:13px;color:var(--accent)">85 Q · 165 min</div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">CySA+ Threat Console — Live Trainer</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Learn · Practice · Exam sim · CVSS calculator</div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:6px">
+            <div style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25)">📖 Learn</div>
+            <div style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)">✍️ Practice</div>
+            <div style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)">⏱️ Exam Sim</div>
+          </div>
+          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
+            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">CVSS v3.1 BASE SCORE</div>
+            <div style="color:var(--accent);word-break:break-all">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H</div>
+            <div style="margin-top:6px;display:flex;align-items:baseline;gap:8px"><span style="font-family:'DM Serif Display',serif;font-size:26px;color:#fb5c74;line-height:1">10.0</span><span style="color:#fb5c74">CRITICAL</span></div>
+            <div style="margin-top:4px;color:var(--ink3)">Impact 6.0 · Exploitability 3.9</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+            <a href="cysa/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Launch Console →</a>
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+          </div>
+          <div class="mrow"><span class="mk">Study modes</span><span class="mv">Learn · Practice · Exam · Drill</span></div>
+          <div class="mrow"><span class="mk">Progress</span><span class="mv ok">Per-domain tracking + mistakes bank</span></div>
+          <div class="mrow"><span class="mk">Build</span><span class="mv ok">Single HTML file · zero dependencies</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Learn engine</span></div><div class="ctitle">52 concepts · 80 flashcards · CVSS calc</div><div class="cdesc">A browsable study library covering all four CS0-003 domains — Zero Trust, IAM, CVSS scoring, MITRE ATT&amp;CK, incident response, forensics, and compliance — with flip-flashcards for memorization and a live CVSS v3.1 calculator that computes the exact base score from the official formula.</div></div><div class="card-body"><div class="mrow"><span class="mk">Concept cards</span><span class="mv">52 across 4 domains</span></div><div class="mrow"><span class="mk">CVSS calc</span><span class="mv ok">Verified vs official v3.1</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Exam simulator</span></div><div class="ctitle">85 questions · 165-minute clock</div><div class="cdesc">A full exam simulation draws 85 questions weighted to the real domain distribution (33/30/20/17) under a 165-minute countdown — plus shorter Practice and per-domain modes. Every question carries a distractor-level explanation of why each option is right or wrong.</div></div><div class="card-body"><div class="mrow"><span class="mk">Question bank</span><span class="mv">120 original items</span></div><div class="mrow"><span class="mk">Weighting</span><span class="mv ok">Matches exam blueprint</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Progress tracking</span></div><div class="ctitle">Weak-spot analytics + mistakes drill</div><div class="cdesc">Results are graded with a per-domain breakdown that flags exactly where points are leaking. Lifetime accuracy and score history persist across sessions, and every missed question feeds a spaced-repetition drill — questions leave the bank only once answered correctly.</div></div><div class="card-body"><div class="mrow"><span class="mk">Persistence</span><span class="mv">localStorage · cross-session</span></div><div class="mrow"><span class="mk">Review</span><span class="mv ok">Spaced-repetition mistakes bank</span></div></div></div>
     </div>
   </div>
 
