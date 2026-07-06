@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 10 — Clinical Systems Analyst Lab | Andy Nguyen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#080c14;--panel:#0d1420;--panel-2:#111a29;--line:#1c2940;
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.12);
+  --text:#dbe4f0;--muted:#7d8ca3;--faint:#54627a;
+  --red:#f87171;--amber:#fbbf24;--green:#4ade80;--purple:#c084fc;
+  --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.65;font-size:16px}
+.wrap{max-width:900px;margin:0 auto;padding:64px 24px 96px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+h1{font-family:var(--serif);font-size:clamp(32px,5.5vw,50px);font-weight:400;line-height:1.12;margin-bottom:18px}
+.sub{color:var(--muted);max-width:680px;margin-bottom:20px}
+.sub strong{color:var(--text);font-weight:500}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 48px}
+.chip{font-family:var(--mono);font-size:11.5px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:56px}
+.tool{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s,transform .2s;text-decoration:none;color:var(--text)}
+.tool:hover{border-color:rgba(56,189,248,.45);box-shadow:0 0 36px rgba(56,189,248,.1);transform:translateY(-3px)}
+.tool-tag{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px}
+.tool-tag.depth{color:var(--red)}
+.tool-tag.breadth{color:var(--cyan)}
+.tool h2{font-family:var(--serif);font-size:24px;font-weight:400;margin-bottom:10px}
+.tool p{color:var(--muted);font-size:14.5px;flex:1}
+.tool .go{margin-top:20px;font-family:var(--mono);font-size:13px;color:var(--cyan)}
+.tool ul{list-style:none;margin:14px 0 0}
+.tool li{position:relative;padding-left:18px;margin-bottom:7px;color:var(--muted);font-size:13.5px}
+.tool li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:11px;top:3px}
+
+h3.sect{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:16px}
+.why{color:var(--muted);max-width:720px;margin-bottom:22px;font-size:15px}
+.why strong{color:var(--text);font-weight:500}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:56px}
+.sk{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;transition:border-color .3s}
+.sk:hover{border-color:rgba(56,189,248,.35)}
+.sk .sk-t{font-weight:500;font-size:14.5px;color:var(--text);margin-bottom:6px;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em}
+.sk p{font-size:13px;color:var(--muted);line-height:1.6}
+
+.note{background:var(--panel-2);border:1px solid var(--line);border-left:2px solid var(--purple);border-radius:0 12px 12px 0;padding:16px 20px;font-size:14px;color:var(--muted);max-width:720px}
+.note strong{color:var(--text);font-weight:500}
+
+footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--cyan);text-decoration:none}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow">Project 10 · Healthcare IT Portfolio</div>
+<h1>Clinical Systems Analyst Lab</h1>
+<p class="sub">Two interactive simulations of the real work behind an Epic EHR environment: three <strong>critical incidents</strong> worked end-to-end, and the <strong>daily ticket queue</strong> that fills the rest of the week. Built to demonstrate clinical systems thinking — where every configuration decision is a patient-safety decision. All data synthetic; no PHI.</p>
+
+<div class="meta-row">
+  <span class="chip">Epic ecosystem</span>
+  <span class="chip">HL7 v2 · Interfaces</span>
+  <span class="chip">ServiceNow workflow</span>
+  <span class="chip">Change control</span>
+  <span class="chip">HIPAA · Cures Act</span>
+  <span class="chip">Patient safety</span>
+</div>
+
+<div class="tools">
+  <a class="tool" href="incident-sim.html">
+    <div class="tool-tag depth">Depth · 3 critical incidents</div>
+    <h2>Incident Simulations</h2>
+    <p>Three critical incidents worked end-to-end, each decision scored with real-world consequences: an HL7 ORU filing failure, an ADT backlog corrupting every downstream system's picture of the hospital, and a Data Courier promotion that passed testing and broke production.</p>
+    <ul>
+      <li>Clickable HL7 message anatomy (MSH → OBX)</li>
+      <li>Sequence integrity, rollback vs fix-forward judgment</li>
+      <li>Emergency change control &amp; safe queue reprocessing</li>
+      <li>Blameless RCA &amp; delayed-criticals safety reviews</li>
+    </ul>
+    <div class="go">Run the incidents →</div>
+  </a>
+
+  <a class="tool" href="shift-trainer.html">
+    <div class="tool-tag breadth">Breadth · Daily queue</div>
+    <h2>CSA Shift Trainer: The Daily Queue</h2>
+    <p>Ten random tickets per shift from a pool of 32 scenarios spanning the whole analyst surface — security, ClinDoc, orders, pharmacy, lab, imaging, interfaces, reporting, downtime, and change control.</p>
+    <ul>
+      <li>Four reveal layers per ticket: Triage → Resolution → Knowledge → Pitfalls</li>
+      <li>Interview angle written into every scenario</li>
+      <li>Library mode: browse all 32 by module</li>
+      <li>Real Epic concepts: EMP/SER, SmartTools, Data Courier, Clarity/Caboodle</li>
+    </ul>
+    <div class="go">Start a shift →</div>
+  </a>
+</div>
+
+<h3 class="sect">What this project demonstrates</h3>
+<p class="why">A Clinical Systems Analyst lives at the junction of three languages — <strong>clinical workflow, system configuration, and risk</strong>. These simulations were built around the judgment calls that define the role: knowing that a deferred message queue is patients' results, that resolution is not closure until the delayed-criticals review runs, that a routing fix must be paired with a sweep of everything already misrouted, and that severity is defined by clinical impact, not system metrics.</p>
+
+<div class="skills">
+  <div class="sk"><div class="sk-t">HL7 &amp; INTEROPERABILITY</div><p>ORU/ADT/ORM message anatomy, placer–filler matching, sequence integrity, interface incident command, minimum-necessary feed design.</p></div>
+  <div class="sk"><div class="sk-t">EPIC OPERATIONS</div><p>EMP/SER security model, SmartTools, order build layers, EPS printing, Data Courier discipline, SU/Nova/Sherlock upgrade rhythm.</p></div>
+  <div class="sk"><div class="sk-t">DATA &amp; REPORTING</div><p>Chronicles → Clarity → Caboodle → Slicer Dicer stack fluency, metric definition governance, tool-fit routing.</p></div>
+  <div class="sk"><div class="sk-t">SAFETY &amp; COMPLIANCE</div><p>BCMA five rights, alert-fatigue tuning by data, Cures Act release rules, break-the-glass, audit role separation, downtime readiness.</p></div>
+</div>
+
+<div class="note"><strong>Why this exists:</strong> built as career preparation for the Clinical Systems Analyst → IAM → Healthcare Security Engineering path — the same method as the CySA+ interactive trainer: turn the target role's daily reality into a practice environment, then rehearse it until the safe path is reflex, not recall.</div>
+
+<footer>
+  <span>Project 10 · synthetic data only · Epic® is a trademark of Epic Systems Corporation</span>
+  <span><a href="https://andy205261.github.io">← Back to portfolio</a></span>
+</footer>
+</div>
+</body>
+</html>
