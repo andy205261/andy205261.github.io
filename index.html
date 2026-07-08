@@ -325,8 +325,9 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <a href="#proj-07" class="proj-nav-tab">07 FHIR Data Engineering</a>
     <a href="#proj-08" class="proj-nav-tab">08 Clinical AI Assistant</a>
     <a href="#proj-09" class="proj-nav-tab">09 Security Training</a>
+    <a href="#proj-10" class="proj-nav-tab">10 Epic Analyst Lab</a>
   </div>
-  <p class="intro fi">Nine hands-on projects spanning neurological signal analysis, clinical AI explainability, medical imaging, document intelligence, healthcare system analysis, enterprise IT, and security exam tooling — showing the full range from infrastructure to clinical informatics.</p>
+  <p class="intro fi">Ten hands-on projects spanning neurological signal analysis, clinical AI explainability, medical imaging, document intelligence, healthcare system analysis, enterprise IT, security exam tooling, and Epic analyst simulation — showing the full range from infrastructure to clinical informatics.</p>
 
   <!-- PROJECT 1: Neurological AI -->
   <div id="proj-01" style="margin-bottom:48px">
@@ -1324,6 +1325,69 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
       <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Learn engine</span></div><div class="ctitle">52 concepts · 80 flashcards · CVSS calc</div><div class="cdesc">A browsable study library covering all four CS0-003 domains — Zero Trust, IAM, CVSS scoring, MITRE ATT&amp;CK, incident response, forensics, and compliance — with flip-flashcards for memorization and a live CVSS v3.1 calculator that computes the exact base score from the official formula.</div></div><div class="card-body"><div class="mrow"><span class="mk">Concept cards</span><span class="mv">52 across 4 domains</span></div><div class="mrow"><span class="mk">CVSS calc</span><span class="mv ok">Verified vs official v3.1</span></div></div></div>
       <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Exam simulator</span></div><div class="ctitle">85 questions · 165-minute clock</div><div class="cdesc">A full exam simulation draws 85 questions weighted to the real domain distribution (33/30/20/17) under a 165-minute countdown — plus shorter Practice and per-domain modes. Every question carries a distractor-level explanation of why each option is right or wrong.</div></div><div class="card-body"><div class="mrow"><span class="mk">Question bank</span><span class="mv">120 original items</span></div><div class="mrow"><span class="mk">Weighting</span><span class="mv ok">Matches exam blueprint</span></div></div></div>
       <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Progress tracking</span></div><div class="ctitle">Weak-spot analytics + mistakes drill</div><div class="cdesc">Results are graded with a per-domain breakdown that flags exactly where points are leaking. Lifetime accuracy and score history persist across sessions, and every missed question feeds a spaced-repetition drill — questions leave the bank only once answered correctly.</div></div><div class="card-body"><div class="mrow"><span class="mk">Persistence</span><span class="mv">localStorage · cross-session</span></div><div class="mrow"><span class="mk">Review</span><span class="mv ok">Spaced-repetition mistakes bank</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- PROJECT 10: CLINICAL SYSTEMS ANALYST LAB -->
+  <div id="proj-10" style="margin-bottom:48px">
+    <a href="#proj-10" class="proj-label fi" style="text-decoration:none">Project 10 — Clinical Systems Analyst Lab</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">HL7 v2</span><span class="tag">Epic ecosystem</span><span class="tag">ServiceNow</span><span class="tag">IAM</span><span class="tag">Patient safety</span>
+        </div>
+        <h3>Epic incident simulations &amp; ticket-queue trainer</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px"><b style="color:var(--ink);font-weight:600">Clinical Systems Analysts</b> live where clinical workflow, system configuration, and risk intersect. This lab turns that job into a practice environment: three decision-based P1/P2 incidents worked end-to-end — an HL7 ORU filing failure with clickable message anatomy, an ADT sequence crisis with a stakeholder pressure-test, and a compromised provider account crossing into IAM and HIPAA breach territory — plus a daily shift trainer that deals 10 random tickets from a 32-scenario pool spanning the whole analyst surface.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">SCENARIO COVERAGE BY DOMAIN</div>
+          <div class="srow"><span class="slb">Interfaces &amp; HL7</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">3 sims</span></div>
+          <div class="srow"><span class="slb">Security &amp; IAM</span><div class="strk"><div class="sbar" style="width:88%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">7 tix</span></div>
+          <div class="srow"><span class="slb">ClinDoc &amp; Orders</span><div class="strk"><div class="sbar" style="width:74%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">8 tix</span></div>
+          <div class="srow"><span class="slb">Willow · Beaker · Radiant</span><div class="strk"><div class="sbar" style="width:66%;background:#34d399"></div></div><span class="sval" style="color:#34d399">7 tix</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">SCENARIO POOL</div>
+            <div style="font-size:13px;color:var(--ink)">3 incidents · 32 tickets</div>
+          </div>
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">REVEAL LAYERS</div>
+            <div style="font-size:13px;color:var(--accent)">Triage → Fix → Know → Pitfalls</div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Clinical Systems Analyst Lab — Live</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Incident sims · Shift trainer · Scenario library</div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:6px">
+            <a href="csa-lab/incident-sim.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25);text-decoration:none">🚨 Incidents</a>
+            <a href="csa-lab/shift-trainer.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule);text-decoration:none">🎫 Shift Trainer</a>
+          </div>
+          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
+            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">INC0482913 · P1 — BEAKER-ORU-IN</div>
+            <div style="color:#f87171">FILING ERROR: no matching order found</div>
+            <div style="color:#fbbf24">filler order number SHCB-20260705-000841</div>
+            <div style="margin-top:6px;color:var(--ink3)">error queue: <span style="color:#f87171">1,325</span> · deferred, not purged</div>
+            <div style="margin-top:4px;color:#34d399">→ fix forward · reprocess · safety review</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+            <a href="csa-lab/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Enter the Lab →</a>
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+          </div>
+          <div class="mrow"><span class="mk">Incidents</span><span class="mv">ORU filing · ADT crisis · Account compromise</span></div>
+          <div class="mrow"><span class="mk">Daily queue</span><span class="mv ok">10 random tickets / shift · 12 Epic domains</span></div>
+          <div class="mrow"><span class="mk">Build</span><span class="mv ok">Static HTML + JS · zero dependencies</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Incident engine</span></div><div class="ctitle">3 end-to-end incidents · 16 decisions</div><div class="cdesc">Each incident is a chain of decision points with real-world cost feedback: read the HL7 error text before restarting, hold sequence integrity against stakeholder pressure, contain a compromised account atomically. Debriefs include the full incident timeline, systemic RCA, and why every wrong answer fails in production.</div></div><div class="card-body"><div class="mrow"><span class="mk">Scenarios</span><span class="mv">ORU · ADT · Compromise</span></div><div class="mrow"><span class="mk">Debrief</span><span class="mv ok">Timeline + RCA + talking points</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Shift trainer</span></div><div class="ctitle">10 random tickets per shift · 32-scenario pool</div><div class="cdesc">A daily queue simulator that deals priority-sorted tickets across Security/IAM, ClinDoc, Orders, Willow, Beaker, Radiant, Cupid, MyChart, Interfaces, Reporting, Downtime, and Change control — the full breadth of what lands in an Epic analyst's ServiceNow queue, with a filterable library mode for study by module.</div></div><div class="card-body"><div class="mrow"><span class="mk">Pool</span><span class="mv">32 scenarios · 12 modules</span></div><div class="mrow"><span class="mk">Modes</span><span class="mv ok">Random shift + filtered library</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Knowledge system</span></div><div class="ctitle">Four reveal layers + interview angles</div><div class="cdesc">Every ticket teaches in layers: triage heuristics (scope IS the diagnosis), ordered resolution steps with Epic master files (EMP/SER, EAP/ERX), two-paragraph deep dives on mechanisms — the Chronicles→Clarity→Caboodle data stack, Data Courier discipline, placer/filler matching — and pitfalls capped with a ready-to-say interview line.</div></div><div class="card-body"><div class="mrow"><span class="mk">Interview lines</span><span class="mv">32 ready-to-use answers</span></div><div class="mrow"><span class="mk">Depth</span><span class="mv ok">Master files → data stack → process</span></div></div></div>
     </div>
   </div>
 
