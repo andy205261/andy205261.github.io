@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modules 3.1 + 3.2 — AI in Healthcare Cheat Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#081120; --bg2:#0c1a30; --panel:#10223c; --panel2:#152a48;
+    --line:#1e3a5f; --cyan:#22d3ee; --cyan-dim:#0e7490;
+    --ink:#e6f1fb; --muted:#8fa9c4; --amber:#fbbf24; --green:#34d399; --rose:#fb7185; --violet:#a78bfa;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Outfit',-apple-system,sans-serif;font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 18px 90px}
+  header{padding:38px 0 22px;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase}
+  h1{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4.6vw,3rem);line-height:1.12;margin:.4rem 0 .5rem}
+  h1 em{font-style:normal;color:var(--cyan)}
+  .sub{color:var(--muted);max-width:680px;font-size:.93rem}
+  .sub code{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--cyan);background:var(--panel);padding:1px 6px;border-radius:4px}
+  nav.jump{position:sticky;top:0;z-index:20;background:rgba(8,17,32,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 -18px;padding:0 18px}
+  .tabs{display:flex;gap:2px;max-width:1060px;margin:0 auto;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs a{color:var(--muted);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.04em;padding:13px 10px 11px;border-bottom:2px solid transparent;white-space:nowrap}
+  .tabs a:active,.tabs a:hover{color:var(--cyan)}
+  .tabs a .num{opacity:.55;margin-right:4px}
+  section.module{padding-top:34px;scroll-margin-top:52px}
+  section.module + section.module{margin-top:26px;border-top:1px solid var(--line)}
+  .mod-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;color:var(--amber);text-transform:uppercase;margin-bottom:4px}
+  h2{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-bottom:2px}
+  .h2-sub{color:var(--muted);font-size:.87rem;margin-bottom:20px}
+  h3.block{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+  h3.block::after{content:"";flex:1;height:1px;background:var(--line)}
+  .grid{display:grid;gap:12px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px 15px 13px;position:relative}
+  .card h4{font-weight:600;font-size:.94rem;margin-bottom:5px}
+  .card p{font-size:.86rem;color:var(--muted)}
+  .card p strong{color:var(--ink);font-weight:500}
+  .card .tag{position:absolute;top:13px;right:13px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:var(--cyan-dim)}
+  .card ul{list-style:none;margin-top:6px}
+  .card ul li{font-size:.85rem;color:var(--muted);padding-left:15px;position:relative;margin-bottom:4px}
+  .card ul li::before{content:"▸";position:absolute;left:0;color:var(--cyan)}
+  .card ul li strong{color:var(--ink);font-weight:500}
+  .accent-amber{border-left:3px solid var(--amber)}
+  .accent-green{border-left:3px solid var(--green)}
+  .accent-rose{border-left:3px solid var(--rose)}
+  .accent-cyan{border-left:3px solid var(--cyan)}
+  .accent-violet{border-left:3px solid var(--violet)}
+  .pipeline{display:flex;align-items:stretch;gap:0;margin:14px 0 4px;flex-wrap:wrap}
+  .pipe{flex:1;min-width:120px;background:var(--panel2);border:1px solid var(--line);padding:11px 12px;text-align:center}
+  .pipe:first-child{border-radius:10px 0 0 10px}
+  .pipe:last-child{border-radius:0 10px 10px 0}
+  .pipe+.pipe{border-left:none}
+  .pipe .t{font-weight:600;font-size:.86rem;color:var(--cyan)}
+  .pipe .d{font-size:.74rem;color:var(--muted);margin-top:2px}
+  @media(max-width:560px){.pipe:first-child{border-radius:10px 10px 0 0}.pipe:last-child{border-radius:0 0 10px 10px}.pipe+.pipe{border-left:1px solid var(--line);border-top:none}}
+  .case{background:linear-gradient(135deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+  .case .label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;color:var(--amber);text-transform:uppercase}
+  .case h4{font-family:'DM Serif Display',serif;font-size:1.12rem;font-weight:400;margin:4px 0 10px}
+  .case .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .case .cols.two{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:760px){.case .cols,.case .cols.two{grid-template-columns:1fr}}
+  .case .col b{display:block;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cyan);margin-bottom:5px;font-weight:500}
+  .case .col p,.case .col li{font-size:.83rem;color:var(--muted)}
+  .case .col ul{list-style:none}
+  .case .col li{padding-left:13px;position:relative;margin-bottom:3px}
+  .case .col li::before{content:"–";position:absolute;left:0;color:var(--cyan-dim)}
+  .case .col li strong{color:var(--ink);font-weight:500}
+  .stat{color:var(--amber);font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.83rem}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:var(--bg2);border:1px solid var(--line);color:var(--cyan);padding:4px 9px;border-radius:6px}
+  .callout{border:1px dashed var(--cyan-dim);border-radius:10px;padding:13px 15px;margin-top:16px;background:rgba(34,211,238,.04)}
+  .callout .c-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;color:var(--cyan);text-transform:uppercase;margin-bottom:4px}
+  .callout p{font-size:.86rem;color:var(--muted)}
+  .callout p strong{color:var(--ink);font-weight:500}
+  table.cmp{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:6px}
+  table.cmp th{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);background:var(--panel2)}
+  table.cmp td{color:var(--muted);padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.cmp td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+  table.cmp td strong{color:var(--ink);font-weight:500}
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+  .bait{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin-bottom:10px;display:flex;gap:12px;align-items:baseline}
+  .bait .n{font-family:'JetBrains Mono',monospace;color:var(--cyan-dim);font-size:.72rem;min-width:24px}
+  .bait p{font-size:.87rem;color:var(--muted)}
+  .bait p strong{color:var(--ink);font-weight:500}
+  .bait .hl{color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+  details.qa{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}
+  details.qa summary{list-style:none;cursor:pointer;color:var(--ink);font-weight:500;font-size:.91rem;padding:13px 42px 13px 15px;position:relative;-webkit-tap-highlight-color:rgba(34,211,238,.12)}
+  details.qa summary::-webkit-details-marker{display:none}
+  details.qa summary::after{content:"+";position:absolute;right:15px;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;color:var(--cyan);font-size:1rem}
+  details.qa[open] summary::after{content:"–"}
+  details.qa .a{padding:12px 15px 13px;font-size:.86rem;color:var(--muted);border-top:1px dashed var(--line)}
+  details.qa .a strong{color:var(--green);font-weight:500}
+  .backtop{display:inline-block;margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;color:var(--cyan);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:6px 12px}
+  footer{margin-top:50px;border-top:1px solid var(--line);padding-top:16px;font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--cyan-dim);letter-spacing:.08em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+
+<header>
+  <div class="eyebrow">Modules 1–2 · 3.1.1 – 3.2.3 · Illinois Tech × Leap of Faith</div>
+  <h1>AI in Healthcare <em>Cheat Sheet</em></h1>
+  <p class="sub">Six-module recall sheet: <code>ML &amp; Pop Health</code>, <code>NLP &amp; GenAI</code>, <code>AI Agents</code>, <code>Ethics</code>, <code>Bias &amp; Fairness</code>, <code>Responsible Deployment</code>. No JavaScript — works from the Files app. Tap questions in Self-Check to reveal.</p>
+</header>
+
+<nav class="jump">
+  <div class="tabs">
+    <a href="#m1"><span class="num">3.1.1</span>ML</a>
+    <a href="#m2"><span class="num">3.1.2</span>NLP</a>
+    <a href="#m3"><span class="num">3.1.3</span>Agents</a>
+    <a href="#m4"><span class="num">3.2.1</span>Ethics</a>
+    <a href="#m5"><span class="num">3.2.2</span>Bias</a>
+    <a href="#m6"><span class="num">3.2.3</span>Deploy</a>
+    <a href="#bait">★ Quiz Bait</a>
+    <a href="#sc">✓ Self-Check</a>
+  </div>
+</nav>
+
+<!-- ============ 3.1.1 ============ -->
+<section class="module" id="m1">
+  <div class="mod-eyebrow">Module 1 · 3.1.1</div>
+  <h2>Machine Learning for Clinical &amp; Population Health</h2>
+  <p class="h2-sub">AI = the umbrella. ML = the subset that learns from historical data. Everything else is "where do we point it."</p>
+
+  <h3 class="block">Core definitions</h3>
+  <div class="grid g2">
+    <div class="card accent-cyan">
+      <h4>AI in Healthcare</h4>
+      <ul>
+        <li>Computational methods supporting <strong>decision-making &amp; problem-solving</strong> in clinical settings</li>
+        <li>Analyzes complex medical data: <strong>diagnosis, treatment planning, outcome prediction</strong></li>
+        <li>Improves <strong>speed, accuracy, consistency</strong> via automation</li>
+      </ul>
+    </div>
+    <div class="card accent-green">
+      <h4>ML in Healthcare</h4>
+      <ul>
+        <li><strong>Subset of AI</strong> — learns patterns from historical data, improves over time</li>
+        <li>Forecasts <strong>disease risk, treatment response, patient outcomes</strong></li>
+        <li>Goal: <strong>large-scale health data → clinical decision support</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="block">4 clinical applications</h3>
+  <div class="grid g2">
+    <div class="card"><span class="tag">01</span><h4>Medical Imaging</h4><p>ML identifies <strong>anomalies for earlier detection</strong></p></div>
+    <div class="card"><span class="tag">02</span><h4>Precision Medicine</h4><p>Predictive analytics → <strong>individualized treatment strategies</strong></p></div>
+    <div class="card"><span class="tag">03</span><h4>Robotic Assisted Surgery</h4><p>AI assists <strong>precision tasks &amp; workflow guidance</strong></p></div>
+    <div class="card"><span class="tag">04</span><h4>Digital Health Monitoring</h4><p><strong>Wearables + AI</strong> → early detection, preventive monitoring</p></div>
+  </div>
+
+  <h3 class="block">Research &amp; precision medicine</h3>
+  <div class="grid g3">
+    <div class="card accent-violet"><h4>Genomics</h4><p>Large genomic datasets → <strong>gene–disease associations</strong></p></div>
+    <div class="card accent-amber"><h4>Drug Discovery</h4><p>Accelerates <strong>early-stage compound screening</strong> &amp; hypothesis generation</p></div>
+    <div class="card accent-green"><h4>Clinical Trials</h4><p><strong>Patient cohorts</strong> + treatment response prediction → higher success rates</p></div>
+  </div>
+
+  <h3 class="block">Generative AI — 6 uses</h3>
+  <div class="grid g3">
+    <div class="card"><h4>Synthetic Data</h4><p>Train <strong>without exposing patient data</strong></p></div>
+    <div class="card"><h4>Leveraging Big Data</h4><p>Extract insights from large datasets</p></div>
+    <div class="card"><h4>Clinical Documentation</h4><p>Draft <strong>discharge notes, reports, summaries</strong></p></div>
+    <div class="card"><h4>Strategic Planning</h4><p>Data-driven decisions &amp; investments</p></div>
+    <div class="card"><h4>Drug Design</h4><p>Generate <strong>novel molecules</strong></p></div>
+    <div class="card"><h4>Patient Interaction</h4><p>Chatbots for <strong>education &amp; clinical support</strong></p></div>
+  </div>
+
+  <h3 class="block">Operational &amp; public health impact</h3>
+  <div class="grid g3">
+    <div class="card accent-cyan"><h4>Hospital Operations</h4><p><strong>Surgery scheduling, bed management</strong>, resource allocation</p></div>
+    <div class="card accent-green"><h4>Administrative Efficiency</h4><p>Repetitive tasks: <strong>coding, billing</strong></p></div>
+    <div class="card accent-amber"><h4>Public Health</h4><p><strong>Population patterns → earlier interventions</strong></p></div>
+  </div>
+  <a class="backtop" href="#top">↑ TOP</a>
+</section>
+
+<!-- ============ 3.1.2 ============ -->
+<section class="module" id="m2">
+  <div class="mod-eyebrow">Module 1 · 3.1.2</div>
+  <h2>NLP and Generative AI in Healthcare</h2>
+  <p class="h2-sub">One problem drives this module: clinicians drown in EHR tasks → burnout. NLP is the pressure valve.</p>
+
+  <h3 class="block">Problem → solutions</h3>
+  <div class="grid g2">
+    <div class="card accent-rose">
+      <h4>Problem</h4>
+      <ul><li>Clinicians spend as much time on <strong>EHR tasks as direct care</strong></li><li>→ <strong>burnout &amp; quality concerns</strong></li></ul>
+    </div>
+    <div class="card accent-cyan">
+      <h4>Challenge trio</h4>
+      <div class="chips"><span class="chip">Privacy</span><span class="chip">Data fidelity</span><span class="chip">EHR compatibility</span></div>
+    </div>
+    <div class="card accent-green">
+      <h4>Clinical Note Summarization</h4>
+      <ul><li><strong>Unstructured text → concise notes</strong></li><li>Performance <strong>nearing human-level accuracy</strong> in specific tasks</li></ul>
+    </div>
+    <div class="card accent-amber">
+      <h4>Ambient Documentation</h4>
+      <ul><li>Captures conversations → <strong>draft notes</strong></li><li>Goal: <strong>improve focus &amp; efficiency</strong></li></ul>
+    </div>
+  </div>
+
+  <h3 class="block">Case study 1 — CareScore AI (Rosalind Franklin Univ)</h3>
+  <div class="case">
+    <div class="label">NLP + Ambient Documentation · Medical Training</div>
+    <h4>CareScore AI</h4>
+    <div class="cols">
+      <div class="col"><b>Background</b>
+        <ul><li>Manual eval: <span class="stat">30–45 min/student</span>, inconsistent</li><li>Feedback delays <span class="stat">&gt;72 hrs</span></li></ul>
+      </div>
+      <div class="col"><b>Solution — 3 modules</b>
+        <ul><li><strong>Case Management</strong> — structured cases</li><li><strong>Synthesis</strong> — SOAP notes + checklists</li><li><strong>Scoring</strong> — CareScores</li></ul>
+      </div>
+      <div class="col"><b>Impact</b>
+        <ul><li><span class="stat">&gt;70% reduction</span> in manual review time</li><li>Frees faculty for mentorship</li><li>Bias-aware assessment</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="block">GenAI patient engagement &amp; telehealth</h3>
+  <div class="grid g2">
+    <div class="card"><h4>Conversational Assistants</h4><p><strong>Natural, context-aware</strong> interactions</p></div>
+    <div class="card"><h4>Telehealth Support</h4><p><strong>Triage, history collection, draft documentation</strong></p></div>
+    <div class="card"><h4>Chronic Care</h4><p>Symptom tracking &amp; alerts <strong>with clinician oversight</strong></p></div>
+    <div class="card"><h4>Key Benefit</h4><p><strong>Scalability &amp; equity</strong> if validated &amp; deployed responsibly</p></div>
+  </div>
+
+  <h3 class="block">Case studies 2 &amp; 3</h3>
+  <div class="case">
+    <div class="label">Remote monitoring · Chronic disease</div>
+    <h4>AI Telehealth — Heart Failure</h4>
+    <div class="cols">
+      <div class="col"><b>Background</b><ul><li>HF patients miss early deterioration; clinicians lack visibility <strong>between visits</strong></li></ul></div>
+      <div class="col"><b>Solution</b><ul><li>Daily inputs: <strong>weight, dyspnea, fatigue</strong></li><li>NLP: <strong>lay terms → structured data</strong>; dashboard alerts</li></ul></div>
+      <div class="col"><b>Impact</b><ul><li>Proactive care; fewer <strong>preventable readmissions</strong>, better adherence</li></ul></div>
+    </div>
+  </div>
+  <div class="case">
+    <div class="label">LLM-generated patient scenarios</div>
+    <h4>AI Case Generator — Dynamic Training</h4>
+    <div class="cols">
+      <div class="col"><b>Concept</b><ul><li>LLMs generate <strong>adaptive scenarios</strong> evolving with learner decisions; static sims limit variety</li></ul></div>
+      <div class="col"><b>Solution</b><ul><li><strong>Real transcripts → interactive sims</strong>; GenAI agents respond in real time</li></ul></div>
+      <div class="col"><b>Why it matters</b><ul><li>Simulates <strong>rare conditions safely</strong>; needs <strong>clinical accuracy + educator oversight</strong></li></ul></div>
+    </div>
+  </div>
+
+  <h3 class="block">Integration with EHRs &amp; CDS</h3>
+  <div class="grid g2">
+    <div class="card accent-green"><h4>EHR Integration</h4><p><strong>Secure &amp; bidirectional</strong> — documentation and alerts flow both ways</p></div>
+    <div class="card accent-amber"><h4>Interoperability Standards</h4>
+      <div class="chips"><span class="chip">FHIR</span><span class="chip">SNOMED-CT</span><span class="chip">ICD-10</span><span class="chip">CPT</span></div>
+    </div>
+    <div class="card accent-violet"><h4>Safety &amp; Governance</h4><p><strong>Continuous validation, clinician oversight, monitoring</strong> — prevent <strong>alert fatigue</strong></p></div>
+    <div class="card accent-cyan"><h4>AI-Enhanced Decision Support</h4><p>Beyond static rules → <strong>contextual, data-driven insights</strong></p></div>
+  </div>
+  <a class="backtop" href="#top">↑ TOP</a>
+</section>
+
+<!-- ============ 3.1.3 ============ -->
+<section class="module" id="m3">
+  <div class="mod-eyebrow">Module 1 · 3.1.3</div>
+  <h2>AI Agents &amp; Multi-Agent Systems</h2>
+  <p class="h2-sub">The agent loop, coordination mechanisms, FIPA, and the two flagship examples.</p>
+
+  <h3 class="block">The agent loop — 4 verbs</h3>
+  <div class="pipeline">
+    <div class="pipe"><div class="t">Perceive</div><div class="d">its environment</div></div>
+    <div class="pipe"><div class="t">Decide</div><div class="d">based on data</div></div>
+    <div class="pipe"><div class="t">Act</div><div class="d">toward goals</div></div>
+    <div class="pipe"><div class="t">Interact</div><div class="d">agents / people</div></div>
+  </div>
+  <p style="font-size:.84rem;color:var(--muted);margin-top:8px">Slide example: a <strong style="color:var(--ink);font-weight:500">scheduling agent</strong> for OR coordination — staff availability + patient readiness.</p>
+
+  <h3 class="block">Single vs multi-agent</h3>
+  <div class="grid g2">
+    <div class="card accent-cyan">
+      <h4>Single Agent</h4>
+      <ul><li>One module processes information</li><li><strong>Ex:</strong> chatbot medication reminders</li><li><strong>Limitation:</strong> lacks coordination / adaptability</li></ul>
+    </div>
+    <div class="card accent-violet">
+      <h4>Multi-Agent</h4>
+      <ul><li>Specialized components share tasks</li><li><strong>Ex:</strong> lab data + imaging + scheduling + monitoring agents</li><li><strong>Benefit:</strong> resilient, scalable, context-aware via shared info</li></ul>
+    </div>
+  </div>
+
+  <h3 class="block">3 coordination mechanisms</h3>
+  <div class="grid g3">
+    <div class="card accent-amber"><h4>Negotiation</h4><p>Priorities &amp; <strong>limited resources</strong></p></div>
+    <div class="card accent-green"><h4>Task Allocation</h4><p>Responsibilities assigned <strong>dynamically</strong></p></div>
+    <div class="card accent-cyan"><h4>Consensus</h4><p>Align → <strong>shared belief / unified decision</strong></p></div>
+  </div>
+
+  <h3 class="block">FIPA — 4 components</h3>
+  <div class="grid g2">
+    <div class="card"><h4>ACL <span style="font-weight:300;color:var(--muted)">— Agent Communication Language</span></h4>
+      <div class="chips"><span class="chip">INFORM</span><span class="chip">REQUEST</span><span class="chip">AGREE</span><span class="chip">REFUSE</span></div>
+    </div>
+    <div class="card"><h4>AMS <span style="font-weight:300;color:var(--muted)">— Agent Management System</span></h4><p><strong>Identities &amp; permissions</strong></p></div>
+    <div class="card"><h4>DF <span style="font-weight:300;color:var(--muted)">— Directory Facilitator</span></h4><p><strong>Advertise &amp; discover services</strong> dynamically</p></div>
+    <div class="card"><h4>AP <span style="font-weight:300;color:var(--muted)">— Agent Platform</span></h4><p><strong>Runtime environment</strong></p></div>
+  </div>
+  <div class="callout">
+    <div class="c-label">Slide flow</div>
+    <p><strong>Diagnosis Agent</strong> requests vitals → <strong>Vitals Agent</strong> responds → via <strong>FIPA ACL</strong>. Agents learn from feedback &amp; experience.</p>
+  </div>
+
+  <h3 class="block">Example 1 — MedAgentSim</h3>
+  <div class="case">
+    <div class="label">Self-evolving multi-agent simulation</div>
+    <h4>Virtual Patient Simulation — 2 phases</h4>
+    <div class="cols">
+      <div class="col"><b>Conversation Phase</b>
+        <ul><li><strong>Patient Agent</strong> responds</li><li><strong>Doctor Agent</strong> → "required test?" → <strong>Measurement Agent</strong></li><li>Loop until <strong>all information collected</strong></li></ul>
+      </div>
+      <div class="col"><b>Experience Replay</b>
+        <ul><li><strong>Medical + Experience Record Buffers</strong></li><li><strong>kNN few-shot</strong> retrieves similar cases</li><li>Doctor agents run <strong>chain-of-thought</strong></li></ul>
+      </div>
+      <div class="col"><b>Final Diagnosis</b>
+        <ul><li><strong>Majority-vote ensembling</strong></li><li>Results stored → <strong>self-evolves</strong></li></ul>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="block">Example 2 — AI-driven EHR coordination</h3>
+  <div class="pipeline">
+    <div class="pipe"><div class="t">Data</div><div class="d">buffers / FHIR / HL7</div></div>
+    <div class="pipe"><div class="t">Reasoning</div><div class="d">intelligent modules</div></div>
+    <div class="pipe"><div class="t">Workflow</div><div class="d">coordinated handoffs</div></div>
+  </div>
+  <div class="callout" style="margin-top:12px">
+    <div class="c-label">King's College London</div>
+    <p>Automated care coordination with <strong>interconnected AI modules</strong> → improved collaboration, <strong>reduced communication delays</strong>.</p>
+  </div>
+  <a class="backtop" href="#top">↑ TOP</a>
+</section>
+
+<!-- ============ 3.2.1 ============ -->
+<section class="module" id="m4">
+  <div class="mod-eyebrow">Module 2 · 3.2.1</div>
+  <h2>AI Ethics in Healthcare</h2>
+  <p class="h2-sub">Ethics translates moral principles — patient safety, fairness, accountability — into design requirements. Regulation is ethics with teeth.</p>
+
+  <h3 class="block">Framing</h3>
+  <div class="grid g2">
+    <div class="card accent-green">
+      <h4>Scope</h4>
+      <ul>
+        <li>Ethics governs <strong>how data is used, how recommendations are made, how patient autonomy is preserved</strong></li>
+        <li>Ethics + regulation together → trust &amp; compliance built <strong>into development, not a late-stage burden</strong></li>
+      </ul>
+    </div>
+    <div class="card accent-amber">
+      <h4>Motivating examples</h4>
+      <ul>
+        <li>Early <strong>oncology AI</strong> on limited datasets → bias → need for <strong>diverse validation</strong></li>
+        <li>Early AI alert tools → <strong>alarm fatigue</strong> → stronger usability &amp; performance testing standards</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="block">Ethical vs policy vectors</h3>
+  <div class="grid g2">
+    <div class="card accent-cyan">
+      <h4>Ethical Vectors</h4>
+      <ul>
+        <li><strong>Algorithmic Accountability</strong> — explainability &amp; audit trails</li>
+        <li><strong>Bias Mitigation</strong> — diverse datasets, guard against inequities</li>
+        <li><strong>Patient Autonomy</strong> — protect consent, enable human review</li>
+      </ul>
+    </div>
+    <div class="card accent-violet">
+      <h4>Policy Vectors</h4>
+      <ul>
+        <li><strong>FDA Safety Testing</strong> — safety &amp; performance standards</li>
+        <li><strong>HIPAA Privacy Safeguards</strong> — privacy &amp; data governance</li>
+        <li><strong>Global Frameworks</strong> — EU AI Act &amp; UNESCO ethics charters</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="block">FDA — clinical AI gatekeeper</h3>
+  <div class="grid g2">
+    <div class="card accent-green">
+      <h4>Purpose</h4>
+      <ul>
+        <li>Regulates <strong>SaMD (Software as a Medical Device)</strong> by risk &amp; function</li>
+        <li><strong>PCCP</strong> (Predetermined Change Control Plan) — predefined rules for <strong>post-approval model updates</strong></li>
+        <li><strong>IDx-DR</strong> — first FDA-cleared <strong>autonomous</strong> diagnostic AI (diabetic retinopathy screening)</li>
+      </ul>
+    </div>
+    <div class="card accent-amber">
+      <h4>Developer implications</h4>
+      <ul>
+        <li><strong>Traceability</strong>: model inputs → clinical claims</li>
+        <li>Real-world validation + <strong>bias-monitoring pipelines</strong></li>
+        <li>Update rules under <strong>PCCP</strong>; post-market surveillance &amp; audit logs</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="block">HIPAA boundary conditions</h3>
+  <div class="grid g2">
+    <div class="card accent-cyan">
+      <h4>The rules</h4>
+      <ul>
+        <li>Applies to <strong>PHI</strong> handled by covered entities</li>
+        <li><strong>Minimum Necessary Rule</strong> — only essential data for the AI purpose</li>
+        <li>De-identification: <strong>Safe Harbor (remove 18 identifiers)</strong> or <strong>Expert Determination (low re-ID risk)</strong></li>
+        <li><strong>BAAs</strong> govern vendor privacy &amp; breach responsibility</li>
+      </ul>
+    </div>
+    <div class="card accent-green">
+      <h4>Developer implications</h4>
+      <ul>
+        <li>Train with <strong>synthetic or federated data</strong>, not real PHI</li>
+        <li>Data minimization + audit logs in pipelines</li>
+        <li><strong>Sign BAAs</strong> with AI/cloud vendors handling PHI</li>
+        <li>Privacy-first design → faster approvals</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="block">IRB vs IDE</h3>
+  <div class="grid g2">
+    <div class="card accent-green">
+      <h4>Research → IRB</h4>
+      <ul>
+        <li>AI projects using <strong>patient data / human subjects</strong></li>
+        <li>Protects <strong>rights, privacy, consent</strong></li>
+        <li>Reviews AI risks: bias, automation scope, accountability</li>
+      </ul>
+    </div>
+    <div class="card accent-amber">
+      <h4>Clinical → IDE</h4>
+      <ul>
+        <li>AI tested in <strong>live clinical settings</strong></li>
+        <li>FDA oversight <strong>as a medical device</strong></li>
+        <li>Safety &amp; effectiveness validation; <strong>IRB + FDA protocols</strong> + continuous monitoring</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout"><div class="c-label">Best practice</div><p>Use <strong>early decision trees with compliance/legal input</strong> to define when a system moves from research → clinical use.</p></div>
+
+  <h3 class="block">US vs EU vs WHO</h3>
+  <div class="table-scroll">
+  <table class="cmp">
+    <tr><th>Aspect</th><th>United States</th><th>European Union</th><th>WHO / Global</th></tr>
+    <tr><td>Philosophy</td><td><strong>Risk-based, multi-agency</strong> (FDA, FTC, HHS). HIPAA governs privacy, <strong>not AI</strong></td><td><strong>Risk-tiered, legally binding</strong> AI Act; healthcare AI = <strong>"high-risk"</strong></td><td>Equity, autonomy, accountability (<strong>WHO 2021 &amp; 2023</strong>)</td></tr>
+    <tr><td>Review model</td><td>Pre + post-market (<strong>FDA TPLC</strong> framework)</td><td>Pre-market assessment + risk documentation</td><td><strong>Non-binding</strong>, influences procurement &amp; ethics policies</td></tr>
+    <tr><td>Dev implications</td><td>Early FDA engagement encouraged; CI/CD monitoring = best practice, not mandate</td><td>Extensive documentation, explainability, risk plans</td><td>Inclusive design for low-resource settings</td></tr>
+  </table>
+  </div>
+
+  <h3 class="block">Mayo Clinic governance model</h3>
+  <div class="grid g2">
+    <div class="card accent-cyan">
+      <h4>4 practices</h4>
+      <ul>
+        <li><strong>Multi-disciplinary AI steering committee</strong> (clinical, IT, legal, ethics)</li>
+        <li><strong>Mandatory validation &amp; bias assessment</strong> pre-deployment</li>
+        <li><strong>Continuous monitoring dashboards</strong> (performance &amp; fairness)</li>
+        <li><strong>Standardized AI incident response</strong> protocols</li>
+      </ul>
+    </div>
+    <div class="card accent-violet">
+      <h4>4 quadrants around "AI Governance"</h4>
+      <ul>
+        <li><strong>Ethical Evaluation &amp; Usage</strong> — multidisciplinary oversight</li>
+        <li><strong>Legal, Regulatory &amp; Compliance</strong> — accountability pathways</li>
+        <li><strong>Clinical &amp; Scientific Verification</strong> — rigorous validation</li>
+        <li><strong>Org Deployment &amp; Change Mgmt</strong> — operational governance</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="block">Why compliance adds value</h3>
+  <div class="grid g2">
+    <div class="card"><h4>Patient Safety &amp; Trust</h4><p>Validation builds <strong>clinician &amp; patient confidence</strong></p></div>
+    <div class="card"><h4>Market Access</h4><p><strong>FDA, CE, global standards</strong> enable procurement</p></div>
+    <div class="card"><h4>Risk Management</h4><p><strong>BAAs, audit trails, change control</strong> reduce liability</p></div>
+    <div class="card"><h4>Scalability</h4><p>Anticipating global rules lowers expansion costs</p></div>
+  </div>
+  <div class="callout"><div class="c-label">Example</div><p><strong>IDx-DR</strong> got FDA marketing authorization + earlier <strong>CE marking (Class IIa)</strong> — dual compliance streamlined European deployment.</p></div>
+  <a class="backtop" href="#top">↑ TOP</a>
+</section>
+
+<!-- ============ 3.2.2 ============ -->
+<section class="module" id="m5">
+  <div class="mod-eyebrow">Module 2 · 3.2.2</div>
+  <h2>Dataset Bias and Fairness</h2>
+  <p class="h2-sub">Bias = systematic under/misrepresentation of patient groups. It enters at every lifecycle stage, and "objective" data isn't immune.</p>
+
+  <h3 class="block">Definitions + lifecycle</h3>
+  <div class="grid g2">
+    <div class="card accent-rose">
+      <h4>Dataset Bias</h4>
+      <ul>
+        <li><strong>Ex 1:</strong> cardiac risk model trained on middle-aged white men → less reliable for <strong>women of color</strong> with different symptom patterns</li>
+        <li><strong>Ex 2:</strong> sepsis algorithm on adult data → misses <strong>pediatric</strong> early-warning signs</li>
+      </ul>
+    </div>
+    <div class="card accent-green">
+      <h4>Fairness</h4>
+      <ul>
+        <li><strong>Equitable model performance</strong> across all subgroups</li>
+        <li><strong>Equal quality of care</strong>, not just equal outcomes</li>
+        <li><strong>Clinical factors</strong> — not demographics — guide recommendations</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pipeline">
+    <div class="pipe"><div class="t">Design</div><div class="d">human bias ↓</div></div>
+    <div class="pipe"><div class="t">Data collection</div><div class="d">human bias ↓</div></div>
+    <div class="pipe"><div class="t">Model dev</div><div class="d">human bias ↓</div></div>
+    <div class="pipe"><div class="t">Deployment</div><div class="d">human bias ↓</div></div>
+    <div class="pipe"><div class="t">Users</div><div class="d">feedback loops ↺</div></div>
+  </div>
+
+  <h3 class="block">6 fairness metrics</h3>
+  <div class="grid g3">
+    <div class="card"><h4>Demographic Parity</h4><p><strong>Equal outcomes</strong> across population groups</p></div>
+    <div class="card"><h4>Equalized Odds</h4><p>Equal <strong>TPR &amp; FPR</strong> across groups</p></div>
+    <div class="card"><h4>Individual Fairness</h4><p><strong>Similar individuals → similar recommendations</strong></p></div>
+    <div class="card"><h4>Procedural Fairness</h4><p><strong>Transparent, consistent processes</strong></p></div>
+    <div class="card"><h4>Calibration</h4><p>Predicted probabilities <strong>match actual outcomes</strong> per group</p></div>
+    <div class="card"><h4>Counterfactual Fairness</h4><p>Decision unchanged if <strong>sensitive attribute flips</strong></p></div>
+  </div>
+
+  <h3 class="block">6 bias types</h3>
+  <div class="grid g3">
+    <div class="card accent-cyan"><h4>Selection</h4><p>Who's in the dataset ≠ who needs care: <strong>access barriers, site differences, exclusions</strong></p></div>
+    <div class="card accent-amber"><h4>Representation</h4><p>Unequal sample size: <strong>sparse data, unstable features, missing demographics</strong></p></div>
+    <div class="card accent-green"><h4>Measurement</h4><p>Inaccurate capture: <strong>device errors, inconsistent units, subjective labels</strong></p></div>
+    <div class="card accent-violet"><h4>Documentation</h4><p>Language/template bias in notes: <strong>subjective wording, provider tone</strong></p></div>
+    <div class="card accent-rose"><h4>Historical</h4><p>Discrimination in legacy data: <strong>trial exclusions, outdated protocols</strong></p></div>
+    <div class="card"><h4>Confirmation</h4><p>Clinical assumptions in labels: <strong>stereotype-driven diagnoses, selective documentation</strong></p></div>
+  </div>
+
+  <h3 class="block">5 sources of bias</h3>
+  <div class="chips">
+    <span class="chip">Geographic limitations</span><span class="chip">Socioeconomic factors</span><span class="chip">Technology access (digital divide)</span><span class="chip">Provider practices</span><span class="chip">Insurance &amp; payment models</span>
+  </div>
+
+  <h3 class="block">Documentation bias → workflow effects</h3>
+  <div class="grid g3">
+    <div class="card"><h4>Language Bias</h4><p>Negative terms <strong>copied forward → reinforces discrimination</strong></p></div>
+    <div class="card"><h4>Tone</h4><p>Wording shapes <strong>clinician perception, alerts, treatment</strong></p></div>
+    <div class="card"><h4>Structured Data Bias</h4><p><strong>"Objective" fields still reflect unequal documentation</strong></p></div>
+    <div class="card"><h4>Template Limits</h4><p>Miss <strong>social, cultural, patient strengths</strong></p></div>
+    <div class="card accent-green"><h4>Mitigation</h4><p><strong>Bias audits, feedback loops, inclusive language guidelines</strong></p></div>
+  </div>
+
+  <h3 class="block">Patient care &amp; equity outcomes — 4</h3>
+  <div class="chips">
+    <span class="chip">Disparate Treatment</span><span class="chip">Delayed Diagnosis</span><span class="chip">Resource Allocation</span><span class="chip">Trust Erosion</span>
+  </div>
+
+  <h3 class="block">The 4×5 block (very quizzable)</h3>
+  <div class="grid g2">
+    <div class="card accent-cyan">
+      <h4>Data Quality — 5</h4>
+      <ul><li><strong>Completeness</strong> — all populations</li><li><strong>Accuracy</strong> — error-free recording</li><li><strong>Consistency</strong> — standardized formats</li><li><strong>Timeliness</strong> — current knowledge</li><li><strong>Representativeness</strong> — reflects patient diversity</li></ul>
+    </div>
+    <div class="card accent-amber">
+      <h4>Data Governance — 5</h4>
+      <ul><li><strong>Data Stewardship</strong> — clear ownership</li><li><strong>Ethical Oversight</strong> — review boards</li><li><strong>Compliance Standards</strong> — HIPAA, FDA</li><li><strong>Audit Trails</strong> — documented sources/steps</li><li><strong>Version Control</strong> — dataset change tracking</li></ul>
+    </div>
+    <div class="card accent-green">
+      <h4>Cleaning &amp; Validation — 5</h4>
+      <ul><li><strong>Cross-Validation</strong> — consistency across groups</li><li><strong>Statistical Validation</strong> — plausible patterns</li><li><strong>Expert Review</strong> — clinical judgment</li><li><strong>Bias Detection</strong> — imbalances, <strong>proxy variables</strong></li><li><strong>Outlier Analysis</strong> — rare cases vs errors</li></ul>
+    </div>
+    <div class="card accent-violet">
+      <h4>Monitoring — 5 · Mitigation — 5</h4>
+      <ul><li><strong>Monitoring:</strong> dashboards, performance monitoring, <strong>drift detection</strong>, feedback loop, audits</li><li><strong>Mitigation:</strong> diverse data collection, algorithmic auditing, continuous monitoring, stakeholder engagement, <strong>bias-aware training</strong></li></ul>
+    </div>
+  </div>
+  <a class="backtop" href="#top">↑ TOP</a>
+</section>
+
+<!-- ============ 3.2.3 ============ -->
+<section class="module" id="m6">
+  <div class="mod-eyebrow">Module 2 · 3.2.3</div>
+  <h2>Responsible Deployment of AI Systems</h2>
+  <p class="h2-sub">Governance tiers, the 5-level transparency hierarchy, XAI techniques (LIME/SHAP), and multi-jurisdictional compliance.</p>
+
+  <h3 class="block">Why responsible AI matters</h3>
+  <div class="grid g2">
+    <div class="card accent-cyan">
+      <h4>Current situation</h4>
+      <ul><li>AI adoption accelerating across healthcare, finance, critical infrastructure</li><li>Public trust <strong>may decline from high-profile failures</strong></li><li>Evolving global regulatory frameworks</li></ul>
+    </div>
+    <div class="card accent-amber">
+      <h4>Healthcare impact — 4</h4>
+      <ul><li><strong>Patient Safety</strong> — life-or-death errors</li><li><strong>Social Equity</strong> — biased models widen disparities</li><li><strong>Legal Liability</strong> — rising accountability</li><li><strong>Public Trust</strong> — essential for adoption</li></ul>
+    </div>
+  </div>
+  <div class="callout"><div class="c-label">Path forward</div><p>Organizations implementing responsible AI frameworks gain <strong>competitive advantage through trust, compliance, innovation</strong>.</p></div>
+
+  <h3 class="block">Institutional governance — 3 tiers</h3>
+  <div class="grid g3">
+    <div class="card accent-cyan"><h4>Tier 1 — Strategic Oversight</h4><ul><li>AI Ethics &amp; Governance Board</li><li>Risk &amp; Compliance Committee</li><li>Compliance Office</li></ul></div>
+    <div class="card accent-amber"><h4>Tier 2 — Operational Mgmt</h4><ul><li><strong>AI Center of Excellence (CoE)</strong></li><li>Data Governance Council</li><li>Change Management Team</li></ul></div>
+    <div class="card accent-green"><h4>Tier 3 — Implementation</h4><ul><li>AI Development Teams</li><li>Clinical &amp; Operational Users</li><li>QA Teams</li></ul></div>
+  </div>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:8px">Spanning all three: <strong style="color:var(--ink);font-weight:500">Continuous Learning, Improvement and Audit</strong>.</p>
+
+  <h3 class="block">Explainability — definition + 5 reasons</h3>
+  <div class="card accent-violet" style="margin-bottom:12px">
+    <h4>AI Explainability</h4>
+    <p>Ability to <strong>understand and articulate how an AI system arrives at decisions</strong> in terms humans can comprehend and act on.</p>
+    <ul>
+      <li><strong>Clinical Trust</strong> — physicians must understand before acting</li>
+      <li><strong>Patient Safety</strong> — catch errors before harm</li>
+      <li><strong>Regulatory Compliance</strong> — FDA, EU AI Act require it for high-risk devices</li>
+      <li><strong>Accountability</strong> — clear attribution when things go wrong</li>
+      <li><strong>Bias Detection</strong> — reveal hidden model biases</li>
+    </ul>
+  </div>
+
+  <h3 class="block">5-level transparency hierarchy</h3>
+  <div class="pipeline">
+    <div class="pipe"><div class="t">L1 Input</div><div class="d">data used &amp; prep</div></div>
+    <div class="pipe"><div class="t">L2 Process</div><div class="d">design &amp; training</div></div>
+    <div class="pipe"><div class="t">L3 Output</div><div class="d">predictions + confidence</div></div>
+    <div class="pipe"><div class="t">L4 Rationale</div><div class="d">LIME, SHAP</div></div>
+    <div class="pipe"><div class="t">L5 Impact</div><div class="d">group performance</div></div>
+  </div>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:8px">Layers: L1–L2 = <strong style="color:var(--ink);font-weight:500">Foundation</strong>, L3–L4 = <strong style="color:var(--ink);font-weight:500">Technical</strong>, L5 = <strong style="color:var(--ink);font-weight:500">Governance</strong>.</p>
+
+  <h3 class="block">XAI techniques</h3>
+  <div class="grid g2">
+    <div class="card accent-cyan">
+      <h4>Tier 1 — LIME</h4>
+      <ul><li><strong>Local Interpretable Model-agnostic Explanations</strong></li><li>Simpler surrogate models approximate complex behavior; explains <strong>individual predictions locally</strong></li><li>Ex: highlights <strong>pixels in medical images</strong> that drove diagnosis</li></ul>
+    </div>
+    <div class="card accent-amber">
+      <h4>Tier 1 — SHAP</h4>
+      <ul><li><strong>SHapley Additive exPlanations</strong> — <strong>game theory</strong>: contribution of each feature</li><li>Ex: elevated BNP <span class="stat">(+0.4)</span> + normal BP <span class="stat">(0.2)</span> → heart failure risk score</li></ul>
+    </div>
+    <div class="card accent-green">
+      <h4>Tier 2 — Causal &amp; Concept-based</h4>
+      <ul><li><strong>Counterfactuals:</strong> "temp 98.6°F instead of 102°F → sepsis risk <span class="stat">78% → 23%</span>" (intervention effects)</li><li><strong>Concept-based:</strong> "pneumonia: lung consolidation + air bronchograms + elevated WBC"</li></ul>
+    </div>
+    <div class="card accent-violet">
+      <h4>Tier 2 — Uncertainty-aware</h4>
+      <ul><li><strong>Confidence intervals &amp; reliability measures</strong></li><li>Critical for <strong>edge cases &amp; rare conditions</strong></li></ul>
+    </div>
+  </div>
+
+  <h3 class="block">Multi-jurisdictional compliance</h3>
+  <div class="grid g3">
+    <div class="card accent-cyan"><h4>Healthcare-specific</h4><ul><li><strong>FDA SaMD</strong> — device software</li><li><strong>HIPAA</strong> — patient data privacy</li><li><strong>CLIA</strong> — lab standards for AI diagnostics</li></ul></div>
+    <div class="card accent-amber"><h4>General AI</h4><ul><li><strong>EU AI Act</strong> — risk-based rules</li><li><strong>GDPR</strong> — data protection</li><li><strong>State laws</strong> — CA, IL &amp; others</li></ul></div>
+    <div class="card accent-green"><h4>Industry standards</h4><ul><li><strong>ISO/IEC 23053</strong> — AI risk mgmt</li><li><strong>IEEE</strong> — ethical design &amp; transparency</li><li><strong>NIST</strong> — voluntary AI risk framework</li></ul></div>
+  </div>
+
+  <h3 class="block">Implementation — 4 phases</h3>
+  <div class="pipeline">
+    <div class="pipe"><div class="t">1 Foundation</div><div class="d">governance, policies, readiness, training</div></div>
+    <div class="pipe"><div class="t">2 Pilot</div><div class="d">low-risk high-value; monitoring; feedback</div></div>
+    <div class="pipe"><div class="t">3 Scale &amp; Optimize</div><div class="d">expand pilots, refine, alerts</div></div>
+    <div class="pipe"><div class="t">4 Maturity</div><div class="d">culture, safeguards, ethical innovation</div></div>
+  </div>
+
+  <h3 class="block">Measuring — 3 metric families</h3>
+  <div class="grid g3">
+    <div class="card"><h4>Governance</h4><p><strong>Policy compliance %</strong>, risk assessment coverage, stakeholder satisfaction</p></div>
+    <div class="card"><h4>Technical</h4><p><strong>Accuracy/precision/recall</strong>, explainability quality, uptime/reliability</p></div>
+    <div class="card"><h4>Ethical</h4><p><strong>Bias detection</strong> across groups, privacy compliance, transparency scores</p></div>
+  </div>
+
+  <h3 class="block">Emerging trends</h3>
+  <div class="grid g3">
+    <div class="card accent-cyan"><h4>Challenges</h4><ul><li><strong>Federated Learning</strong> — train across institutions <strong>without data sharing</strong></li><li><strong>Edge AI</strong> — local devices, real-time</li><li><strong>Multimodal AI</strong> — text + images + more</li></ul></div>
+    <div class="card accent-amber"><h4>Solutions</h4><ul><li><strong>Differential Privacy</strong> — math for privacy-preserving analysis</li><li><strong>Federated Analytics</strong> — insights without centralizing</li><li><strong>XAI Standards</strong></li></ul></div>
+    <div class="card accent-green"><h4>Path forward</h4><ul><li>Continuous learning</li><li>Collaborative innovation with regulators</li><li>Ethical leadership</li></ul></div>
+  </div>
+  <a class="backtop" href="#top">↑ TOP</a>
+</section>
+
+<!-- ============ QUIZ BAIT ============ -->
+<section class="module" id="bait">
+  <h2>Quiz Bait</h2>
+  <p class="h2-sub">The details most likely to appear as answer options — memorize cold, then run the self-check.</p>
+
+  <h3 class="block">Module 1 (3.1.x)</h3>
+  <div class="bait"><span class="n">01</span><p><strong>ML is a subset of AI</strong> — learns from historical data, improves over time.</p></div>
+  <div class="bait"><span class="n">02</span><p>CareScore AI (Rosalind Franklin) — <strong>Case Management / Synthesis / Scoring</strong>. Impact <span class="hl">&gt;70%</span> review-time reduction; baseline <span class="hl">30–45 min</span>, delays <span class="hl">&gt;72 hrs</span>.</p></div>
+  <div class="bait"><span class="n">03</span><p>NLP challenges: <strong>privacy, data fidelity, EHR compatibility</strong>. Standards: <strong>FHIR / SNOMED-CT / ICD-10 / CPT</strong>. Governance keyword: <strong>alert fatigue</strong>.</p></div>
+  <div class="bait"><span class="n">04</span><p>Agent loop: <strong>Perceive → Decide → Act → Interact</strong>. Coordination: <strong>Negotiation / Task Allocation / Consensus</strong>.</p></div>
+  <div class="bait"><span class="n">05</span><p>FIPA: <strong>ACL</strong> (INFORM/REQUEST/AGREE/REFUSE), <strong>AMS</strong>, <strong>DF</strong>, <strong>AP</strong>.</p></div>
+  <div class="bait"><span class="n">06</span><p>MedAgentSim: Conversation + Experience Replay phases; <strong>kNN few-shot, chain-of-thought, majority-vote ensembling</strong>; self-evolving. King's College = care coordination, <strong>reduced communication delays</strong>.</p></div>
+
+  <h3 class="block">Module 2 (3.2.x)</h3>
+  <div class="bait"><span class="n">07</span><p><strong>IDx-DR</strong> = first FDA-cleared <strong>autonomous</strong> diagnostic AI (diabetic retinopathy). Also earned <strong>CE marking Class IIa</strong>.</p></div>
+  <div class="bait"><span class="n">08</span><p><strong>PCCP</strong> = Predetermined Change Control Plan — predefined rules for <strong>post-approval model updates</strong>. FDA regulates <strong>SaMD</strong> by risk &amp; function; review model = <strong>TPLC</strong> (pre + post-market).</p></div>
+  <div class="bait"><span class="n">09</span><p>HIPAA de-identification: <strong>Safe Harbor = remove <span class="hl">18 identifiers</span></strong>; <strong>Expert Determination = low re-ID risk</strong>. Also: Minimum Necessary Rule, BAAs.</p></div>
+  <div class="bait"><span class="n">10</span><p><strong>IRB</strong> = research use (rights, privacy, consent). <strong>IDE</strong> = clinical use, live settings, FDA as medical device.</p></div>
+  <div class="bait"><span class="n">11</span><p>EU AI Act: <strong>risk-tiered, legally binding</strong>; healthcare AI = <span class="hl">"high-risk"</span>. WHO guidance = <strong>non-binding</strong>, equity/autonomy/accountability (2021 &amp; 2023).</p></div>
+  <div class="bait"><span class="n">12</span><p>Mayo model: steering committee, <strong>mandatory pre-deployment validation &amp; bias assessment</strong>, monitoring dashboards, incident response protocols.</p></div>
+  <div class="bait"><span class="n">13</span><p>6 fairness metrics: <strong>Demographic Parity, Equalized Odds (TPR+FPR), Individual, Procedural, Calibration, Counterfactual</strong>.</p></div>
+  <div class="bait"><span class="n">14</span><p>6 bias types: <strong>Selection, Representation, Measurement, Documentation, Historical, Confirmation</strong>. Classic examples: cardiac model (white men → women of color), sepsis (adult → pediatric).</p></div>
+  <div class="bait"><span class="n">15</span><p>The 4×5 block: data quality 5 (<strong>Completeness/Accuracy/Consistency/Timeliness/Representativeness</strong>), governance 5, cleaning 5, monitoring 5 (incl. <strong>drift detection</strong>).</p></div>
+  <div class="bait"><span class="n">16</span><p>Transparency levels: <strong>L1 Input → L2 Process → L3 Output → L4 Rationale (LIME/SHAP) → L5 Impact</strong>.</p></div>
+  <div class="bait"><span class="n">17</span><p><strong>LIME</strong> = local surrogate models (pixels example). <strong>SHAP</strong> = game theory feature contributions (BNP <span class="hl">+0.4</span>). Counterfactual: sepsis <span class="hl">78% → 23%</span> at 98.6°F.</p></div>
+  <div class="bait"><span class="n">18</span><p>Compliance buckets: healthcare (<strong>FDA SaMD, HIPAA, CLIA</strong>), general (<strong>EU AI Act, GDPR, state laws</strong>), standards (<strong>ISO/IEC 23053, IEEE, NIST</strong>).</p></div>
+  <div class="bait"><span class="n">19</span><p>Governance tiers: <strong>1 Strategic Oversight → 2 Operational Mgmt (AI CoE) → 3 Implementation</strong>. Phases: <strong>Foundation → Pilot → Scale → Maturity</strong>.</p></div>
+  <div class="bait"><span class="n">20</span><p>Emerging: <strong>Federated Learning</strong> (no data sharing), <strong>Edge AI</strong>, <strong>Multimodal</strong>; solutions: <strong>Differential Privacy, Federated Analytics</strong>.</p></div>
+
+  <h3 class="block" id="sc" style="scroll-margin-top:52px">Self-check — tap to reveal</h3>
+
+  <details class="qa"><summary>Agent loop, in order — and the 3 coordination mechanisms?</summary><div class="a"><strong>Perceive → Decide → Act → Interact.</strong> Coordination: <strong>Negotiation</strong> (priorities/resources), <strong>Task Allocation</strong> (dynamic), <strong>Consensus</strong> (shared belief).</div></details>
+
+  <details class="qa"><summary>Expand FIPA's four components.</summary><div class="a"><strong>ACL</strong> — messages INFORM/REQUEST/AGREE/REFUSE. <strong>AMS</strong> — identities &amp; permissions. <strong>DF</strong> — service discovery. <strong>AP</strong> — runtime environment.</div></details>
+
+  <details class="qa"><summary>CareScore AI: university, 3 modules, impact number?</summary><div class="a"><strong>Rosalind Franklin University.</strong> <strong>Case Management / Synthesis / Scoring.</strong> Impact: <strong>&gt;70% reduction</strong> in manual review (baseline 30–45 min/student, &gt;72 hr delays).</div></details>
+
+  <details class="qa"><summary>What makes MedAgentSim self-evolving?</summary><div class="a">Outcomes write back to <strong>Medical &amp; Experience Record Buffers</strong> → <strong>kNN few-shot</strong> pulls better examples over time. Diagnosis = <strong>majority-vote ensembling</strong> over chain-of-thought doctor agents.</div></details>
+
+  <details class="qa"><summary>Four interoperability standards and what each covers?</summary><div class="a"><strong>FHIR</strong> — exchange API. <strong>SNOMED-CT</strong> — clinical terminology. <strong>ICD-10</strong> — diagnoses. <strong>CPT</strong> — procedures/billing.</div></details>
+
+  <details class="qa"><summary>What is IDx-DR and why does it show up twice in Module 2?</summary><div class="a">First FDA-cleared <strong>autonomous diagnostic AI</strong> — diabetic retinopathy screening. Appears again as the compliance-value example: <strong>FDA authorization + CE marking (Class IIa)</strong> = dual compliance streamlined EU deployment.</div></details>
+
+  <details class="qa"><summary>What is a PCCP and which agency framework pairs with it?</summary><div class="a"><strong>Predetermined Change Control Plan</strong> — predefined rules for <strong>post-approval model updates &amp; validation</strong> of adaptive algorithms. Pairs with FDA's <strong>SaMD</strong> regulation and <strong>TPLC</strong> (total product life cycle: pre + post-market) review model.</div></details>
+
+  <details class="qa"><summary>HIPAA's two de-identification standards?</summary><div class="a"><strong>Safe Harbor</strong> — remove <strong>18 identifiers</strong>. <strong>Expert Determination</strong> — documented <strong>low re-identification risk</strong>. Bonus pairs: Minimum Necessary Rule; BAAs for vendors handling PHI.</div></details>
+
+  <details class="qa"><summary>IRB vs IDE — which is which?</summary><div class="a"><strong>IRB</strong> (Institutional Review Board) = <strong>research</strong> use — patient data/human subjects, protects rights/privacy/consent. <strong>IDE</strong> (Investigational Device Exemption) = <strong>clinical</strong> use — live settings, FDA oversight as a medical device, IRB + FDA protocols + continuous monitoring.</div></details>
+
+  <details class="qa"><summary>How does the EU AI Act classify healthcare AI, and how does WHO guidance differ?</summary><div class="a">EU AI Act: <strong>risk-tiered, legally binding</strong> — healthcare AI is <strong>"high-risk"</strong>. WHO (2021 &amp; 2023): <strong>non-binding</strong>, focuses on equity/autonomy/accountability, influences procurement &amp; ethics policies.</div></details>
+
+  <details class="qa"><summary>Name all 6 fairness metrics and distinguish Equalized Odds from Calibration.</summary><div class="a">Demographic Parity, <strong>Equalized Odds</strong>, Individual, Procedural, <strong>Calibration</strong>, Counterfactual. <strong>Equalized Odds</strong> = equal <strong>TPR &amp; FPR</strong> across groups. <strong>Calibration</strong> = predicted probabilities <strong>match actual outcomes</strong> within each group.</div></details>
+
+  <details class="qa"><summary>Name the 6 dataset bias types and the slide's two classic examples.</summary><div class="a"><strong>Selection, Representation, Measurement, Documentation, Historical, Confirmation.</strong> Examples: cardiac risk model trained on middle-aged white men → unreliable for women of color; sepsis algorithm on adults → misses pediatric warning signs.</div></details>
+
+  <details class="qa"><summary>Walk the 5-level transparency hierarchy and its 3 layers.</summary><div class="a"><strong>L1 Input → L2 Process</strong> (Foundation layer) → <strong>L3 Output → L4 Rationale — LIME/SHAP</strong> (Technical layer) → <strong>L5 Impact</strong> (Governance layer).</div></details>
+
+  <details class="qa"><summary>LIME vs SHAP — mechanism and example for each.</summary><div class="a"><strong>LIME</strong>: builds simpler <strong>local surrogate models</strong> to explain individual predictions — e.g., highlights image pixels driving a diagnosis. <strong>SHAP</strong>: <strong>game theory</strong> — each feature's contribution — e.g., elevated BNP (+0.4) + normal BP (0.2) in a heart-failure risk score.</div></details>
+
+  <details class="qa"><summary>Give the counterfactual explainability example with numbers.</summary><div class="a">"If temperature was <strong>98.6°F instead of 102°F</strong>, sepsis risk drops from <strong>78% to 23%</strong>." Used to understand <strong>intervention effects</strong>.</div></details>
+
+  <details class="qa"><summary>Sort into buckets: CLIA, GDPR, NIST, FDA SaMD, EU AI Act, ISO/IEC 23053.</summary><div class="a"><strong>Healthcare-specific:</strong> FDA SaMD, CLIA (+ HIPAA). <strong>General AI regulation:</strong> EU AI Act, GDPR (+ state laws). <strong>Industry standards:</strong> ISO/IEC 23053, NIST (+ IEEE).</div></details>
+
+  <details class="qa"><summary>Three governance tiers and one body in each?</summary><div class="a"><strong>Tier 1 Strategic Oversight</strong> — AI Ethics &amp; Governance Board. <strong>Tier 2 Operational Management</strong> — AI Center of Excellence. <strong>Tier 3 Implementation &amp; Delivery</strong> — AI Development Teams. All wrapped in continuous learning &amp; audit.</div></details>
+
+  <details class="qa"><summary>Four implementation phases in order?</summary><div class="a"><strong>Foundation</strong> (governance, policies, readiness) → <strong>Pilot</strong> (low-risk high-value, monitoring) → <strong>Scale &amp; Optimize</strong> → <strong>Maturity &amp; Innovation</strong> (governance embedded in culture).</div></details>
+
+  <details class="qa"><summary>Federated learning vs differential privacy — which solves what?</summary><div class="a"><strong>Federated learning</strong>: train models <strong>across institutions without sharing raw data</strong> (a next-gen challenge). <strong>Differential privacy</strong>: <strong>mathematical techniques</strong> for privacy-preserving analysis (an emerging solution).</div></details>
+
+  <details class="qa"><summary>Mayo Clinic model: 4 practices + 4 quadrants?</summary><div class="a"><strong>Practices:</strong> multidisciplinary steering committee; mandatory pre-deployment validation &amp; bias assessment; continuous monitoring dashboards; standardized AI incident response. <strong>Quadrants:</strong> Ethical Evaluation &amp; Usage · Legal/Regulatory/Compliance · Clinical &amp; Scientific Verification · Org Deployment &amp; Change Management.</div></details>
+
+  <a class="backtop" href="#top">↑ TOP</a>
+</section>
+
+<footer>
+  <span>MODULES 3.1.1–3.2.3 · AI IN HEALTHCARE</span>
+  <span>MOBILE EDITION · BUILT FOR ANDY · JUL 2026</span>
+</footer>
+
+</div>
+</body>
+</html>
