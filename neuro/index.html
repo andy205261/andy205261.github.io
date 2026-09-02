@@ -146,6 +146,28 @@ footer a{color:var(--cyan);text-decoration:none}
 .demo{background:var(--cyan);color:#04121f;border:none;border-radius:8px;padding:6px 15px;font-family:var(--sans);font-weight:600;font-size:12.5px;cursor:pointer;transition:box-shadow .2s}
 .demo:hover{box-shadow:0 0 20px rgba(56,189,248,.4)}
 .demo:disabled{opacity:.55;cursor:default}
+
+.roi{display:grid;grid-template-columns:320px 1fr;gap:0}
+@media(max-width:860px){.roi{grid-template-columns:1fr}}
+.roi-l{padding:20px;border-right:1px solid var(--line)}
+@media(max-width:860px){.roi-l{border-right:none;border-bottom:1px solid var(--line)}}
+.roi-r{padding:20px}
+.par{margin-bottom:15px}
+.par-h{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;margin-bottom:5px}
+.par-h span:first-child{color:var(--muted)}
+.par-v{font-family:var(--mono);font-size:13px;color:var(--cyan)}
+.par input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--line);border-radius:99px;outline:none}
+.par input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--cyan);cursor:pointer}
+.par input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:var(--cyan);cursor:pointer}
+.rmtx{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:11px;margin-bottom:16px}
+.rm{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.rm-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.rm-v{font-family:var(--serif);font-size:26px;line-height:1.05}
+.rm-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.v-ok{color:var(--green)}.v-cy{color:var(--cyan)}.v-p{color:var(--purple)}.v-a{color:var(--amber)}
+.hum{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.28);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.75;color:var(--muted)}
+.hum b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
+.hum strong{color:var(--text);font-weight:500}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -258,9 +280,46 @@ footer a{color:var(--cyan);text-decoration:none}
   <div class="note" style="margin-top:18px"><strong>Why this is the analyst's meeting, not the vendor's:</strong> the algorithm ships with a default. The default was tuned on someone else's population, in someone else's unit, with someone else's staffing. Choosing the operating point is a <em>local clinical governance decision</em> — and the person who can put this tradeoff on a screen for the neurointensivist, the nurse manager, and the CMIO is the person who makes that decision possible.</div>
 </section>
 
+<!-- ============ 3B. ROI ============ -->
+<section>
+  <div class="slab">04 — The business case</div>
+  <h2>What the right threshold is worth</h2>
+  <p class="lede">The clinical argument for tuning an alert is easy to make and easy to ignore. <strong>The financial one is harder to ignore.</strong> Two costs move when the threshold moves: ICU days from seizures caught late, and nursing hours burned on false alarms. Both are measurable, and the second one is almost never measured.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div><div class="panel-title">Annual impact model — 12-bed neuro ICU</div><div class="panel-sub">all inputs adjustable · illustrative, not an institutional projection</div></div>
+      <div class="panel-sub" id="roiTag">baseline assumptions</div>
+    </div>
+    <div class="roi">
+      <div class="roi-l">
+        <div class="par"><div class="par-h"><span>NCSE cases per year</span><span class="par-v" id="vCases">55</span></div><input type="range" id="pCases" min="15" max="140" step="5" value="55"></div>
+        <div class="par"><div class="par-h"><span>ICU days saved per early catch</span><span class="par-v" id="vDays">3</span></div><input type="range" id="pDays" min="1" max="8" step="1" value="3"></div>
+        <div class="par"><div class="par-h"><span>Cost per ICU day</span><span class="par-v" id="vIcu">$4,800</span></div><input type="range" id="pIcu" min="2500" max="9000" step="100" value="4800"></div>
+        <div class="par"><div class="par-h"><span>False alerts/day — before tuning</span><span class="par-v" id="vFpA">104</span></div><input type="range" id="pFpA" min="30" max="160" step="2" value="104"></div>
+        <div class="par"><div class="par-h"><span>False alerts/day — after tuning</span><span class="par-v" id="vFpB">23</span></div><input type="range" id="pFpB" min="5" max="80" step="1" value="23"></div>
+        <div class="par"><div class="par-h"><span>Nurse minutes per false alert</span><span class="par-v" id="vMin">4</span></div><input type="range" id="pMin" min="1" max="12" step="1" value="4"></div>
+        <div class="par"><div class="par-h"><span>Loaded nursing cost / hour</span><span class="par-v" id="vRate">$85</span></div><input type="range" id="pRate" min="45" max="140" step="5" value="85"></div>
+      </div>
+      <div class="roi-r">
+        <p style="font-size:13px;color:var(--faint);margin-bottom:14px;line-height:1.6">What changes over a year when the threshold is chosen deliberately instead of inherited:</p>
+        <div class="rmtx">
+          <div class="rm"><div class="rm-k">ICU days avoided</div><div class="rm-v v-cy" id="oIcuD">—</div><div class="rm-s">earlier detection</div></div>
+          <div class="rm"><div class="rm-k">ICU cost avoided</div><div class="rm-v v-ok" id="oIcuC">—</div><div class="rm-s">per year</div></div>
+          <div class="rm"><div class="rm-k">False alerts removed</div><div class="rm-v v-a" id="oFp">—</div><div class="rm-s">per year</div></div>
+          <div class="rm"><div class="rm-k">Nursing hours reclaimed</div><div class="rm-v v-p" id="oHrs">—</div><div class="rm-s">back to the bedside</div></div>
+          <div class="rm"><div class="rm-k">Nursing cost recovered</div><div class="rm-v v-ok" id="oNur">—</div><div class="rm-s">per year</div></div>
+          <div class="rm"><div class="rm-k">Total annual value</div><div class="rm-v v-a" id="oTot">—</div><div class="rm-s">both effects</div></div>
+        </div>
+        <div class="hum" id="hum"><b>How to present this</b><p>—</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>The number nobody counts:</strong> alert fatigue is almost always argued as a safety problem, which makes it easy to file under "important, not urgent." Convert it to nursing hours and it becomes a staffing line item — and staffing is a language every operating committee already speaks fluently. <em>The strongest version of this case pairs both: the dollars get you the meeting, the missed seizures get you the decision.</em></div>
+</section>
+
 <!-- ============ 4. ESCALATION ============ -->
 <section>
-  <div class="slab">04 — Routing</div>
+  <div class="slab">05 — Routing</div>
   <h2>An alert with no owner is not an alert</h2>
   <p class="lede">An alert nobody receives is the same as no alert at all. Here is who gets told, when, and what happens if they don't respond.</p>
   <div class="panel">
@@ -276,7 +335,7 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <!-- ============ 5. AUTONOMY LADDER ============ -->
 <section>
-  <div class="slab">05 — Automation governance</div>
+  <div class="slab">06 — Automation governance</div>
   <h2>How much should the machine be allowed to decide?</h2>
   <p class="lede">The real question is never "can we automate this" — it usually can be. It's <strong>how much the machine is allowed to decide on its own</strong>. The answer depends on two things: can the action be undone, and how badly can it hurt someone.</p>
   <div class="ladder">
@@ -291,7 +350,7 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <!-- ============ 6. FAILURE MODES ============ -->
 <section>
-  <div class="slab">06 — What actually breaks</div>
+  <div class="slab">07 — What actually breaks</div>
   <h2>Failure modes worth designing against</h2>
   <div class="grid2">
     <div class="card"><h3>Silent death of the pipeline</h3><ul>
@@ -319,7 +378,7 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <!-- ============ 7. CLOSE ============ -->
 <section>
-  <div class="slab">07 — Why this project</div>
+  <div class="slab">08 — Why this project</div>
   <h2>The question after the algorithm works</h2>
   <p class="lede">Project 01 built seizure detection from EEG features and asked whether the model could find the pattern. This project asks the harder question that determines whether any of that reaches a patient: <strong>who gets told, how fast, at what false-alarm cost, with which human holding the decision</strong> — and who is accountable when the automation is wrong. That question is the job description of a clinical systems analyst working on automation, and it is the same question whether the pipeline carries a seizure detector, an RPA bot, or a sepsis model.</p>
   <div class="grid2">
@@ -594,6 +653,43 @@ footer a{color:var(--cyan);text-decoration:none}
     });
   });
   update();
+})();
+
+/* ================= ROI ================= */
+(function(){
+var R={Cases:55,Days:3,Icu:4800,FpA:104,FpB:23,Min:4,Rate:85};
+function money(n){ if(n>=1000000) return '$'+(n/1000000).toFixed(2)+'M'; if(n>=1000) return '$'+Math.round(n/1000)+'K'; return '$'+Math.round(n); }
+function calc(){
+  var icuD = R.Cases * R.Days;
+  var icuC = icuD * R.Icu;
+  var fpRemoved = Math.max(0,(R.FpA - R.FpB)) * 365;
+  var hrs = fpRemoved * R.Min / 60;
+  var nur = hrs * R.Rate;
+  var tot = icuC + nur;
+  document.getElementById('oIcuD').textContent = Math.round(icuD);
+  document.getElementById('oIcuC').textContent = money(icuC);
+  document.getElementById('oFp').textContent = fpRemoved.toLocaleString();
+  document.getElementById('oHrs').textContent = Math.round(hrs).toLocaleString();
+  document.getElementById('oNur').textContent = money(nur);
+  document.getElementById('oTot').textContent = money(tot);
+  document.getElementById('hum').innerHTML = '<b>How to present this</b>' +
+    '<p>Lead with the operational number: <strong>' + Math.round(hrs).toLocaleString() + ' nursing hours a year</strong> currently spent dismissing alarms that were never real — roughly ' + (hrs/2080).toFixed(1) + ' FTE worth of time, returned to the bedside. That is a staffing argument, and staffing arguments get heard.</p>' +
+    '<p>Then land the clinical one: <strong>' + Math.round(icuD) + ' ICU days avoided</strong> because seizures were caught while treatment still worked. Combined modeled value <strong>' + money(tot) + '</strong>. But the sentence that should close the meeting is the one without a dollar sign: <em>at the current threshold we are missing seizures, and the fix costs nothing but a decision.</em></p>';
+  document.getElementById('roiTag').textContent =
+    (R.Cases===55&&R.Days===3&&R.FpA===104&&R.FpB===23) ? 'baseline assumptions' : 'custom assumptions';
+}
+[['pCases','Cases','vCases',function(v){return v;}],
+ ['pDays','Days','vDays',function(v){return v;}],
+ ['pIcu','Icu','vIcu',function(v){return '$'+(+v).toLocaleString();}],
+ ['pFpA','FpA','vFpA',function(v){return v;}],
+ ['pFpB','FpB','vFpB',function(v){return v;}],
+ ['pMin','Min','vMin',function(v){return v;}],
+ ['pRate','Rate','vRate',function(v){return '$'+v;}]
+].forEach(function(c){
+  var el=document.getElementById(c[0]);
+  el.addEventListener('input',function(){ R[c[1]]=+el.value; document.getElementById(c[2]).textContent=c[3](+el.value); calc(); });
+});
+calc();
 })();
 </script>
 </body>
