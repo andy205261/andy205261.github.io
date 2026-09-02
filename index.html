@@ -316,22 +316,262 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   <h2 class="fi">Projects</h2>
   <!-- PROJECT NAV TABS -->
   <div id="proj-tabs" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:40px;padding:12px;background:var(--paper2);border:1px solid var(--rule);border-radius:10px">
-    <a href="#proj-01" class="proj-nav-tab active">01 Neurological AI</a>
-    <a href="#proj-02" class="proj-nav-tab">02 Clinical AI</a>
-    <a href="#proj-03" class="proj-nav-tab">03 Medical Imaging</a>
-    <a href="#proj-04" class="proj-nav-tab">04 Document Intel</a>
-    <a href="#proj-05" class="proj-nav-tab">05 Clinical Systems</a>
-    <a href="#proj-06" class="proj-nav-tab">06 IT Operations</a>
-    <a href="#proj-07" class="proj-nav-tab">07 FHIR Data Engineering</a>
-    <a href="#proj-08" class="proj-nav-tab">08 Clinical AI Assistant</a>
-    <a href="#proj-09" class="proj-nav-tab">09 Security Training</a>
-    <a href="#proj-10" class="proj-nav-tab">10 Epic Analyst Lab</a>
+    <a href="#proj-01" class="proj-nav-tab active">01 Cancer Center Automation</a>
+    <a href="#proj-02" class="proj-nav-tab">02 Neurocritical Automation</a>
+    <a href="#proj-03" class="proj-nav-tab">03 Epic Analyst Lab</a>
+    <a href="#proj-04" class="proj-nav-tab">04 Automation Governance</a>
+    <a href="#proj-05" class="proj-nav-tab">05 Neurological AI</a>
   </div>
-  <p class="intro fi">Ten hands-on projects spanning neurological signal analysis, clinical AI explainability, medical imaging, document intelligence, healthcare system analysis, enterprise IT, security exam tooling, and Epic analyst simulation — showing the full range from infrastructure to clinical informatics.</p>
+  <p class="intro fi">Five in-depth projects where neuroscience, clinical automation, and health system operations meet — from CAR-T neurotoxicity surveillance and neuro-ICU seizure alerting to Epic analyst simulations, RPA governance, and EEG machine learning. Each one is a working build that names both what it does for patients and what it is worth to the institution.</p>
+
+  <!-- PROJECT 1: CAR-T NEUROTOXICITY WATCH -->
+  <div id="proj-01" style="margin-bottom:48px">
+    <a href="#proj-01" class="proj-label fi" style="text-decoration:none">Project 01 — Cancer Center Automation</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">CAR-T / cell therapy</span><span class="tag">ICANS · ICE score</span><span class="tag">Trend detection</span><span class="tag">Capacity modeling</span><span class="tag">Clinical automation</span>
+        </div>
+        <h3>CAR-T neurotoxicity watch &amp; capacity model</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">CAR-T cell therapy cures cancers nothing else could touch. Its most feared complication is neurological — <b style="color:var(--ink);font-weight:600">ICANS</b>: lucid at noon, confused by evening, seizing by morning. The warning sign is measured by asking a patient to write one sentence. This project automates the catching of that signal through trend detection rather than thresholds, then does what clinical projects usually avoid: it models what catching it 16 hours earlier is worth — in ICU days, in released treatment slots, and in patients who never lose the ability to speak to their family.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">BED 07 · ICE TRAJECTORY OVER 72H</div>
+          <div class="srow"><span class="slb">Hour 16 — score 9</span><div class="strk"><div class="sbar" style="width:90%;background:#34d399"></div></div><span class="sval" style="color:#34d399">stable</span></div>
+          <div class="srow"><span class="slb">Hour 24 — score 8</span><div class="strk"><div class="sbar" style="width:80%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">trend fires</span></div>
+          <div class="srow"><span class="slb">Hour 40 — score 6</span><div class="strk"><div class="sbar" style="width:60%;background:#f87171"></div></div><span class="sval" style="color:#f87171">threshold fires</span></div>
+          <div class="srow"><span class="slb">Detection lead time gained</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">16 h</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">MODELED IMPACT</div>
+            <div style="font-size:13px;color:var(--ink)">58 ICU days avoided / yr</div>
+          </div>
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">CAPACITY RELEASED</div>
+            <div style="font-size:13px;color:var(--accent)">~6 treatment slots / yr</div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Cell therapy unit — neurotoxicity board</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">ICE assessments q8h · 72-hour window</div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
+            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">HOUR 24 · TREND ALERT — BED 07</div>
+            <div style="color:#fbbf24">ICE trajectory 10 → 9 → 8 over two assessments</div>
+            <div style="color:var(--ink3)">still grade 1 · patient oriented · <span style="color:#34d399">this is the window</span></div>
+            <div style="margin-top:6px;color:var(--ink3)">→ repeat assessment, rule out sedation</div>
+            <div style="color:var(--ink3)">→ notify cell therapy APP <span style="color:var(--accent)">with the trend</span></div>
+            <div style="margin-top:6px;color:#f87171">threshold-only rule would fire at hour 40</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+            <a href="cart/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Board →</a>
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+          </div>
+          <div class="mrow"><span class="mk">Patient board</span><span class="mv">5 patients · scrubbable 72h timeline</span></div>
+          <div class="mrow"><span class="mk">Detection</span><span class="mv ok">Threshold vs trend, side by side</span></div>
+          <div class="mrow"><span class="mk">ROI model</span><span class="mv ok">8 adjustable assumptions</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Trend detection</span></div><div class="ctitle">10 → 9 → 7 is a trajectory; 7 alone is a number</div><div class="cdesc">A scrubbable 72-hour board across five CAR-T patients, one of whom is declining on a path no single assessment flags. Switching from threshold logic to a two-assessment delta rule surfaces the decline 16 hours earlier — while the patient is still oriented and steroids can change the outcome. The data required no new device and no new documentation: nurses were already collecting it.</div></div><div class="card-body"><div class="mrow"><span class="mk">Lead time</span><span class="mv">Hour 24 vs hour 40</span></div><div class="mrow"><span class="mk">Tradeoff shown</span><span class="mv ok">Transient dip fires too</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Capacity economics</span></div><div class="ctitle">A bed-day in a full service is a treatment slot</div><div class="cdesc">An interactive model converting earlier detection into severe cases avoided, ICU days, released bed-days, and additional CAR-T treatment slots — with all eight assumptions exposed as sliders, because a business case that hides its inputs is a sales pitch. Built against the reality that cancer services at major centers are capacity-constrained, where length-of-stay converts directly into forgone treatments.</div></div><div class="card-body"><div class="mrow"><span class="mk">Outputs</span><span class="mv">ICU days · bed-days · slots · value</span></div><div class="mrow"><span class="mk">Framing</span><span class="mv ok">Clinical and financial case align</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Clinical governance</span></div><div class="ctitle">ICE anatomy &amp; confirmation-first escalation</div><div class="cdesc">A component-level breakdown of the 10-point ICE assessment — including why handwriting degrades before orientation does — paired with an escalation design that starts with nurse re-assessment rather than a page, protecting alert credibility. Deliberately placed on rung 1 of the autonomy ladder: the differential for a falling score requires a clinician at the bedside.</div></div><div class="card-body"><div class="mrow"><span class="mk">Escalation</span><span class="mv">Confirm → APP → attending + cEEG</span></div><div class="mrow"><span class="mk">Byproduct</span><span class="mv ok">Structured program reporting data</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- PROJECT 1: NEURO-ICU cEEG ALERT PIPELINE -->
+  <div id="proj-02" style="margin-bottom:48px">
+    <a href="#proj-02" class="proj-label fi" style="text-decoration:none">Project 02 — Neurocritical Care Automation</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">cEEG monitoring</span><span class="tag">Seizure detection</span><span class="tag">Alert governance</span><span class="tag">Device integration</span><span class="tag">Clinical automation</span>
+        </div>
+        <h3>Neuro-ICU cEEG alert pipeline &amp; automation governance</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">Up to a fifth of comatose neuro-ICU patients are seizing with no outward movement — <b style="color:var(--ink);font-weight:600">non-convulsive status epilepticus</b>, visible only on continuous EEG, costing neurons every undetected hour. Detection is a solved math problem; getting the alert to the right clinician without drowning the unit in false alarms is a systems problem. This project maps the seven-hop pipeline from scalp to clinician, makes the sensitivity-versus-alert-burden tradeoff interactive, and proposes an autonomy framework for how much any clinical automation should be allowed to decide.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">THRESHOLD TRADEOFF · 24H MODELED WINDOW</div>
+          <div class="srow"><span class="slb">Max sensitivity (0.18)</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">104 FP</span></div>
+          <div class="srow"><span class="slb">Balanced (0.48)</span><div class="strk"><div class="sbar" style="width:22%;background:#34d399"></div></div><span class="sval" style="color:#34d399">23 FP</span></div>
+          <div class="srow"><span class="slb">Low noise (0.78)</span><div class="strk"><div class="sbar" style="width:7%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">7 FP</span></div>
+          <div class="srow"><span class="slb">Seizures missed at 0.78</span><div class="strk"><div class="sbar" style="width:56%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">5 of 9</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">PIPELINE</div>
+            <div style="font-size:13px;color:var(--ink)">7 hops · 5 owners</div>
+          </div>
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">AUTONOMY MODEL</div>
+            <div style="font-size:13px;color:var(--accent)">5 rungs · reversibility × harm</div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Bed 7 — cEEG · live detector</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Fp1-F7 · F7-T3 · T3-T5 · T5-O1 · 256 Hz</div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <span style="color:#f87171">⚡ RHYTHMIC EVOLVING DISCHARGE</span>
+              <span style="color:var(--ink)">score <b style="color:#f87171">0.91</b></span>
+            </div>
+            <div style="color:var(--ink3)">T1 · 0s &nbsp;→&nbsp; assigned RN, push + <span style="color:var(--accent)">ack required</span></div>
+            <div style="color:var(--ink3)">T2 · 3m &nbsp;→&nbsp; unacknowledged, widen to charge RN + fellow</div>
+            <div style="color:var(--ink3)">T3 · 10m &nbsp;→&nbsp; sustained = <span style="color:#fbbf24">status epilepticus</span>, attending</div>
+            <div style="margin-top:6px;color:#34d399">every event → reviewable record · none disappear</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+            <a href="neuro/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Pipeline →</a>
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+          </div>
+          <div class="mrow"><span class="mk">Live signal</span><span class="mv">4-channel cEEG canvas · inject seizure/artifact</span></div>
+          <div class="mrow"><span class="mk">Tuning console</span><span class="mv ok">Interactive threshold · sensitivity vs burden</span></div>
+          <div class="mrow"><span class="mk">Governance</span><span class="mv ok">Escalation tiers + autonomy ladder</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Live simulation</span></div><div class="ctitle">4-channel cEEG with injectable events</div><div class="cdesc">A canvas-rendered EEG stream where background activity, rhythmic evolving seizure discharge, and movement artifact are each synthesized distinctly — and the detector score responds in real time. Injecting an artifact demonstrates exactly why false positives exist: noise can score 0.42 and clear a poorly-set threshold.</div></div><div class="card-body"><div class="mrow"><span class="mk">Channels</span><span class="mv">Longitudinal bipolar montage</span></div><div class="mrow"><span class="mk">States</span><span class="mv ok">Background · seizure · artifact</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Alert governance</span></div><div class="ctitle">The threshold meeting, made interactive</div><div class="cdesc">Nine modeled seizure events — including subtle low-amplitude ones — scored against a false-positive curve. Moving the threshold recomputes seizures caught, seizures missed, false alerts per day, alerts per nurse per shift, detection latency, and positive predictive value, with a live operating curve. Every setting names its own cost.</div></div><div class="card-body"><div class="mrow"><span class="mk">Metrics</span><span class="mv">Sensitivity · PPV · alert burden</span></div><div class="mrow"><span class="mk">Insight</span><span class="mv ok">Max sensitivity ≠ max safety</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Automation framework</span></div><div class="ctitle">Five rungs of clinical autonomy</div><div class="cdesc">A governance model for how much any automation — seizure detector, RPA bot, or predictive model — should be allowed to decide, with reversibility and harm as the axes. Includes the service-identity problem most automation programs discover late: a bot that reads charts is an account that reads charts, and it needs scope, rotation, and attribution.</div></div><div class="card-body"><div class="mrow"><span class="mk">Rungs</span><span class="mv">Record → flag → act → veto → autonomous</span></div><div class="mrow"><span class="mk">Bot identity</span><span class="mv ok">Least privilege + audit attribution</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- PROJECT 10: CLINICAL SYSTEMS ANALYST LAB -->
+  <div id="proj-03" style="margin-bottom:48px">
+    <a href="#proj-03" class="proj-label fi" style="text-decoration:none">Project 03 — Clinical Systems Analyst Lab</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">HL7 v2</span><span class="tag">Epic ecosystem</span><span class="tag">ServiceNow</span><span class="tag">IAM</span><span class="tag">Patient safety</span>
+        </div>
+        <h3>Epic incident simulations &amp; ticket-queue trainer</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px"><b style="color:var(--ink);font-weight:600">Clinical Systems Analysts</b> live where clinical workflow, system configuration, and risk intersect. This lab turns that job into a practice environment: three decision-based P1/P2 incidents worked end-to-end — an HL7 ORU filing failure with clickable message anatomy, an ADT sequence crisis with a stakeholder pressure-test, and a compromised provider account crossing into IAM and HIPAA breach territory — plus a daily shift trainer that deals 10 random tickets from a 32-scenario pool spanning the whole analyst surface.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">SCENARIO COVERAGE BY DOMAIN</div>
+          <div class="srow"><span class="slb">Interfaces &amp; HL7</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">3 sims</span></div>
+          <div class="srow"><span class="slb">Security &amp; IAM</span><div class="strk"><div class="sbar" style="width:88%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">7 tix</span></div>
+          <div class="srow"><span class="slb">ClinDoc &amp; Orders</span><div class="strk"><div class="sbar" style="width:74%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">8 tix</span></div>
+          <div class="srow"><span class="slb">Willow · Beaker · Radiant</span><div class="strk"><div class="sbar" style="width:66%;background:#34d399"></div></div><span class="sval" style="color:#34d399">7 tix</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">SCENARIO POOL</div>
+            <div style="font-size:13px;color:var(--ink)">3 incidents · 42 tickets</div>
+          </div>
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">REVEAL LAYERS</div>
+            <div style="font-size:13px;color:var(--accent)">Triage → Fix → Know → Pitfalls</div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Clinical Systems Analyst Lab — Live</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Incident sims · Shift trainer · Scenario library</div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:6px">
+            <a href="csa-lab/incident-sim.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25);text-decoration:none">🚨 Incidents</a>
+            <a href="csa-lab/shift-trainer.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule);text-decoration:none">🎫 Shift Trainer</a>
+          </div>
+          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
+            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">INC0482913 · P1 — BEAKER-ORU-IN</div>
+            <div style="color:#f87171">FILING ERROR: no matching order found</div>
+            <div style="color:#fbbf24">filler order number SHCB-20260705-000841</div>
+            <div style="margin-top:6px;color:var(--ink3)">error queue: <span style="color:#f87171">1,325</span> · deferred, not purged</div>
+            <div style="margin-top:4px;color:#34d399">→ fix forward · reprocess · safety review</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+            <a href="csa-lab/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Enter the Lab →</a>
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+          </div>
+          <div class="mrow"><span class="mk">Incidents</span><span class="mv">ORU filing · ADT crisis · Account compromise</span></div>
+          <div class="mrow"><span class="mk">Daily queue</span><span class="mv ok">10 random tickets / shift · 23 Epic domains</span></div>
+          <div class="mrow"><span class="mk">Build</span><span class="mv ok">Static HTML + JS · zero dependencies</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Incident engine</span></div><div class="ctitle">3 end-to-end incidents · 16 decisions</div><div class="cdesc">Each incident is a chain of decision points with real-world cost feedback: read the HL7 error text before restarting, hold sequence integrity against stakeholder pressure, contain a compromised account atomically. Debriefs include the full incident timeline, systemic RCA, and why every wrong answer fails in production.</div></div><div class="card-body"><div class="mrow"><span class="mk">Scenarios</span><span class="mv">ORU · ADT · Compromise</span></div><div class="mrow"><span class="mk">Debrief</span><span class="mv ok">Timeline + RCA + talking points</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Shift trainer</span></div><div class="ctitle">10 random tickets per shift · 32-scenario pool</div><div class="cdesc">A daily queue simulator that deals priority-sorted tickets across Security/IAM, patient identity, ClinDoc, Orders, Willow, Beaker, Radiant, OpTime, ASAP, Grand Central, Telehealth, FHIR APIs, Interfaces, Reporting, Downtime, and Change control — the full breadth of what lands in an Epic analyst's ServiceNow queue, with a filterable library mode for study by module.</div></div><div class="card-body"><div class="mrow"><span class="mk">Pool</span><span class="mv">42 scenarios · 23 modules</span></div><div class="mrow"><span class="mk">Modes</span><span class="mv ok">Random shift + filtered library</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Knowledge system</span></div><div class="ctitle">Four reveal layers + interview angles</div><div class="cdesc">Every ticket teaches in layers: triage heuristics (scope IS the diagnosis), ordered resolution steps with Epic master files (EMP/SER, EAP/ERX), two-paragraph deep dives on mechanisms — the Chronicles→Clarity→Caboodle data stack, Data Courier discipline, placer/filler matching — and pitfalls capped with a ready-to-say interview line.</div></div><div class="card-body"><div class="mrow"><span class="mk">Interview lines</span><span class="mv">42 ready-to-use answers</span></div><div class="mrow"><span class="mk">Depth</span><span class="mv ok">Master files → data stack → process</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- PROJECT 4: RPA FLEET CONTROL TOWER -->
+  <div id="proj-04" style="margin-bottom:48px">
+    <a href="#proj-04" class="proj-label fi" style="text-decoration:none">Project 04 — Automation Governance</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">RPA governance</span><span class="tag">Service identity</span><span class="tag">Least privilege</span><span class="tag">Blast radius</span><span class="tag">Audit attribution</span>
+        </div>
+        <h3>RPA fleet control tower</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">A human who makes a mistake makes it once. A bot makes it <b style="color:var(--ink);font-weight:600">4,000 times before lunch</b> — and every one of those actions is signed with a service account nobody can quite explain. This is a control tower for five bots running real healthcare workflows: prior authorization, registration cleanup, In Basket triage, charge reconciliation, discharge outreach. Configure the guardrails, run a 24-hour shift, and watch which controls were load-bearing. The guardrails you skip are the incidents you get.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">24H SHIFT · GOVERNED VS UNGOVERNED</div>
+          <div class="srow"><span class="slb">Ungoverned — hours saved</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">252h</span></div>
+          <div class="srow"><span class="slb">Ungoverned — incidents</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">5</span></div>
+          <div class="srow"><span class="slb">Governed — hours saved</span><div class="strk"><div class="sbar" style="width:67%;background:#34d399"></div></div><span class="sval" style="color:#34d399">168h</span></div>
+          <div class="srow"><span class="slb">Governed — incidents</span><div class="strk"><div class="sbar" style="width:2%;background:#34d399"></div></div><span class="sval" style="color:#34d399">0</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">FLEET</div>
+            <div style="font-size:13px;color:var(--ink)">5 bots · 4,830 daily tasks</div>
+          </div>
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">CONTROLS</div>
+            <div style="font-size:13px;color:var(--accent)">6 guardrails · 5 incident paths</div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Fleet Control Tower — shift simulator</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Guardrail config determines the outcome</div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
+            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">SHIFT LOG — GUARDRAILS OFF</div>
+            <div style="color:#4ade80">REG-CLEANUP-BOT · 1,674 tasks · 56h returned</div>
+            <div style="color:#f87171">06:30 ⛔ ADT queue depth 9,412 · latency 41m</div>
+            <div style="color:#f87171">07:05 ⛔ transport sent to 3 incorrect rooms</div>
+            <div style="color:#f87171">&nbsp;&nbsp;&nbsp;⛔ 294 unreviewed low-confidence actions</div>
+            <div style="color:#fbbf24">&nbsp;&nbsp;&nbsp;⚠ mean time to detect: 6h · to stop: 40m</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+            <a href="automation/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Run the Fleet →</a>
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+          </div>
+          <div class="mrow"><span class="mk">Guardrails</span><span class="mv">Rate · window · exceptions · scope · kill · owner</span></div>
+          <div class="mrow"><span class="mk">Failure modes</span><span class="mv ok">Interface flood · unreviewed actions · scope creep</span></div>
+          <div class="mrow"><span class="mk">Framework</span><span class="mv ok">5-rung autonomy ladder</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Shift simulator</span></div><div class="ctitle">Six guardrails, five incident paths</div><div class="cdesc">Toggle rate limiting, execution windows, exception queues, least-privilege scope, kill switches, and named ownership — then run a modeled 24-hour shift. Removing controls raises throughput by roughly 50% and generates the exact incidents those controls exist to prevent, including a bulk job flooding the ADT interface during morning admissions.</div></div><div class="card-body"><div class="mrow"><span class="mk">Tradeoff</span><span class="mv">252h + 5 incidents vs 168h + 0</span></div><div class="mrow"><span class="mk">Insight</span><span class="mv ok">Throughput is what you pay for safety</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Service identity</span></div><div class="ctitle">A bot that reads charts is an account that reads charts</div><div class="cdesc">Every bot needs an accountable human owner, least-privilege scope, credential rotation, and an audit trail that separates its actions from a human's. The simulation surfaces what happens without them — orphaned bots whose owners left, shared credentials that break attribution, and a triage bot quietly reading restricted charts it never needed.</div></div><div class="card-body"><div class="mrow"><span class="mk">Controls</span><span class="mv">Owner · scope · rotation · attribution</span></div><div class="mrow"><span class="mk">Risk</span><span class="mv ok">Continuous minimum-necessary exposure</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Autonomy framework</span></div><div class="ctitle">Which rung is this task allowed to occupy?</div><div class="cdesc">A governance model scoring automation on reversibility and harm rather than technical feasibility. Most healthcare automation belongs on rung 1 (machine flags, human decides) or rung 2 (machine acts on reversible work) — and the most common governance failure is a bot silently climbing a rung because nobody built the exception queue that was holding it in place.</div></div><div class="card-body"><div class="mrow"><span class="mk">Rungs</span><span class="mv">Record → flag → act → veto → autonomous</span></div><div class="mrow"><span class="mk">Axes</span><span class="mv ok">Reversibility × harm</span></div></div></div>
+    </div>
+  </div>
 
   <!-- PROJECT 1: Neurological AI -->
-  <div id="proj-01" style="margin-bottom:48px">
-    <a href="#proj-01" class="proj-label fi" style="text-decoration:none">Project 01 — Neurological AI</a>
+  <div id="proj-05" style="margin-bottom:48px">
+    <a href="#proj-05" class="proj-label fi" style="text-decoration:none">Project 05 — Neurological AI</a>
     <div class="split fi">
       <div class="pan dk">
         <div class="tags" style="margin-bottom:12px">
@@ -557,839 +797,6 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     </div>
   </div>
 
-  <!-- PROJECT 2: Clinical AI -->
-  <div id="proj-02" style="margin-bottom:48px">
-    <a href="#proj-02" class="proj-label fi" style="text-decoration:none">Project 02 — Clinical AI</a>
-
-<style>
-.db-tab-bar{display:flex;gap:4px;margin-bottom:0}
-.db-tab{padding:7px 14px;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:none;cursor:pointer;font-size:12px;color:var(--ink3);background:rgba(255,255,255,.03);transition:all .15s;font-family:'Outfit',sans-serif}
-.db-tab.active{background:var(--paper2);color:var(--ink);font-weight:500;border-color:rgba(255,255,255,.1)}
-.db-panel{display:none;border:1px solid rgba(255,255,255,.08);border-radius:0 8px 8px 8px;padding:16px;background:var(--paper2)}
-.db-panel.active{display:block}
-.db-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-.db-bred{background:rgba(248,113,113,.15);color:#f87171}.db-bamb{background:rgba(251,191,36,.12);color:#fbbf24}.db-bgrn{background:rgba(52,211,153,.12);color:#34d399}
-.db-mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
-.db-mcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:9px 11px}
-.db-mlabel{font-size:10px;color:var(--ink3);margin-bottom:2px}
-.db-mval{font-size:18px;font-weight:500;color:var(--ink)}
-.db-shap-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:11px}
-.db-shap-lbl{width:120px;color:var(--ink3);font-size:11px}
-.db-shap-wrap{flex:1;background:rgba(255,255,255,.06);border-radius:3px;height:10px;overflow:hidden}
-.db-shap-bar{height:100%;border-radius:3px}
-.db-shap-num{width:38px;text-align:right;font-size:10px}
-.db-act-row{display:flex;align-items:flex-start;gap:8px;margin:6px 0;padding:9px 10px;border-radius:6px;background:rgba(255,255,255,.04)}
-.db-act-num{width:18px;height:18px;border-radius:50%;background:var(--accent);color:#080c14;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.db-act-title{font-size:12px;font-weight:500;color:var(--ink)}
-.db-act-sub{font-size:11px;color:var(--ink3);margin-top:1px}
-.db-sec{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:12px 0 5px}
-.db-goal-row{display:flex;align-items:center;gap:8px;margin:5px 0}
-.db-goal-lbl{font-size:11px;width:120px;color:var(--ink)}
-.db-goal-wrap{flex:1;background:rgba(255,255,255,.06);border-radius:4px;height:8px;overflow:hidden}
-.db-goal-bar{height:100%;border-radius:4px}
-.db-goal-val{font-size:10px;color:var(--ink3);width:30px;text-align:right}
-.db-icon-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:8px 0}
-.db-icon-box{text-align:center;padding:7px 4px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);font-size:10px;color:var(--ink3)}
-.db-icon-box.mod{background:rgba(52,211,153,.08);color:var(--green);border-color:rgba(52,211,153,.15)}
-.db-icon-box.fix{background:rgba(251,191,36,.08);color:var(--amber);border-color:rgba(251,191,36,.15)}
-.db-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:10px 0}
-.db-ci-track{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;position:relative;overflow:visible}
-.db-ci-fill{position:absolute;top:0;height:6px;border-radius:3px;background:rgba(56,189,248,.3)}
-.db-ci-dot{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid var(--paper2);margin-left:-7px;box-shadow:0 0 8px rgba(56,189,248,.4)}
-.db-sim-row{display:flex;align-items:center;gap:8px;margin:6px 0}
-.db-sim-lbl{width:120px;font-size:11px;color:var(--ink3)}
-.db-sim-out{font-size:12px;font-weight:500;min-width:36px;text-align:right;color:var(--ink)}
-.db-pt-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,255,255,.1);border-radius:4px;background:rgba(255,255,255,.05);color:var(--ink)}
-</style>
-
-        <div class="db-tab-bar">
-          <div class="db-tab active" onclick="dbSwitch('cardio')">Cardiologist</div>
-          <div class="db-tab" onclick="dbSwitch('pcp')">Primary care</div>
-          <div class="db-tab" onclick="dbSwitch('patient')">Patient</div>
-        </div>
-
-        <!-- CARDIOLOGIST -->
-        <div class="db-panel active" id="db-cardio">
-          <div class="db-pt-row">
-            <label style="font-size:11px;color:var(--ink3)">Patient</label>
-            <select class="db-sel" id="db-sel-cardio" onchange="dbLoad(this.value)"></select>
-            <span id="db-badge-cardio" class="db-badge db-bred">High risk</span>
-          </div>
-          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
-            <span id="db-c-name" style="font-size:14px;font-weight:500;color:var(--ink)"></span>
-            <span id="db-c-demo" style="font-size:11px;color:var(--ink3)"></span>
-          </div>
-          <div class="db-mgrid">
-            <div class="db-mcard"><div class="db-mlabel">Predicted risk</div><div class="db-mval" id="db-c-risk"></div></div>
-            <div class="db-mcard"><div class="db-mlabel">95% CI</div><div class="db-mval" style="font-size:13px;padding-top:2px" id="db-c-ci"></div></div>
-            <div class="db-mcard"><div class="db-mlabel">Cohort pctile</div><div class="db-mval" id="db-c-pctile"></div></div>
-            <div class="db-mcard"><div class="db-mlabel">High-risk label</div><div class="db-mval" style="font-size:13px;padding-top:2px" id="db-c-lbl"></div></div>
-          </div>
-          <div class="db-sec">SHAP feature contributions</div>
-          <div id="db-shap-chart"></div>
-          <div class="db-sec">Confidence interval</div>
-          <div style="display:flex;align-items:center;gap:8px;margin:6px 0">
-            <span style="font-size:10px;color:var(--ink3);width:24px">0%</span>
-            <div class="db-ci-track"><div class="db-ci-fill" id="db-ci-fill"></div><div class="db-ci-dot" id="db-ci-dot"></div></div>
-            <span style="font-size:10px;color:var(--ink3);width:32px;text-align:right">100%</span>
-          </div>
-          <p id="db-ci-note" style="font-size:10px;color:var(--ink3);margin:2px 0 0"></p>
-          <div class="db-sec">What-if simulator</div>
-          <div class="db-sim-row"><span class="db-sim-lbl">Lower LDL (mg/dL)</span><input type="range" id="db-ldl" min="0" max="60" value="0" step="5" style="flex:1" oninput="dbSim()"><span class="db-sim-out" id="db-ldl-out">−0</span></div>
-          <div class="db-sim-row"><span class="db-sim-lbl">Smoking cessation</span><input type="range" id="db-smoke" min="0" max="1" value="0" step="1" style="flex:1" oninput="dbSim()"><span class="db-sim-out" id="db-smoke-out">No</span></div>
-          <p style="font-size:12px;margin:7px 0 0">Simulated risk: <span id="db-sim-risk" style="font-weight:500"></span> <span id="db-sim-delta" style="font-size:10px;color:var(--ink3)"></span></p>
-        </div>
-
-        <!-- PRIMARY CARE -->
-        <div class="db-panel" id="db-pcp">
-          <div class="db-pt-row">
-            <label style="font-size:11px;color:var(--ink3)">Patient</label>
-            <select class="db-sel" id="db-sel-pcp" onchange="dbLoad(this.value)"></select>
-            <span id="db-badge-pcp" class="db-badge db-bred">High risk</span>
-          </div>
-          <div id="db-pcp-alert" style="display:flex;align-items:center;gap:10px;padding:11px;border-radius:8px;margin-bottom:11px">
-            <div id="db-pcp-icon" style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 4v9m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
-            <div><div id="db-pcp-title" style="font-weight:500;font-size:13px"></div><div id="db-pcp-sub" style="font-size:11px;margin-top:1px"></div></div>
-          </div>
-          <div class="db-sec">Top modifiable risk factors</div>
-          <div id="db-pcp-actions"></div>
-          <div class="db-sec">Clinical details</div>
-          <div id="db-pcp-details" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"></div>
-          <hr class="db-divider">
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <button style="font-size:11px;padding:5px 10px;cursor:pointer" onclick="alert('In a live deployment this connects to your EHR order system')">Order lipid panel</button>
-            <button style="font-size:11px;padding:5px 10px;cursor:pointer" onclick="alert('Referral template would auto-populate here')">Cessation referral</button>
-          </div>
-        </div>
-
-        <!-- PATIENT -->
-        <div class="db-panel" id="db-patient">
-          <div class="db-pt-row">
-            <label style="font-size:11px;color:var(--ink3)">Patient</label>
-            <select class="db-sel" id="db-sel-patient" onchange="dbLoad(this.value)"></select>
-          </div>
-          <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
-            <div style="text-align:center;flex-shrink:0">
-              <canvas id="db-gauge" width="150" height="86"></canvas>
-              <div id="db-pat-risk-lbl" style="font-size:10px;color:var(--ink3);margin-top:1px"></div>
-            </div>
-            <div id="db-pat-summary" style="font-size:12px;line-height:1.6;padding:11px;border-radius:8px;flex:1"></div>
-          </div>
-          <div class="db-sec">Your risk factors</div>
-          <div class="db-icon-grid" id="db-pat-icons"></div>
-          <div class="db-sec">What you can work on</div>
-          <div id="db-pat-goals"></div>
-        </div>
-
-      </div><!-- end live-dashboard -->
-    </div><!-- end border box -->
-  </div>
-
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const DB_RAW=[
-    ["CR0001",75,"Female","White",27.1,129,59,111,80,"Current","1-2x/week","No","No","Moderate",1,0.976,0.034,0.044,-0.036,0.066,-0.002,0.031,0.065,0.046],
-    ["CR0002",32,"Male","Other",18.6,82,61,114,69,"Current","3-5x/week","No","No","Moderate",0,0.572,0.129,0.11,0.013,0.116,0.122,0.058,0.028,0.077],
-    ["CR0003",58,"Female","Hispanic",19.2,87,56,125,62,"Former","Daily","No","Yes","High",0,0.51,0.134,0.036,0.076,0.044,0.112,0.083,0.071,0.128],
-    ["CR0004",64,"Male","Asian",20.6,119,41,127,74,"Never","1-2x/week","Yes","No","Moderate",0,0.468,0.071,0.103,0.074,0.127,0.102,-0.01,0.039,0.088],
-    ["CR0005",68,"Male","White",31.8,112,75,112,69,"Current","Daily","No","No",null,1,0.449,0.062,0.001,0.028,0.017,0.04,0.051,0.063,0.146],
-    ["CR0006",47,"Male","Other",27.4,154,52,143,106,"Current","Daily","No","No","High",1,0.568,0.077,0.052,0.149,0.139,-0.039,-0.035,0.016,-0.048],
-    ["CR0007",49,"Female","Hispanic",20.8,115,44,137,68,"Never","Daily","Yes","No","High",0,0.759,0.115,0.013,0.14,-0.004,-0.044,-0.021,0.023,0.043],
-    ["CR0008",72,"Female","Hispanic",26.2,93,64,103,75,"Never","Daily","No","No",null,0,0.081,0.11,0.022,-0.024,-0.009,0.016,0.075,0.094,0.023],
-    ["CR0009",52,"Female","Black",35,74,70,177,83,"Former","1-2x/week","Yes","Yes","Moderate",0,0.217,0.108,0.038,0.07,0.132,-0.048,0.069,0.035,-0.015],
-    ["CR0010",63,"Male","White",34.3,112,79,146,79,"Current","1-2x/week","Yes","No","High",1,0.991,0.041,-0.029,0.053,0.044,0.079,0.112,0.116,-0.003],
-    ["CR0011",62,"Female","White",19.5,122,72,107,89,"Never",null,"Yes","No","High",0,0.75,0.142,0.146,0.077,0.133,-0.034,0.047,0.035,-0.005],
-    ["CR0012",79,"Male","Hispanic",33.6,172,32,165,72,"Former","Daily","No","No",null,0,0.713,-0.024,0.129,-0.012,-0.024,0.126,0.011,-0.009,0.114],
-    ["CR0013",77,"Male","Other",25,82,44,107,60,"Never","1-2x/week","No","No",null,1,0.133,-0.033,0.046,-0.034,0.097,0.144,0.03,0.137,0.067],
-    ["CR0014",39,"Female","Black",39.6,90,34,174,63,"Never",null,"No","Yes","Moderate",1,0.23,-0.027,-0.021,0.132,-0.021,0.136,0.041,0.147,0.03],
-    ["CR0015",62,"Female","Black",21.4,159,57,158,66,"Former",null,"No","No","Moderate",0,0.43,0.01,-0.024,0.103,0.002,0.096,0.081,0.118,0.054],
-    ["CR0016",76,"Female","Asian",22.5,167,69,158,109,"Never",null,"No","No","Moderate",0,0.121,0.093,-0.04,0.138,0.092,0.024,0.021,0.06,0.12],
-    ["CR0017",62,"Male","Hispanic",28.6,109,39,116,95,"Current","1-2x/week","No","Yes","Moderate",0,0.977,0.051,0.031,-0.031,0.068,0.004,0.119,0.017,0.055],
-    ["CR0018",77,"Female","Other",28.5,112,75,129,80,"Former","3-5x/week","No","No",null,1,0.144,0.012,0.123,0.07,-0.012,-0.048,-0.039,0.011,-0.03],
-    ["CR0019",55,"Female","Hispanic",19.5,128,51,150,89,"Former","Daily","No","No","High",0,0.719,-0.049,0.088,0.065,0.1,0.121,0.111,0.059,0.079],
-    ["CR0020",49,"Male","Black",29.5,118,32,156,98,"Never","Daily","No","Yes",null,0,0.608,0.09,0.099,-0.002,-0.048,0.136,-0.034,0.105,0.081],
-    ["CR0021",44,"Male","White",36.1,105,79,109,86,"Former","1-2x/week","No","No","High",0,0.655,0.141,0.082,0.077,-0.011,0.07,-0.015,0.133,0.075],
-    ["CR0022",66,"Male","Asian",27.3,191,68,133,108,"Never","Daily","Yes","Yes","Moderate",1,0.152,-0.039,0.137,-0.009,0.121,-0.049,0.053,0.037,0.134],
-    ["CR0023",62,"Female","Black",30.8,163,67,114,85,"Former","Daily","Yes","No","High",0,0.521,-0.022,0.026,0.099,0.119,0.134,-0.029,0.08,-0.008],
-    ["CR0024",46,"Male","Asian",34.6,177,65,124,78,"Former","3-5x/week","No","Yes","Moderate",0,0.725,0.005,0.099,-0.029,0.035,0.146,0.054,0.033,0.149],
-    ["CR0025",34,"Female","White",26.7,102,73,113,73,"Never","1-2x/week","No","Yes","Moderate",1,0.369,0.056,0.004,0.107,-0.043,0.018,-0.005,0.043,-0.036],
-    ["CR0048",42,"Female","White",21,179,32,144,103,"Never","3-5x/week","Yes","No",null,1,0.872,0.13,0.059,0.013,0.081,0.137,0.068,0.034,-0.013],
-    ["CR0049",70,"Male","White",30.5,125,66,105,101,"Former","Daily","No","No",null,1,0.967,-0.04,-0.04,0.14,0.015,-0.012,-0.015,0.019,0.073],
-    ["CR0057",52,"Male","White",30.9,169,53,111,96,"Never","Daily","No","No","High",0,0.94,0.027,0.037,-0.01,0.132,0.056,0.036,0.1,0.132],
-    ["CR0094",78,"Female","Asian",25.3,150,63,103,104,"Never","1-2x/week","No","No","High",1,0.993,0.106,0.039,-0.019,0.015,0.052,0.021,0.089,0.131],
-    ["CR0095",57,"Male","Hispanic",20.2,176,77,156,76,"Former",null,"No","No","Moderate",1,0.984,0.089,0.107,0.15,0.047,0.021,0.127,0.034,0.095],
-    ["CR0122",47,"Female","Asian",35.2,104,77,158,65,"Former","Daily","No","Yes","High",0,0.996,0.117,0.083,0.004,0.066,0.004,0.116,0.046,0.128]
-  ];
-  const DB_COLS=["Patient_ID","Age","Gender","Race","BMI","LDL","HDL","Systolic_BP","Diastolic_BP","Smoking_Status","Exercise_Frequency","Diabetes","Family_History_CVD","Alcohol_Intake","High_Risk","Predicted_Probability","SHAP_Age","SHAP_BMI","SHAP_LDL","SHAP_HDL","SHAP_Systolic_BP","SHAP_Smoking_Status","SHAP_Exercise_Frequency","SHAP_Diabetes"];
-  const dbPts=DB_RAW.map(r=>Object.fromEntries(DB_COLS.map((c,i)=>[c,r[i]])));
-  let dbCur=dbPts[0];
-
-  function dbRiskColor(p){
-    if(p>=0.75)return{bg:'#FCEBEB',txt:'#A32D2D',ico:'#E24B4A',badge:'db-bred',label:'High risk'};
-    if(p>=0.4) return{bg:'#FAEEDA',txt:'#633806',ico:'#EF9F27',badge:'db-bamb',label:'Moderate risk'};
-    return{bg:'#EAF3DE',txt:'#27500A',ico:'#639922',badge:'db-bgrn',label:'Low risk'};
-  }
-  function dbShapFeats(pt){
-    return[
-      {label:'LDL cholesterol',val:pt.SHAP_LDL},{label:'Age',val:pt.SHAP_Age},
-      {label:'Systolic BP',val:pt.SHAP_Systolic_BP},{label:'BMI',val:pt.SHAP_BMI},
-      {label:'Smoking',val:pt.SHAP_Smoking_Status},{label:'Exercise',val:pt.SHAP_Exercise_Frequency},
-      {label:'Diabetes',val:pt.SHAP_Diabetes},{label:'HDL',val:pt.SHAP_HDL}
-    ].sort((a,b)=>Math.abs(b.val)-Math.abs(a.val));
-  }
-  function dbPopulateSelects(){
-    const opts=dbPts.map(p=>`<option value="${p.Patient_ID}">${p.Patient_ID} · Age ${p.Age} · ${p.Gender} · ${Math.round(p.Predicted_Probability*100)}%</option>`).join('');
-    ['cardio','pcp','patient'].forEach(t=>{const el=document.getElementById(`db-sel-${t}`);if(el)el.innerHTML=opts;});
-  }
-  function dbSwitch(id){
-    document.querySelectorAll('.db-tab').forEach((t,i)=>t.classList.toggle('active',['cardio','pcp','patient'][i]===id));
-    document.querySelectorAll('.db-panel').forEach(p=>p.classList.toggle('active',p.id==='db-'+id));
-    dbRenderAll();
-  }
-  function dbLoad(id){
-    dbCur=dbPts.find(p=>p.Patient_ID===id)||dbPts[0];
-    ['cardio','pcp','patient'].forEach(t=>{const el=document.getElementById(`db-sel-${t}`);if(el)el.value=dbCur.Patient_ID;});
-    document.getElementById('db-ldl').value=0;
-    document.getElementById('db-smoke').value=0;
-    dbRenderAll();
-  }
-  function dbRenderAll(){dbRenderCardio();dbRenderPCP();dbRenderPatient();}
-
-  function dbRenderCardio(){
-    const pt=dbCur,pct=Math.round(pt.Predicted_Probability*100),rc=dbRiskColor(pt.Predicted_Probability);
-    document.getElementById('db-c-name').textContent=pt.Patient_ID;
-    document.getElementById('db-c-demo').textContent=`Age ${pt.Age} · ${pt.Gender} · ${pt.Race}`;
-    const rEl=document.getElementById('db-c-risk');rEl.textContent=pct+'%';rEl.style.color=rc.ico;
-    const lo=Math.max(0,pct-5),hi=Math.min(100,pct+6);
-    document.getElementById('db-c-ci').textContent=`${lo}–${hi}%`;
-    const allP=dbPts.map(p=>p.Predicted_Probability).sort((a,b)=>a-b);
-    document.getElementById('db-c-pctile').textContent=Math.round(allP.filter(v=>v<=pt.Predicted_Probability).length/allP.length*100)+'th';
-    document.getElementById('db-c-lbl').textContent=pt.High_Risk===1?'Positive':'Negative';
-    const b=document.getElementById('db-badge-cardio');b.className='db-badge '+rc.badge;b.textContent=rc.label;
-    const feats=dbShapFeats(pt);const maxA=Math.max(...feats.map(f=>Math.abs(f.val)));
-    document.getElementById('db-shap-chart').innerHTML=feats.map(f=>{
-      const p2=Math.round(Math.abs(f.val)/maxA*100),col=f.val>=0?'#E24B4A':'#1D9E75',sign=f.val>=0?'+':'';
-      return`<div class="db-shap-row"><span class="db-shap-lbl">${f.label}</span><div class="db-shap-wrap"><div class="db-shap-bar" style="width:${p2}%;background:${col}"></div></div><span class="db-shap-num" style="color:${col}">${sign}${(f.val*100).toFixed(1)}%</span></div>`;
-    }).join('');
-    document.getElementById('db-ci-fill').style.left=(Math.max(0,pct-5))+'%';
-    document.getElementById('db-ci-fill').style.width='11%';
-    document.getElementById('db-ci-dot').style.left=pct+'%';
-    document.getElementById('db-ci-note').textContent=`95% CI: ${lo}–${hi}%. Point estimate: ${pct}%.`;
-    dbSim();
-  }
-  function dbSim(){
-    const pt=dbCur,ldl=parseInt(document.getElementById('db-ldl').value)||0,smk=parseInt(document.getElementById('db-smoke').value)||0;
-    document.getElementById('db-ldl-out').textContent='−'+ldl;
-    document.getElementById('db-smoke-out').textContent=smk?'Yes':'No';
-    let r=Math.round(pt.Predicted_Probability*100)-Math.round(ldl*0.067)-(smk&&pt.Smoking_Status!=='Never'?Math.round(Math.abs(pt.SHAP_Smoking_Status)*100):0);
-    r=Math.max(2,r);
-    const el=document.getElementById('db-sim-risk'),rc=dbRiskColor(r/100);
-    el.textContent=r+'%';el.style.color=rc.ico;
-    const d=r-Math.round(pt.Predicted_Probability*100);
-    document.getElementById('db-sim-delta').textContent=d<0?`(↓ ${Math.abs(d)}% reduction)`:'';
-  }
-  function dbRenderPCP(){
-    const pt=dbCur,pct=Math.round(pt.Predicted_Probability*100),rc=dbRiskColor(pt.Predicted_Probability);
-    ['pcp'].forEach(t=>{const el=document.getElementById(`db-sel-${t}`);if(el)el.value=pt.Patient_ID;});
-    const b=document.getElementById('db-badge-pcp');b.className='db-badge '+rc.badge;b.textContent=rc.label;
-    const al=document.getElementById('db-pcp-alert');al.style.background=rc.bg;
-    const ic=document.getElementById('db-pcp-icon');ic.style.background=rc.ico;
-    document.getElementById('db-pcp-title').style.color=rc.txt;document.getElementById('db-pcp-title').textContent=`${pct}% 10-year cardiac risk — ${rc.label.toLowerCase()}`;
-    document.getElementById('db-pcp-sub').style.color=rc.txt;document.getElementById('db-pcp-sub').textContent=`Out of 100 similar patients, ~${pct} would experience a cardiac event`;
-    const feats=dbShapFeats(pt).filter(f=>f.val>0).slice(0,3);
-    const aMap={'LDL cholesterol':`LDL ${pt.LDL} mg/dL — consider statin therapy`,'Systolic BP':`BP ${pt.Systolic_BP}/${pt.Diastolic_BP} — review antihypertensive`,'BMI':`BMI ${pt.BMI} — lifestyle counselling`,'Smoking':`Smoking: ${pt.Smoking_Status} — cessation referral`,'Diabetes':`Diabetes: ${pt.Diabetes} — optimise glycaemic control`,'Age':`Age ${pt.Age} — elevated baseline risk`,'Exercise':`Exercise: ${pt.Exercise_Frequency||'Unknown'} — 150 min/week target`,'HDL':`HDL ${pt.HDL} mg/dL — increase via lifestyle`};
-    document.getElementById('db-pcp-actions').innerHTML=feats.map((f,i)=>`<div class="db-act-row"><div class="db-act-num">${i+1}</div><div><div class="db-act-title">${f.label}</div><div class="db-act-sub">${aMap[f.label]||f.label}</div></div></div>`).join('');
-    document.getElementById('db-pcp-details').innerHTML=[['LDL',pt.LDL+' mg/dL'],['HDL',pt.HDL+' mg/dL'],['BMI',pt.BMI],['BP',pt.Systolic_BP+'/'+pt.Diastolic_BP],['Diabetes',pt.Diabetes],['Smoker',pt.Smoking_Status]].map(([l,v])=>`<div class="db-mcard"><div class="db-mlabel">${l}</div><div style="font-size:13px;font-weight:500;color:var(--ink)">${v||'—'}</div></div>`).join('');
-  }
-  function dbDrawGauge(pct,color){
-    const c=document.getElementById('db-gauge');if(!c)return;
-    const ctx=c.getContext('2d');ctx.clearRect(0,0,150,86);
-    const cx=75,cy=78,r=58;
-    ctx.beginPath();ctx.arc(cx,cy,r,Math.PI,0);ctx.lineWidth=13;ctx.strokeStyle='#eeecea';ctx.stroke();
-    const angle=Math.PI+(pct/100)*Math.PI;
-    ctx.beginPath();ctx.arc(cx,cy,r,Math.PI,angle);ctx.strokeStyle=color;ctx.stroke();
-    ctx.beginPath();const nx=cx+r*Math.cos(angle),ny=cy+r*Math.sin(angle);
-    ctx.moveTo(cx,cy);ctx.lineTo(nx,ny);ctx.lineWidth=2;ctx.strokeStyle=color;ctx.stroke();
-    ctx.beginPath();ctx.arc(cx,cy,3.5,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();
-    ctx.font='500 20px Outfit,sans-serif';ctx.fillStyle=color;ctx.textAlign='center';ctx.fillText(pct+'%',cx,cy-10);
-  }
-  function dbRenderPatient(){
-    const pt=dbCur,pct=Math.round(pt.Predicted_Probability*100),rc=dbRiskColor(pt.Predicted_Probability);
-    ['patient'].forEach(t=>{const el=document.getElementById(`db-sel-${t}`);if(el)el.value=pt.Patient_ID;});
-    setTimeout(()=>dbDrawGauge(pct,rc.ico),50);
-    document.getElementById('db-pat-risk-lbl').textContent=rc.label.toUpperCase();
-    const sum=document.getElementById('db-pat-summary');sum.style.background=rc.bg;
-    const topF=dbShapFeats(pt)[0];
-    const fMsg={'LDL cholesterol':`Your cholesterol is ${pt.LDL} mg/dL. Lowering it can significantly reduce your risk.`,'Systolic BP':`Your blood pressure is ${pt.Systolic_BP}/${pt.Diastolic_BP}. Keeping it under 130/80 matters.`,'BMI':`Your BMI is ${pt.BMI}. Even small weight reductions lower heart risk.`,'Smoking':`Smoking status: ${pt.Smoking_Status}. Quitting is the single biggest change you can make.`,'Diabetes':`Managing blood sugar well is important for your heart health.`,'Age':`Age is a factor you can't change — but others on this list you can.`,'Exercise':`You exercise ${pt.Exercise_Frequency||'infrequently'}. 150 min/week makes a real difference.`,'HDL':`Your HDL is ${pt.HDL} mg/dL. Exercise and diet can help raise this.`};
-    sum.innerHTML=`<span style="font-weight:500;color:${rc.txt};font-size:12px">Key factor:</span> <span style="color:${rc.txt};font-size:12px">${fMsg[topF.label]||'Talk to your doctor about your results.'}</span>`;
-    const feats=dbShapFeats(pt);
-    const mod=['LDL cholesterol','BMI','Smoking','Exercise','Diabetes','Systolic BP'];
-    const icons={'LDL cholesterol':'L','Age':'A','Systolic BP':'BP','BMI':'B','Smoking':'S','Exercise':'E','Diabetes':'D','HDL':'H'};
-    document.getElementById('db-pat-icons').innerHTML=feats.slice(0,5).map(f=>`<div class="db-icon-box ${mod.includes(f.label)?'mod':'fix'}"><div style="font-size:14px;font-weight:500;margin-bottom:3px">${icons[f.label]||'?'}</div><div>${f.label}</div><div style="font-size:9px;font-weight:500;margin-top:2px">${mod.includes(f.label)?'Can improve':'Fixed'}</div></div>`).join('');
-    const goals=feats.filter(f=>mod.includes(f.label)&&f.val>0).slice(0,3);
-    const gDet={'LDL cholesterol':{label:'Lower cholesterol',tip:`Current: ${pt.LDL} mg/dL`,pct:Math.min(95,100-Math.round((pt.LDL-70)/130*100))},'Systolic BP':{label:'Control blood pressure',tip:`Current: ${pt.Systolic_BP} mmHg`,pct:Math.min(95,100-Math.round((pt.Systolic_BP-100)/80*100))},'BMI':{label:'Healthy weight',tip:`Current BMI: ${pt.BMI}`,pct:Math.min(95,100-Math.round((pt.BMI-18)/22*100))},'Smoking':{label:'Quit smoking',tip:`Status: ${pt.Smoking_Status}`,pct:pt.Smoking_Status==='Never'?95:pt.Smoking_Status==='Former'?60:20},'Exercise':{label:'Exercise regularly',tip:`Current: ${pt.Exercise_Frequency||'Unknown'}`,pct:pt.Exercise_Frequency==='Daily'?90:pt.Exercise_Frequency==='3-5x/week'?65:35},'Diabetes':{label:'Manage blood sugar',tip:`Diabetes: ${pt.Diabetes}`,pct:pt.Diabetes==='No'?85:50}};
-    document.getElementById('db-pat-goals').innerHTML=goals.map(f=>{
-      const g=gDet[f.label]||{label:f.label,tip:'',pct:50};
-      const col=g.pct>=70?'#1D9E75':g.pct>=40?'#EF9F27':'#E24B4A';
-      return`<div class="db-goal-row"><span class="db-goal-lbl">${g.label}</span><div class="db-goal-wrap"><div class="db-goal-bar" style="width:${g.pct}%;background:${col}"></div></div><span class="db-goal-val">${g.pct}%</span></div><div style="font-size:10px;color:var(--ink3);margin:-3px 0 5px 128px">${g.tip}</div>`;
-    }).join('');
-  }
-  dbPopulateSelects();
-  dbRenderAll();
-  </script>
-
-  <!-- PROJECT 3: Medical AI & Imaging -->
-  <div id="proj-03" style="margin-bottom:48px">
-    <a href="#proj-03" class="proj-label fi" style="text-decoration:none">Project 03 — Medical AI & Imaging</a>
-    <div class="split fi">
-      <div class="pan" style="display:flex;flex-direction:column;gap:14px">
-        <div>
-          <div class="tags" style="margin-bottom:10px"><a href="https://pytorch.org/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag b">Deep Learning</span></a><a href="https://azure.microsoft.com/en-us/products/machine-learning" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag t">Azure ML</span></a><a href="https://arxiv.org/abs/1610.02391" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag p">Grad-CAM</span></a><a href="https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-aiml-enabled-medical-devices" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag g">Clinical AI</span></a></div>
-          <h3>Chest X-ray AI analysis pipeline</h3>
-          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Designed and implemented an end-to-end AI pipeline for automated abnormality detection in chest radiographs — addressing a real radiology bottleneck of 800+ daily X-rays across three hospital sites with 12–24 hour reporting delays. The system preprocesses DICOM images, runs a fine-tuned ResNet-50 model, generates Grad-CAM explainability heat maps, and routes critical findings to on-call radiologists in under 2 minutes.</p>
-        </div>
-        <ul class="feat-list">
-          <li>Built a DICOM preprocessing pipeline with CLAHE contrast enhancement, 512×512 standardisation, and automated quality filtering (~2% exclusion rate)</li>
-          <li>Fine-tuned ResNet-50 (ImageNet pre-trained) with class-weighted binary cross-entropy loss — achieving AUC 0.94, Sensitivity 91%, Specificity 86%</li>
-          <li>Implemented Grad-CAM heat map generation aligned with radiologist annotations in 88% of cases; false localisations traced to motion artifact and underexposure</li>
-          <li>Designed a 0–10 composite priority scoring system with clinical modifiers (ED +2, "stat" flag = max) and alert fatigue prevention mechanisms</li>
-          <li>Integrated with Azure Logic Apps for automated Teams notifications on high-confidence critical findings — end-to-end latency under 2 minutes</li>
-          <li>Documented pipeline for FDA 510(k) pathway including intended use statement, failure mode analysis, and phased 4-month clinical rollout plan</li>
-        </ul>
-      </div>
-      <div class="pan dk">
-        <h3>Pipeline architecture</h3>
-        <p style="font-size:12px;font-weight:300;margin-bottom:16px">DICOM ingestion to radiologist priority queue — fully automated.</p>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
-          <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(241,245,249,.4);margin-bottom:4px">STAGE 1 — PREPROCESSING</div>
-            <div style="font-size:12px;color:var(--ink)">DICOM parse &nbsp;·&nbsp; CLAHE &nbsp;·&nbsp; 512×512 resize &nbsp;·&nbsp; Quality filter</div>
-          </div>
-          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(241,245,249,.3)">↓ Augmentation (train only)</div>
-          <div style="background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);margin-bottom:4px">STAGE 2 — INFERENCE</div>
-            <div style="font-size:12px;color:var(--ink)">ResNet-50 (ImageNet) &nbsp;·&nbsp; Multi-label sigmoid &nbsp;·&nbsp; Grad-CAM</div>
-          </div>
-          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(241,245,249,.3)">↓ Priority scoring</div>
-          <div style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);margin-bottom:4px">STAGE 3 — CLINICAL ROUTING</div>
-            <div style="font-size:12px;color:var(--ink)">PACS worklist &nbsp;·&nbsp; Radiologist pager &nbsp;·&nbsp; Teams alert</div>
-          </div>
-        </div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Model AUC</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">0.94</span></div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Sensitivity / Specificity</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">91% / 86%</span></div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">End-to-end latency</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">&lt;2 min</span></div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1);border-bottom:none"><span class="qk">Explainability</span><span style="font-size:13px;font-weight:500;color:var(--ink)">Grad-CAM · 88% alignment</span></div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><a href="https://scikit-learn.org/stable/modules/model_evaluation.html" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag b">Model performance</span></a></div><div class="ctitle">ResNet-50 classifier</div><div class="cdesc">Fine-tuned on 40,000 labelled chest X-rays. Class-weighted loss and per-class threshold tuning to handle imbalanced Normal/Pneumonia distribution (71%/29%).</div></div><div class="card-body"><div class="mrow"><span class="mk">AUC-ROC</span><span class="mv ok">0.94</span></div><div class="mrow"><span class="mk">Sensitivity (critical)</span><span class="mv ok">&gt;91%</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><a href="https://shap.readthedocs.io/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag p">Explainability</span></a></div><div class="ctitle">Grad-CAM heat maps</div><div class="cdesc">Visualisations overlay on original X-rays highlighting abnormality regions. Validated against radiologist annotations — 88% spatial alignment, 76% IoU &gt;0.5.</div></div><div class="card-body"><div class="mrow"><span class="mk">Radiologist rating ≥4/5</span><span class="mv ok">82%</span></div><div class="mrow"><span class="mk">False localisation rate</span><span class="mv warn">12%</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><a href="https://www.healthit.gov/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag g">Clinical integration</span></a></div><div class="ctitle">Priority routing system</div><div class="cdesc">Composite 0–10 score combining abnormality severity, model confidence, patient acuity, and order urgency. Critical findings paged immediately; target false alarm rate &lt;15%.</div></div><div class="card-body"><div class="mrow"><span class="mk">Critical threshold</span><span class="mv">Score 9–10 → page</span></div><div class="mrow"><span class="mk">Target false alarm rate</span><span class="mv ok">&lt;15%</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 4: Document Intelligence -->
-  <div id="proj-04" style="margin-bottom:48px">
-    <a href="#proj-04" class="proj-label fi" style="text-decoration:none">Project 04 — Document Intelligence</a>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px"><a href="https://azure.microsoft.com/en-us/products/ai-services/ai-language" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">Azure AI Language</span></a><a href="https://learn.microsoft.com/en-us/azure/ai-services/language-service/custom-text-classification/overview" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">Custom Text Classification</span></a><a href="https://azure.microsoft.com/en-us/products/logic-apps" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">Logic Apps</span></a><a href="https://powerbi.microsoft.com/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">Power BI</span></a></div>
-        <h3>Multi-level medical document classification system</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Built a four-dimensional automated classification pipeline for 5,000+ monthly clinical documents at Central Health System — categorising by document type, urgency, department, and billing relevance simultaneously. Replaced 8–12 min manual review with 3.2-second automated routing, cutting billing backlog from 5 days to under 1 day and reducing routing errors from 15% to 2.7%.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:7px;letter-spacing:.08em">90-DAY CLASSIFICATION ACCURACY</div>
-          <div class="srow"><span class="slb">Document Type</span><div class="strk"><div class="sbar" style="width:94%;background:#34d399"></div></div><span class="sval" style="color:#34d399">94.2%</span></div>
-          <div class="srow"><span class="slb">Urgency Level</span><div class="strk"><div class="sbar" style="width:97%;background:#34d399"></div></div><span class="sval" style="color:#34d399">96.8%</span></div>
-          <div class="srow"><span class="slb">Department</span><div class="strk"><div class="sbar" style="width:92%;background:#34d399"></div></div><span class="sval" style="color:#34d399">91.5%</span></div>
-          <div class="srow"><span class="slb">Billing Relevance</span><div class="strk"><div class="sbar" style="width:93%;background:#34d399"></div></div><span class="sval" style="color:#34d399">93.1%</span></div>
-        </div>
-      </div>
-      <div class="pan" style="padding:0;overflow:hidden">
-        <div style="background:#0b0f1c;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <div style="font-size:12px;font-weight:600;color:var(--ink)">Power BI — Classification Performance Monitor</div>
-            <div style="display:flex;gap:5px">
-              <div style="width:8px;height:8px;border-radius:50%;background:#f87171"></div>
-              <div style="width:8px;height:8px;border-radius:50%;background:#fbbf24"></div>
-              <div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div>
-            </div>
-          </div>
-          <div style="display:flex;gap:4px;margin-bottom:0">
-            <div class="pbi2-tab active" onclick="pbi2Switch('perf')">Classification</div>
-            <div class="pbi2-tab" onclick="pbi2Switch('ops')">Operations</div>
-            <div class="pbi2-tab" onclick="pbi2Switch('qa')">QA &amp; Alerts</div>
-          </div>
-        </div>
-
-        <style>
-        .pbi2-tab{padding:5px 12px;border-radius:4px 4px 0 0;cursor:pointer;font-size:11px;color:rgba(148,163,184,.6);background:transparent;font-family:'Outfit',sans-serif;border:none;transition:all .15s}
-        .pbi2-tab.active{color:#38bdf8;background:rgba(56,189,248,.08);font-weight:500}
-        .pbi2-panel{display:none;padding:14px 16px;background:#0b0f1c}
-        .pbi2-panel.active{display:block}
-        .pbi2-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
-        .pbi2-kpi{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:8px 10px}
-        .pbi2-lbl{font-size:9px;color:#94a3b8;font-family:'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
-        .pbi2-val{font-size:18px;font-weight:700;line-height:1}
-        .pbi2-sub{font-size:9px;margin-top:2px}
-        .pbi2-bar{display:flex;align-items:center;gap:8px;margin:5px 0}
-        .pbi2-blbl{font-size:10px;color:#94a3b8;width:86px;flex-shrink:0;font-family:'DM Mono',monospace}
-        .pbi2-btrack{flex:1;height:12px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden}
-        .pbi2-bfill{height:100%;border-radius:3px}
-        .pbi2-bval{font-size:10px;font-family:'DM Mono',monospace;width:40px;text-align:right;flex-shrink:0}
-        .pbi2-section{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8;margin:10px 0 5px}
-        .pbi2-table{width:100%;border-collapse:collapse;font-size:10px}
-        .pbi2-table th{font-size:9px;color:#94a3b8;padding:4px 6px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;letter-spacing:.06em;text-transform:uppercase}
-        .pbi2-table td{padding:5px 6px;border-bottom:1px solid rgba(255,255,255,.04);color:#f1f5f9}
-        .pbi2-table tr:last-child td{border:none}
-        .pbi2-badge{display:inline-block;padding:1px 6px;border-radius:100px;font-size:9px;font-weight:500}
-        .ok2{background:rgba(52,211,153,.12);color:#34d399}
-        .warn2{background:rgba(251,191,36,.12);color:#fbbf24}
-        .alert2{background:rgba(248,113,113,.12);color:#f87171}
-        .pbi2-alert{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:5px;margin-bottom:4px;border:1px solid}
-        </style>
-
-        <!-- PAGE 1 -->
-        <div class="pbi2-panel active" id="pbi2-perf">
-          <div class="pbi2-kpis">
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Accuracy</div><div class="pbi2-val" style="color:#34d399">93.9%</div><div class="pbi2-sub" style="color:#34d399">▲ +3.9% vs target</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Volume/day</div><div class="pbi2-val" style="color:#38bdf8">240</div><div class="pbi2-sub" style="color:#94a3b8">docs avg</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Exceptions</div><div class="pbi2-val" style="color:#fbbf24">7.8%</div><div class="pbi2-sub" style="color:#34d399">▼ Below 10%</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Proc. Time</div><div class="pbi2-val" style="color:#34d399">3.2s</div><div class="pbi2-sub" style="color:#34d399">▼ vs 5s target</div></div>
-          </div>
-          <div class="pbi2-section">Accuracy by Dimension</div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Doc Type</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:94.2%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi2-bval" style="color:#34d399">94.2%</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Urgency</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:96.8%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi2-bval" style="color:#34d399">96.8%</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Department</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:91.5%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi2-bval" style="color:#34d399">91.5%</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Billing</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:93.1%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><div class="pbi2-bval" style="color:#34d399">93.1%</div></div>
-          <div class="pbi2-section">90-Day Accuracy Trend</div>
-          <svg viewBox="0 0 300 52" style="width:100%;height:52px">
-            <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34d399" stop-opacity="0.25"/><stop offset="100%" stop-color="#34d399" stop-opacity="0"/></linearGradient></defs>
-            <line x1="0" y1="12" x2="300" y2="12" stroke="rgba(248,113,113,.35)" stroke-width="1" stroke-dasharray="3,3"/>
-            <text x="2" y="10" fill="rgba(248,113,113,.6)" font-size="6" font-family="monospace">85% alert line</text>
-            <path d="M0,42 L20,38 L50,34 L80,30 L110,28 L130,32 L155,24 L175,20 L200,16 L225,14 L250,10 L270,8 L300,6" fill="none" stroke="#34d399" stroke-width="1.5"/>
-            <path d="M0,42 L20,38 L50,34 L80,30 L110,28 L130,32 L155,24 L175,20 L200,16 L225,14 L250,10 L270,8 L300,6 L300,52 L0,52Z" fill="url(#g2)"/>
-          </svg>
-          <div style="display:flex;justify-content:space-between;font-size:9px;color:#94a3b8;font-family:monospace;margin-top:2px"><span>D1: 88.2%</span><span>D30: 91.4%</span><span>D60: 93.1%</span><span>D90: 93.9%</span></div>
-        </div>
-
-        <!-- PAGE 2 -->
-        <div class="pbi2-panel" id="pbi2-ops">
-          <div class="pbi2-kpis">
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Monthly Docs</div><div class="pbi2-val" style="color:#38bdf8">5,200</div><div class="pbi2-sub" style="color:#34d399">▲ +4% MoM</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Auto-Routed</div><div class="pbi2-val" style="color:#34d399">97.3%</div><div class="pbi2-sub" style="color:#94a3b8">4,780 docs</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">Human Review</div><div class="pbi2-val" style="color:#fbbf24">406</div><div class="pbi2-sub" style="color:#94a3b8">7.8% of total</div></div>
-            <div class="pbi2-kpi"><div class="pbi2-lbl">STAT Resolved</div><div class="pbi2-val" style="color:#34d399">100%</div><div class="pbi2-sub" style="color:#34d399">All ≤30 min</div></div>
-          </div>
-          <div class="pbi2-section">Volume by Document Type</div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Progress Note</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:28%;background:#38bdf8"></div></div><div class="pbi2-bval" style="color:#38bdf8">1,456</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Lab Report</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:22%;background:#38bdf8"></div></div><div class="pbi2-bval" style="color:#38bdf8">1,144</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Discharge Summ.</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:14%;background:#a78bfa"></div></div><div class="pbi2-bval" style="color:#a78bfa">728</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Operative Rpt</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:10%;background:#f87171"></div></div><div class="pbi2-bval" style="color:#f87171">520</div></div>
-          <div class="pbi2-section">Top Exception Reasons</div>
-          <table class="pbi2-table">
-            <tr><th>Reason</th><th>Count</th><th>Trend</th></tr>
-            <tr><td>Low dept confidence</td><td>162</td><td><span class="pbi2-badge warn2">▼ Improving</span></td></tr>
-            <tr><td>Novel doc format</td><td>81</td><td><span class="pbi2-badge warn2">→ Stable</span></td></tr>
-            <tr><td>Conflicting urgency</td><td>61</td><td><span class="pbi2-badge ok2">▼ Declining</span></td></tr>
-            <tr><td>Low billing confidence</td><td>57</td><td><span class="pbi2-badge ok2">▼ Declining</span></td></tr>
-          </table>
-        </div>
-
-        <!-- PAGE 3 -->
-        <div class="pbi2-panel" id="pbi2-qa">
-          <div class="pbi2-section">Human Correction Rate — Improving Over Time</div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Month 1</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:15.2%;background:#f87171"></div></div><div class="pbi2-bval" style="color:#f87171">15.2%</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Month 2</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:9.1%;background:#fbbf24"></div></div><div class="pbi2-bval" style="color:#fbbf24">9.1%</div></div>
-          <div class="pbi2-bar"><div class="pbi2-blbl">Month 3</div><div class="pbi2-btrack"><div class="pbi2-bfill" style="width:4.8%;background:#34d399"></div></div><div class="pbi2-bval" style="color:#34d399">4.8%</div></div>
-          <div style="font-size:9px;color:#94a3b8;margin:3px 0 10px">↓ 68% reduction after 2 retraining cycles</div>
-          <div class="pbi2-section">Alert Log</div>
-          <div class="pbi2-alert" style="background:rgba(52,211,153,.05);border-color:rgba(52,211,153,.15)"><div style="width:6px;height:6px;border-radius:50%;background:#34d399;flex-shrink:0"></div><div style="font-size:10px;color:#f1f5f9;flex:1">All metrics green — no active alerts</div><div style="font-size:9px;color:#94a3b8;font-family:monospace">Now</div></div>
-          <div class="pbi2-alert" style="background:rgba(251,191,36,.04);border-color:rgba(251,191,36,.15)"><div style="width:6px;height:6px;border-radius:50%;background:#fbbf24;flex-shrink:0"></div><div style="font-size:10px;color:#f1f5f9;flex:1">Exception spike 12.4% — resolved after Lab Report prompt tuning</div><div style="font-size:9px;color:#94a3b8;font-family:monospace">Day 41</div></div>
-          <div class="pbi2-alert" style="background:rgba(248,113,113,.04);border-color:rgba(248,113,113,.12)"><div style="width:6px;height:6px;border-radius:50%;background:#f87171;flex-shrink:0"></div><div style="font-size:10px;color:#f1f5f9;flex:1">Accuracy 86.1% — triggered retraining with 200 new labeled docs</div><div style="font-size:9px;color:#94a3b8;font-family:monospace">Day 18</div></div>
-          <div class="pbi2-section">Business Impact</div>
-          <table class="pbi2-table">
-            <tr><th>Metric</th><th>Before</th><th>After</th><th></th></tr>
-            <tr><td>Review time/doc</td><td>8–12 min</td><td>1–2 min</td><td><span class="pbi2-badge ok2">83% ↓</span></td></tr>
-            <tr><td>Routing errors</td><td>15.0%</td><td>2.7%</td><td><span class="pbi2-badge ok2">82% ↓</span></td></tr>
-            <tr><td>Billing backlog</td><td>5 days</td><td>&lt;1 day</td><td><span class="pbi2-badge ok2">80% ↓</span></td></tr>
-            <tr><td>STAT response</td><td>45 min</td><td>5 min</td><td><span class="pbi2-badge ok2">89% ↓</span></td></tr>
-          </table>
-        </div>
-
-        <script>
-        function pbi2Switch(p){
-          document.querySelectorAll('.pbi2-tab').forEach((t,i)=>t.classList.toggle('active',['perf','ops','qa'][i]===p));
-          document.querySelectorAll('.pbi2-panel').forEach(el=>el.classList.toggle('active',el.id==='pbi2-'+p));
-        }
-        </script>
-      </div>
-    </div>
-  </div>
-
-  <!-- PROJECT 3: JAMF MDM -->
-
-  <!-- PROJECT 5: Clinical System Analysis -->
-  <div id="proj-05" style="margin-bottom:48px">
-    <a href="#proj-05" class="proj-label fi" style="text-decoration:none">Project 05 — Clinical System Analysis</a>
-    <div class="split fi">
-      <div class="pan" style="display:flex;flex-direction:column;gap:14px">
-        <div>
-          <div class="tags" style="margin-bottom:10px"><a href="https://hl7.org/fhir/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag p">HL7 FHIR</span></a><a href="https://www.healthit.gov/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag t">EHR Integration</span></a><a href="https://learn.microsoft.com/en-us/sql/sql-server/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag b">SQL</span></a><a href="https://www.python.org/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">Python</span></a></div>
-          <h3>EHR workflow optimisation &amp; clinical system analysis</h3>
-          <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">Analysed clinical workflows across a multi-site hospital system to identify inefficiencies in EHR data entry, order management, and care coordination. Mapped current-state vs future-state workflows, identified integration gaps between systems, and designed a HL7 FHIR-based data pipeline to unify patient records across disparate platforms.</p>
-        </div>
-        <ul class="feat-list">
-          <li>Conducted 12 stakeholder interviews across nursing, pharmacy, and physician teams to map clinical workflow pain points</li>
-          <li>Identified 3 critical integration gaps between the EHR, lab system, and pharmacy platform causing duplicate data entry</li>
-          <li>Designed FHIR R4 resource mapping for Patient, Observation, MedicationRequest, and DiagnosticReport resources</li>
-          <li>Built SQL queries to audit data quality — flagging 847 inconsistent patient records across sites</li>
-          <li>Produced a gap analysis report with prioritised recommendations aligned to ONC interoperability standards</li>
-        </ul>
-      </div>
-      <div class="pan dk">
-        <h3>System architecture</h3>
-        <p style="font-size:12px;font-weight:300;margin-bottom:16px">Unified three disconnected clinical systems through a FHIR-based integration layer.</p>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
-          <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(241,245,249,.4);margin-bottom:4px">LAYER 1 — SOURCE SYSTEMS</div>
-            <div style="font-size:12px;color:var(--ink)">Epic EHR &nbsp;·&nbsp; LabCorp LIS &nbsp;·&nbsp; Pharmacy PIS</div>
-          </div>
-          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(241,245,249,.3)">↓ HL7 FHIR R4</div>
-          <div style="background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);margin-bottom:4px">LAYER 2 — INTEGRATION ENGINE</div>
-            <div style="font-size:12px;color:var(--ink)">FHIR API Gateway &nbsp;·&nbsp; Data validation &nbsp;·&nbsp; Audit logs</div>
-          </div>
-          <div style="text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(241,245,249,.3)">↓ Unified patient record</div>
-          <div style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);border-radius:3px;padding:10px 14px">
-            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);margin-bottom:4px">LAYER 3 — CLINICAL APPS</div>
-            <div style="font-size:12px;color:var(--ink)">Clinician dashboard &nbsp;·&nbsp; Analytics &nbsp;·&nbsp; Alerts</div>
-          </div>
-        </div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Data quality issues found</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">847 records</span></div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1)"><span class="qk">Integration gaps resolved</span><span style="font-size:13px;font-weight:500;color:#6ee7b7">3 systems</span></div>
-        <div class="mrow" style="border-color:rgba(255,255,255,.1);border-bottom:none"><span class="qk">Standard</span><span style="font-size:13px;font-weight:500;color:var(--ink)">ONC / HL7 FHIR R4</span></div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><a href="https://www.healthit.gov/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag p">Workflow analysis</span></a></div><div class="ctitle">Current-state mapping</div><div class="cdesc">Mapped 6 end-to-end clinical workflows including patient admission, medication ordering, and lab result routing. Identified 14 manual handoff points.</div></div><div class="card-body"><div class="mrow"><span class="mk">Interviews</span><span class="mv">12 stakeholders</span></div><div class="mrow"><span class="mk">Workflows mapped</span><span class="mv">6 end-to-end</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><a href="https://hl7.org/fhir/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag t">FHIR design</span></a></div><div class="ctitle">Interoperability blueprint</div><div class="cdesc">Designed FHIR R4 resource mapping across Patient, Observation, MedicationRequest, and DiagnosticReport. Aligned with ONC 21st Century Cures Act.</div></div><div class="card-body"><div class="mrow"><span class="mk">Standard</span><span class="mv">HL7 FHIR R4</span></div><div class="mrow"><span class="mk">Resources mapped</span><span class="mv ok">4 core types</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><a href="https://www.hl7.org/fhir/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag b">Data quality</span></a></div><div class="ctitle">SQL audit &amp; reporting</div><div class="cdesc">Built SQL audit queries to detect duplicate records, missing fields, and inconsistent identifiers. Delivered executive gap analysis report with phased recommendations.</div></div><div class="card-body"><div class="mrow"><span class="mk">Records audited</span><span class="mv warn">847 issues flagged</span></div><div class="mrow"><span class="mk">Deliverable</span><span class="mv">Gap analysis report</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 6: IT Operations -->
-  <div id="proj-06" style="margin-bottom:48px">
-    <a href="#proj-06" class="proj-label fi" style="text-decoration:none">Project 06 — IT Operations</a>
-    <div class="proj-grid-2 fi">
-      <div class="card">
-        <div class="card-head">
-          <div class="tags"><a href="https://www.jamf.com/products/jamf-pro/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">JAMF Pro</span></a><a href="https://www.jamf.com/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">MDM</span></a><a href="https://www.apple.com/business/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag g">Apple ecosystem</span></a><a href="https://incidentiq.com/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">IncidentIQ</span></a></div>
-          <div class="ctitle">Large-scale MDM fleet management</div>
-          <div class="cdesc">Designed and operated the complete device lifecycle for 3,000+ student and staff devices across a multi-school district — from zero-touch deployment through retirement. Reduced ticket escalations by 30% and standardised the onboarding process for new devices district-wide.</div>
-        </div>
-        <div class="card-body">
-          <ul class="feat-list">
-            <li>Configured JAMF Pro policies, profiles, and smart groups for automated macOS and iPadOS deployment across MacBooks, iPads, and Apple TVs</li>
-            <li>Built a device naming convention and asset tagging system tracked in IncidentIQ, reducing lost/untracked device incidents by 40%</li>
-            <li>Led procurement coordination for annual hardware refresh cycles, managing vendor relationships and aligning timelines with district IT leadership</li>
-            <li>Created self-service troubleshooting guides that reduced repeat tickets by 25% in the first semester</li>
-          </ul>
-          <div class="mrow" style="margin-top:8px"><span class="mk">Devices managed</span><span class="mv ok">3,000+</span></div>
-          <div class="mrow"><span class="mk">Ticket escalation reduction</span><span class="mv ok">30%</span></div>
-          <div class="mrow"><span class="mk">Platform</span><span class="mv">JAMF Pro · IncidentIQ · Apple DEP</span></div>
-          <div class="mrow"><span class="mk">Environment</span><span class="mv">K-12 Education · Multi-site</span></div>
-        </div>
-      </div>
-
-      <!-- PROJECT 4: CYBERSECURITY -->
-      <div class="card">
-        <div class="card-head">
-          <div class="tags"><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag r">Cybersecurity</span></a><a href="https://www.paloaltonetworks.com/network-security/next-generation-firewall" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">Palo Alto NGFW</span></a><a href="https://www.vmware.com/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">VMware</span></a><a href="https://www.linux.org/" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag">Linux</span></a></div>
-          <div class="ctitle">Enterprise endpoint hardening &amp; security tooling</div>
-          <div class="cdesc">At Palo Alto Networks, built internal tooling to streamline Level 2 firewall troubleshooting and automated repetitive diagnostic steps — achieving 153% of case closure target. Also implemented endpoint hardening procedures adopted across the support team.</div>
-        </div>
-        <div class="card-body">
-          <ul class="feat-list">
-            <li>Diagnosed and resolved complex issues on Palo Alto 7000/5000/3000-series NGFWs — routing, NAT, SSL inspection, and VPN failures</li>
-            <li>Built a Bash/Python diagnostic tool that automated log parsing and common failure pattern detection, cutting average resolution time by ~20 min/case</li>
-            <li>Developed endpoint hardening checklist (MFA, user access controls, patch management) adopted as team standard operating procedure</li>
-            <li>Maintained 98% case resolution without escalation across 1,000+ global users — highest on the team for two consecutive quarters</li>
-          </ul>
-          <div class="mrow" style="margin-top:8px"><span class="mk">Case resolution rate</span><span class="mv ok">98% without escalation</span></div>
-          <div class="mrow"><span class="mk">Case closure vs target</span><span class="mv ok">153%</span></div>
-          <div class="mrow"><span class="mk">Tools built</span><span class="mv">Bash + Python diagnostics</span></div>
-          <div class="mrow"><span class="mk">Platform</span><span class="mv">PAN-OS · VMware ESXi · Linux</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PROJECT 7: FHIR Data Engineering -->
-  <div id="proj-07" style="margin-bottom:48px">
-    <a href="#proj-07" class="proj-label fi" style="text-decoration:none">Project 07 — FHIR Data Engineering</a>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px">
-          <span class="tag">Google Cloud Healthcare API</span><span class="tag">FHIR R4</span><span class="tag">BigQuery</span><span class="tag">SQL</span>
-        </div>
-        <h3>Ingesting FHIR data with the Healthcare API</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:14px">Hands-on implementation of Google Cloud Healthcare API for FHIR R4 data ingestion, management, and de-identification. Created FHIR datasets and stores on GCP, imported Patient and clinical resources, exported FHIR data to BigQuery, and queried structured clinical data using FHIR-aware SQL. Completed with 100% grade — Google Cloud certified project.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">GCP OPERATIONS COMPLETED</div>
-          <div class="srow"><span class="slb">CreateDataset</span><div class="strk"><div class="sbar" style="width:100%;background:#34d399"></div></div><span class="sval" style="color:#34d399">✓ OK</span></div>
-          <div class="srow"><span class="slb">ImportResources</span><div class="strk"><div class="sbar" style="width:100%;background:#34d399"></div></div><span class="sval" style="color:#34d399">✓ OK</span></div>
-          <div class="srow"><span class="slb">ExportResources</span><div class="strk"><div class="sbar" style="width:100%;background:#34d399"></div></div><span class="sval" style="color:#34d399">✓ OK</span></div>
-          <div class="srow"><span class="slb">DeidentifyFHIR</span><div class="strk"><div class="sbar" style="width:100%;background:#34d399"></div></div><span class="sval" style="color:#34d399">✓ OK</span></div>
-        </div>
-        <div style="margin-top:10px;padding:8px 10px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:6px;display:flex;align-items:center;gap:8px">
-          <span style="font-size:18px">🏅</span>
-          <div>
-            <div style="font-size:11px;font-weight:600;color:var(--green)">Google Cloud · Project Certificate</div>
-            <div style="font-size:10px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace">Jun 13, 2026 · Grade: 100% · <a href="https://coursera.org/verify/IQYFXD5OFF3E" target="_blank" style="color:var(--accent);text-decoration:none">Verify ↗</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="font-size:11px;font-weight:600;color:var(--ink);margin-bottom:4px">BigQuery — FHIR Patient Query</div>
-          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">FHIR R4 · Cloud Healthcare API export → BigQuery</div>
-        </div>
-        <div style="background:#0d1117;padding:16px;flex:1;font-family:'DM Mono',monospace;font-size:12px;line-height:1.8">
-          <div><span style="color:#ff7b72">SELECT</span></div>
-          <div>&nbsp;&nbsp;id <span style="color:#79c0ff">AS</span> patient_id,</div>
-          <div>&nbsp;&nbsp;name[safe_offset(<span style="color:#a5f3fc">0</span>)].given <span style="color:#79c0ff">AS</span> given_name,</div>
-          <div>&nbsp;&nbsp;name[safe_offset(<span style="color:#a5f3fc">0</span>)].family <span style="color:#79c0ff">AS</span> family,</div>
-          <div>&nbsp;&nbsp;birthDate <span style="color:#79c0ff">AS</span> birth_date</div>
-          <div><span style="color:#ff7b72">FROM</span> <span style="color:#a5f3fc">`dataset1.Patient`</span></div>
-          <div><span style="color:#ff7b72">WHERE</span> name[safe_offset(<span style="color:#a5f3fc">0</span>)].family = <span style="color:#a5d18a">"Smith"</span></div>
-          <div style="margin-top:12px;padding:8px;background:rgba(52,211,153,.08);border-radius:4px;border:1px solid rgba(52,211,153,.15)">
-            <div style="font-size:10px;color:var(--green);margin-bottom:6px">✓ Query completed · 1 row returned</div>
-            <div style="font-size:10px;color:var(--ink3)">patient_id &nbsp;&nbsp; given_name &nbsp;&nbsp; family &nbsp;&nbsp; birth_date</div>
-            <div style="font-size:10px;color:var(--ink);margin-top:3px">c38aa8ba-... &nbsp;&nbsp; Darcy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Smith &nbsp;&nbsp;&nbsp; 1970-01-01</div>
-          </div>
-        </div>
-        <div style="padding:12px 16px;border-top:1px solid rgba(255,255,255,.06);display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div class="mrow" style="border:none;padding:4px 0"><span class="mk">Standard</span><span class="mv">HL7 FHIR R4</span></div>
-          <div class="mrow" style="border:none;padding:4px 0"><span class="mk">Platform</span><span class="mv">Google Cloud</span></div>
-          <div class="mrow" style="border:none;padding:4px 0"><span class="mk">Operations</span><span class="mv ok">5/5 ✓ Zero errors</span></div>
-          <div class="mrow" style="border:none;padding:4px 0"><span class="mk">De-identify</span><span class="mv ok">HIPAA-compliant</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- PROJECT 8: CLINICAL AI ASSISTANT -->
-  <div id="proj-08" style="margin-bottom:48px">
-    <a href="#proj-08" class="proj-label fi" style="text-decoration:none">Project 08 — Clinical AI Assistant</a>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px">
-          <span class="tag">Claude API</span><span class="tag">RAG</span><span class="tag">Prompt Engineering</span><span class="tag">Clinical NLP</span><span class="tag">SBAR</span>
-        </div>
-        <h3>Discharge summary generator</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">Live LLM-powered clinical documentation tool — paste a physician dictation, select your audience, and receive a structured, clinically appropriate summary in seconds. Three audience-specific modes with distinct formatting requirements, safety constraints, and reading-level calibration.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">AUDIENCE MODES</div>
-          <div class="srow"><span class="slb">PCP Handoff</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">Clinical</span></div>
-          <div class="srow"><span class="slb">Nursing SBAR</span><div class="strk"><div class="sbar" style="width:100%;background:#34d399"></div></div><span class="sval" style="color:#34d399">Action</span></div>
-          <div class="srow"><span class="slb">Patient Portal</span><div class="strk"><div class="sbar" style="width:100%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">6th grade</span></div>
-        </div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">MODEL</div>
-            <div style="font-size:13px;color:var(--ink)">claude-haiku-4-5</div>
-          </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">SAFETY</div>
-            <div style="font-size:13px;color:var(--amber)">Human-in-loop</div>
-          </div>
-        </div>
-      </div>
-      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Clinical AI Assistant — Live Demo</div>
-          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Powered by Claude · 3 audience modes · Real-time generation</div>
-        </div>
-        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:6px">
-            <div id="caa-tab-pcp" onclick="caaTab('pcp')" style="cursor:pointer;padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25)">🩺 PCP Handoff</div>
-            <div id="caa-tab-nursing" onclick="caaTab('nursing')" style="cursor:pointer;padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)">💊 Nursing</div>
-            <div id="caa-tab-patient" onclick="caaTab('patient')" style="cursor:pointer;padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)">👤 Patient</div>
-          </div>
-          <div id="caa-out" style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
-            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">DISCHARGE SUMMARY — PCP HANDOFF</div>
-            <div style="color:var(--accent)">PRINCIPAL DIAGNOSIS</div>
-            <div>COPD Exacerbation, Moderate (J44.1)</div>
-            <div style="margin-top:6px;color:var(--accent)">CRITICAL FOLLOW-UP</div>
-            <div>• PCP within 5-7 days ⚡</div>
-            <div>• Pulmonology referral — 4 weeks</div>
-            <div>• Repeat spirometry 6-8 weeks</div>
-            <div style="margin-top:6px;color:var(--ink3)">ALLERGY: Penicillin (rash) — flagged</div>
-          </div>
-          <script>
-          (function(){
-            const OUT={
-              pcp:'<div style="color:var(--ink);margin-bottom:6px;font-size:12px">DISCHARGE SUMMARY — PCP HANDOFF</div><div style="color:var(--accent)">PRINCIPAL DIAGNOSIS</div><div>COPD Exacerbation, Moderate (J44.1)</div><div style="margin-top:6px;color:var(--accent)">CRITICAL FOLLOW-UP</div><div>• PCP within 5-7 days ⚡</div><div>• Pulmonology referral — 4 weeks</div><div>• Repeat spirometry 6-8 weeks</div><div style="margin-top:6px;color:var(--ink3)">ALLERGY: Penicillin (rash) — flagged</div>',
-              nursing:'<div style="color:var(--ink);margin-bottom:6px;font-size:12px">NURSING HANDOFF — SBAR</div><div style="color:var(--accent)">S — SITUATION</div><div>64F, COPD exacerbation, cleared for discharge</div><div style="margin-top:6px;color:var(--accent)">B — BACKGROUND</div><div>3-day stay · IV steroids + nebulizers · now on room air</div><div style="margin-top:6px;color:var(--accent)">A — ASSESSMENT</div><div>SpO₂ 94% RA · ambulating independently · afebrile</div><div style="margin-top:6px;color:var(--accent)">R — RECOMMENDATION</div><div>• Inhaler technique teach-back before discharge</div><div>• Confirm PCP appt booked (5-7 days)</div><div style="margin-top:6px;color:var(--ink3)">ALLERGY: Penicillin (rash) — flagged</div>',
-              patient:'<div style="color:var(--ink);margin-bottom:6px;font-size:12px">YOUR DISCHARGE SUMMARY</div><div style="color:var(--accent)">WHY YOU WERE HERE</div><div>Your COPD (a lung condition) flared up. You are better now.</div><div style="margin-top:6px;color:var(--accent)">WHAT TO DO AT HOME</div><div>• Use your inhalers the way we showed you</div><div>• See your regular doctor in 5-7 days</div><div>• See a lung doctor in about 4 weeks</div><div style="margin-top:6px;color:var(--accent)">CALL YOUR DOCTOR IF</div><div>You feel more short of breath, or you get a fever.</div><div style="margin-top:6px;color:var(--ink3)">Remember: you are allergic to penicillin.</div>'
-            };
-            const ON={bg:'rgba(56,189,248,.12)',fg:'var(--accent)',bd:'1px solid rgba(56,189,248,.25)'};
-            const OFF={bg:'rgba(255,255,255,.04)',fg:'var(--ink3)',bd:'1px solid var(--rule)'};
-            window.caaTab=function(m){
-              const out=document.getElementById('caa-out'); if(!out) return;
-              out.innerHTML=OUT[m];
-              ['pcp','nursing','patient'].forEach(k=>{
-                const t=document.getElementById('caa-tab-'+k); if(!t) return;
-                const s=(k===m)?ON:OFF; t.style.background=s.bg; t.style.color=s.fg; t.style.border=s.bd;
-              });
-            };
-          })();
-          </script>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="https://clinical-ai-demo-six.vercel.app/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open Live Demo →</a>
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-          </div>
-          <div class="mrow"><span class="mk">Cases supported</span><span class="mv">COPD · AMI · Sepsis · Stroke · CHF</span></div>
-          <div class="mrow"><span class="mk">Safety</span><span class="mv warn">Human review required — demo only</span></div>
-          <div class="mrow"><span class="mk">Reading levels</span><span class="mv ok">Medical · Nursing · 6th grade</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Prompt engineering</span></div><div class="ctitle">3 audience-specific prompts</div><div class="cdesc">Separate system prompts engineered for each audience. PCP mode generates ICD-10 codes, medication reconciliation tables, and critical follow-up flags. Nursing mode outputs structured SBAR with action-oriented bullet points. Patient mode enforces 6th-grade reading level, plain language, and avoids jargon entirely.</div></div><div class="card-body"><div class="mrow"><span class="mk">Technique</span><span class="mv">Role + format + constraint prompting</span></div><div class="mrow"><span class="mk">Validation</span><span class="mv ok">Format enforced via structured headers</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Clinical safety</span></div><div class="ctitle">Human-in-the-loop design</div><div class="cdesc">Every generated summary displays a mandatory clinical safety notice requiring licensed clinician review before use in patient care. Fallback outputs for API errors ensure the demo never fails silently. Allergy detection and critical follow-up items are surfaced with visual flags in every summary type.</div></div><div class="card-body"><div class="mrow"><span class="mk">Safety pattern</span><span class="mv">Decision support, not autonomous</span></div><div class="mrow"><span class="mk">Error handling</span><span class="mv ok">Graceful fallback outputs</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Clinical coverage</span></div><div class="ctitle">Multi-condition support</div><div class="cdesc">Pre-loaded example cases covering 5 high-volume clinical scenarios: COPD exacerbation, acute MI with PCI, septic shock, ischemic stroke with thrombectomy, and CHF exacerbation. Each case tests different medication complexity, allergy documentation, and follow-up requirements across all three audience modes.</div></div><div class="card-body"><div class="mrow"><span class="mk">Cases built</span><span class="mv">5 clinical scenarios</span></div><div class="mrow"><span class="mk">Audiences</span><span class="mv ok">PCP · Nursing · Patient × 5 = 15</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 9: CYSA+ THREAT CONSOLE -->
-  <div id="proj-09" style="margin-bottom:48px">
-    <a href="#proj-09" class="proj-label fi" style="text-decoration:none">Project 09 — Security Training Tool</a>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px">
-          <span class="tag">Vanilla JS</span><span class="tag">CVSS 3.1</span><span class="tag">MITRE ATT&amp;CK</span><span class="tag">localStorage</span><span class="tag">Zero deps</span>
-        </div>
-        <h3>CySA+ Threat Console</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px"><b style="color:var(--ink);font-weight:600">CySA+ (CompTIA Cybersecurity Analyst+)</b> is an industry certification covering threat detection, vulnerability management, and incident response. Clinical systems run on ePHI, so understanding this security and compliance layer is core to systems analysis — which is why I built this interactive CS0-003 trainer, grounded in healthcare security context (IoMT, HIPAA, PACS, hospital ransomware): Learn, Practice, and a full timed exam simulator, with per-domain progress tracking and a spaced-repetition mistakes drill.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">EXAM DOMAIN WEIGHTING</div>
-          <div class="srow"><span class="slb">Security Operations</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">33%</span></div>
-          <div class="srow"><span class="slb">Vulnerability Mgmt</span><div class="strk"><div class="sbar" style="width:91%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">30%</span></div>
-          <div class="srow"><span class="slb">Incident Response</span><div class="strk"><div class="sbar" style="width:61%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">20%</span></div>
-          <div class="srow"><span class="slb">Reporting &amp; Comms</span><div class="strk"><div class="sbar" style="width:52%;background:#34d399"></div></div><span class="sval" style="color:#34d399">17%</span></div>
-        </div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">QUESTION BANK</div>
-            <div style="font-size:13px;color:var(--ink)">120 original items</div>
-          </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">EXAM SIM</div>
-            <div style="font-size:13px;color:var(--accent)">85 Q · 165 min</div>
-          </div>
-        </div>
-      </div>
-      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">CySA+ Threat Console — Live Trainer</div>
-          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Learn · Practice · Exam sim · CVSS calculator</div>
-        </div>
-        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:6px">
-            <a href="cysa/#learn" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25);text-decoration:none">📖 Learn</a>
-            <a href="cysa/#practice" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule);text-decoration:none">✍️ Practice</a>
-            <a href="cysa/#exam" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule);text-decoration:none">⏱️ Exam Sim</a>
-          </div>
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
-            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">CVSS v3.1 BASE SCORE</div>
-            <div style="color:var(--accent);word-break:break-all">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H</div>
-            <div style="margin-top:6px;display:flex;align-items:baseline;gap:8px"><span style="font-family:'DM Serif Display',serif;font-size:26px;color:#fb5c74;line-height:1">10.0</span><span style="color:#fb5c74">CRITICAL</span></div>
-            <div style="margin-top:4px;color:var(--ink3)">Impact 6.0 · Exploitability 3.9</div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="cysa/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Launch Console →</a>
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-          </div>
-          <div class="mrow"><span class="mk">Study modes</span><span class="mv">Learn · Practice · Exam · Drill</span></div>
-          <div class="mrow"><span class="mk">Progress</span><span class="mv ok">Per-domain tracking + mistakes bank</span></div>
-          <div class="mrow"><span class="mk">Build</span><span class="mv ok">Single HTML file · zero dependencies</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Learn engine</span></div><div class="ctitle">52 concepts · 80 flashcards · CVSS calc</div><div class="cdesc">A browsable study library covering all four CS0-003 domains — Zero Trust, IAM, CVSS scoring, MITRE ATT&amp;CK, incident response, forensics, and compliance — with flip-flashcards for memorization and a live CVSS v3.1 calculator that computes the exact base score from the official formula.</div></div><div class="card-body"><div class="mrow"><span class="mk">Concept cards</span><span class="mv">52 across 4 domains</span></div><div class="mrow"><span class="mk">CVSS calc</span><span class="mv ok">Verified vs official v3.1</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Exam simulator</span></div><div class="ctitle">85 questions · 165-minute clock</div><div class="cdesc">A full exam simulation draws 85 questions weighted to the real domain distribution (33/30/20/17) under a 165-minute countdown — plus shorter Practice and per-domain modes. Every question carries a distractor-level explanation of why each option is right or wrong.</div></div><div class="card-body"><div class="mrow"><span class="mk">Question bank</span><span class="mv">120 original items</span></div><div class="mrow"><span class="mk">Weighting</span><span class="mv ok">Matches exam blueprint</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Progress tracking</span></div><div class="ctitle">Weak-spot analytics + mistakes drill</div><div class="cdesc">Results are graded with a per-domain breakdown that flags exactly where points are leaking. Lifetime accuracy and score history persist across sessions, and every missed question feeds a spaced-repetition drill — questions leave the bank only once answered correctly.</div></div><div class="card-body"><div class="mrow"><span class="mk">Persistence</span><span class="mv">localStorage · cross-session</span></div><div class="mrow"><span class="mk">Review</span><span class="mv ok">Spaced-repetition mistakes bank</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 10: CLINICAL SYSTEMS ANALYST LAB -->
-  <div id="proj-10" style="margin-bottom:48px">
-    <a href="#proj-10" class="proj-label fi" style="text-decoration:none">Project 10 — Clinical Systems Analyst Lab</a>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px">
-          <span class="tag">HL7 v2</span><span class="tag">Epic ecosystem</span><span class="tag">ServiceNow</span><span class="tag">IAM</span><span class="tag">Patient safety</span>
-        </div>
-        <h3>Epic incident simulations &amp; ticket-queue trainer</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px"><b style="color:var(--ink);font-weight:600">Clinical Systems Analysts</b> live where clinical workflow, system configuration, and risk intersect. This lab turns that job into a practice environment: three decision-based P1/P2 incidents worked end-to-end — an HL7 ORU filing failure with clickable message anatomy, an ADT sequence crisis with a stakeholder pressure-test, and a compromised provider account crossing into IAM and HIPAA breach territory — plus a daily shift trainer that deals 10 random tickets from a 32-scenario pool spanning the whole analyst surface.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">SCENARIO COVERAGE BY DOMAIN</div>
-          <div class="srow"><span class="slb">Interfaces &amp; HL7</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">3 sims</span></div>
-          <div class="srow"><span class="slb">Security &amp; IAM</span><div class="strk"><div class="sbar" style="width:88%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">7 tix</span></div>
-          <div class="srow"><span class="slb">ClinDoc &amp; Orders</span><div class="strk"><div class="sbar" style="width:74%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">8 tix</span></div>
-          <div class="srow"><span class="slb">Willow · Beaker · Radiant</span><div class="strk"><div class="sbar" style="width:66%;background:#34d399"></div></div><span class="sval" style="color:#34d399">7 tix</span></div>
-        </div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">SCENARIO POOL</div>
-            <div style="font-size:13px;color:var(--ink)">3 incidents · 42 tickets</div>
-          </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">REVEAL LAYERS</div>
-            <div style="font-size:13px;color:var(--accent)">Triage → Fix → Know → Pitfalls</div>
-          </div>
-        </div>
-      </div>
-      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Clinical Systems Analyst Lab — Live</div>
-          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Incident sims · Shift trainer · Scenario library</div>
-        </div>
-        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:6px">
-            <a href="csa-lab/incident-sim.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25);text-decoration:none">🚨 Incidents</a>
-            <a href="csa-lab/shift-trainer.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule);text-decoration:none">🎫 Shift Trainer</a>
-          </div>
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
-            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">INC0482913 · P1 — BEAKER-ORU-IN</div>
-            <div style="color:#f87171">FILING ERROR: no matching order found</div>
-            <div style="color:#fbbf24">filler order number SHCB-20260705-000841</div>
-            <div style="margin-top:6px;color:var(--ink3)">error queue: <span style="color:#f87171">1,325</span> · deferred, not purged</div>
-            <div style="margin-top:4px;color:#34d399">→ fix forward · reprocess · safety review</div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="csa-lab/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Enter the Lab →</a>
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-          </div>
-          <div class="mrow"><span class="mk">Incidents</span><span class="mv">ORU filing · ADT crisis · Account compromise</span></div>
-          <div class="mrow"><span class="mk">Daily queue</span><span class="mv ok">10 random tickets / shift · 23 Epic domains</span></div>
-          <div class="mrow"><span class="mk">Build</span><span class="mv ok">Static HTML + JS · zero dependencies</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Incident engine</span></div><div class="ctitle">3 end-to-end incidents · 16 decisions</div><div class="cdesc">Each incident is a chain of decision points with real-world cost feedback: read the HL7 error text before restarting, hold sequence integrity against stakeholder pressure, contain a compromised account atomically. Debriefs include the full incident timeline, systemic RCA, and why every wrong answer fails in production.</div></div><div class="card-body"><div class="mrow"><span class="mk">Scenarios</span><span class="mv">ORU · ADT · Compromise</span></div><div class="mrow"><span class="mk">Debrief</span><span class="mv ok">Timeline + RCA + talking points</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Shift trainer</span></div><div class="ctitle">10 random tickets per shift · 32-scenario pool</div><div class="cdesc">A daily queue simulator that deals priority-sorted tickets across Security/IAM, patient identity, ClinDoc, Orders, Willow, Beaker, Radiant, OpTime, ASAP, Grand Central, Telehealth, FHIR APIs, Interfaces, Reporting, Downtime, and Change control — the full breadth of what lands in an Epic analyst's ServiceNow queue, with a filterable library mode for study by module.</div></div><div class="card-body"><div class="mrow"><span class="mk">Pool</span><span class="mv">42 scenarios · 23 modules</span></div><div class="mrow"><span class="mk">Modes</span><span class="mv ok">Random shift + filtered library</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Knowledge system</span></div><div class="ctitle">Four reveal layers + interview angles</div><div class="cdesc">Every ticket teaches in layers: triage heuristics (scope IS the diagnosis), ordered resolution steps with Epic master files (EMP/SER, EAP/ERX), two-paragraph deep dives on mechanisms — the Chronicles→Clarity→Caboodle data stack, Data Courier discipline, placer/filler matching — and pitfalls capped with a ready-to-say interview line.</div></div><div class="card-body"><div class="mrow"><span class="mk">Interview lines</span><span class="mv">42 ready-to-use answers</span></div><div class="mrow"><span class="mk">Depth</span><span class="mv ok">Master files → data stack → process</span></div></div></div>
-    </div>
-  </div>
 
 </section>
 
@@ -1545,7 +952,7 @@ select.db-sel{flex:1;font-size:12px;padding:5px 8px;border:1px solid rgba(255,25
 
 <script>
 // Highlight active project tab on scroll
-const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05','proj-06','proj-07','proj-08'];
+const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05'];
 const navTabs = document.querySelectorAll('.proj-nav-tab');
 window.addEventListener('scroll', () => {
   let current = '';
