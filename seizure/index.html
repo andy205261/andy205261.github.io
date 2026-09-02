@@ -103,6 +103,19 @@ section{margin-bottom:72px}
 .note strong{color:var(--text);font-weight:500}
 footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 footer a{color:var(--cyan);text-decoration:none}
+
+.ladder{display:grid;gap:11px;margin-bottom:20px}
+.rung{display:grid;grid-template-columns:96px 1fr 108px;gap:16px;align-items:center;padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-radius:13px;transition:border-color .3s}
+@media(max-width:700px){.rung{grid-template-columns:1fr;gap:8px}}
+.rung.live{border-color:rgba(74,222,128,.4);background:rgba(74,222,128,.04)}
+.rung.here{border-color:rgba(251,191,36,.45);background:rgba(251,191,36,.05)}
+.rung-s{font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase}
+.rung h4{font-size:15px;font-weight:500;margin-bottom:4px}
+.rung p{font-size:13px;color:var(--muted);line-height:1.6}
+.rung-v{font-family:var(--serif);font-size:24px;text-align:right;line-height:1.1}
+@media(max-width:700px){.rung-v{text-align:left}}
+.rung-vs{font-family:var(--mono);font-size:9.5px;color:var(--faint);text-align:right}
+@media(max-width:700px){.rung-vs{text-align:left}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -214,9 +227,23 @@ footer a{color:var(--cyan);text-decoration:none}
   </div>
 </section>
 
+<!-- VALUE -->
+<section>
+  <div class="slab">05 — The business case</div>
+  <h2>What a model is worth: honestly, nothing yet</h2>
+  <p class="lede">Every other project in this portfolio has a dollar model. This one gets a different answer, and refusing to fake it is the point. <strong>A model in a notebook produces exactly zero value</strong> — no ICU day is saved, no bed is freed, no patient is treated earlier. Accuracy is a precondition, not a return. Value appears only at the steps most machine learning projects never reach.</p>
+  <div class="ladder">
+    <div class="rung live"><div class="rung-s">Step 1 · done</div><div><h4>A model that predicts accurately</h4><p>Features engineered, four model families compared, ensemble methods validated on 11,500 labeled segments. This is where most portfolio projects stop.</p></div><div><div class="rung-v" style="color:var(--faint)">$0</div><div class="rung-vs">no patient touched</div></div></div>
+    <div class="rung live"><div class="rung-s">Step 2 · done</div><div><h4>A model that explains itself</h4><p>Every prediction decomposed into feature contributions. Necessary for clinical trust, regulatory defensibility, and debugging drift — still worth nothing on its own.</p></div><div><div class="rung-v" style="color:var(--faint)">$0</div><div class="rung-vs">still not deployed</div></div></div>
+    <div class="rung here"><div class="rung-s">Step 3 · the wall</div><div><h4>A pipeline that delivers the alert</h4><p>Signal quality monitoring, threshold governance, escalation routing, acknowledgment tracking, documentation. <strong>This is where value begins — and where most models die.</strong></p></div><div><div class="rung-v" style="color:var(--amber)">Project 02</div><div class="rung-vs">built next, deliberately</div></div></div>
+    <div class="rung"><div class="rung-s">Step 4</div><div><h4>A unit that acts on it</h4><p>Tuned thresholds the staff trust, workflows that survive a night shift, and a governance loop that reviews false-positive rates on a schedule.</p></div><div><div class="rung-v" style="color:var(--green)">~$960K/yr</div><div class="rung-vs">modeled in Project 02</div></div></div>
+  </div>
+  <div class="hum"><b>What this means in an interview</b><p>The temptation with a machine learning project is to quote an accuracy figure and let the listener assume value. <strong>The stronger move is to say plainly that the model is step one of four</strong>, name the three steps between a notebook and a patient, and show that you built the next one. Most candidates present the model. Fewer can explain why the model isn't the hard part.</p><p><em>"I can tell you this model's accuracy. I'd rather tell you why that number doesn't matter until someone decides who gets paged at 3am."</em></p></div>
+</section>
+
 <!-- 5. BRIDGE -->
 <section>
-  <div class="slab">05 — What came next</div>
+  <div class="slab">06 — What came next</div>
   <h2>The question this project couldn't answer</h2>
   <p class="lede">This model finds seizures. It cannot tell you <strong>who gets told, how fast, at what false-alarm cost, or who is accountable when it's wrong</strong> — and those turn out to be the questions that decide whether any of it reaches a patient. That gap is exactly what the neurocritical care pipeline was built to address: the same signal, followed all the way from the electrode to a clinician who has to act on it.</p>
   <div class="note"><strong>The through-line across this portfolio:</strong> a model that detects seizures (this project) is worthless without a pipeline that delivers the alert without drowning the unit in false alarms (Project 02), which depends on the same clinical systems discipline that keeps lab results filing into charts at 7am (Project 03), governed by the same rules that decide how much any automation gets to decide alone (Project 04). <em>Detection is the first hop, not the destination.</em></div>

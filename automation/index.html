@@ -142,6 +142,29 @@ footer a{color:var(--cyan);text-decoration:none}
 .p30-c p em{color:var(--text);font-style:italic}
 .tryit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;background:rgba(56,189,248,.06);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
 .tryit b{color:var(--cyan);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+
+.roi{display:grid;grid-template-columns:320px 1fr;gap:0}
+@media(max-width:860px){.roi{grid-template-columns:1fr}}
+.roi-l{padding:20px;border-right:1px solid var(--line)}
+@media(max-width:860px){.roi-l{border-right:none;border-bottom:1px solid var(--line)}}
+.roi-r{padding:20px}
+.par{margin-bottom:15px}
+.par-h{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;margin-bottom:5px}
+.par-h span:first-child{color:var(--muted)}
+.par-v{font-family:var(--mono);font-size:13px;color:var(--cyan)}
+.par input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--line);border-radius:99px;outline:none}
+.par input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--cyan);cursor:pointer}
+.par input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:var(--cyan);cursor:pointer}
+.rmtx{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:11px;margin-bottom:16px}
+.rm{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.rm-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.rm-v{font-family:var(--serif);font-size:26px;line-height:1.05}
+.rm-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.v-ok{color:var(--green)}.v-cy{color:var(--cyan)}.v-p{color:var(--purple)}.v-a{color:var(--amber)}.v-bad{color:var(--red)}
+.hum{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.28);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.75;color:var(--muted)}
+.hum b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
+.hum strong{color:var(--text);font-weight:500}
+.hum em{color:var(--text)}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -227,9 +250,45 @@ footer a{color:var(--cyan);text-decoration:none}
   <div class="note" style="margin-top:18px"><strong>The pattern worth internalizing:</strong> every guardrail here costs throughput and every one of them is skippable. That's precisely why they get skipped — the pilot works, nothing breaks, and the controls look like bureaucracy right up until the morning a bot has been wrong 4,000 times overnight. <em>Automation risk is not the probability of a mistake; it's the probability multiplied by the speed at which the mistake replicates.</em></div>
 </section>
 
+<!-- ROI -->
+<section>
+  <div class="slab">03 — The business case</div>
+  <h2>The math that makes people skip the guardrails</h2>
+  <p class="lede">Here is the uncomfortable truth an automation program runs on: <strong>the ungoverned fleet really does produce a better number on the slide.</strong> More hours saved, faster payback, a happier steering committee. The governed version only wins once you price the incidents — and incidents are the one column nobody puts in the business case.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div><div class="panel-title">Annual value — governed vs ungoverned fleet</div><div class="panel-sub">all inputs adjustable · illustrative, not an institutional projection</div></div>
+      <div class="panel-sub" id="roiTag">baseline assumptions</div>
+    </div>
+    <div class="roi">
+      <div class="roi-l">
+        <div class="par"><div class="par-h"><span>Tasks automated per day</span><span class="par-v" id="vTask">4,830</span></div><input type="range" id="pTask" min="800" max="12000" step="100" value="4830"></div>
+        <div class="par"><div class="par-h"><span>Minutes saved per task</span><span class="par-v" id="vMin">2.4</span></div><input type="range" id="pMin" min="0.5" max="8" step="0.1" value="2.4"></div>
+        <div class="par"><div class="par-h"><span>Loaded staff cost / hour</span><span class="par-v" id="vRate">$55</span></div><input type="range" id="pRate" min="28" max="120" step="1" value="55"></div>
+        <div class="par"><div class="par-h"><span>Ungoverned speed advantage</span><span class="par-v" id="vSpd">35%</span></div><input type="range" id="pSpd" min="0" max="60" step="5" value="35"></div>
+        <div class="par"><div class="par-h"><span>Incidents per year — ungoverned</span><span class="par-v" id="vInc">5</span></div><input type="range" id="pInc" min="0" max="20" step="1" value="5"></div>
+        <div class="par"><div class="par-h"><span>Cost per incident</span><span class="par-v" id="vIc">$400,000</span></div><input type="range" id="pIc" min="20000" max="1200000" step="20000" value="400000"></div>
+      </div>
+      <div class="roi-r">
+        <p style="font-size:13px;color:var(--faint);margin-bottom:14px;line-height:1.6">Gross value looks better without guardrails. Net value is a different story:</p>
+        <div class="rmtx">
+          <div class="rm"><div class="rm-k">Governed — gross value</div><div class="rm-v v-cy" id="oGovG">—</div><div class="rm-s">hours returned</div></div>
+          <div class="rm"><div class="rm-k">Ungoverned — gross value</div><div class="rm-v v-a" id="oUngG">—</div><div class="rm-s">looks better</div></div>
+          <div class="rm"><div class="rm-k">Incident cost — ungoverned</div><div class="rm-v v-bad" id="oIncC">—</div><div class="rm-s">the missing column</div></div>
+          <div class="rm"><div class="rm-k">Governed — net</div><div class="rm-v v-ok" id="oGovN">—</div><div class="rm-s">zero incidents</div></div>
+          <div class="rm"><div class="rm-k">Ungoverned — net</div><div class="rm-v" id="oUngN">—</div><div class="rm-s">after incidents</div></div>
+          <div class="rm"><div class="rm-k">Cost of skipping</div><div class="rm-v v-p" id="oDelta">—</div><div class="rm-s">governed advantage</div></div>
+        </div>
+        <div class="hum" id="hum"><b>How to present this</b><p>—</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>Why incident cost is always missing from the slide:</strong> it is the only number in the model that hasn't happened yet. Hours saved are countable next quarter; the interface flood is hypothetical until the morning it isn't. That asymmetry is what makes automation programs systematically under-invest in controls — and why the analyst's job is to put the column on the slide <em>before</em> anyone can point at a real one. <em>An incident cost you can't estimate is not an incident cost of zero.</em></div>
+</section>
+
 <!-- 3. IDENTITY -->
 <section>
-  <div class="slab">03 — The identity problem</div>
+  <div class="slab">04 — The identity problem</div>
   <h2>A bot that reads charts is an account that reads charts</h2>
   <p class="lede">Every bot logs into systems using an account, just like a person does. That account can read patient records. So it needs the same things a staff account needs — limited access, rotating passwords, an owner — plus one more: <strong>when something goes wrong, "the bot did it" has to point to a real person.</strong></p>
   <div class="grid2">
@@ -253,7 +312,7 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <!-- 4. WHAT TO AUTOMATE -->
 <section>
-  <div class="slab">04 — The decision framework</div>
+  <div class="slab">05 — The decision framework</div>
   <h2>Which rung is this task allowed to occupy?</h2>
   <p class="lede">"Can we automate this" is almost always yes, and it's the wrong question. The real one is <strong>how much the machine gets to decide alone</strong> — which depends on whether the action can be undone and how badly it can hurt someone. Most hospital automation belongs on rungs 1 and 2. Trouble starts when a bot quietly climbs a rung nobody approved.</p>
   <div class="ladder-mini">
@@ -267,7 +326,7 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <!-- 5. CLOSE -->
 <section>
-  <div class="slab">05 — Why this project</div>
+  <div class="slab">06 — Why this project</div>
   <h2>Automation is an operations problem wearing a technology costume</h2>
   <p class="lede">Health systems are deploying bots quickly because the ROI is real and immediate — the hours returned in the simulator above are not exaggerated. What lags behind is the governance: who owns each bot, what it's scoped to touch, how fast it's allowed to move, and what stops it at 3 a.m. This project builds the control layer that should exist before the fleet does, and it connects directly to the identity and access work that governs every non-human actor in a clinical environment.</p>
   <div class="grid2">
@@ -532,6 +591,46 @@ function renderIncidents(incidents, hours, score){
 
 document.getElementById('run').addEventListener('click', run);
 updatePosture();
+
+/* ============ ROI ============ */
+(function(){
+var R={Task:4830,Min:2.4,Rate:55,Spd:35,Inc:5,Ic:400000};
+function money(n){ if(Math.abs(n)>=1000000) return (n<0?'-':'')+'$'+(Math.abs(n)/1000000).toFixed(2)+'M'; if(Math.abs(n)>=1000) return (n<0?'-':'')+'$'+Math.round(Math.abs(n)/1000)+'K'; return (n<0?'-':'')+'$'+Math.round(Math.abs(n)); }
+function calc(){
+  var govHrs = R.Task * R.Min * 365 / 60;
+  var govG = govHrs * R.Rate;
+  var ungG = govG * (1 + R.Spd/100);
+  var incC = R.Inc * R.Ic;
+  var govN = govG;
+  var ungN = ungG - incC;
+  var delta = govN - ungN;
+  document.getElementById('oGovG').textContent = money(govG);
+  document.getElementById('oUngG').textContent = money(ungG);
+  document.getElementById('oIncC').textContent = money(incC);
+  document.getElementById('oGovN').textContent = money(govN);
+  var un = document.getElementById('oUngN');
+  un.textContent = money(ungN);
+  un.className = 'rm-v ' + (ungN < govN ? 'v-bad' : 'v-ok');
+  document.getElementById('oDelta').textContent = money(delta);
+  var wins = delta > 0;
+  var breakEven = R.Inc > 0 ? (ungG - govG) / R.Inc : 0;
+  document.getElementById('hum').innerHTML = '<b>How to present this</b>' +
+   '<p>Never open with the guardrails. Open with the number they came for: <strong>' + money(govG) + ' a year</strong> in returned staff time, about <strong>' + Math.round(govHrs/2080) + ' FTE</strong> worth of work the bots absorb. The program is worth doing — that has to be established before you complicate it.</p>' +
+   (wins
+     ? '<p>Then add the column nobody drew: at ' + R.Inc + ' incidents a year, the faster fleet nets <strong>' + money(ungN) + '</strong> against the governed fleet\'s <strong>' + money(govN) + '</strong>. <strong>Skipping the controls costs ' + money(delta) + ' a year</strong> — and that is before anyone asks who signed off on a bot reading restricted charts.</p><p>Then hand risk the one number they can act on: <strong>break-even is ' + money(breakEven) + ' per incident</strong>. Below that, skipping controls genuinely pays on paper — so the real question is whether your organization believes an interface outage plus a scope finding costs more or less than that. <em>Make them answer it out loud.</em></p>'
+     : '<p>At these assumptions the ungoverned fleet still nets higher — which is worth saying out loud rather than hiding. The argument then rests where it should: <em>some risks are not priced in dollars.</em> A bot misfiling 294 clinical actions is a patient-safety and compliance exposure, and those get decided by risk appetite, not arithmetic.</p>');
+  document.getElementById('roiTag').textContent = (R.Task===4830&&R.Inc===5&&R.Ic===400000) ? 'baseline assumptions' : 'custom assumptions';
+}
+[['pTask','Task','vTask',function(v){return (+v).toLocaleString();}],
+ ['pMin','Min','vMin',function(v){return v;}],
+ ['pRate','Rate','vRate',function(v){return '$'+v;}],
+ ['pSpd','Spd','vSpd',function(v){return v+'%';}],
+ ['pInc','Inc','vInc',function(v){return v;}],
+ ['pIc','Ic','vIc',function(v){return '$'+(+v).toLocaleString();}]
+].forEach(function(c){var el=document.getElementById(c[0]);
+  el.addEventListener('input',function(){R[c[1]]=+el.value;document.getElementById(c[2]).textContent=c[3](+el.value);calc();});});
+calc();
+})();
 </script>
 </body>
 </html>

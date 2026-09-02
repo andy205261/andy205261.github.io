@@ -62,6 +62,29 @@ footer a{color:var(--cyan);text-decoration:none}
 .p30-c p em{color:var(--text);font-style:italic}
 .tryit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;background:rgba(56,189,248,.06);border:1px solid var(--line);border-radius:12px;margin-bottom:22px;font-size:13px;color:var(--muted)}
 .tryit b{color:var(--cyan);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+
+.roi{display:grid;grid-template-columns:320px 1fr;gap:0}
+@media(max-width:860px){.roi{grid-template-columns:1fr}}
+.roi-l{padding:20px;border-right:1px solid var(--line)}
+@media(max-width:860px){.roi-l{border-right:none;border-bottom:1px solid var(--line)}}
+.roi-r{padding:20px}
+.par{margin-bottom:15px}
+.par-h{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;margin-bottom:5px}
+.par-h span:first-child{color:var(--muted)}
+.par-v{font-family:var(--mono);font-size:13px;color:var(--cyan)}
+.par input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--line);border-radius:99px;outline:none}
+.par input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--cyan);cursor:pointer}
+.par input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:var(--cyan);cursor:pointer}
+.rmtx{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:11px;margin-bottom:16px}
+.rm{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.rm-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.rm-v{font-family:var(--serif);font-size:26px;line-height:1.05}
+.rm-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.v-ok{color:var(--green)}.v-cy{color:var(--cyan)}.v-p{color:var(--purple)}.v-a{color:var(--amber)}.v-bad{color:var(--red)}
+.hum{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.28);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.75;color:var(--muted)}
+.hum b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
+.hum strong{color:var(--text);font-weight:500}
+.hum em{color:var(--text)}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -130,6 +153,39 @@ footer a{color:var(--cyan);text-decoration:none}
   <div class="sk"><div class="sk-t">SAFETY &amp; COMPLIANCE</div><p>BCMA five rights, alert-fatigue tuning by data, Cures Act release rules, break-the-glass, audit role separation, downtime readiness.</p></div>
 </div>
 
+
+<h3 class="sect">What competent incident handling is worth</h3>
+<p class="why">Nobody budgets for the analyst who <em>prevents</em> the outage — the savings are invisible by design. But the cost of the alternative is measurable: an EHR degraded for hours has a price per hour, and it is paid in cancelled procedures, diverted patients, manual workarounds, and overtime. <strong>The gap between a 3-hour incident and a 90-minute one is a real number.</strong></p>
+<div class="panel" style="margin-bottom:24px">
+  <div class="panel-head">
+    <div><div class="panel-title">Annual impact model — one analyst's incident load</div><div class="panel-sub">all inputs adjustable · illustrative, not an institutional projection</div></div>
+    <div class="panel-sub" id="roiTag">baseline assumptions</div>
+  </div>
+  <div class="roi">
+    <div class="roi-l">
+      <div class="par"><div class="par-h"><span>Major incidents per year</span><span class="par-v" id="vInc">24</span></div><input type="range" id="pInc" min="6" max="80" step="2" value="24"></div>
+      <div class="par"><div class="par-h"><span>Resolution time — untrained</span><span class="par-v" id="vBef">3.5h</span></div><input type="range" id="pBef" min="2" max="9" step="0.5" value="3.5"></div>
+      <div class="par"><div class="par-h"><span>Resolution time — practiced</span><span class="par-v" id="vAft">1.5h</span></div><input type="range" id="pAft" min="0.5" max="5" step="0.5" value="1.5"></div>
+      <div class="par"><div class="par-h"><span>Cost per hour of degraded EHR</span><span class="par-v" id="vHr">$12,000</span></div><input type="range" id="pHr" min="3000" max="40000" step="1000" value="12000"></div>
+      <div class="par"><div class="par-h"><span>Tickets per year</span><span class="par-v" id="vTix">2,400</span></div><input type="range" id="pTix" min="600" max="6000" step="100" value="2400"></div>
+      <div class="par"><div class="par-h"><span>Escalation rate reduction</span><span class="par-v" id="vEsc">18%</span></div><input type="range" id="pEsc" min="3" max="40" step="1" value="18"></div>
+      <div class="par"><div class="par-h"><span>Cost of one escalation</span><span class="par-v" id="vEc">$220</span></div><input type="range" id="pEc" min="80" max="600" step="10" value="220"></div>
+    </div>
+    <div class="roi-r">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6">What changes when the person holding the ticket already knows which shortcut is dangerous:</p>
+      <div class="rmtx">
+        <div class="rm"><div class="rm-k">Degraded hours avoided</div><div class="rm-v v-cy" id="oHrs">—</div><div class="rm-s">per year</div></div>
+        <div class="rm"><div class="rm-k">Downtime cost avoided</div><div class="rm-v v-ok" id="oDown">—</div><div class="rm-s">per year</div></div>
+        <div class="rm"><div class="rm-k">Escalations avoided</div><div class="rm-v v-a" id="oEsc">—</div><div class="rm-s">resolved at tier 2</div></div>
+        <div class="rm"><div class="rm-k">Escalation cost avoided</div><div class="rm-v v-ok" id="oEc">—</div><div class="rm-s">per year</div></div>
+        <div class="rm"><div class="rm-k">Total annual value</div><div class="rm-v v-a" id="oTot">—</div><div class="rm-s">one analyst</div></div>
+        <div class="rm"><div class="rm-k">Ratio to analyst salary</div><div class="rm-v v-p" id="oRat">—</div><div class="rm-s">at $135K loaded</div></div>
+      </div>
+      <div class="hum" id="hum"><b>How to present this</b><p>—</p></div>
+    </div>
+  </div>
+</div>
+<div class="note" style="margin-bottom:56px"><strong>The uncomfortable part of this model:</strong> none of it shows up as revenue. Incident prevention produces no line item, no invoice, and no celebration — the reward for handling a P1 correctly is that nobody outside the unit ever knows it happened. That is exactly why analyst headcount is hard to justify and why the honest version of this case leads with the <em>avoided</em> cost rather than pretending there is a profit story. <strong>The one number that lands in a budget meeting is the ratio at the end: what one person prevents, against what one person costs.</strong></div>
 <div class="note"><strong>Why this exists:</strong> built as career preparation for the Clinical Systems Analyst → IAM → Healthcare Security Engineering path — the same method as the CySA+ interactive trainer: turn the target role's daily reality into a practice environment, then rehearse it until the safe path is reflex, not recall.</div>
 
 <footer>
@@ -137,5 +193,39 @@ footer a{color:var(--cyan);text-decoration:none}
   <span><a href="https://andy205261.github.io">← Back to portfolio</a></span>
 </footer>
 </div>
+<script>
+(function(){
+var R={Inc:24,Bef:3.5,Aft:1.5,Hr:12000,Tix:2400,Esc:18,Ec:220};
+function money(n){ if(n>=1000000) return '$'+(n/1000000).toFixed(2)+'M'; if(n>=1000) return '$'+Math.round(n/1000)+'K'; return '$'+Math.round(n); }
+function calc(){
+  var hrs = R.Inc * Math.max(0,(R.Bef-R.Aft));
+  var down = hrs * R.Hr;
+  var esc = Math.round(R.Tix * R.Esc/100);
+  var ec = esc * R.Ec;
+  var tot = down + ec;
+  var rat = tot/135000;
+  document.getElementById('oHrs').textContent = hrs.toFixed(0);
+  document.getElementById('oDown').textContent = money(down);
+  document.getElementById('oEsc').textContent = esc.toLocaleString();
+  document.getElementById('oEc').textContent = money(ec);
+  document.getElementById('oTot').textContent = money(tot);
+  document.getElementById('oRat').textContent = rat.toFixed(1)+'×';
+  document.getElementById('hum').innerHTML = '<b>How to present this</b>' +
+   '<p>Lead with the ratio: <strong>' + rat.toFixed(1) + '× loaded salary</strong> in avoided cost from one analyst who has already made these mistakes in a simulator instead of in production. Then the operational number — <strong>' + hrs.toFixed(0) + ' fewer hours</strong> of degraded clinical operations a year, and <strong>' + esc.toLocaleString() + ' fewer escalations</strong> consuming senior engineering time.</p>' +
+   '<p>The sentence that actually wins the argument has no number in it: <em>the analyst who has never seen a stuck interface queue will eventually clear one, and 1,325 patients\' results will be gone.</em> Training is cheaper than that morning.</p>';
+  document.getElementById('roiTag').textContent = (R.Inc===24&&R.Bef===3.5&&R.Aft===1.5) ? 'baseline assumptions' : 'custom assumptions';
+}
+[['pInc','Inc','vInc',function(v){return v;}],
+ ['pBef','Bef','vBef',function(v){return v+'h';}],
+ ['pAft','Aft','vAft',function(v){return v+'h';}],
+ ['pHr','Hr','vHr',function(v){return '$'+(+v).toLocaleString();}],
+ ['pTix','Tix','vTix',function(v){return (+v).toLocaleString();}],
+ ['pEsc','Esc','vEsc',function(v){return v+'%';}],
+ ['pEc','Ec','vEc',function(v){return '$'+v;}]
+].forEach(function(c){var el=document.getElementById(c[0]);
+  el.addEventListener('input',function(){R[c[1]]=+el.value;document.getElementById(c[2]).textContent=c[3](+el.value);calc();});});
+calc();
+})();
+</script>
 </body>
 </html>
