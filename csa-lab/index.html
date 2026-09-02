@@ -51,6 +51,17 @@ h3.sect{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:16
 
 footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 footer a{color:var(--cyan);text-decoration:none}
+
+.p30{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:48px}
+.p30-h{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.p30-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.p30-c{display:flex;gap:12px;align-items:flex-start}
+.p30-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--cyan-dim);border:1px solid rgba(56,189,248,.35);color:var(--cyan);font-family:var(--mono);font-size:11.5px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.p30-c h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.4}
+.p30-c p{font-size:13px;color:var(--muted);line-height:1.65}
+.p30-c p em{color:var(--text);font-style:italic}
+.tryit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;background:rgba(56,189,248,.06);border:1px solid var(--line);border-radius:12px;margin-bottom:22px;font-size:13px;color:var(--muted)}
+.tryit b{color:var(--cyan);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -59,7 +70,7 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <div class="eyebrow">Project 10 · Healthcare IT Portfolio</div>
 <h1>Clinical Systems Analyst Lab</h1>
-<p class="sub">Two interactive simulations of the real work behind an Epic EHR environment: a <strong>P1 interface incident</strong> worked end-to-end, and the <strong>daily ticket queue</strong> that fills the rest of the week. Built to demonstrate clinical systems thinking — where every configuration decision is a patient-safety decision. All data synthetic; no PHI.</p>
+<p class="sub">Hospitals run on software called an EHR. When it breaks, patients feel it — lab results vanish, medications can't be scanned, doctors round blind. <strong>Clinical Systems Analysts are the people who fix it.</strong> This is a training environment for that job: three emergencies worked end to end, and the daily ticket queue that fills the rest of the week. All data synthetic; no PHI.</p>
 
 <div class="meta-row">
   <span class="chip">Epic ecosystem</span>
@@ -68,6 +79,16 @@ footer a{color:var(--cyan);text-decoration:none}
   <span class="chip">Change control</span>
   <span class="chip">HIPAA · Cures Act</span>
   <span class="chip">Patient safety</span>
+</div>
+
+<div class="p30">
+  <div class="p30-h">The 30-second version</div>
+  <div class="p30-g">
+    <div class="p30-c"><div class="p30-n">1</div><div><h4>Every hospital runs on one giant system</h4><p>Orders, results, medications, charts — all of it lives in the EHR. Stanford and most large US hospitals use Epic. When something in it goes wrong, care stops working.</p></div></div>
+    <div class="p30-c"><div class="p30-n">2</div><div><h4>Someone has to fix it, fast</h4><p>That's the Clinical Systems Analyst. Half the job is emergencies — lab results not reaching charts at 7am. The other half is a queue of smaller problems that are never <em>just</em> technical.</p></div></div>
+    <div class="p30-c"><div class="p30-n">3</div><div><h4>The hard part isn't the technology</h4><p>It's knowing which shortcut is dangerous. Clearing a stuck queue sounds efficient — it also permanently deletes 1,325 patients' lab results. That judgment is what this trains.</p></div></div>
+    <div class="p30-c"><div class="p30-n">4</div><div><h4>Two ways to practice it</h4><p>Work a full emergency and see the consequence of every decision, or take a random shift of ten tickets and think through each one before revealing the answer.</p></div></div>
+  </div>
 </div>
 
 <div class="tools">
@@ -100,7 +121,7 @@ footer a{color:var(--cyan);text-decoration:none}
 </div>
 
 <h3 class="sect">What this project demonstrates</h3>
-<p class="why">A Clinical Systems Analyst lives at the junction of three languages — <strong>clinical workflow, system configuration, and risk</strong>. These simulations were built around the judgment calls that define the role: knowing that a deferred message queue is patients' results, that resolution is not closure until the delayed-criticals review runs, that a routing fix must be paired with a sweep of everything already misrouted, and that severity is defined by clinical impact, not system metrics.</p>
+<p class="why">The job sits where three languages meet — <strong>how care actually works, how the system is built, and what can go wrong</strong>. These simulations were built around the judgment calls that define the role: knowing that a deferred message queue is patients' results, that resolution is not closure until the delayed-criticals review runs, that a routing fix must be paired with a sweep of everything already misrouted, and that severity is defined by clinical impact, not system metrics.</p>
 
 <div class="skills">
   <div class="sk"><div class="sk-t">HL7 &amp; INTEROPERABILITY</div><p>ORU/ADT/ORM message anatomy, placer–filler matching, sequence integrity, interface incident command, minimum-necessary feed design.</p></div>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 04 — RPA Fleet Control Tower | Andy Nguyen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#080c14;--panel:#0d1420;--panel-2:#111a29;--line:#1c2940;
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.12);
+  --text:#dbe4f0;--muted:#7d8ca3;--faint:#54627a;
+  --red:#f87171;--amber:#fbbf24;--green:#4ade80;--purple:#c084fc;
+  --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.65;font-size:16px}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 24px 96px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.eyebrow a{color:var(--cyan);text-decoration:none}
+h1{font-family:var(--serif);font-size:clamp(30px,5.2vw,48px);font-weight:400;line-height:1.12;margin-bottom:18px}
+h1 em{font-style:italic;color:var(--cyan)}
+.sub{color:var(--muted);max-width:710px;margin-bottom:22px}
+.sub strong{color:var(--text);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:52px}
+.chip{font-family:var(--mono);font-size:11px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.slab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+h2{font-family:var(--serif);font-size:clamp(23px,3.4vw,30px);font-weight:400;line-height:1.2;margin-bottom:14px}
+.lede{color:var(--muted);max-width:730px;margin-bottom:26px;font-size:15.5px}
+.lede strong{color:var(--text);font-weight:500}
+.lede em{color:var(--text);font-style:italic}
+section{margin-bottom:72px}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.panel-title{font-size:12.5px;font-weight:500}
+.panel-sub{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.live{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;color:var(--green)}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blip 1.8s infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* fleet */
+.fleet{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:12px;padding:18px}
+.bot{background:var(--panel-2);border:1px solid var(--line);border-radius:13px;padding:16px;transition:border-color .3s,box-shadow .3s}
+.bot.hot{border-color:rgba(248,113,113,.5);box-shadow:0 0 26px rgba(248,113,113,.1)}
+.bot.ok{border-color:rgba(74,222,128,.35)}
+.bot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px}
+.bot-name{font-family:var(--mono);font-size:12.5px;color:var(--cyan);font-weight:500}
+.bot-task{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:10px}
+.rung{font-family:var(--mono);font-size:9.5px;padding:2px 8px;border-radius:999px;white-space:nowrap;border:1px solid}
+.rung.r1{background:rgba(74,222,128,.1);color:var(--green);border-color:rgba(74,222,128,.3)}
+.rung.r2{background:rgba(56,189,248,.1);color:var(--cyan);border-color:rgba(56,189,248,.3)}
+.rung.r3{background:rgba(251,191,36,.1);color:var(--amber);border-color:rgba(251,191,36,.3)}
+.bot-stats{display:flex;gap:14px;font-family:var(--mono);font-size:10.5px;color:var(--faint);padding-top:10px;border-top:1px solid var(--line)}
+.bot-stats b{color:var(--text);font-weight:500;display:block;font-size:13px;font-family:var(--serif)}
+.scope{margin-top:9px;font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.6}
+.scope span{color:var(--cyan)}
+
+/* console */
+.console{display:grid;grid-template-columns:340px 1fr;gap:0}
+@media(max-width:860px){.console{grid-template-columns:1fr}}
+.con-l{padding:20px;border-right:1px solid var(--line)}
+@media(max-width:860px){.con-l{border-right:none;border-bottom:1px solid var(--line)}}
+.con-r{padding:20px;min-height:420px}
+.gtitle{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+.guard{display:flex;gap:11px;align-items:flex-start;padding:11px 12px;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;cursor:pointer;transition:border-color .2s,background .2s}
+.guard:hover{border-color:rgba(56,189,248,.4)}
+.guard.on{border-color:rgba(74,222,128,.4);background:rgba(74,222,128,.05)}
+.sw{flex-shrink:0;width:34px;height:19px;border-radius:99px;background:var(--line);position:relative;transition:background .2s;margin-top:2px}
+.sw::after{content:'';position:absolute;top:2.5px;left:2.5px;width:14px;height:14px;border-radius:50%;background:var(--faint);transition:transform .2s,background .2s}
+.guard.on .sw{background:rgba(74,222,128,.35)}
+.guard.on .sw::after{transform:translateX(15px);background:var(--green)}
+.g-b{flex:1;min-width:0}
+.g-t{font-size:13.5px;font-weight:500;color:var(--text);line-height:1.4}
+.g-d{font-size:12px;color:var(--faint);line-height:1.55;margin-top:2px}
+.runbtn{width:100%;background:var(--cyan);color:#04121f;border:none;border-radius:10px;padding:13px;font-family:var(--sans);font-weight:600;font-size:15px;cursor:pointer;margin-top:14px;transition:box-shadow .2s,transform .1s}
+.runbtn:hover{box-shadow:0 0 28px rgba(56,189,248,.4)}
+.runbtn:active{transform:scale(.985)}
+.runbtn:disabled{opacity:.5;cursor:default}
+.presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.mini{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:5px 12px;font-family:var(--sans);font-size:12px;cursor:pointer;transition:all .2s}
+.mini:hover{border-color:var(--cyan);color:var(--cyan)}
+
+.mtx{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px}
+.met{background:var(--panel-2);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+.met-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.met-v{font-family:var(--serif);font-size:25px;line-height:1.05}
+.met-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:2px}
+.v-ok{color:var(--green)}.v-warn{color:var(--amber)}.v-bad{color:var(--red)}.v-cy{color:var(--cyan)}
+
+.log{background:#050810;border:1px solid var(--line);border-radius:11px;padding:14px 16px;font-family:var(--mono);font-size:11.5px;line-height:1.85;max-height:290px;overflow-y:auto}
+.log div{animation:fade .25s ease}
+.l-t{color:var(--faint)}
+.l-ok{color:var(--green)}
+.l-w{color:var(--amber)}
+.l-e{color:var(--red)}
+.l-i{color:var(--cyan)}
+.l-h{color:var(--text)}
+.empty{color:var(--faint);text-align:center;padding:90px 20px;font-family:var(--sans);font-size:14px}
+
+.inc{margin-top:14px;border-radius:11px;padding:15px 17px;border:1px solid var(--line);background:var(--panel-2);font-size:13.5px;line-height:1.7;animation:fade .3s ease}
+.inc.crit{border-color:rgba(248,113,113,.4);background:rgba(248,113,113,.05)}
+.inc.warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.05)}
+.inc.good{border-color:rgba(74,222,128,.4);background:rgba(74,222,128,.05)}
+.inc b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.inc.crit b{color:var(--red)}.inc.warn b{color:var(--amber)}.inc.good b{color:var(--green)}
+.inc p{color:var(--muted)}
+.inc p+p{margin-top:8px}
+
+.ladder-mini{display:grid;gap:9px}
+.lr{display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;transition:border-color .3s}
+.lr:hover{border-color:rgba(56,189,248,.35)}
+.lr.hi{border-color:rgba(56,189,248,.3);background:var(--panel-2)}
+.lr-n{font-family:var(--serif);font-size:24px;color:var(--faint);line-height:1;text-align:center}
+.lr.hi .lr-n{color:var(--cyan)}
+.lr h4{font-size:14.5px;font-weight:500;margin-bottom:3px}
+.lr p{font-size:13px;color:var(--muted);line-height:1.6}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .3s,box-shadow .3s}
+.card:hover{border-color:rgba(56,189,248,.35);box-shadow:0 0 28px rgba(56,189,248,.08)}
+.card h3{font-family:var(--serif);font-size:19px;font-weight:400;margin-bottom:12px}
+.card ul{list-style:none}
+.card li{position:relative;padding-left:19px;margin-bottom:9px;color:var(--muted);font-size:14px;line-height:1.65}
+.card li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:11px;top:3px}
+.card li strong{color:var(--text);font-weight:500}
+.note{background:var(--panel-2);border:1px solid var(--line);border-left:2px solid var(--purple);border-radius:0 12px 12px 0;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.75}
+.note strong{color:var(--text);font-weight:500}
+footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--cyan);text-decoration:none}
+
+.p30{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:56px}
+.p30-h{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.p30-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.p30-c{display:flex;gap:12px;align-items:flex-start}
+.p30-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--cyan-dim);border:1px solid rgba(56,189,248,.35);color:var(--cyan);font-family:var(--mono);font-size:11.5px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.p30-c h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.4}
+.p30-c p{font-size:13px;color:var(--muted);line-height:1.65}
+.p30-c p em{color:var(--text);font-style:italic}
+.tryit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;background:rgba(56,189,248,.06);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.tryit b{color:var(--cyan);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow"><a href="../">← Portfolio</a> · Project 04</div>
+<h1>The Bot That Worked <em>Too Fast</em></h1>
+<p class="sub">A person who makes a mistake makes it once and notices. A software bot makes it <strong>4,000 times before lunch</strong>, signed with an account nobody can quite explain. This is a control tower for five bots doing real hospital paperwork: flip the safety settings on or off, run a 24-hour shift, and read what happened. <strong>The guardrails you skip are the incidents you get.</strong></p>
+<div class="chips">
+  <span class="chip">RPA governance</span>
+  <span class="chip">Service identity</span>
+  <span class="chip">Least privilege</span>
+  <span class="chip">Blast radius</span>
+  <span class="chip">Audit attribution</span>
+  <span class="chip">Epic workflows</span>
+</div>
+
+<!-- PLAIN LANGUAGE -->
+<div class="p30">
+  <div class="p30-h">The 30-second version</div>
+  <div class="p30-g">
+    <div class="p30-c"><div class="p30-n">1</div><div><h4>Hospitals are hiring software robots</h4><p>Not physical robots — programs that do the paperwork: filing insurance authorizations, cleaning up patient records, sorting inbox messages. The time savings are real and large.</p></div></div>
+    <div class="p30-c"><div class="p30-n">2</div><div><h4>A bot's mistake doesn't happen once</h4><p>A person who fills a form wrong does it once and notices. A bot configured wrong does it <em>four thousand times before lunch</em> — and nobody finds out until patients start calling.</p></div></div>
+    <div class="p30-c"><div class="p30-n">3</div><div><h4>Six settings decide whether that happens</h4><p>Speed limits, running hours, what to do when unsure, what data it can touch, how to stop it, and who owns it. All six are optional. Skipping them makes the bot faster — that's why they get skipped.</p></div></div>
+    <div class="p30-c"><div class="p30-n">4</div><div><h4>Try it and see what breaks</h4><p>Turn the guardrails off, run a day, and read what the fleet did. The ungoverned version saves more hours. It also causes five incidents, and one of them sends hospital transport to the wrong rooms.</p></div></div>
+  </div>
+</div>
+
+<!-- 1. FLEET -->
+<section>
+  <div class="slab">01 — The fleet</div>
+  <h2>Five bots, five very different risk profiles</h2>
+  <p class="lede">Each bot does a real hospital back-office job. What makes them different isn't difficulty — it's <strong>how bad it is when they're wrong</strong>. A bot that tidies an address field and a bot that files insurance authorizations fail in completely different ways, so they shouldn't get the same rules.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Bot fleet — production</div>
+        <div class="panel-sub">5 service identities · Epic + payer portals + comms platform</div>
+      </div>
+      <div class="live"><span class="pulse"></span>IDLE</div>
+    </div>
+    <div class="fleet" id="fleet"></div>
+  </div>
+</section>
+
+<!-- 2. CONTROL TOWER -->
+<section>
+  <div class="slab">02 — The control tower</div>
+  <h2>Configure the guardrails. Run the shift.</h2>
+  <p class="lede">Each switch below is a real control that automation programs either build up front or discover they needed the hard way. Turn them off and the bots still run — faster, in fact. <strong>Run a day and read the log.</strong></p>
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Fleet Control Tower — 24h shift simulator</div>
+        <div class="panel-sub">guardrail configuration determines outcome</div>
+      </div>
+      <div class="panel-sub" id="postureLbl">posture: unconfigured</div>
+    </div>
+    <div class="tryit"><b>Try it</b><span>Run it once with everything off, then hit "All guardrails on" and run again. Compare the hours saved against the incident list.</span></div>
+    <div class="console">
+      <div class="con-l">
+        <div class="presets">
+          <button class="mini" id="pAll">All guardrails on</button>
+          <button class="mini" id="pNone">Ship it fast</button>
+        </div>
+        <div class="gtitle">Guardrails</div>
+        <div id="guards"></div>
+        <button class="runbtn" id="run">▶ Run 24-hour shift</button>
+      </div>
+      <div class="con-r">
+        <div class="mtx">
+          <div class="met"><div class="met-k">Tasks completed</div><div class="met-v v-cy" id="mTasks">—</div><div class="met-s">across fleet</div></div>
+          <div class="met"><div class="met-k">Staff hours returned</div><div class="met-v v-ok" id="mHours">—</div><div class="met-s">FTE equivalent</div></div>
+          <div class="met"><div class="met-k">Incidents</div><div class="met-v" id="mInc">—</div><div class="met-s">caused by the fleet</div></div>
+          <div class="met"><div class="met-k">Safety posture</div><div class="met-v" id="mPost">—</div><div class="met-s">governance score</div></div>
+        </div>
+        <div class="log" id="log"><div class="empty">Configure guardrails, then run a shift.<br>The log will show what the fleet did — and what it broke.</div></div>
+        <div id="incidents"></div>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>The pattern worth internalizing:</strong> every guardrail here costs throughput and every one of them is skippable. That's precisely why they get skipped — the pilot works, nothing breaks, and the controls look like bureaucracy right up until the morning a bot has been wrong 4,000 times overnight. <em>Automation risk is not the probability of a mistake; it's the probability multiplied by the speed at which the mistake replicates.</em></div>
+</section>
+
+<!-- 3. IDENTITY -->
+<section>
+  <div class="slab">03 — The identity problem</div>
+  <h2>A bot that reads charts is an account that reads charts</h2>
+  <p class="lede">Every bot logs into systems using an account, just like a person does. That account can read patient records. So it needs the same things a staff account needs — limited access, rotating passwords, an owner — plus one more: <strong>when something goes wrong, "the bot did it" has to point to a real person.</strong></p>
+  <div class="grid2">
+    <div class="card"><h3>What every bot identity needs</h3><ul>
+      <li><strong>A named human owner</strong> — not a team, not a vendor. Someone who can answer for its actions and approve its scope changes</li>
+      <li><strong>Least-privilege scope</strong> — a bot that reads demographics does not need chart write access, and "we'll tighten it later" is a sentence that never gets finished</li>
+      <li><strong>Credential rotation</strong> — service account passwords that never expire are the ones that end up in a script in a shared drive</li>
+      <li><strong>Distinguishable audit trail</strong> — bot actions must be separable from human actions in the log, or every investigation starts with a week of disambiguation</li>
+      <li><strong>A documented purpose</strong> — an account whose reason for existing is undocumented is an account nobody will dare to disable</li>
+    </ul></div>
+    <div class="card"><h3>How it actually goes wrong</h3><ul>
+      <li><strong>Scope creep by convenience</strong> — the bot needed one more permission for one more task, five times, and now it can do anything</li>
+      <li><strong>The orphaned bot</strong> — its owner left the organization; nobody knows what it does, so nobody turns it off, and it runs for years</li>
+      <li><strong>Shared credentials</strong> — two bots on one service account means neither one's actions can be attributed to it</li>
+      <li><strong>The human-shaped bot</strong> — running automation under a real employee's login, which makes the audit trail actively false rather than merely unclear</li>
+      <li><strong>Break-the-glass at scale</strong> — a bot with emergency-access rights that uses them routinely, turning an exception into a habit</li>
+    </ul></div>
+  </div>
+  <div class="note" style="margin-top:20px"><strong>Why this is a clinical systems problem, not just an IT one:</strong> in a health system every one of these accounts touches PHI. A bot with unnecessary chart access is a HIPAA minimum-necessary finding that runs continuously, at machine speed, with no one watching — and the day it's discovered, the question asked will be "who approved this scope," not "which vendor built it."</div>
+</section>
+
+<!-- 4. WHAT TO AUTOMATE -->
+<section>
+  <div class="slab">04 — The decision framework</div>
+  <h2>Which rung is this task allowed to occupy?</h2>
+  <p class="lede">"Can we automate this" is almost always yes, and it's the wrong question. The real one is <strong>how much the machine gets to decide alone</strong> — which depends on whether the action can be undone and how badly it can hurt someone. Most hospital automation belongs on rungs 1 and 2. Trouble starts when a bot quietly climbs a rung nobody approved.</p>
+  <div class="ladder-mini">
+    <div class="lr"><div class="lr-n">0</div><div><h4>Machine records, human does</h4><p>No autonomy. Correct for anything rare, ambiguous, or unrecoverable — and an honest answer more often than automation programs like to admit.</p></div></div>
+    <div class="lr hi"><div class="lr-n">1</div><div><h4>Machine flags, human decides</h4><p>The bot surfaces candidates; a qualified human owns the decision. All of the throughput, none of the delegated judgment. Where clinical-facing automation belongs.</p></div></div>
+    <div class="lr hi"><div class="lr-n">2</div><div><h4>Machine acts on reversible, low-stakes work</h4><p>Autonomy where a wrong action costs minutes and can be undone. <strong>Most RPA value lives here — and so does most RPA risk</strong>, because "low stakes" times ten thousand executions stops being low stakes.</p></div></div>
+    <div class="lr"><div class="lr-n">3</div><div><h4>Machine acts, human can veto in a window</h4><p>Requires a veto window that someone is genuinely watching. Usually a design smell when proposed for anything irreversible.</p></div></div>
+    <div class="lr"><div class="lr-n">4</div><div><h4>Fully autonomous</h4><p>In direct patient care, reserved for regulated closed-loop devices with their own safety engineering — not for workflow automation, and never as an efficiency shortcut.</p></div></div>
+  </div>
+</section>
+
+<!-- 5. CLOSE -->
+<section>
+  <div class="slab">05 — Why this project</div>
+  <h2>Automation is an operations problem wearing a technology costume</h2>
+  <p class="lede">Health systems are deploying bots quickly because the ROI is real and immediate — the hours returned in the simulator above are not exaggerated. What lags behind is the governance: who owns each bot, what it's scoped to touch, how fast it's allowed to move, and what stops it at 3 a.m. This project builds the control layer that should exist before the fleet does, and it connects directly to the identity and access work that governs every non-human actor in a clinical environment.</p>
+  <div class="grid2">
+    <div class="card"><h3>Demonstrated here</h3><ul>
+      <li><strong>Blast-radius thinking</strong> — rate limits, execution windows, and scope as the primary risk controls for automation</li>
+      <li><strong>Service identity design</strong> — ownership, least privilege, rotation, and distinguishable audit attribution</li>
+      <li><strong>Exception handling as a control</strong> — the human queue is what keeps a bot on rung 2 instead of silently climbing to rung 3</li>
+      <li><strong>ROI framed honestly</strong> — hours returned stated alongside the risk that produced them</li>
+      <li><strong>Autonomy governance</strong> — reversibility × harm as an explicit, defensible decision rather than a default</li>
+    </ul></div>
+    <div class="card"><h3>Interview talking points</h3><ul>
+      <li>"Automation risk is the probability of a mistake multiplied by the speed it replicates — which is why rate limiting is a safety control, not a performance setting"</li>
+      <li>"A bot that reads charts is an account that reads charts: owner, scope, rotation, and an audit trail that separates it from humans"</li>
+      <li>"The exception queue is the difference between rung 2 and rung 3, and most bots climb that rung without anyone deciding to let them"</li>
+      <li>"Every bulk operation against interfaced data is an interface event, whether its owner thinks of it that way or not"</li>
+      <li>"I'd rather ship a slower bot with a kill switch than a fast one whose owner left the company"</li>
+    </ul></div>
+  </div>
+</section>
+
+<footer>
+  <span>Project 04 · modeled simulation · synthetic workflows · no PHI</span>
+  <span><a href="https://andy205261.github.io">andy205261.github.io</a></span>
+</footer>
+</div>
+
+<script>
+/* ============ FLEET ============ */
+var BOTS = [
+ {id:'PRIOR-AUTH-BOT', rung:2, task:'Submits prior authorization requests to payer portals and tracks status responses.',
+  vol:340, min:11, scope:'read: coverage, orders · write: payer portal', risk:'external'},
+ {id:'REG-CLEANUP-BOT', rung:2, task:'Normalizes demographic fields and flags probable duplicate registrations for HIM review.',
+  vol:1240, min:2, scope:'read: patient index · write: demographics', risk:'interface'},
+ {id:'INBASKET-TRIAGE-BOT', rung:1, task:'Classifies incoming result messages and routes them to the correct clinical pool.',
+  vol:890, min:1.5, scope:'read: results, pools · write: routing only', risk:'clinical'},
+ {id:'CHARGE-RECON-BOT', rung:2, task:'Reconciles charge capture against documented procedures and queues mismatches.',
+  vol:2100, min:1, scope:'read: charges, docs · write: work queue', risk:'financial'},
+ {id:'DISCHARGE-OUTREACH-BOT', rung:1, task:'Drafts post-discharge follow-up outreach for staff review before sending.',
+  vol:260, min:6, scope:'read: discharge, contacts · write: draft only', risk:'clinical'}
+];
+
+(function(){
+  var host = document.getElementById('fleet');
+  BOTS.forEach(function(b){
+    var d = document.createElement('div');
+    d.className = 'bot'; d.id = 'bot-'+b.id;
+    d.innerHTML =
+      '<div class="bot-top"><span class="bot-name">'+b.id+'</span><span class="rung r'+b.rung+'">RUNG '+b.rung+'</span></div>'+
+      '<div class="bot-task">'+b.task+'</div>'+
+      '<div class="bot-stats"><div>daily volume<b>'+b.vol.toLocaleString()+'</b></div><div>min/task saved<b>'+b.min+'</b></div></div>'+
+      '<div class="scope">scope — <span>'+b.scope+'</span></div>';
+    host.appendChild(d);
+  });
+})();
+
+/* ============ GUARDRAILS ============ */
+var GUARDS = [
+ {k:'rate', t:'Rate limiting', d:'Caps executions per minute so a runaway bot degrades gracefully instead of flooding downstream systems.'},
+ {k:'hours', t:'Execution window', d:'Bulk work runs off-hours only — never against live clinical traffic during peak operations.'},
+ {k:'exception', t:'Exception → human queue', d:'Anything the bot is not confident about routes to a person instead of proceeding on a guess.'},
+ {k:'scope', t:'Least-privilege scope', d:'Each service account is granted only what its workflow needs, reviewed at every scope change.'},
+ {k:'kill', t:'Kill switch + monitoring', d:'Throughput and error-rate alerting, plus a single control that stops the fleet immediately.'},
+ {k:'owner', t:'Named bot owner', d:'Every bot has an accountable human, a documented purpose, and rotating credentials.'}
+];
+var state = {rate:false,hours:false,exception:false,scope:false,kill:false,owner:false};
+
+(function(){
+  var host = document.getElementById('guards');
+  GUARDS.forEach(function(g){
+    var el = document.createElement('div');
+    el.className = 'guard'; el.id = 'g-'+g.k;
+    el.innerHTML = '<div class="sw"></div><div class="g-b"><div class="g-t">'+g.t+'</div><div class="g-d">'+g.d+'</div></div>';
+    el.addEventListener('click', function(){
+      state[g.k] = !state[g.k];
+      el.classList.toggle('on', state[g.k]);
+      updatePosture();
+    });
+    host.appendChild(el);
+  });
+})();
+
+function setAll(v){
+  GUARDS.forEach(function(g){
+    state[g.k] = v;
+    document.getElementById('g-'+g.k).classList.toggle('on', v);
+  });
+  updatePosture();
+}
+document.getElementById('pAll').addEventListener('click', function(){ setAll(true); });
+document.getElementById('pNone').addEventListener('click', function(){ setAll(false); });
+
+function postureScore(){
+  var w = {rate:18,hours:14,exception:22,scope:20,kill:14,owner:12};
+  var s = 0;
+  for (var k in state) if (state[k]) s += w[k];
+  return s;
+}
+function updatePosture(){
+  var s = postureScore();
+  var lbl = document.getElementById('postureLbl');
+  lbl.textContent = 'posture: ' + (s>=85?'governed':s>=55?'partial':s>=25?'thin':'unconfigured');
+}
+
+/* ============ SIMULATION ============ */
+function run(){
+  var log = document.getElementById('log');
+  var incHost = document.getElementById('incidents');
+  log.innerHTML = ''; incHost.innerHTML = '';
+  var btn = document.getElementById('run');
+  btn.disabled = true; btn.textContent = '● Running shift…';
+
+  var lines = [];
+  function L(t, cls){ lines.push({t:t, c:cls||'l-t'}); }
+
+  var speedBoost = state.rate ? 1 : 1.35;         // no rate limit = more throughput
+  var windowCut  = state.hours ? 0.9 : 1;          // off-hours window = slightly less volume
+  var exceptRate = 0.045;
+  var totalTasks = 0, totalMin = 0, exceptions = 0, badActions = 0;
+  var incidents = [];
+
+  L('shift start · 00:00 — fleet initializing', 'l-i');
+  L(state.owner ? '✓ all bots have named owners + rotating credentials' : '⚠ 2 bots have no documented owner; credentials static since deploy', state.owner?'l-ok':'l-w');
+  L(state.scope ? '✓ service accounts scoped to workflow minimum' : '⚠ service accounts hold broad legacy permissions', state.scope?'l-ok':'l-w');
+  L(state.rate ? '✓ rate limiting active (throttle on downstream pressure)' : '⚠ no rate limit — bots run at maximum speed', state.rate?'l-ok':'l-w');
+  L(state.hours ? '✓ bulk operations restricted to 22:00–05:00 window' : '⚠ bulk operations permitted during clinical peak', state.hours?'l-ok':'l-w');
+  L(state.kill ? '✓ throughput + error-rate monitoring armed' : '⚠ no fleet monitoring; failures detected by downstream complaint', state.kill?'l-ok':'l-w');
+  L('—', 'l-t');
+
+  BOTS.forEach(function(b){
+    var vol = Math.round(b.vol * speedBoost * windowCut);
+    var exc = Math.round(vol * exceptRate);
+    var handled = state.exception ? exc : 0;
+    var wrong  = state.exception ? 0 : exc;
+    totalTasks += vol; totalMin += vol * b.min; exceptions += handled; badActions += wrong;
+    L(b.id + ' · ' + vol.toLocaleString() + ' tasks · ' + Math.round(vol*b.min/60) + 'h returned',
+      'l-ok');
+    if (!state.exception && exc > 0){
+      L('   └ ' + exc + ' low-confidence cases proceeded without review', 'l-e');
+    }
+  });
+
+  L('—', 'l-t');
+
+  // ---- incident generation ----
+  if (!state.rate && !state.hours){
+    incidents.push({
+      sev:'crit', t:'06:30 — ADT interface flooded',
+      p1:'REG-CLEANUP-BOT began a bulk demographic pass during morning admissions at full speed. Its updates emitted <strong>thousands of A08 events</strong> into the enterprise ADT feed — 28× normal volume — and the outbound queue backed up to a 41-minute lag.',
+      p2:'Downstream systems fell behind reality: the bed board showed patients in rooms they had left, and transport was dispatched to three wrong rooms before anyone connected the dots. <strong>Every bulk operation against interfaced data is an interface event, whether its owner thinks of it that way or not.</strong>'
+    });
+    L('06:30 ⛔ ADT outbound queue depth 9,412 · latency 41m', 'l-e');
+    L('07:05 ⛔ transport dispatched to 3 incorrect rooms', 'l-e');
+  } else if (!state.rate){
+    incidents.push({
+      sev:'warn', t:'02:10 — payer portal rate-blocked the fleet',
+      p1:'PRIOR-AUTH-BOT submitted at unthrottled speed and tripped the payer portal\'s own abuse protection. The account was temporarily blocked, stranding <strong>190 authorizations</strong> mid-submission with ambiguous status.',
+      p2:'Staff spent the next morning manually verifying which requests actually landed — the automation created more reconciliation work than it saved that day. Rate limiting is not a performance setting; it is how you stay welcome on systems you do not own.'
+    });
+    L('02:10 ⚠ payer portal returned 429 · account throttled', 'l-w');
+  }
+
+  if (!state.exception && badActions > 0){
+    incidents.push({
+      sev:'crit', t:'Ongoing — ' + badActions.toLocaleString() + ' low-confidence actions taken unreviewed',
+      p1:'With no exception queue, every ambiguous case became a decision the bot made alone. Across the fleet that is <strong>' + badActions.toLocaleString() + ' actions</strong> in one shift: prior auths submitted with mismatched coverage, demographics normalized onto the wrong record, results routed to pools that do not own them.',
+      p2:'This is the quiet failure mode — nothing crashed, no alert fired, and the errors are now distributed across thousands of patient records waiting to be discovered one complaint at a time. <strong>The exception queue is the difference between rung 2 and rung 3</strong>, and skipping it promotes every bot in the fleet without anyone deciding to.'
+    });
+    L('   ⛔ ' + badActions.toLocaleString() + ' unreviewed low-confidence actions across fleet', 'l-e');
+  }
+
+  if (!state.scope){
+    incidents.push({
+      sev:'crit', t:'Discovered in audit — bot access exceeded need',
+      p1:'INBASKET-TRIAGE-BOT was provisioned with broad legacy permissions rather than routing-only scope. It has been reading full chart content — including restricted-category records — for every message it classified.',
+      p2:'No data left the organization and no harm reached a patient, which is fortunate but not exculpatory: this is a <strong>continuous minimum-necessary violation running at machine speed</strong>. The audit question will be "who approved this scope," and the answer needs to be a person, a date, and a documented justification.'
+    });
+    L('   ⛔ scope audit: triage bot read restricted-category charts', 'l-e');
+  }
+
+  if (!state.kill){
+    incidents.push({
+      sev:'warn', t:'Detection gap — 6 hours to notice, 40 minutes to stop',
+      p1:'Without throughput or error-rate monitoring, nothing in the fleet reported its own misbehavior. The problems above were discovered by <strong>downstream humans filing tickets</strong>, hours after they began.',
+      p2:'And with no kill switch, stopping the fleet meant paging the vendor and disabling accounts one at a time while the bots kept working. <strong>Detection must not depend on someone noticing</strong> — that principle is identical whether the thing failing is an interface, a monitor, or a bot.'
+    });
+    L('   ⚠ mean time to detect: 6h · mean time to stop: 40m', 'l-w');
+  }
+
+  if (!state.owner){
+    incidents.push({
+      sev:'warn', t:'Two bots have no accountable owner',
+      p1:'CHARGE-RECON-BOT and REG-CLEANUP-BOT were deployed by a project team that has since dissolved. Their credentials have not rotated since deployment and their documented purpose is a line in a closed ticket.',
+      p2:'Nobody can approve a scope change, nobody can confidently disable them, and if either causes harm, <strong>"the bot did it" does not resolve to a person</strong>. Orphaned automation is not a governance detail — it is an account with production access and no human attached.'
+    });
+    L('   ⚠ 2 orphaned bots · credentials static since deploy', 'l-w');
+  }
+
+  var hours = Math.round(totalMin/60);
+  var fte = (hours/8).toFixed(1);
+  var score = postureScore();
+
+  L('—', 'l-t');
+  L('shift end · 24:00', 'l-i');
+  L(totalTasks.toLocaleString() + ' tasks · ' + hours.toLocaleString() + 'h returned (' + fte + ' FTE-days)', 'l-h');
+  L(incidents.length === 0 ? '✓ zero fleet-caused incidents' : incidents.length + ' incident(s) attributable to the fleet',
+    incidents.length === 0 ? 'l-ok' : 'l-e');
+
+  // render metrics
+  document.getElementById('mTasks').textContent = totalTasks.toLocaleString();
+  document.getElementById('mHours').textContent = hours.toLocaleString() + 'h';
+  var incEl = document.getElementById('mInc');
+  incEl.textContent = incidents.length;
+  incEl.className = 'met-v ' + (incidents.length===0?'v-ok':incidents.length<=2?'v-warn':'v-bad');
+  var pEl = document.getElementById('mPost');
+  pEl.textContent = score;
+  pEl.className = 'met-v ' + (score>=85?'v-ok':score>=55?'v-warn':'v-bad');
+
+  // stream the log
+  var i = 0;
+  (function tick(){
+    if (i < lines.length){
+      var d = document.createElement('div');
+      d.className = lines[i].c;
+      d.innerHTML = lines[i].t === '—' ? '<span style="opacity:.25">────────────────────</span>' : lines[i].t;
+      log.appendChild(d);
+      log.scrollTop = log.scrollHeight;
+      i++;
+      setTimeout(tick, 55);
+    } else {
+      renderIncidents(incidents, hours, score);
+      btn.disabled = false; btn.textContent = '▶ Run 24-hour shift';
+    }
+  })();
+
+  // bot card states
+  BOTS.forEach(function(b){
+    var el = document.getElementById('bot-'+b.id);
+    el.classList.remove('hot','ok');
+    el.classList.add(incidents.length===0 ? 'ok' : (score < 55 ? 'hot' : 'ok'));
+  });
+}
+
+function renderIncidents(incidents, hours, score){
+  var host = document.getElementById('incidents');
+  if (incidents.length === 0){
+    host.innerHTML = '<div class="inc good"><b>Clean shift — governed fleet</b>' +
+      '<p><strong>' + hours.toLocaleString() + ' staff hours returned with zero fleet-caused incidents.</strong> Throughput is slightly lower than an ungoverned fleet — rate limiting and off-hours windows cost real volume, and that cost is the entire point. You bought the difference between an automation program and an automation liability.</p>' +
+      '<p>This is also the version you can defend in front of a compliance committee: every action attributable, every scope justified, every bot stoppable. <em>The boring outcome is the product.</em></p></div>';
+    return;
+  }
+  var html = '';
+  incidents.forEach(function(x){
+    html += '<div class="inc '+x.sev+'"><b>'+x.t+'</b><p>'+x.p1+'</p><p>'+x.p2+'</p></div>';
+  });
+  if (score < 40){
+    html += '<div class="inc crit"><b>The uncomfortable summary</b>' +
+      '<p>The fleet returned <strong>'+hours.toLocaleString()+' staff hours</strong> — a genuinely impressive number that would look excellent in a steering-committee deck, and that is exactly how programs end up here. The hours are real. So is everything above.</p>' +
+      '<p><strong>Automation risk is not the probability of a mistake; it is that probability multiplied by the speed at which the mistake replicates.</strong> A human doing this work wrong makes a handful of errors a day and notices. This fleet made thousands and did not.</p></div>';
+  }
+  host.innerHTML = html;
+}
+
+document.getElementById('run').addEventListener('click', run);
+updatePosture();
+</script>
+</body>
+</html>

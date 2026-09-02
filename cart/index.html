@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 01 — CAR-T Neurotoxicity Watch | Andy Nguyen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#080c14;--panel:#0d1420;--panel-2:#111a29;--line:#1c2940;
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.12);
+  --text:#dbe4f0;--muted:#7d8ca3;--faint:#54627a;
+  --red:#f87171;--amber:#fbbf24;--green:#4ade80;--purple:#c084fc;
+  --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.65;font-size:16px}
+.wrap{max-width:1020px;margin:0 auto;padding:56px 24px 96px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.eyebrow a{color:var(--cyan);text-decoration:none}
+h1{font-family:var(--serif);font-size:clamp(31px,5.4vw,50px);font-weight:400;line-height:1.11;margin-bottom:18px}
+h1 em{font-style:italic;color:var(--cyan)}
+.sub{color:var(--muted);max-width:720px;margin-bottom:22px}
+.sub strong{color:var(--text);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:50px}
+.chip{font-family:var(--mono);font-size:11px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.slab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+h2{font-family:var(--serif);font-size:clamp(23px,3.4vw,31px);font-weight:400;line-height:1.2;margin-bottom:14px}
+.lede{color:var(--muted);max-width:740px;margin-bottom:26px;font-size:15.5px}
+.lede strong{color:var(--text);font-weight:500}
+.lede em{color:var(--text);font-style:italic}
+section{margin-bottom:74px}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.panel-title{font-size:12.5px;font-weight:500}
+.panel-sub{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.live{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;color:var(--green)}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blip 1.8s infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ICE anatomy */
+.ice{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:11px;padding:20px}
+.icd{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:15px;cursor:pointer;transition:border-color .25s,box-shadow .25s}
+.icd:hover{border-color:rgba(56,189,248,.45);box-shadow:0 0 22px rgba(56,189,248,.08)}
+.icd.act{border-color:rgba(56,189,248,.6)}
+.icd-p{font-family:var(--serif);font-size:26px;color:var(--cyan);line-height:1}
+.icd-t{font-size:13.5px;font-weight:500;margin:6px 0 4px}
+.icd-d{font-size:12.5px;color:var(--faint);line-height:1.55}
+.icd-note{display:none;grid-column:1/-1;padding:14px 16px;background:#050810;border:1px solid var(--line);border-left:2px solid var(--cyan);border-radius:0 10px 10px 0;font-size:13.5px;color:var(--muted);line-height:1.7}
+.icd-note.open{display:block;animation:fade .25s ease}
+.icd-note strong{color:var(--text);font-weight:500}
+
+/* patient board */
+.board{padding:0}
+.scrub{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--panel-2)}
+.scrub input[type=range]{flex:1;min-width:180px;-webkit-appearance:none;appearance:none;height:5px;background:var(--line);border-radius:99px;outline:none}
+.scrub input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:19px;height:19px;border-radius:50%;background:var(--cyan);cursor:pointer;box-shadow:0 0 14px rgba(56,189,248,.5)}
+.scrub input[type=range]::-moz-range-thumb{width:19px;height:19px;border:none;border-radius:50%;background:var(--cyan);cursor:pointer}
+.hclock{font-family:var(--mono);font-size:12px;color:var(--cyan);white-space:nowrap;min-width:110px}
+.mini{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:5px 13px;font-family:var(--sans);font-size:12.5px;cursor:pointer;transition:all .2s}
+.mini:hover{border-color:var(--cyan);color:var(--cyan)}
+.mini.on{background:var(--cyan-dim);color:var(--cyan);border-color:rgba(56,189,248,.4)}
+.modes{display:flex;gap:7px}
+
+.pt{display:grid;grid-template-columns:150px 1fr 108px;gap:14px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line);transition:background .3s}
+@media(max-width:760px){.pt{grid-template-columns:1fr;gap:8px}}
+.pt.alert{background:rgba(248,113,113,.055)}
+.pt.watch{background:rgba(251,191,36,.045)}
+.pt-id{font-family:var(--mono);font-size:12px;color:var(--text)}
+.pt-meta{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:2px}
+.spark{width:100%;height:44px;display:block}
+.pt-r{text-align:right}
+@media(max-width:760px){.pt-r{text-align:left}}
+.pt-ice{font-family:var(--serif);font-size:27px;line-height:1}
+.pt-st{font-family:var(--mono);font-size:9.5px;padding:2px 8px;border-radius:999px;border:1px solid;display:inline-block;margin-top:3px}
+.st-ok{background:rgba(74,222,128,.1);color:var(--green);border-color:rgba(74,222,128,.3)}
+.st-w{background:rgba(251,191,36,.12);color:var(--amber);border-color:rgba(251,191,36,.3)}
+.st-a{background:rgba(248,113,113,.14);color:var(--red);border-color:rgba(248,113,113,.38)}
+.banner{padding:15px 18px;font-size:13.5px;line-height:1.7;border-top:1px solid var(--line);animation:fade .3s ease}
+.banner.none{color:var(--faint);font-family:var(--mono);font-size:11.5px}
+.banner.fire{background:rgba(248,113,113,.06);color:var(--muted)}
+.banner b{color:var(--red);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:5px}
+.banner.trend b{color:var(--amber)}
+.banner.trend{background:rgba(251,191,36,.05)}
+.banner strong{color:var(--text);font-weight:500}
+
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:18px}
+@media(max-width:680px){.cmp{grid-template-columns:1fr}}
+.cmpc{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:16px}
+.cmpc.win{border-color:rgba(74,222,128,.4)}
+.cmpc h4{font-size:13.5px;font-weight:500;margin-bottom:8px}
+.cmpc .big{font-family:var(--serif);font-size:29px;line-height:1.05}
+.cmpc .lbl{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.cmpc p{font-size:12.5px;color:var(--faint);line-height:1.6;margin-top:9px}
+
+/* escalation */
+.esc{display:grid;gap:11px;padding:19px}
+.tier{display:flex;gap:15px;align-items:flex-start;padding:15px 17px;background:var(--panel-2);border:1px solid var(--line);border-radius:12px}
+.tier-t{flex-shrink:0;width:88px;font-family:var(--mono);font-size:11px;color:var(--cyan);padding-top:2px}
+.tier-h{font-size:14.5px;font-weight:500;margin-bottom:3px}
+.tier-d{font-size:13.5px;color:var(--muted);line-height:1.65}
+.tier-d code{font-family:var(--mono);font-size:12px;color:var(--cyan);background:var(--cyan-dim);padding:1px 5px;border-radius:4px}
+
+/* ROI */
+.roi{display:grid;grid-template-columns:330px 1fr;gap:0}
+@media(max-width:860px){.roi{grid-template-columns:1fr}}
+.roi-l{padding:20px;border-right:1px solid var(--line)}
+@media(max-width:860px){.roi-l{border-right:none;border-bottom:1px solid var(--line)}}
+.roi-r{padding:20px}
+.par{margin-bottom:15px}
+.par-h{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;margin-bottom:5px}
+.par-h span:first-child{color:var(--muted)}
+.par-v{font-family:var(--mono);font-size:13px;color:var(--cyan)}
+.par input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--line);border-radius:99px;outline:none}
+.par input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--cyan);cursor:pointer}
+.par input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:var(--cyan);cursor:pointer}
+.rmtx{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:16px}
+.rm{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.rm-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.rm-v{font-family:var(--serif);font-size:27px;line-height:1.05}
+.rm-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.v-ok{color:var(--green)}.v-cy{color:var(--cyan)}.v-p{color:var(--purple)}.v-a{color:var(--amber)}
+.hum{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.28);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.75;color:var(--muted)}
+.hum b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
+.hum strong{color:var(--text);font-weight:500}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .3s,box-shadow .3s}
+.card:hover{border-color:rgba(56,189,248,.35);box-shadow:0 0 28px rgba(56,189,248,.08)}
+.card h3{font-family:var(--serif);font-size:19px;font-weight:400;margin-bottom:12px}
+.card ul{list-style:none}
+.card li{position:relative;padding-left:19px;margin-bottom:9px;color:var(--muted);font-size:14px;line-height:1.65}
+.card li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:11px;top:3px}
+.card li strong{color:var(--text);font-weight:500}
+.note{background:var(--panel-2);border:1px solid var(--line);border-left:2px solid var(--purple);border-radius:0 12px 12px 0;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.75}
+.note strong{color:var(--text);font-weight:500}
+footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--cyan);text-decoration:none}
+
+.p30{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:56px}
+.p30-h{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.p30-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.p30-c{display:flex;gap:12px;align-items:flex-start}
+.p30-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--cyan-dim);border:1px solid rgba(56,189,248,.35);color:var(--cyan);font-family:var(--mono);font-size:11.5px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.p30-c h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.4}
+.p30-c p{font-size:13px;color:var(--muted);line-height:1.65}
+.p30-c p em{color:var(--text);font-style:italic}
+.tryit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;background:rgba(56,189,248,.06);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.tryit b{color:var(--cyan);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.demo{background:var(--cyan);color:#04121f;border:none;border-radius:8px;padding:6px 15px;font-family:var(--sans);font-weight:600;font-size:12.5px;cursor:pointer;transition:box-shadow .2s}
+.demo:hover{box-shadow:0 0 20px rgba(56,189,248,.4)}
+.adv{margin-top:6px;border-top:1px solid var(--line);padding-top:14px}
+.adv-t{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--faint);cursor:pointer;user-select:none;transition:color .2s}
+.adv-t:hover{color:var(--cyan)}
+.adv-b{display:none;margin-top:14px}
+.adv-b.open{display:block;animation:fade .25s ease}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow"><a href="../">← Portfolio</a> · Project 01</div>
+<h1>The Patient Who Couldn't <em>Write a Sentence</em></h1>
+<p class="sub">A cancer therapy that sometimes attacks the brain. A patient lucid at noon, confused by evening, seizing by morning. The warning sign is quiet — it shows up when someone can no longer write a simple sentence. This project catches that signal <strong>16 hours earlier</strong> by watching the direction a score is moving instead of waiting for it to hit a bad number, and then puts a number on what those 16 hours are worth.</p>
+<div class="chips">
+  <span class="chip">CAR-T / cell therapy</span>
+  <span class="chip">ICANS · ICE score</span>
+  <span class="chip">Neurotoxicity surveillance</span>
+  <span class="chip">Trend detection</span>
+  <span class="chip">Capacity &amp; ROI modeling</span>
+  <span class="chip">Clinical automation</span>
+</div>
+
+<!-- PLAIN LANGUAGE -->
+<div class="p30">
+  <div class="p30-h">The 30-second version</div>
+  <div class="p30-g">
+    <div class="p30-c"><div class="p30-n">1</div><div><h4>A cancer treatment that can attack the brain</h4><p>CAR-T is a powerful cell therapy for blood cancers. In some patients it triggers brain swelling and confusion. Caught early, it's treatable with steroids. Caught late, the patient ends up in the ICU — or seizing.</p></div></div>
+    <div class="p30-c"><div class="p30-n">2</div><div><h4>Nurses already check for it every 8 hours</h4><p>A simple 3-minute test scored out of 10: what year is it, name these objects, write this sentence. The problem isn't collecting the data — it's that nobody can see the <em>direction</em> it's moving.</p></div></div>
+    <div class="p30-c"><div class="p30-n">3</div><div><h4>Watching the direction buys 16 hours</h4><p>Most alerts wait for the score to hit a bad number. Watching for a <em>falling</em> score instead catches the same patient 16 hours sooner — while treatment still works and the ICU is still avoidable.</p></div></div>
+    <div class="p30-c"><div class="p30-n">4</div><div><h4>And 16 hours is worth real money</h4><p>Fewer ICU days, shorter stays, and — in a cancer program running at full capacity — beds that open up for the next patient waiting for treatment. Better care and better economics point the same direction.</p></div></div>
+  </div>
+</div>
+
+<!-- 1. THE SCORE -->
+<section>
+  <div class="slab">01 — The signal</div>
+  <h2>Ten points, three minutes, one pen</h2>
+  <p class="lede">This is the test itself — 10 points, three minutes, no equipment. A nurse asks a few questions and has the patient write one sentence. <strong>Click any component</strong> to see what it detects and which one fails first.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">The bedside test — 10 points total</div>
+        <div class="panel-sub">10 = normal &nbsp;·&nbsp; 7–9 = mild &nbsp;·&nbsp; 3–6 = serious &nbsp;·&nbsp; 0–2 = severe</div>
+      </div>
+      <div class="panel-sub">q8h during CAR-T monitoring window</div>
+    </div>
+    <div class="ice" id="ice"></div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>Why handwriting is the canary:</strong> writing a sentence requires language, motor planning, and sustained attention at once — so it degrades before orientation does. A patient who still knows the year and the hospital may already be unable to produce a legible sentence. That is the window this whole system exists to catch, and it is measured in hours.</div>
+</section>
+
+<!-- 2. PATIENT BOARD -->
+<section>
+  <div class="slab">02 — The board</div>
+  <h2>Five patients. One is quietly getting worse.</h2>
+  <p class="lede">Five patients on a cell therapy unit over three days. <strong>Drag the timeline</strong> to move through time. One of them is slowly getting worse — but no single score looks alarming enough to act on, which is exactly how this gets missed. Switch between the two detection rules and watch when each one notices.</p>
+  <div class="panel board">
+    <div class="tryit"><b>Try it</b><span>Each row is one patient. The number is their brain test score out of 10 — <b style="color:var(--green)">10 is normal</b>, <b style="color:var(--red)">6 or below is serious</b>. Watch Bed 07 slide.</span><button class="demo" id="demoBtn">▶ Show me the difference</button></div>
+    <div class="scrub">
+      <span class="hclock" id="clock">Hour 0 · Day 1</span>
+      <input type="range" id="hr" min="0" max="9" value="0">
+      <div class="modes">
+        <button class="mini on" id="mThr">Alert on bad number</button>
+        <button class="mini" id="mTrend">Alert on falling</button>
+      </div>
+    </div>
+    <div id="pts"></div>
+    <div class="banner none" id="banner">no active neurotoxicity alerts</div>
+  </div>
+
+  <div class="panel" style="margin-top:16px">
+    <div class="panel-head"><div class="panel-title">Detection comparison — Bed 7</div><div class="panel-sub">time to first alert</div></div>
+    <div class="cmp">
+      <div class="cmpc">
+        <h4>Alert when the score hits 6</h4>
+        <div class="big" style="color:var(--red)">Hour 40</div>
+        <div class="lbl">first alert · already grade 2</div>
+        <p>Waits for a bad number. By then the patient has been slipping for a day and a half and is confused enough that an ICU transfer is already being arranged. The information was there the whole time — nobody was looking at the shape of it.</p>
+      </div>
+      <div class="cmpc win">
+        <h4>Alert when the score drops 2 in a row</h4>
+        <div class="big" style="color:var(--green)">Hour 24</div>
+        <div class="lbl">first alert · still grade 1</div>
+        <p><strong>16 hours earlier</strong>, while the patient can still hold a conversation and the score is only 8. Two checks in a row moving the wrong way is a signal; one number by itself is not. This is the window where steroids work and the ICU gets avoided.</p>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>And the cost of the trend rule, visible on the same board:</strong> switch to trend-aware and advance to hour 32 — <strong>Bed 05 fires too</strong>. That patient had a transient two-point dip after sedation and recovered on their own. This is not a flaw in the demonstration; it is the actual tradeoff. Trend detection buys 16 hours on the patient who is truly declining and costs you an alert on the patient who is not, and the delta threshold that governs that ratio is a number the cell therapy team has to choose and revisit — not a setting an analyst picks alone.</div>
+
+  <div class="note" style="margin-top:14px"><strong>The whole insight in one line:</strong> 10 → 9 → 7 is a trajectory; 7 alone is a number. Clinical systems overwhelmingly alert on thresholds because thresholds are easy to configure — and trajectories are what clinicians actually reason about at the bedside. Encoding the trajectory is the entire value add here, and it required no new data, no new device, and no new documentation burden. <em>The nurses were already collecting this.</em></div>
+</section>
+
+<!-- 3. ESCALATION -->
+<section>
+  <div class="slab">03 — Routing</div>
+  <h2>What happens after the alert fires</h2>
+  <p class="lede">An alert that goes nowhere is a dashboard nobody watches. Here is who gets told, in what order, and what each person is expected to do.</p>
+  <div class="panel">
+    <div class="esc">
+      <div class="tier"><div class="tier-t">Δ detected</div><div><div class="tier-h">Bedside RN — verify and repeat</div><div class="tier-d">The first action is confirmation, not escalation: repeat the ICE assessment and rule out the reversible mimics — sedating medications, sleep deprivation, hypoglycemia, infection. <code>Two-nurse confirmation</code> protects the alert's credibility.</div></div></div>
+      <div class="tier"><div class="tier-t">Confirmed</div><div><div class="tier-h">Cell therapy APP + primary team</div><div class="tier-d">Structured notification carrying the <em>trajectory</em>, not just the current score — the last three assessments, the delta, and hours since infusion. Time from infusion is diagnostic context: ICANS has a characteristic onset window.</div></div></div>
+      <div class="tier"><div class="tier-t">Grade 2+</div><div><div class="tier-h">Attending + neurology consult + cEEG evaluation</div><div class="tier-d">Corticosteroid decision point. Neurology consult and consideration of continuous EEG to detect non-convulsive seizure activity — the same cEEG pipeline modeled in the neurocritical care project. <strong>Two of the highest-stakes neuro monitoring problems in the hospital converge here.</strong></div></div></div>
+      <div class="tier"><div class="tier-t">Any grade</div><div><div class="tier-h">Structured record + program registry</div><div class="tier-d">Every assessment, alert, and disposition writes a discrete record. This feeds required cell-therapy program reporting (FACT accreditation, REMS obligations, registry submission) — <code>documentation the program already owes</code>, produced as a byproduct rather than a separate chart-abstraction job.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ROI -->
+<section>
+  <div class="slab">04 — The business case</div>
+  <h2>What those 16 hours are worth</h2>
+  <p class="lede">Cancer programs at major centers are running full — Stanford Medicine has described its cancer services as being <em>out of capacity</em>, with patient volume projected to double in a decade. When a service is full, a bed-day saved isn't just money saved. <strong>It's a treatment slot for the next patient waiting.</strong> Move the sliders and watch both numbers change.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Capacity &amp; financial model — annual</div>
+        <div class="panel-sub">all inputs adjustable · modeled illustration, not a Stanford financial projection</div>
+      </div>
+      <div class="panel-sub" id="roiTag">baseline assumptions</div>
+    </div>
+    <div class="roi">
+      <div class="roi-l">
+        <div class="par"><div class="par-h"><span>Annual CAR-T infusions</span><span class="par-v" id="vVol">180</span></div><input type="range" id="pVol" min="60" max="400" step="10" value="180"></div>
+        <div class="par"><div class="par-h"><span>ICU days per severe case</span><span class="par-v" id="vIcu">6</span></div><input type="range" id="pIcu" min="2" max="14" step="1" value="6"></div>
+        <div class="par"><div class="par-h"><span>Cost per ICU day</span><span class="par-v" id="vCost">$4,800</span></div><input type="range" id="pCost" min="2500" max="9000" step="100" value="4800"></div>
+        <div class="adv">
+          <div class="adv-t" id="advT"><span id="advCaret">▸</span> clinical assumptions (5 more)</div>
+          <div class="adv-b" id="advB">
+            <div class="par"><div class="par-h"><span>Develop any-grade ICANS</span><span class="par-v" id="vInc">45%</span></div><input type="range" id="pInc" min="25" max="65" step="1" value="45"></div>
+            <div class="par"><div class="par-h"><span>Progress to severe — late detection</span><span class="par-v" id="vLate">30%</span></div><input type="range" id="pLate" min="18" max="45" step="1" value="30"></div>
+            <div class="par"><div class="par-h"><span>Progress to severe — early detection</span><span class="par-v" id="vEarly">18%</span></div><input type="range" id="pEarly" min="8" max="30" step="1" value="18"></div>
+            <div class="par"><div class="par-h"><span>Added inpatient days per severe case</span><span class="par-v" id="vLos">8</span></div><input type="range" id="pLos" min="3" max="18" step="1" value="8"></div>
+            <div class="par"><div class="par-h"><span>Contribution margin per added case</span><span class="par-v" id="vMar">$85,000</span></div><input type="range" id="pMar" min="20000" max="180000" step="5000" value="85000"></div>
+          </div>
+        </div>
+      </div>
+      <div class="roi-r">
+        <p style="font-size:13px;color:var(--faint);margin-bottom:14px;line-height:1.6">What happens over a year if the hospital catches these 16 hours earlier:</p>
+        <div class="rmtx">
+          <div class="rm"><div class="rm-k">Severe cases avoided</div><div class="rm-v v-ok" id="oCases">—</div><div class="rm-s">per year</div></div>
+          <div class="rm"><div class="rm-k">ICU days avoided</div><div class="rm-v v-cy" id="oIcu">—</div><div class="rm-s">per year</div></div>
+          <div class="rm"><div class="rm-k">Direct cost avoided</div><div class="rm-v v-ok" id="oCost">—</div><div class="rm-s">ICU utilization</div></div>
+          <div class="rm"><div class="rm-k">Bed-days released</div><div class="rm-v v-cy" id="oBed">—</div><div class="rm-s">cell therapy unit</div></div>
+          <div class="rm"><div class="rm-k">Additional treatment slots</div><div class="rm-v v-p" id="oSlots">—</div><div class="rm-s">at 14-day mean LOS</div></div>
+          <div class="rm"><div class="rm-k">Total annual value</div><div class="rm-v v-a" id="oTotal">—</div><div class="rm-s">cost + capacity</div></div>
+        </div>
+        <div class="hum" id="human"><b>What the number actually means</b><p>—</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>On honesty in ROI modeling:</strong> every input above is adjustable because every input is an assumption, and a business case that hides its assumptions is a sales pitch. The incidence and progression ranges are drawn from published CAR-T neurotoxicity literature; the cost and margin figures are deliberately generic placeholders, not Stanford's actuals. The defensible claim is not a dollar figure — it is the <em>structure</em>: earlier detection reduces severe progression, severe progression drives ICU and length-of-stay, and in a capacity-constrained service, length-of-stay converts directly into forgone treatment slots. <strong>Present the model, let finance supply the real inputs.</strong></div>
+</section>
+
+<!-- 5. GOVERNANCE -->
+<section>
+  <div class="slab">05 — Governance</div>
+  <h2>The machine never decides</h2>
+  <p class="lede">This system sits deliberately on <strong>rung 1 of the autonomy ladder</strong>: it surfaces a trajectory, and a qualified human decides what it means. That placement is not timidity — it is the only defensible position for a signal whose differential includes medication effect, infection, metabolic derangement, and sleep, all of which require a clinician at the bedside to sort out.</p>
+  <div class="grid2">
+    <div class="card"><h3>What the automation does</h3><ul>
+      <li><strong>Captures</strong> ICE assessments as discrete, timestamped data instead of free text buried in notes</li>
+      <li><strong>Computes</strong> trajectory — deltas across the last two and three assessments, plus hours since infusion</li>
+      <li><strong>Surfaces</strong> a confirmed decline to the right role with the trend attached, not just the current value</li>
+      <li><strong>Records</strong> every assessment and disposition for program reporting and threshold review</li>
+    </ul></div>
+    <div class="card"><h3>What stays human</h3><ul>
+      <li><strong>The assessment itself</strong> — a nurse asking a patient to write a sentence is not automatable, and shouldn't be</li>
+      <li><strong>Differentiating the mimics</strong> — sedation, infection, hypoglycemia, and exhaustion all look like early ICANS on a score</li>
+      <li><strong>The grading and treatment decision</strong> — steroids, ICU transfer, and neurology consult are clinical judgment</li>
+      <li><strong>Threshold tuning</strong> — the delta rule is a governed parameter reviewed against real alert performance, not a vendor default</li>
+    </ul></div>
+  </div>
+  <div class="note" style="margin-top:20px"><strong>The alert-burden discipline applies here too:</strong> a trend rule set too sensitive will fire on every post-sedation dip and be dismissed within a month, at which point the real decline gets dismissed with it. The delta thresholds belong in scheduled governance review with the cell therapy team, measured against a real false-positive rate — the same discipline that governs every other clinical alert in the building.</p></div>
+</section>
+
+<!-- 6. CLOSE -->
+<section>
+  <div class="slab">06 — Why this project</div>
+  <h2>Clinical value and financial value are the same sentence here</h2>
+  <p class="lede">Most healthcare IT projects have to choose which case to make: the clinical one or the financial one. This one doesn't, and that is the reason to build it. <strong>Catching neurotoxicity sixteen hours earlier means a patient who never loses the ability to write their name — and it means a bed that opens for the next person waiting for a therapy that is currently out of capacity.</strong> The same intervention, the same math, no tradeoff to negotiate. Projects that sit on that line are the ones that get funded, and more importantly, they are the ones worth building.</p>
+  <div class="grid2">
+    <div class="card"><h3>Demonstrated here</h3><ul>
+      <li><strong>Clinical domain depth</strong> — CAR-T neurotoxicity, ICE scoring, grading, and the ICANS onset window</li>
+      <li><strong>Trend detection over threshold logic</strong> — encoding how clinicians actually reason about deterioration</li>
+      <li><strong>Escalation design</strong> — confirmation-first routing that protects alert credibility</li>
+      <li><strong>Capacity-aware financial modeling</strong> — bed-days converted to treatment slots in a constrained service line</li>
+      <li><strong>Byproduct compliance</strong> — structured capture that satisfies program reporting obligations automatically</li>
+    </ul></div>
+    <div class="card"><h3>Interview talking points</h3><ul>
+      <li>"Ten to nine to seven is a trajectory; seven alone is a number — most alerting is built on the second because it's easier to configure"</li>
+      <li>"In a capacity-constrained service, a bed-day saved isn't a cost avoided — it's a treatment slot for the next patient"</li>
+      <li>"The nurses were already collecting this data. The gap was that nobody could trend it"</li>
+      <li>"Every input in my ROI model is adjustable, because a business case that hides its assumptions is a sales pitch"</li>
+      <li>"This sits on rung 1 deliberately — the differential for a falling ICE score requires a clinician at the bedside"</li>
+    </ul></div>
+  </div>
+</section>
+
+<footer>
+  <span>Project 01 · modeled patients &amp; illustrative financials · no PHI · not a Stanford projection</span>
+  <span><a href="https://andy205261.github.io">andy205261.github.io</a></span>
+</footer>
+</div>
+
+<script>
+/* ===== ICE COMPONENTS ===== */
+var ICE = [
+ {p:'4', t:'Orientation', d:'Year, month, city, hospital', n:'Four points, one for each. <strong>The most robust component</strong> — it survives longest and fails last, which is precisely why waiting for disorientation means waiting too long. A patient can be fully oriented and already unable to write.'},
+ {p:'2', t:'Naming', d:'Name three objects', n:'Point to a clock, a pen, a button. Two points for three correct. Word-finding difficulty is often the <strong>first thing families notice</strong> before any formal assessment does — worth asking them directly.'},
+ {p:'1', t:'Following commands', d:'"Show me two fingers"', n:'A single point testing comprehension and motor execution together. Loss here signals the encephalopathy is affecting more than language alone.'},
+ {p:'1', t:'Writing', d:'Write a standard sentence', n:'One point, and <strong>the earliest reliable warning in the whole score</strong>. Writing demands language, motor planning, and sustained attention simultaneously, so it degrades before anything else. Serial handwriting samples taped in the chart are a low-tech monitoring tool that outperforms most technology.'},
+ {p:'2', t:'Attention', d:'Count backward from 100 by 10', n:'Two points. Attention deficits are subtle, fluctuate through the day, and are easy to attribute to fatigue in a patient who has just been through lymphodepleting chemotherapy — <strong>the most commonly rationalized-away finding</strong>.'}
+];
+(function(){
+  var host = document.getElementById('ice');
+  ICE.forEach(function(c){
+    var d = document.createElement('div'); d.className='icd';
+    d.innerHTML = '<div class="icd-p">'+c.p+'</div><div class="icd-t">'+c.t+'</div><div class="icd-d">'+c.d+'</div>';
+    var n = document.createElement('div'); n.className='icd-note'; n.innerHTML = c.n;
+    host.appendChild(d); host.appendChild(n);
+    d.addEventListener('click', function(){
+      var open = n.classList.contains('open');
+      host.querySelectorAll('.icd-note').forEach(function(x){x.classList.remove('open');});
+      host.querySelectorAll('.icd').forEach(function(x){x.classList.remove('act');});
+      if(!open){ n.classList.add('open'); d.classList.add('act'); }
+    });
+  });
+})();
+
+/* ===== PATIENT BOARD ===== */
+var HOURS = [0,8,16,24,32,40,48,56,64,72];
+var PTS = [
+ {bed:'Bed 03', dx:'DLBCL · axi-cel', day:'D+4', ice:[10,10,10,10,10,10,10,10,10,10]},
+ {bed:'Bed 05', dx:'ALL · tisa-cel', day:'D+6', ice:[10,10,10,9,8,9,10,10,10,10]},
+ {bed:'Bed 07', dx:'DLBCL · axi-cel', day:'D+5', ice:[10,10,9,8,7,6,5,4,4,5]},
+ {bed:'Bed 09', dx:'MM · cilta-cel', day:'D+3', ice:[10,10,10,10,10,10,9,10,10,10]},
+ {bed:'Bed 11', dx:'DLBCL · liso-cel', day:'D+7', ice:[10,10,10,10,10,10,10,9,8,7]}
+];
+var mode = 'thr', hIdx = 0;
+
+function status(p, i){
+  var v = p.ice[i];
+  if (mode === 'thr'){
+    if (v <= 6) return 'a';
+    if (v <= 8) return 'w';
+    return 'ok';
+  }
+  // trend-aware
+  var d1 = i>=1 ? p.ice[i-1]-v : 0;
+  var d2 = i>=2 ? p.ice[i-2]-v : 0;
+  if (v <= 6 || d1 >= 2 || d2 >= 2) return 'a';
+  if (d1 >= 1) return 'w';
+  if (v <= 8) return 'w';
+  return 'ok';
+}
+
+function spark(p, i){
+  var w = 260, h = 44, n = HOURS.length;
+  var pts = [];
+  for (var k=0;k<=i;k++){
+    var x = (k/(n-1))*w;
+    var y = h - 4 - ((p.ice[k]-2)/8)*(h-10);
+    pts.push([x,y]);
+  }
+  var d = pts.map(function(q,k){ return (k?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1); }).join(' ');
+  var st = status(p,i);
+  var col = st==='a' ? '#f87171' : st==='w' ? '#fbbf24' : '#38bdf8';
+  var dots = pts.map(function(q){ return '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="2.2" fill="'+col+'"/>'; }).join('');
+  return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none">'+
+    '<line x1="0" y1="'+(h-4-((6-2)/8)*(h-10))+'" x2="'+w+'" y2="'+(h-4-((6-2)/8)*(h-10))+'" stroke="rgba(248,113,113,.18)" stroke-dasharray="3 3"/>'+
+    '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="1.9"/>'+dots+'</svg>';
+}
+
+function render(){
+  var host = document.getElementById('pts');
+  host.innerHTML = '';
+  var fired = null;
+  PTS.forEach(function(p){
+    var st = status(p, hIdx), v = p.ice[hIdx];
+    var el = document.createElement('div');
+    el.className = 'pt' + (st==='a'?' alert':st==='w'?' watch':'');
+    var col = st==='a'?'var(--red)':st==='w'?'var(--amber)':'var(--green)';
+    var lab = st==='a'?'ALERT':st==='w'?'WATCH':'STABLE';
+    var cls = st==='a'?'st-a':st==='w'?'st-w':'st-ok';
+    el.innerHTML = '<div><div class="pt-id">'+p.bed+'</div><div class="pt-meta">'+p.dx+' · '+p.day+'</div></div>'+
+      '<div>'+spark(p,hIdx)+'</div>'+
+      '<div class="pt-r"><div class="pt-ice" style="color:'+col+'">'+v+'<span style="font-size:13px;color:var(--faint)">/10</span></div>'+
+      '<span class="pt-st '+cls+'">'+lab+'</span></div>';
+    host.appendChild(el);
+    if (st==='a' && (!fired || v < fired.ice[hIdx])) fired = p;
+  });
+
+  document.getElementById('clock').textContent = 'Hour ' + HOURS[hIdx] + ' · Day ' + (Math.floor(HOURS[hIdx]/24)+1);
+  var b = document.getElementById('banner');
+  if (!fired){
+    b.className = 'banner none';
+    b.textContent = 'no active neurotoxicity alerts';
+  } else if (mode === 'trend' && fired.ice[hIdx] > 6){
+    b.className = 'banner trend';
+    b.innerHTML = '<b>Trend alert — '+fired.bed+'</b>ICE trajectory <strong>'+fired.ice[Math.max(0,hIdx-2)]+' → '+fired.ice[Math.max(0,hIdx-1)]+' → '+fired.ice[hIdx]+'</strong> over the last two assessments. Score is still grade 1, patient remains oriented — <strong>this is the window</strong>. Repeat assessment, rule out sedation and metabolic causes, notify cell therapy APP with the trend attached.';
+  } else {
+    b.className = 'banner fire';
+    b.innerHTML = '<b>Threshold alert — '+fired.bed+'</b>ICE '+fired.ice[hIdx]+'/10 meets <strong>grade 2 criteria</strong>. Corticosteroid decision point; neurology consult and cEEG evaluation indicated. Note the trajectory behind this number: the decline began '+(mode==='thr'?'16 hours before this alert fired':'earlier and was already flagged')+'.';
+  }
+}
+
+document.getElementById('hr').addEventListener('input', function(e){ hIdx = +e.target.value; render(); });
+document.getElementById('mThr').addEventListener('click', function(){
+  mode='thr'; this.classList.add('on'); document.getElementById('mTrend').classList.remove('on'); render();
+});
+document.getElementById('mTrend').addEventListener('click', function(){
+  mode='trend'; this.classList.add('on'); document.getElementById('mThr').classList.remove('on'); render();
+});
+render();
+
+document.getElementById('demoBtn').addEventListener('click', function(){
+  var b = this; b.disabled = true; b.textContent = 'watching…';
+  mode='thr';
+  document.getElementById('mThr').classList.add('on');
+  document.getElementById('mTrend').classList.remove('on');
+  var i = 0;
+  var slider = document.getElementById('hr');
+  (function step(){
+    hIdx = i; slider.value = i; render();
+    if (i < 5){ i++; setTimeout(step, 620); }
+    else {
+      setTimeout(function(){
+        mode='trend';
+        document.getElementById('mTrend').classList.add('on');
+        document.getElementById('mThr').classList.remove('on');
+        hIdx = 3; slider.value = 3; render();
+        b.disabled = false; b.textContent = '↻ Play again';
+      }, 1100);
+    }
+  })();
+});
+
+document.getElementById('advT').addEventListener('click', function(){
+  var b = document.getElementById('advB');
+  b.classList.toggle('open');
+  document.getElementById('advCaret').textContent = b.classList.contains('open') ? '▾' : '▸';
+});
+
+/* ===== ROI MODEL ===== */
+var P = {Vol:180, Inc:45, Late:30, Early:18, Icu:6, Cost:4800, Los:8, Mar:85000};
+var fmt = function(n){ return n.toLocaleString('en-US'); };
+var money = function(n){
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
+  return '$' + Math.round(n);
+};
+
+function calcROI(){
+  var withIcans = P.Vol * P.Inc/100;
+  var sevLate = withIcans * P.Late/100;
+  var sevEarly = withIcans * P.Early/100;
+  var avoided = sevLate - sevEarly;
+  var icuDays = avoided * P.Icu;
+  var costAvoided = icuDays * P.Cost;
+  var bedDays = avoided * P.Los;
+  var slots = bedDays / 14;
+  var capValue = slots * P.Mar;
+  var total = costAvoided + capValue;
+
+  document.getElementById('oCases').textContent = avoided.toFixed(1);
+  document.getElementById('oIcu').textContent = Math.round(icuDays);
+  document.getElementById('oCost').textContent = money(costAvoided);
+  document.getElementById('oBed').textContent = Math.round(bedDays);
+  document.getElementById('oSlots').textContent = slots.toFixed(1);
+  document.getElementById('oTotal').textContent = money(total);
+
+  var h = document.getElementById('human');
+  h.innerHTML = '<b>What the number actually means</b><p>' +
+    '<strong>' + avoided.toFixed(0) + ' patients a year</strong> who would have progressed to severe neurotoxicity and did not — meaning ' + Math.round(icuDays) + ' fewer ICU days, and that many fewer families sitting beside someone who cannot name the month.</p>' +
+    '<p>The released bed-days translate to roughly <strong>' + slots.toFixed(0) + ' additional CAR-T treatment slots</strong> per year. In a program running at capacity, those slots are not hypothetical — they are the patients currently on the scheduling list. ' +
+    'The combined modeled value of <strong>' + money(total) + '</strong> is what makes this fundable; the ' + slots.toFixed(0) + ' patients are what makes it worth doing.</p>';
+
+  document.getElementById('roiTag').textContent =
+    (P.Vol===180 && P.Inc===45 && P.Late===30 && P.Early===18) ? 'baseline assumptions' : 'custom assumptions';
+}
+
+[['pVol','Vol','vVol',function(v){return fmt(v);}],
+ ['pInc','Inc','vInc',function(v){return v+'%';}],
+ ['pLate','Late','vLate',function(v){return v+'%';}],
+ ['pEarly','Early','vEarly',function(v){return v+'%';}],
+ ['pIcu','Icu','vIcu',function(v){return v;}],
+ ['pCost','Cost','vCost',function(v){return '$'+fmt(v);}],
+ ['pLos','Los','vLos',function(v){return v;}],
+ ['pMar','Mar','vMar',function(v){return '$'+fmt(v);}]
+].forEach(function(cfg){
+  var el = document.getElementById(cfg[0]);
+  el.addEventListener('input', function(){
+    P[cfg[1]] = +el.value;
+    document.getElementById(cfg[2]).textContent = cfg[3](+el.value);
+    calcROI();
+  });
+});
+calcROI();
+</script>
+</body>
+</html>

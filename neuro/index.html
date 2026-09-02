@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 11 — Neuro-ICU cEEG Alert Pipeline | Andy Nguyen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#080c14;--panel:#0d1420;--panel-2:#111a29;--line:#1c2940;
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.12);
+  --text:#dbe4f0;--muted:#7d8ca3;--faint:#54627a;
+  --red:#f87171;--amber:#fbbf24;--green:#4ade80;--purple:#c084fc;
+  --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.65;font-size:16px}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 24px 96px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.eyebrow a{color:var(--cyan);text-decoration:none}
+h1{font-family:var(--serif);font-size:clamp(30px,5.2vw,48px);font-weight:400;line-height:1.12;margin-bottom:18px}
+h1 em{font-style:italic;color:var(--cyan)}
+.sub{color:var(--muted);max-width:700px;margin-bottom:22px}
+.sub strong{color:var(--text);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:52px}
+.chip{font-family:var(--mono);font-size:11px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+
+.slab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+h2{font-family:var(--serif);font-size:clamp(23px,3.4vw,30px);font-weight:400;line-height:1.2;margin-bottom:14px}
+.lede{color:var(--muted);max-width:720px;margin-bottom:26px;font-size:15.5px}
+.lede strong{color:var(--text);font-weight:500}
+.lede em{color:var(--text);font-style:italic}
+section{margin-bottom:72px}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.panel-title{font-size:12.5px;font-weight:500;color:var(--text)}
+.panel-sub{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.live{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;color:var(--green)}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blip 1.8s infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* EEG monitor */
+.eeg-wrap{padding:0;background:#050810}
+#eeg{display:block;width:100%;height:280px}
+.eeg-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 18px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--faint)}
+.eeg-state{display:flex;align-items:center;gap:9px}
+.badge{font-family:var(--mono);font-size:10.5px;padding:3px 10px;border-radius:999px;font-weight:500}
+.badge.calm{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.3)}
+.badge.sz{background:rgba(248,113,113,.14);color:var(--red);border:1px solid rgba(248,113,113,.38)}
+.badge.art{background:rgba(251,191,36,.12);color:var(--amber);border:1px solid rgba(251,191,36,.3)}
+.ctlrow{display:flex;gap:8px;flex-wrap:wrap}
+.mini{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:5px 13px;font-family:var(--sans);font-size:12.5px;cursor:pointer;transition:all .2s}
+.mini:hover{border-color:var(--cyan);color:var(--cyan)}
+.mini.on{background:var(--cyan-dim);color:var(--cyan);border-color:rgba(56,189,248,.4)}
+
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;padding:22px 18px}
+.hop{position:relative;padding:16px 14px;border:1px solid var(--line);border-radius:12px;margin:6px;transition:border-color .3s,box-shadow .3s;cursor:pointer;background:var(--panel-2)}
+.hop:hover{border-color:rgba(56,189,248,.45);box-shadow:0 0 24px rgba(56,189,248,.09)}
+.hop.act{border-color:rgba(56,189,248,.6);box-shadow:0 0 26px rgba(56,189,248,.14)}
+.hop-n{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.14em;margin-bottom:6px}
+.hop-t{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.35}
+.hop-o{font-family:var(--mono);font-size:10.5px;color:var(--cyan)}
+.hop-note{display:none;grid-column:1/-1;margin:2px 6px 8px;padding:14px 16px;background:#050810;border:1px solid var(--line);border-left:2px solid var(--cyan);border-radius:0 10px 10px 0;font-size:13.5px;color:var(--muted);line-height:1.7}
+.hop-note.open{display:block;animation:fade .3s ease}
+.hop-note strong{color:var(--text);font-weight:500}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* tuning console */
+.tune{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:820px){.tune{grid-template-columns:1fr}}
+.tune-l{padding:22px;border-right:1px solid var(--line)}
+@media(max-width:820px){.tune-l{border-right:none;border-bottom:1px solid var(--line)}}
+.tune-r{padding:22px}
+.thr-lbl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.thr-lbl span:first-child{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.thr-val{font-family:var(--serif);font-size:32px;color:var(--cyan);line-height:1}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:5px;background:var(--line);border-radius:99px;outline:none;margin:12px 0 6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--cyan);cursor:pointer;box-shadow:0 0 14px rgba(56,189,248,.5)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border:none;border-radius:50%;background:var(--cyan);cursor:pointer}
+.thr-ends{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-bottom:18px}
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.mtx{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.met{background:var(--panel-2);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+.met-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.met-v{font-family:var(--serif);font-size:27px;line-height:1.05}
+.met-s{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:3px}
+.v-ok{color:var(--green)}.v-warn{color:var(--amber)}.v-bad{color:var(--red)}.v-cy{color:var(--cyan)}
+#roc{display:block;width:100%;height:210px;margin-top:4px}
+.verdict{margin-top:16px;padding:14px 16px;border-radius:11px;font-size:13.5px;line-height:1.65;border:1px solid var(--line);background:var(--panel-2)}
+.verdict.good{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.06)}
+.verdict.warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.05)}
+.verdict.bad{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.05)}
+.verdict b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px}
+.verdict.good b{color:var(--green)}.verdict.warn b{color:var(--amber)}.verdict.bad b{color:var(--red)}
+.verdict p{color:var(--muted)}
+
+/* escalation */
+.esc{display:grid;gap:12px;padding:20px}
+.tier{display:flex;gap:16px;align-items:flex-start;padding:16px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;transition:border-color .3s}
+.tier:hover{border-color:rgba(56,189,248,.35)}
+.tier-t{flex-shrink:0;width:78px;font-family:var(--mono);font-size:11px;color:var(--cyan);padding-top:2px}
+.tier-b{flex:1;min-width:0}
+.tier-h{font-size:14.5px;font-weight:500;color:var(--text);margin-bottom:4px}
+.tier-d{font-size:13.5px;color:var(--muted);line-height:1.65}
+.tier-d code{font-family:var(--mono);font-size:12px;color:var(--cyan);background:var(--cyan-dim);padding:1px 5px;border-radius:4px}
+
+/* autonomy ladder */
+.ladder{display:grid;gap:10px}
+.rung{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start;padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:13px;transition:border-color .3s,box-shadow .3s}
+.rung:hover{border-color:rgba(56,189,248,.4);box-shadow:0 0 26px rgba(56,189,248,.07)}
+.rung-n{font-family:var(--serif);font-size:30px;color:var(--faint);line-height:1;text-align:center}
+.rung.hi .rung-n{color:var(--cyan)}
+.rung h4{font-size:15.5px;font-weight:500;margin-bottom:6px;color:var(--text)}
+.rung p{font-size:13.5px;color:var(--muted);line-height:1.7}
+.rung p strong{color:var(--text);font-weight:500}
+.rung .eg{margin-top:8px;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+.rung .eg b{color:var(--cyan);font-weight:500}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .3s,box-shadow .3s}
+.card:hover{border-color:rgba(56,189,248,.35);box-shadow:0 0 28px rgba(56,189,248,.08)}
+.card h3{font-family:var(--serif);font-size:19px;font-weight:400;margin-bottom:12px}
+.card ul{list-style:none}
+.card li{position:relative;padding-left:19px;margin-bottom:9px;color:var(--muted);font-size:14px;line-height:1.65}
+.card li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:11px;top:3px}
+.card li strong{color:var(--text);font-weight:500}
+.note{background:var(--panel-2);border:1px solid var(--line);border-left:2px solid var(--purple);border-radius:0 12px 12px 0;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.75}
+.note strong{color:var(--text);font-weight:500}
+footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--cyan);text-decoration:none}
+
+.p30{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:56px}
+.p30-h{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.p30-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.p30-c{display:flex;gap:12px;align-items:flex-start}
+.p30-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--cyan-dim);border:1px solid rgba(56,189,248,.35);color:var(--cyan);font-family:var(--mono);font-size:11.5px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.p30-c h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.4}
+.p30-c p{font-size:13px;color:var(--muted);line-height:1.65}
+.p30-c p em{color:var(--text);font-style:italic}
+.tryit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;background:rgba(56,189,248,.06);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.tryit b{color:var(--cyan);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.demo{background:var(--cyan);color:#04121f;border:none;border-radius:8px;padding:6px 15px;font-family:var(--sans);font-weight:600;font-size:12.5px;cursor:pointer;transition:box-shadow .2s}
+.demo:hover{box-shadow:0 0 20px rgba(56,189,248,.4)}
+.demo:disabled{opacity:.55;cursor:default}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow"><a href="../">← Portfolio</a> · Project 11</div>
+<h1>The Seizure Nobody Can <em>See</em></h1>
+<p class="sub">In the neuro ICU, some patients are seizing with no outward movement at all — nothing to see, and every undetected hour costs brain tissue. A monitor can find it. That part is solved. <strong>Getting the alert to the right clinician without burying the unit in false alarms is the unsolved part</strong> — and it's a systems problem, not a math problem. This is that system.</p>
+<div class="chips">
+  <span class="chip">cEEG monitoring</span>
+  <span class="chip">Seizure detection</span>
+  <span class="chip">Alert governance</span>
+  <span class="chip">Device integration</span>
+  <span class="chip">HL7 · Epic</span>
+  <span class="chip">Clinical automation</span>
+</div>
+
+<!-- PLAIN LANGUAGE -->
+<div class="p30">
+  <div class="p30-h">The 30-second version</div>
+  <div class="p30-g">
+    <div class="p30-c"><div class="p30-n">1</div><div><h4>Some seizures are invisible</h4><p>In the neuro ICU, a patient can be seizing in their brain with no shaking, no movement, nothing to see. It only shows up on a brain-wave monitor — and every undetected hour causes more damage.</p></div></div>
+    <div class="p30-c"><div class="p30-n">2</div><div><h4>Software can spot them. That's the easy part.</h4><p>Detection algorithms already exist and work reasonably well. The hard part is everything after: getting the right person told, fast, without crying wolf.</p></div></div>
+    <div class="p30-c"><div class="p30-n">3</div><div><h4>Every alert setting has a victim</h4><p>Set it too sensitive and nurses get buried in false alarms until they ignore all of them. Set it too strict and you miss the subtle seizures you bought the machine to find. <em>There is no setting that avoids both.</em></p></div></div>
+    <div class="p30-c"><div class="p30-n">4</div><div><h4>Someone has to choose the number</h4><p>That choice belongs to the hospital, not the vendor's default. This project puts the tradeoff on one screen so a clinician, a nurse manager, and an IT analyst can look at the same picture and decide together.</p></div></div>
+  </div>
+</div>
+
+<!-- ============ 1. LIVE MONITOR ============ -->
+<section>
+  <div class="slab">01 — The signal</div>
+  <h2>What the detector actually sees</h2>
+  <p class="lede">Four channels of simulated brain activity. Normal background looks irregular and small. A seizure looks like a <strong>rhythmic wave that builds</strong> — that's the pattern the software scores. Movement — chewing, turning the patient, a loose electrode — can look uncomfortably similar, and that resemblance is the entire reason false alarms exist.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Bed 7 — cEEG · longitudinal bipolar montage</div>
+        <div class="panel-sub">Fp1-F7 · F7-T3 · T3-T5 · T5-O1 &nbsp;·&nbsp; 256 Hz &nbsp;·&nbsp; synthetic signal</div>
+      </div>
+      <div class="live"><span class="pulse"></span>STREAMING</div>
+    </div>
+    <div class="tryit"><b>Try it</b><span>Watch a seizure emerge, then watch ordinary movement noise do a convincing impression of one.</span><button class="demo" id="demoEeg">▶ Show me both</button></div>
+    <div class="eeg-wrap"><canvas id="eeg"></canvas></div>
+    <div class="eeg-foot">
+      <div class="eeg-state">
+        <span id="stBadge" class="badge calm">BACKGROUND</span>
+        <span>detector score: <b id="stScore" style="color:var(--cyan)">0.08</b></span>
+      </div>
+      <div class="ctlrow">
+        <button class="mini" id="bSz">⚡ Inject seizure</button>
+        <button class="mini" id="bArt">〰 Inject artifact</button>
+        <button class="mini on" id="bRun">⏸ Pause</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. PIPELINE ============ -->
+<section>
+  <div class="slab">02 — The pipeline</div>
+  <h2>Seven hops from scalp to clinician</h2>
+  <p class="lede">The detection algorithm is one step out of seven. The other six are plumbing, ownership, and routing — and the alert can die quietly at any of them. <strong>Click any step</strong> to see who owns it and how it breaks.</p>
+  <div class="panel">
+    <div class="pipe" id="pipe"></div>
+  </div>
+</section>
+
+<!-- ============ 3. TUNING CONSOLE ============ -->
+<section>
+  <div class="slab">03 — The real decision</div>
+  <h2>Where do you set the threshold?</h2>
+  <p class="lede">A modeled day on a 12-bed neuro ICU with <strong>9 real seizures</strong> buried in hundreds of noisy segments. Drag the slider: catching more seizures means more false alarms, and fewer false alarms means missing real ones. <strong>Try all three presets</strong> — none of them is free.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Alert operating point — 24h modeled window</div>
+        <div class="panel-sub">12 beds · 9 true seizure events · continuous scoring</div>
+      </div>
+      <div class="panel-sub" id="opLabel">custom operating point</div>
+    </div>
+    <div class="tune">
+      <div class="tune-l">
+        <div class="thr-lbl"><span>Detection threshold</span><span class="thr-val" id="thrV">0.50</span></div>
+        <input type="range" id="thr" min="10" max="95" value="50">
+        <div class="thr-ends"><span>0.10 — catch everything</span><span>0.95 — only the obvious</span></div>
+        <div class="presets">
+          <button class="mini" data-p="18">Max sensitivity</button>
+          <button class="mini" data-p="48">Balanced</button>
+          <button class="mini" data-p="78">Low noise</button>
+        </div>
+        <div class="mtx">
+          <div class="met"><div class="met-k">Seizures detected</div><div class="met-v v-ok" id="mTP">—</div><div class="met-s">of 9 true events</div></div>
+          <div class="met"><div class="met-k">Seizures missed</div><div class="met-v v-bad" id="mFN">—</div><div class="met-s">undetected NCSE</div></div>
+          <div class="met"><div class="met-k">False alerts / 24h</div><div class="met-v v-warn" id="mFP">—</div><div class="met-s">unit-wide</div></div>
+          <div class="met"><div class="met-k">Alerts per nurse / shift</div><div class="met-v v-cy" id="mBurden">—</div><div class="met-s">12h · 3 nurses</div></div>
+        </div>
+        <div class="mtx" style="margin-top:10px">
+          <div class="met"><div class="met-k">Median detection latency</div><div class="met-v v-cy" id="mLat" style="font-size:23px">—</div><div class="met-s">from electrographic onset</div></div>
+          <div class="met"><div class="met-k">Alert positive predictive value</div><div class="met-v" id="mPPV" style="font-size:23px">—</div><div class="met-s">% of alerts that are real</div></div>
+        </div>
+      </div>
+      <div class="tune-r">
+        <div class="met-k" style="margin-bottom:6px">Operating curve — sensitivity vs. false alerts</div>
+        <canvas id="roc"></canvas>
+        <div class="verdict" id="verdict"><b>—</b><p>—</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>Why this is the analyst's meeting, not the vendor's:</strong> the algorithm ships with a default. The default was tuned on someone else's population, in someone else's unit, with someone else's staffing. Choosing the operating point is a <em>local clinical governance decision</em> — and the person who can put this tradeoff on a screen for the neurointensivist, the nurse manager, and the CMIO is the person who makes that decision possible.</div>
+</section>
+
+<!-- ============ 4. ESCALATION ============ -->
+<section>
+  <div class="slab">04 — Routing</div>
+  <h2>An alert with no owner is not an alert</h2>
+  <p class="lede">An alert nobody receives is the same as no alert at all. Here is who gets told, when, and what happens if they don't respond.</p>
+  <div class="panel">
+    <div class="esc">
+      <div class="tier"><div class="tier-t">T0 · 0s</div><div class="tier-b"><div class="tier-h">Bedside display + unit dashboard</div><div class="tier-d">Detection surfaces on the bedside cEEG display and the neuro ICU dashboard immediately. Passive, non-interruptive — the nurse who is already in the room sees it without being paged.</div></div></div>
+      <div class="tier"><div class="tier-t">T1 · 0s</div><div class="tier-b"><div class="tier-h">Assigned RN — mobile push</div><div class="tier-d">Interruptive push to the assigned nurse's device via the clinical communication platform, with bed, pattern class, and duration. <code>Requires acknowledgment.</code></div></div></div>
+      <div class="tier"><div class="tier-t">T2 · 3 min</div><div class="tier-b"><div class="tier-h">Unacknowledged → charge RN + neuro fellow</div><div class="tier-d">No acknowledgment in three minutes means the nurse is in a code, in isolation gear, or the message failed. The system does not wait to find out which — it widens.</div></div></div>
+      <div class="tier"><div class="tier-t">T3 · 10 min</div><div class="tier-b"><div class="tier-h">Sustained pattern → neurointensivist attending</div><div class="tier-d">A pattern persisting past ten minutes meets the operational definition of <strong>status epilepticus</strong>. This is no longer a monitoring event; it is a treatment decision that requires an attending.</div></div></div>
+      <div class="tier"><div class="tier-t">Always</div><div class="tier-b"><div class="tier-h">Every event → reviewable record</div><div class="tier-d">Each detection — acted on, dismissed, or false — writes to a review queue with the raw epoch attached. This is the substrate for weekly tuning, quality review, and the false-positive rate that governs the threshold above. <code>No event disappears.</code></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. AUTONOMY LADDER ============ -->
+<section>
+  <div class="slab">05 — Automation governance</div>
+  <h2>How much should the machine be allowed to decide?</h2>
+  <p class="lede">The real question is never "can we automate this" — it usually can be. It's <strong>how much the machine is allowed to decide on its own</strong>. The answer depends on two things: can the action be undone, and how badly can it hurt someone.</p>
+  <div class="ladder">
+    <div class="rung"><div class="rung-n">0</div><div><h4>Human does it, machine records</h4><p>No autonomy. The system observes and documents. Safe, and often the correct answer for anything rare, ambiguous, or unrecoverable.</p><div class="eg"><b>e.g.</b> manual EEG review by a neurophysiologist; automation only stores and displays</div></div></div>
+    <div class="rung hi"><div class="rung-n">1</div><div><h4>Machine flags, human decides</h4><p><strong>This is where the cEEG detector belongs.</strong> The algorithm surfaces a candidate; a qualified human confirms the pattern and owns the treatment decision. All the sensitivity of automation, none of the delegated judgment.</p><div class="eg"><b>e.g.</b> seizure detection alert → clinician reviews the epoch → treats or dismisses</div></div></div>
+    <div class="rung hi"><div class="rung-n">2</div><div><h4>Machine acts on low-stakes, reversible tasks</h4><p>Autonomy granted where a wrong action costs minutes, not harm, and can be undone. <strong>Most RPA value in a health system lives here</strong> — and so does most RPA risk, because a bot at scale makes the same mistake thousands of times before anyone notices.</p><div class="eg"><b>e.g.</b> bot files prior-auth submissions, reconciles worklists, populates registry data</div></div></div>
+    <div class="rung"><div class="rung-n">3</div><div><h4>Machine acts, human can veto in a window</h4><p>Action proceeds unless interrupted. Requires the veto window to be real — visible to someone who is actually watching, with enough time to intervene. Rare in clinical settings, and usually a design smell when proposed for anything irreversible.</p><div class="eg"><b>e.g.</b> auto-scheduled follow-up that a scheduler can cancel before it sends</div></div></div>
+    <div class="rung"><div class="rung-n">4</div><div><h4>Machine acts autonomously</h4><p>No human in the loop. In direct patient care this rung is reserved for closed-loop devices under device regulation and their own safety engineering — not for workflow automation, and never as an efficiency shortcut.</p><div class="eg"><b>e.g.</b> closed-loop insulin delivery — a regulated device, not an IT project</div></div></div>
+  </div>
+  <div class="note" style="margin-top:20px"><strong>The identity question nobody asks early enough:</strong> a bot that reads charts is an account that reads charts. It needs a service identity, scoped least-privilege access, credential rotation, and an audit trail that distinguishes its actions from a human's. When an automated action turns out to be wrong, "who did this" must have an answer — and <em>"the bot"</em> is only an acceptable answer if the bot has an owner, a scope, and a log.</div>
+</section>
+
+<!-- ============ 6. FAILURE MODES ============ -->
+<section>
+  <div class="slab">06 — What actually breaks</div>
+  <h2>Failure modes worth designing against</h2>
+  <div class="grid2">
+    <div class="card"><h3>Silent death of the pipeline</h3><ul>
+      <li><strong>Electrode impedance drift</strong> — signal quality degrades over hours; the detector keeps scoring garbage and reports nothing wrong</li>
+      <li><strong>Amplifier disconnect</strong> — no data is not a low score, but a naive dashboard renders both as "quiet"</li>
+      <li><strong>The fix:</strong> monitor signal <em>quality</em> and heartbeat, not just detections — absence of alerts must be provably different from absence of monitoring</li>
+    </ul></div>
+    <div class="card"><h3>Alert fatigue as a safety failure</h3><ul>
+      <li>Above roughly 90% override rates, an alert stops protecting anyone and starts training clinicians to dismiss <em>all</em> alerts</li>
+      <li>A threshold set for maximum sensitivity with no tuning review is how a unit arrives there in three weeks</li>
+      <li><strong>The fix:</strong> treat alert burden per nurse per shift as a governed metric with a scheduled review, not a one-time config</li>
+    </ul></div>
+    <div class="card"><h3>Delivery gaps</h3><ul>
+      <li>Assigned-nurse mapping goes stale at shift change and alerts route to whoever was on at 07:00</li>
+      <li>Device wifi roaming drops the push; nobody learns the message was never delivered</li>
+      <li><strong>The fix:</strong> acknowledgment-based escalation — undelivered and unacknowledged must behave identically, because to the patient they are identical</li>
+    </ul></div>
+    <div class="card"><h3>Documentation drift</h3><ul>
+      <li>The detection exists in the vendor system; the chart shows nothing, so the clinical record and the monitoring record diverge</li>
+      <li>Quality review later cannot reconstruct what was known and when</li>
+      <li><strong>The fix:</strong> every reviewed event writes a discrete, timestamped record into the chart — the EHR is the legal narrative, not the vendor console</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ============ 7. CLOSE ============ -->
+<section>
+  <div class="slab">07 — Why this project</div>
+  <h2>The question after the algorithm works</h2>
+  <p class="lede">Project 01 built seizure detection from EEG features and asked whether the model could find the pattern. This project asks the harder question that determines whether any of that reaches a patient: <strong>who gets told, how fast, at what false-alarm cost, with which human holding the decision</strong> — and who is accountable when the automation is wrong. That question is the job description of a clinical systems analyst working on automation, and it is the same question whether the pipeline carries a seizure detector, an RPA bot, or a sepsis model.</p>
+  <div class="grid2">
+    <div class="card"><h3>Demonstrated here</h3><ul>
+      <li><strong>Device-to-EHR integration</strong> — the multi-hop pipeline, its owners, and its silent failure points</li>
+      <li><strong>Alert governance with real math</strong> — sensitivity, PPV, alert burden, and the tradeoff made explicit for decision-makers</li>
+      <li><strong>Escalation design</strong> — acknowledgment-driven routing with time-bound widening</li>
+      <li><strong>Automation autonomy framework</strong> — reversibility and harm as the axes that set the rung</li>
+      <li><strong>Service identity for bots</strong> — least privilege and attribution for non-human actors</li>
+    </ul></div>
+    <div class="card"><h3>Interview talking points</h3><ul>
+      <li>"Detection is one hop out of seven — the other six are where alerts die silently, and that's where an analyst adds value"</li>
+      <li>"I can put the sensitivity-versus-alert-burden tradeoff on one screen, which is what lets a governance committee actually choose a number"</li>
+      <li>"Absence of alerts has to be provably different from absence of monitoring"</li>
+      <li>"Autonomy level is a function of reversibility and harm — most clinical automation belongs on rung 1 or 2, and saying so explicitly is the governance"</li>
+      <li>"A bot that reads charts is an account that reads charts"</li>
+    </ul></div>
+  </div>
+</section>
+
+<footer>
+  <span>Project 11 · synthetic signal &amp; modeled data · no PHI · illustrative system design</span>
+  <span><a href="https://andy205261.github.io">andy205261.github.io</a></span>
+</footer>
+</div>
+
+<script>
+/* ================= EEG SIMULATION ================= */
+(function(){
+  var cv = document.getElementById('eeg'), ctx = cv.getContext('2d');
+  var CH = 4, W = 0, H = 0, dpr = Math.min(window.devicePixelRatio||1, 2);
+  var buf = [], HEAD = 0, N = 900;
+  var mode = 'bg', modeT = 0, score = 0.08, running = true, t = 0;
+  var labels = ['Fp1-F7','F7-T3','T3-T5','T5-O1'];
+
+  function size(){
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W*dpr; cv.height = H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  size(); window.addEventListener('resize', size);
+  for (var c=0;c<CH;c++){ buf[c] = new Float32Array(N); }
+
+  function bg(c, i){
+    return (Math.sin(i*0.21+c)*0.34 + Math.sin(i*0.53+c*2.1)*0.22 +
+            Math.sin(i*1.17+c*0.7)*0.13 + (Math.random()-0.5)*0.38);
+  }
+  function seiz(c, i, prog){
+    var f = 0.34 + prog*0.30;
+    var amp = 0.85 + prog*1.5;
+    return (Math.sin(i*f + c*0.35)*amp + Math.sin(i*f*2.05 + c)*amp*0.42 +
+            (Math.random()-0.5)*0.3);
+  }
+  function artifact(c, i){
+    var burst = Math.sin(i*0.11) > 0.35 ? 1 : 0.15;
+    return ((Math.random()-0.5)*3.1*burst + Math.sin(i*0.9+c)*0.4);
+  }
+
+  function step(){
+    t++;
+    if (mode !== 'bg'){ modeT--; if (modeT <= 0) mode = 'bg'; }
+    var prog = mode==='sz' ? Math.min(1,(140-modeT)/70) : 0;
+    for (var c=0;c<CH;c++){
+      var v = mode==='sz' ? seiz(c,t,prog) : mode==='art' ? artifact(c,t) : bg(c,t);
+      buf[c][HEAD] = v;
+    }
+    HEAD = (HEAD+1)%N;
+
+    var target = mode==='sz' ? (0.55+prog*0.42) : mode==='art' ? 0.42 : 0.07;
+    score += (target - score)*0.05 + (Math.random()-0.5)*0.012;
+    score = Math.max(0.01, Math.min(0.99, score));
+
+    var b = document.getElementById('stBadge');
+    if (mode==='sz'){ b.className='badge sz'; b.textContent='RHYTHMIC EVOLVING DISCHARGE'; }
+    else if (mode==='art'){ b.className='badge art'; b.textContent='ARTIFACT — MOVEMENT'; }
+    else { b.className='badge calm'; b.textContent='BACKGROUND'; }
+    document.getElementById('stScore').textContent = score.toFixed(2);
+    document.getElementById('stScore').style.color =
+      score>0.6 ? '#f87171' : score>0.35 ? '#fbbf24' : '#38bdf8';
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var lane = H/CH, mid = lane/2, sc = lane*0.30;
+    ctx.strokeStyle = 'rgba(56,189,248,0.05)'; ctx.lineWidth = 1;
+    for (var g=1; g<CH; g++){
+      ctx.beginPath(); ctx.moveTo(0, lane*g); ctx.lineTo(W, lane*g); ctx.stroke();
+    }
+    for (var c=0;c<CH;c++){
+      ctx.strokeStyle = mode==='sz' ? 'rgba(248,113,113,0.9)'
+                      : mode==='art' ? 'rgba(251,191,36,0.8)' : 'rgba(56,189,248,0.75)';
+      ctx.lineWidth = 1.15; ctx.beginPath();
+      for (var i=0;i<N;i++){
+        var idx = (HEAD+i)%N;
+        var x = (i/(N-1))*W;
+        var y = lane*c + mid - buf[c][idx]*sc;
+        i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(125,140,163,0.55)';
+      ctx.font = '10px JetBrains Mono, monospace';
+      ctx.fillText(labels[c], 8, lane*c + 13);
+    }
+  }
+
+  function loop(){ if (running){ step(); step(); draw(); } requestAnimationFrame(loop); }
+  loop();
+
+  document.getElementById('bSz').addEventListener('click', function(){ mode='sz'; modeT=140; });
+  document.getElementById('bArt').addEventListener('click', function(){ mode='art'; modeT=60; });
+  var rb = document.getElementById('bRun');
+  rb.addEventListener('click', function(){
+    running = !running;
+    rb.textContent = running ? '⏸ Pause' : '▶ Resume';
+    rb.classList.toggle('on', running);
+  });
+  document.getElementById('demoEeg').addEventListener('click', function(){
+    var b = this; b.disabled = true; b.textContent = 'watching…';
+    running = true; rb.textContent = '⏸ Pause'; rb.classList.add('on');
+    mode='sz'; modeT=150;
+    setTimeout(function(){ mode='bg'; modeT=0; }, 3400);
+    setTimeout(function(){ mode='art'; modeT=90; }, 4600);
+    setTimeout(function(){ b.disabled = false; b.textContent = '↻ Play again'; }, 7200);
+  });
+
+})();
+
+/* ================= PIPELINE ================= */
+(function(){
+  var HOPS = [
+    {n:'HOP 1', t:'Electrodes & amplifier', o:'Neurodiagnostics', d:"Scalp electrodes in a standard montage feed a bedside amplifier. <strong>Failure mode:</strong> impedance drifts over hours as gel dries and patients are repositioned — the signal degrades into noise while every downstream system reports itself perfectly healthy. Signal quality has to be monitored as its own metric, or the pipeline lies to you politely for a whole shift."},
+    {n:'HOP 2', t:'Acquisition workstation', o:'Biomed + IT', d:"The bedside workstation digitizes, buffers, and forwards the stream. <strong>Failure mode:</strong> a Windows update, a full disk, or a network drop takes it offline — and a bed that has stopped monitoring looks exactly like a bed that is quiet. This is the classic device-integration seam where biomed owns the hardware and IT owns the OS, so neither owns the outcome unless someone insists."},
+    {n:'HOP 3', t:'Detection algorithm', o:'Vendor + informatics', d:"Trend software scores epochs for rhythmic, evolving, seizure-like activity. <strong>This is the only hop most people think about, and it is the one you have the least control over</strong> — you cannot rewrite the vendor's model. What you <em>do</em> control is the operating point, and that turns out to matter more than the algorithm's headline accuracy."},
+    {n:'HOP 4', t:'Threshold & alert logic', o:'Clinical governance', d:"Where the score becomes a decision: threshold, minimum duration, lockout between repeat alerts, and which patterns qualify. <strong>Failure mode:</strong> shipping the vendor default because nobody convened the meeting — the unit inherits an operating point tuned for a different population and a different nurse-to-bed ratio."},
+    {n:'HOP 5', t:'Notification delivery', o:'IT + clinical comms', d:"The alert reaches a human via the clinical communication platform. <strong>Failure mode:</strong> stale assigned-nurse mapping after shift change, a device on a dead wifi segment, a silenced phone. Fire-and-forget delivery is not delivery — only acknowledgment proves arrival, which is why escalation must trigger on silence."},
+    {n:'HOP 6', t:'Clinical response', o:'Bedside + neuro team', d:"A qualified human reviews the epoch and decides: treat, watch, or dismiss as artifact. <strong>This hop is deliberately human</strong> — the algorithm proposes, the clinician disposes. The design goal is to make the review fast and the raw epoch one tap away, because a hard-to-review alert becomes a reflexively-dismissed alert."},
+    {n:'HOP 7', t:'Documentation & feedback', o:'Analyst', d:"The event, its disposition, and its raw epoch write back to the chart and into a review queue. <strong>Failure mode:</strong> the vendor system knows everything and the EHR knows nothing, so the legal record and quality review can't reconstruct what was known when. This hop also closes the loop: dispositions become the false-positive rate that drives the next threshold review."}
+  ];
+  var host = document.getElementById('pipe');
+  HOPS.forEach(function(h, i){
+    var d = document.createElement('div');
+    d.className = 'hop';
+    d.innerHTML = '<div class="hop-n">'+h.n+'</div><div class="hop-t">'+h.t+'</div><div class="hop-o">'+h.o+'</div>';
+    var note = document.createElement('div');
+    note.className = 'hop-note';
+    note.innerHTML = '<strong>'+h.t+'</strong> — '+h.d;
+    host.appendChild(d);
+    host.appendChild(note);
+    d.addEventListener('click', function(){
+      var open = note.classList.contains('open');
+      host.querySelectorAll('.hop-note').forEach(function(x){x.classList.remove('open');});
+      host.querySelectorAll('.hop').forEach(function(x){x.classList.remove('act');});
+      if (!open){ note.classList.add('open'); d.classList.add('act'); }
+    });
+  });
+})();
+
+/* ================= TUNING CONSOLE ================= */
+(function(){
+  // 9 true seizure events with detector scores (some subtle = low score)
+  var TRUE_SZ = [0.94,0.89,0.84,0.78,0.71,0.63,0.52,0.38,0.25];
+  // latency in seconds from electrographic onset, higher threshold = later catch
+  var BASE_LAT = [12,14,17,21,26,33,44,58,75];
+
+  // modeled false-positive count per 24h as a function of threshold (artifact-driven)
+  function fpCount(th){
+    // steep at low thresholds (artifact soup), asymptotic at high
+    return Math.round(260*Math.exp(-5.2*th) + 2);
+  }
+
+  var thr = document.getElementById('thr'), thrV = document.getElementById('thrV');
+  var roc = document.getElementById('roc'), rctx = roc.getContext('2d');
+  var dpr = Math.min(window.devicePixelRatio||1, 2);
+  function rsize(){ roc.width = roc.clientWidth*dpr; roc.height = roc.clientHeight*dpr; rctx.setTransform(dpr,0,0,dpr,0,0); }
+  rsize(); window.addEventListener('resize', function(){ rsize(); update(); });
+
+  function metrics(th){
+    var tp = TRUE_SZ.filter(function(s){ return s >= th; }).length;
+    var fn = 9 - tp;
+    var fp = fpCount(th);
+    var lats = [];
+    TRUE_SZ.forEach(function(s,i){ if (s>=th) lats.push(BASE_LAT[i] * (0.75 + th*0.9)); });
+    lats.sort(function(a,b){return a-b;});
+    var med = lats.length ? lats[Math.floor(lats.length/2)] : null;
+    var ppv = (tp+fp) > 0 ? tp/(tp+fp)*100 : 0;
+    var burden = (tp+fp)/6; // unit-wide alerts spread over 3 nurses x 2 shifts
+    return {tp:tp, fn:fn, fp:fp, med:med, ppv:ppv, burden:burden};
+  }
+
+  function drawROC(th){
+    var W = roc.clientWidth, H = roc.clientHeight, P = 30;
+    rctx.clearRect(0,0,W,H);
+    var maxFP = 70;
+    function X(fp){ return P + Math.min(fp,maxFP)/maxFP*(W-P-12); }
+    function Y(sn){ return H-P - sn/9*(H-P-14); }
+    // grid
+    rctx.strokeStyle='rgba(255,255,255,.055)'; rctx.lineWidth=1;
+    for (var g=0; g<=3; g++){
+      var yy = H-P-(g/3)*(H-P-14);
+      rctx.beginPath(); rctx.moveTo(P,yy); rctx.lineTo(W-12,yy); rctx.stroke();
+    }
+    // axes labels
+    rctx.fillStyle='rgba(125,140,163,.6)'; rctx.font='9.5px JetBrains Mono, monospace';
+    rctx.fillText('9', 10, Y(9)+4); rctx.fillText('0', 10, Y(0)+4);
+    rctx.fillText('sensitivity', 8, 12);
+    rctx.fillText('false alerts / 24h →', W-128, H-10);
+    // curve
+    rctx.strokeStyle='rgba(56,189,248,.45)'; rctx.lineWidth=1.8; rctx.beginPath();
+    var first=true;
+    for (var t=0.95; t>=0.10; t-=0.01){
+      var m = metrics(t);
+      var x = X(m.fp), y = Y(m.tp);
+      first ? (rctx.moveTo(x,y), first=false) : rctx.lineTo(x,y);
+    }
+    rctx.stroke();
+    // sweet-spot band
+    var m1 = metrics(0.62), m2 = metrics(0.40);
+    rctx.fillStyle='rgba(74,222,128,.07)';
+    rctx.fillRect(X(m1.fp), 14, X(m2.fp)-X(m1.fp), H-P-14);
+    rctx.fillStyle='rgba(74,222,128,.5)'; rctx.font='9px JetBrains Mono, monospace';
+    rctx.fillText('workable band', X(m1.fp)+4, 26);
+    // current point
+    var cm = metrics(th);
+    var cx = X(cm.fp), cy = Y(cm.tp);
+    rctx.beginPath(); rctx.arc(cx,cy,13,0,6.3); rctx.fillStyle='rgba(56,189,248,.13)'; rctx.fill();
+    rctx.beginPath(); rctx.arc(cx,cy,5,0,6.3); rctx.fillStyle='#38bdf8'; rctx.fill();
+  }
+
+  function update(){
+    var th = +thr.value/100;
+    thrV.textContent = th.toFixed(2);
+    var m = metrics(th);
+    document.getElementById('mTP').textContent = m.tp;
+    document.getElementById('mFN').textContent = m.fn;
+    document.getElementById('mFP').textContent = m.fp;
+    document.getElementById('mBurden').textContent = m.burden.toFixed(1);
+    document.getElementById('mLat').textContent = m.med ? Math.round(m.med)+'s' : '—';
+    var ppvEl = document.getElementById('mPPV');
+    ppvEl.textContent = m.ppv.toFixed(0)+'%';
+    ppvEl.className = 'met-v ' + (m.ppv>55?'v-ok':m.ppv>20?'v-warn':'v-bad');
+    document.getElementById('mFN').className = 'met-v ' + (m.fn===0?'v-ok':m.fn<=2?'v-warn':'v-bad');
+    document.getElementById('mBurden').className = 'met-v ' + (m.burden<6?'v-ok':m.burden<16?'v-warn':'v-bad');
+
+    var v = document.getElementById('verdict'), lbl = document.getElementById('opLabel');
+    if (th < 0.30){
+      v.className = 'verdict bad';
+      v.innerHTML = '<b>Alert fatigue territory</b><p>You are catching nearly everything — and burying the unit. At <strong>'+m.fp+' false alerts a day</strong>, each nurse fields roughly '+m.burden.toFixed(0)+' per shift and only <strong>'+m.ppv.toFixed(0)+'%</strong> of alerts are real. Within weeks the unit dismisses reflexively, and the seizure you tuned so hard to catch gets swiped away with everything else. Maximum sensitivity is not maximum safety.</p>';
+      lbl.textContent = 'operating point: over-sensitive';
+    } else if (th > 0.70){
+      v.className = 'verdict bad';
+      v.innerHTML = '<b>Quiet — and missing seizures</b><p>Only '+m.fp+' false alerts a day and the unit trusts every one. But you are missing <strong>'+m.fn+' of 9 real seizure events</strong> — the subtle, low-amplitude patterns, which are exactly the non-convulsive cases cEEG was deployed to find. A monitoring program that only catches obvious seizures is an expensive way to confirm what the bedside already saw.</p>';
+      lbl.textContent = 'operating point: under-sensitive';
+    } else if (m.fn <= 2 && m.burden < 8){
+      v.className = 'verdict good';
+      v.innerHTML = '<b>Defensible operating point</b><p>Catching <strong>'+m.tp+' of 9</strong> events with <strong>'+m.fp+'</strong> false alerts daily — about '+m.burden.toFixed(0)+' per nurse per shift, '+m.ppv.toFixed(0)+'% of them real, median detection at <strong>'+Math.round(m.med)+'s</strong>. This is a number a governance committee can defend: it still misses '+m.fn+', and saying that out loud — with a scheduled review of the missed cases — is what makes it a decision rather than a default.</p>';
+      lbl.textContent = 'operating point: workable';
+    } else {
+      v.className = 'verdict warn';
+      v.innerHTML = '<b>Workable, with a cost to name</b><p><strong>'+m.tp+'/9</strong> caught, <strong>'+m.fp+'</strong> false alerts a day, '+m.ppv.toFixed(0)+'% precision. Neither failure dominates here, which means the choice belongs to the people who live with it: ask the neurointensivist what a missed subtle seizure costs, and the nurse manager what '+m.burden.toFixed(0)+' alerts a shift costs. Your job is to make both numbers visible in the same room.</p>';
+      lbl.textContent = 'operating point: contested';
+    }
+    drawROC(th);
+  }
+
+  thr.addEventListener('input', update);
+  document.querySelectorAll('.presets .mini').forEach(function(b){
+    b.addEventListener('click', function(){
+      thr.value = b.getAttribute('data-p');
+      document.querySelectorAll('.presets .mini').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      update();
+    });
+  });
+  update();
+})();
+</script>
+</body>
+</html>

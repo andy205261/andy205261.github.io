@@ -89,6 +89,17 @@ h1{font-family:var(--serif);font-size:clamp(28px,5vw,40px);font-weight:400;line-
 .eod p{color:var(--muted);font-size:14.5px}
 footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 footer a{color:var(--cyan);text-decoration:none}
+
+.p30{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:48px}
+.p30-h{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.p30-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.p30-c{display:flex;gap:12px;align-items:flex-start}
+.p30-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--cyan-dim);border:1px solid rgba(56,189,248,.35);color:var(--cyan);font-family:var(--mono);font-size:11.5px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.p30-c h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.4}
+.p30-c p{font-size:13px;color:var(--muted);line-height:1.65}
+.p30-c p em{color:var(--text);font-style:italic}
+.tryit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;background:rgba(56,189,248,.06);border:1px solid var(--line);border-radius:12px;margin-bottom:22px;font-size:13px;color:var(--muted)}
+.tryit b{color:var(--cyan);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -96,7 +107,7 @@ footer a{color:var(--cyan);text-decoration:none}
 <div class="wrap">
 <div class="eyebrow"><a href="index.html">← Project 10</a> · Shift Trainer</div>
 <h1>Clinical Systems Analyst: The Daily Queue</h1>
-<p class="sub"><strong>Shift mode</strong> deals 10 random tickets from a growing pool of <span id="poolCount"></span> real-world Epic analyst scenarios — think through your triage out loud before revealing each layer: <strong>Triage → Resolution → Knowledge → Pitfalls</strong>. <strong>Library mode</strong> opens the whole pool for reference study, filterable by module. Synthetic data only — no PHI.</p>
+<p class="sub">A day in the queue. Each shift deals <strong>10 random tickets</strong> from <span id="poolCount"></span> real scenarios — the kind that actually land on an Epic analyst's desk. Read the ticket, decide what you'd do first, <em>then</em> reveal the answer one layer at a time. Synthetic data only — no PHI.</p>
 
 <div class="bar">
   <div class="mode">
@@ -110,6 +121,7 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <div class="filters" id="filters"></div>
 
+<div class="tryit"><b>How to use</b><span>Open a ticket → guess your first move out loud → reveal <b style="color:var(--amber)">Triage</b>, then <b style="color:var(--green)">Resolution</b>, then <b style="color:var(--purple)">Knowledge</b>, then <b style="color:var(--red)">Pitfalls</b>. Guessing first is the whole point.</span></div>
 <div class="tix" id="queue"><div class="empty">Press "New shift" to pull today's queue — or switch to Library to browse all 32 scenarios.</div></div>
 
 <div class="eod" id="eod">

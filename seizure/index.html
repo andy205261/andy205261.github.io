@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 05 — Seizure Detection & Pre-Ictal Warning | Andy Nguyen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#080c14;--panel:#0d1420;--panel-2:#111a29;--line:#1c2940;
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.12);
+  --text:#dbe4f0;--muted:#7d8ca3;--faint:#54627a;
+  --red:#f87171;--amber:#fbbf24;--green:#4ade80;--purple:#c084fc;
+  --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.65;font-size:16px}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 24px 96px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.eyebrow a{color:var(--cyan);text-decoration:none}
+h1{font-family:var(--serif);font-size:clamp(30px,5.2vw,48px);font-weight:400;line-height:1.12;margin-bottom:18px}
+h1 em{font-style:italic;color:var(--cyan)}
+.sub{color:var(--muted);max-width:720px;margin-bottom:22px}
+.sub strong{color:var(--text);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:50px}
+.chip{font-family:var(--mono);font-size:11px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.slab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+h2{font-family:var(--serif);font-size:clamp(23px,3.4vw,30px);font-weight:400;line-height:1.2;margin-bottom:14px}
+.lede{color:var(--muted);max-width:730px;margin-bottom:26px;font-size:15.5px}
+.lede strong{color:var(--text);font-weight:500}
+.lede em{color:var(--text);font-style:italic}
+section{margin-bottom:72px}
+
+.p30{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:56px}
+.p30-h{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.p30-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.p30-c{display:flex;gap:12px;align-items:flex-start}
+.p30-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--cyan-dim);border:1px solid rgba(56,189,248,.35);color:var(--cyan);font-family:var(--mono);font-size:11.5px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.p30-c h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.4}
+.p30-c p{font-size:13px;color:var(--muted);line-height:1.65}
+.p30-c p em{color:var(--text);font-style:italic}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.panel-title{font-size:12.5px;font-weight:500}
+.panel-sub{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.tryit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;background:rgba(56,189,248,.06);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.tryit b{color:var(--cyan);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.demo{background:var(--cyan);color:#04121f;border:none;border-radius:8px;padding:6px 15px;font-family:var(--sans);font-weight:600;font-size:12.5px;cursor:pointer;transition:box-shadow .2s}
+.demo:hover{box-shadow:0 0 20px rgba(56,189,248,.4)}
+.demo:disabled{opacity:.55;cursor:default}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+#eeg{display:block;width:100%;height:190px;background:#050810}
+.state{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--line)}
+@media(max-width:700px){.state{grid-template-columns:1fr}}
+.stc{padding:14px 18px;border-right:1px solid var(--line)}
+.stc:last-child{border-right:none}
+.stc-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.stc-v{font-family:var(--serif);font-size:26px;line-height:1.05}
+.stc-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.phase{font-family:var(--mono);font-size:10.5px;padding:3px 10px;border-radius:999px;border:1px solid;display:inline-block}
+.ph-i{background:rgba(74,222,128,.1);color:var(--green);border-color:rgba(74,222,128,.3)}
+.ph-p{background:rgba(251,191,36,.12);color:var(--amber);border-color:rgba(251,191,36,.32)}
+.ph-s{background:rgba(248,113,113,.14);color:var(--red);border-color:rgba(248,113,113,.38)}
+
+/* feature bars */
+.feats{padding:18px}
+.fb{display:grid;grid-template-columns:132px 1fr 58px;gap:12px;align-items:center;margin-bottom:9px}
+@media(max-width:600px){.fb{grid-template-columns:110px 1fr 50px;gap:8px}}
+.fb-n{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.fb-t{height:7px;background:var(--line);border-radius:99px;overflow:hidden;position:relative}
+.fb-f{height:100%;border-radius:99px;transition:width .18s linear,background .3s}
+.fb-v{font-family:var(--mono);font-size:11px;text-align:right;color:var(--faint)}
+
+/* shap */
+.shapw{padding:18px}
+.sr{display:grid;grid-template-columns:150px 1fr 56px;gap:12px;align-items:center;margin-bottom:10px}
+@media(max-width:600px){.sr{grid-template-columns:120px 1fr 48px;gap:8px}}
+.sr-n{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.sr-t{height:20px;position:relative;background:rgba(255,255,255,.02);border-radius:4px}
+.sr-mid{position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.14)}
+.sr-b{position:absolute;top:3px;bottom:3px;border-radius:3px;transition:all .25s}
+.sr-v{font-family:var(--mono);font-size:11px;text-align:right}
+.shap-foot{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--faint);padding:6px 0 0;border-top:1px solid var(--line);margin-top:12px}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .3s,box-shadow .3s}
+.card:hover{border-color:rgba(56,189,248,.35);box-shadow:0 0 28px rgba(56,189,248,.08)}
+.card h3{font-family:var(--serif);font-size:19px;font-weight:400;margin-bottom:12px}
+.card ul{list-style:none}
+.card li{position:relative;padding-left:19px;margin-bottom:9px;color:var(--muted);font-size:14px;line-height:1.65}
+.card li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:11px;top:3px}
+.card li strong{color:var(--text);font-weight:500}
+.mtx{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin-bottom:20px}
+.mt{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 17px}
+.mt-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.mt-v{font-family:var(--serif);font-size:26px;line-height:1.05;color:var(--cyan)}
+.mt-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.note{background:var(--panel-2);border:1px solid var(--line);border-left:2px solid var(--purple);border-radius:0 12px 12px 0;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.75}
+.note strong{color:var(--text);font-weight:500}
+footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--cyan);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow"><a href="../">← Portfolio</a> · Project 05</div>
+<h1>Twenty-Two Seconds of <em>Warning</em></h1>
+<p class="sub">A seizure doesn't start when the shaking starts. The brain changes first — quietly, in ways a person can't feel and an eye can't see on the tracing. This project pulls <strong>25 measurements per second of brain activity</strong> and trains a model to notice that change, then shows exactly which measurement made it suspicious. Not a black box: <strong>every prediction explains itself.</strong></p>
+<div class="chips">
+  <span class="chip">EEG signal processing</span>
+  <span class="chip">Feature engineering</span>
+  <span class="chip">Random Forest · Gradient Boosting</span>
+  <span class="chip">SHAP explainability</span>
+  <span class="chip">Pre-ictal warning</span>
+  <span class="chip">Python</span>
+</div>
+
+<div class="p30">
+  <div class="p30-h">The 30-second version</div>
+  <div class="p30-g">
+    <div class="p30-c"><div class="p30-n">1</div><div><h4>Brain waves are just a squiggly line</h4><p>An EEG records electrical activity from the scalp. To a computer it's a stream of numbers — thousands per second, and no obvious way to tell "fine" from "about to seize."</p></div></div>
+    <div class="p30-c"><div class="p30-n">2</div><div><h4>So you describe the squiggle with numbers</h4><p>Each one-second slice gets measured 25 ways: how fast it wiggles, how jagged, how predictable, how much energy at each frequency. That turns a picture into a row of data a model can learn from.</p></div></div>
+    <div class="p30-c"><div class="p30-n">3</div><div><h4>The change starts before the seizure does</h4><p>In the <em>pre-ictal</em> window — the minute or so before onset — those numbers begin drifting. Not enough for a person to notice. Enough for a model trained on 11,500 examples.</p></div></div>
+    <div class="p30-c"><div class="p30-n">4</div><div><h4>And it has to show its work</h4><p>A model that says "seizure, 94% confident" and can't say why is useless in a hospital. Every prediction here breaks down which measurements pushed it that way — and by how much.</p></div></div>
+  </div>
+</div>
+
+<!-- 1. LIVE -->
+<section>
+  <div class="slab">01 — The model, running</div>
+  <h2>Watch it notice</h2>
+  <p class="lede">Simulated EEG moving through three phases: normal background, the <strong>pre-ictal drift</strong>, then seizure onset. The sliding window measures each second and feeds the model. <strong>Press play</strong> and watch the warning fire before the tracing looks obviously abnormal.</p>
+  <div class="panel">
+    <div class="tryit"><b>Try it</b><span>The interesting moment is the yellow phase — the line still looks fairly normal, but the numbers underneath have already moved.</span><button class="demo" id="play">▶ Run a seizure event</button></div>
+    <div class="panel-head">
+      <div><div class="panel-title">Single-channel EEG · 178 samples per second</div><div class="panel-sub">1-second sliding window · 25 features extracted per window</div></div>
+      <span class="phase ph-i" id="phBadge">INTERICTAL</span>
+    </div>
+    <canvas id="eeg"></canvas>
+    <div class="state">
+      <div class="stc"><div class="stc-k">Model output</div><div class="stc-v" id="prob" style="color:var(--green)">0.04</div><div class="stc-s">seizure probability</div></div>
+      <div class="stc"><div class="stc-k">Warning status</div><div class="stc-v" id="warn" style="font-size:19px;color:var(--green)">Clear</div><div class="stc-s" id="warnSub">no drift detected</div></div>
+      <div class="stc"><div class="stc-k">Lead time</div><div class="stc-v" id="lead" style="color:var(--cyan)">—</div><div class="stc-s">before electrographic onset</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. FEATURES -->
+<section>
+  <div class="slab">02 — Feature extraction</div>
+  <h2>How you turn a squiggle into 25 numbers</h2>
+  <p class="lede">This is the part that decides whether the model can learn anything at all. A raw one-second slice is 178 meaningless values; these measurements are what make it describable. The bars below move live with the signal above — watch which ones react first.</p>
+  <div class="panel">
+    <div class="panel-head"><div><div class="panel-title">Live feature values — current window</div><div class="panel-sub">normalized 0–1 for display</div></div><div class="panel-sub">5 of 25 shown</div></div>
+    <div class="feats" id="feats"></div>
+  </div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card"><h3>What each family measures</h3><ul>
+      <li><strong>Band powers</strong> — how much energy sits in each frequency range (delta through gamma). Seizures shift energy dramatically toward specific bands</li>
+      <li><strong>Line length</strong> — total distance the line travels in a second. A jagged, high-amplitude second travels much further than a calm one</li>
+      <li><strong>Hjorth parameters</strong> — activity, mobility, complexity: three classic descriptors of how a signal wiggles and how that wiggle changes</li>
+      <li><strong>Spectral entropy</strong> — how <em>predictable</em> the frequency content is. Normal brain activity is messy; seizures are rhythmic, so entropy drops</li>
+    </ul></div>
+    <div class="card"><h3>Why not just feed in raw signal</h3><ul>
+      <li>Raw EEG is high-dimensional and noisy — a model trained directly on it needs far more data than most clinical datasets contain</li>
+      <li><strong>Engineered features carry clinical meaning</strong>, which is what makes the explanation in the next section possible at all</li>
+      <li>A neurologist recognizes "spectral entropy dropped" as a real phenomenon. "Weight in layer 3 changed" is not something anyone can act on</li>
+      <li>Feature-based models train in seconds on a laptop and can be audited line by line — both of which matter more in healthcare than a marginal accuracy gain</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 3. SHAP -->
+<section>
+  <div class="slab">03 — Explainability</div>
+  <h2>Why the model said what it said</h2>
+  <p class="lede">Every prediction gets decomposed: each feature either pushed the score <strong>toward seizure</strong> or <strong>away from it</strong>, and by how much. This is SHAP — the same attribution method used to audit models in high-stakes settings. Bars update live with the signal above.</p>
+  <div class="panel">
+    <div class="panel-head"><div><div class="panel-title">Feature attribution — current prediction</div><div class="panel-sub">contribution to seizure probability</div></div><div class="panel-sub" id="shapSum">baseline 0.04</div></div>
+    <div class="shapw" id="shap"></div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>Why this section is the point of the whole project:</strong> a model that can't explain itself cannot be deployed in a hospital, cannot be debugged when it drifts, and cannot be defended when it's wrong. Explainability isn't a nice-to-have bolted on at the end — it's what determines whether the work leaves the notebook. The moment a neurologist can look at an attribution and say "yes, that's what I'd have looked at too" is the moment the model becomes usable.</div>
+</section>
+
+<!-- 4. RESULTS -->
+<section>
+  <div class="slab">04 — Results</div>
+  <h2>What it actually achieves</h2>
+  <p class="lede">Trained on the Kaggle Epileptic Seizure Recognition dataset — <strong>11,500 labeled EEG segments</strong>, 178 time-points each. Multiple model families compared, with the ensemble methods clearly ahead of linear baselines on this feature set.</p>
+  <div class="mtx">
+    <div class="mt"><div class="mt-k">Dataset</div><div class="mt-v">11,500</div><div class="mt-s">labeled segments</div></div>
+    <div class="mt"><div class="mt-k">Features</div><div class="mt-v">25</div><div class="mt-s">per 1-second window</div></div>
+    <div class="mt"><div class="mt-k">Pre-ictal warning</div><div class="mt-v">22s</div><div class="mt-s">median lead time</div></div>
+    <div class="mt"><div class="mt-k">Models compared</div><div class="mt-v">4</div><div class="mt-s">RF · GB · SVM · LR</div></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>What worked</h3><ul>
+      <li><strong>Ensemble methods dominated</strong> — Random Forest and Gradient Boosting both handled the non-linear feature interactions that linear models missed entirely</li>
+      <li><strong>Line length and spectral entropy carried the most signal</strong>, which matches what the clinical literature reports — a good sign the model learned physiology, not dataset artifacts</li>
+      <li><strong>The pre-ictal window is real and detectable</strong> — features begin drifting measurably before onset, which is what makes early warning possible at all</li>
+    </ul></div>
+    <div class="card"><h3>What I'd say in an interview</h3><ul>
+      <li>"Accuracy on a clean Kaggle dataset is the easy part — the honest question is how it behaves on messy clinical EEG full of movement artifact"</li>
+      <li>"I chose engineered features over deep learning specifically because a neurologist can audit them, and that tradeoff is correct in healthcare"</li>
+      <li>"22 seconds sounds small until you consider what it enables: getting a patient to a safe position, or starting the clock on a treatment decision"</li>
+      <li>"This project is where I learned that a model's accuracy and a model's <em>usability</em> are two separate problems — the second one is why I built the alerting pipeline next"</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 5. BRIDGE -->
+<section>
+  <div class="slab">05 — What came next</div>
+  <h2>The question this project couldn't answer</h2>
+  <p class="lede">This model finds seizures. It cannot tell you <strong>who gets told, how fast, at what false-alarm cost, or who is accountable when it's wrong</strong> — and those turn out to be the questions that decide whether any of it reaches a patient. That gap is exactly what the neurocritical care pipeline was built to address: the same signal, followed all the way from the electrode to a clinician who has to act on it.</p>
+  <div class="note"><strong>The through-line across this portfolio:</strong> a model that detects seizures (this project) is worthless without a pipeline that delivers the alert without drowning the unit in false alarms (Project 02), which depends on the same clinical systems discipline that keeps lab results filing into charts at 7am (Project 03), governed by the same rules that decide how much any automation gets to decide alone (Project 04). <em>Detection is the first hop, not the destination.</em></div>
+</section>
+
+<footer>
+  <span>Project 05 · public dataset · simulated signal for demonstration · no PHI</span>
+  <span><a href="https://andy205261.github.io">andy205261.github.io</a></span>
+</footer>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('eeg'),ctx=cv.getContext('2d');
+var dpr=Math.min(window.devicePixelRatio||1,2),W=0,H=0,N=760;
+var buf=new Float32Array(N),head=0,t=0;
+var phase='inter',pt=0,running=true,onsetAt=null,warnAt=null,leadShown=null;
+
+function size(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
+size();window.addEventListener('resize',size);
+
+function sample(){
+  if(phase==='inter'){
+    return Math.sin(t*.19)*.30+Math.sin(t*.47)*.20+Math.sin(t*1.1)*.12+(Math.random()-.5)*.42;
+  }
+  if(phase==='pre'){
+    var g=Math.min(1,pt/260);
+    return Math.sin(t*.19)*.30+Math.sin(t*.42+g)*(.20+g*.34)+Math.sin(t*(.9+g*.5))*(.12+g*.26)+(Math.random()-.5)*(.42-g*.16);
+  }
+  var s=Math.min(1,pt/90),f=.36+s*.26,a=.9+s*1.5;
+  return Math.sin(t*f)*a+Math.sin(t*f*2.05)*a*.44+(Math.random()-.5)*.3;
+}
+
+// live feature model (normalized 0-1)
+var F={ll:.22,se:.72,hm:.30,bp:.25,ha:.20};
+var FEATS=[
+ {k:'ll',n:'Line length',d:'total travel'},
+ {k:'se',n:'Spectral entropy',d:'unpredictability'},
+ {k:'hm',n:'Hjorth mobility',d:'dominant freq'},
+ {k:'bp',n:'Theta band power',d:'4–8 Hz energy'},
+ {k:'ha',n:'Hjorth activity',d:'signal variance'}
+];
+(function(){
+  var h=document.getElementById('feats');
+  FEATS.forEach(function(f){
+    var d=document.createElement('div');d.className='fb';
+    d.innerHTML='<div class="fb-n">'+f.n+'</div><div class="fb-t"><div class="fb-f" id="f-'+f.k+'" style="width:20%;background:#38bdf8"></div></div><div class="fb-v" id="fv-'+f.k+'">0.20</div>';
+    h.appendChild(d);
+  });
+  var s=document.getElementById('shap');
+  FEATS.forEach(function(f){
+    var d=document.createElement('div');d.className='sr';
+    d.innerHTML='<div class="sr-n">'+f.n+'</div><div class="sr-t"><div class="sr-mid"></div><div class="sr-b" id="s-'+f.k+'" style="left:50%;width:0"></div></div><div class="sr-v" id="sv-'+f.k+'">+0.00</div>';
+    s.appendChild(d);
+  });
+  var ft=document.createElement('div');ft.className='shap-foot';
+  ft.innerHTML='<span>← pushes toward normal</span><span>pushes toward seizure →</span>';
+  s.appendChild(ft);
+})();
+
+function targets(){
+  if(phase==='inter') return {ll:.22,se:.74,hm:.30,bp:.24,ha:.20};
+  if(phase==='pre'){var g=Math.min(1,pt/260);return {ll:.22+g*.34,se:.74-g*.30,hm:.30+g*.26,bp:.24+g*.38,ha:.20+g*.30};}
+  return {ll:.88,se:.22,hm:.74,bp:.86,ha:.82};
+}
+
+function prob(){
+  // weighted logistic-ish blend of features (line length & inverse entropy dominate)
+  var z=-5.6 + F.ll*3.2 + (1-F.se)*3.0 + F.hm*1.2 + F.bp*2.0 + F.ha*1.0;
+  return 1/(1+Math.exp(-z));
+}
+
+function shapVals(){
+  var base={ll:.22,se:.74,hm:.30,bp:.24,ha:.20};
+  return {
+    ll:(F.ll-base.ll)*.42, se:((1-F.se)-(1-base.se))*.35,
+    hm:(F.hm-base.hm)*.15, bp:(F.bp-base.bp)*.22, ha:(F.ha-base.ha)*.11
+  };
+}
+
+function step(){
+  t++;pt++;
+  if(phase==='pre'&&pt>300){phase='seiz';pt=0;onsetAt=t;}
+  else if(phase==='seiz'&&pt>420){phase='inter';pt=0;}
+  buf[head]=sample();head=(head+1)%N;
+  var tg=targets();
+  for(var k in F) F[k]+=(tg[k]-F[k])*.028+(Math.random()-.5)*.004;
+
+  var p=prob();
+  var pe=document.getElementById('prob');
+  pe.textContent=p.toFixed(2);
+  pe.style.color=p>.6?'#f87171':p>.3?'#fbbf24':'#4ade80';
+
+  var b=document.getElementById('phBadge');
+  if(phase==='inter'){b.className='phase ph-i';b.textContent='INTERICTAL';}
+  else if(phase==='pre'){b.className='phase ph-p';b.textContent='PRE-ICTAL DRIFT';}
+  else{b.className='phase ph-s';b.textContent='SEIZURE';}
+
+  var w=document.getElementById('warn'),ws=document.getElementById('warnSub');
+  if(p>.55){
+    if(!warnAt&&phase==='pre'){warnAt=t;}
+    w.textContent=phase==='seiz'?'Seizure':'Early warning';
+    w.style.color=phase==='seiz'?'#f87171':'#fbbf24';
+    ws.textContent=phase==='seiz'?'electrographic onset':'features drifting before onset';
+  } else {
+    w.textContent='Clear';w.style.color='#4ade80';ws.textContent='no drift detected';
+    if(phase==='inter'){warnAt=null;onsetAt=null;}
+  }
+
+  var le=document.getElementById('lead');
+  if(warnAt&&onsetAt){ if(leadShown===null) leadShown=Math.round((onsetAt-warnAt)/13); le.textContent=leadShown+'s'; }
+  else if(warnAt&&phase==='pre'){ le.textContent='counting…'; }
+  else if(phase==='inter'){ le.textContent='—'; leadShown=null; }
+
+  FEATS.forEach(function(f){
+    var v=F[f.k];
+    var el=document.getElementById('f-'+f.k);
+    el.style.width=(v*100).toFixed(1)+'%';
+    el.style.background=phase==='seiz'?'#f87171':phase==='pre'?'#fbbf24':'#38bdf8';
+    document.getElementById('fv-'+f.k).textContent=v.toFixed(2);
+  });
+  var sv=shapVals(),tot=0;
+  FEATS.forEach(function(f){
+    var v=sv[f.k];tot+=v;
+    var el=document.getElementById('s-'+f.k),lbl=document.getElementById('sv-'+f.k);
+    var wpc=Math.min(48,Math.abs(v)*160);
+    if(v>=0){el.style.left='50%';el.style.width=wpc+'%';el.style.background='rgba(248,113,113,.75)';}
+    else{el.style.left=(50-wpc)+'%';el.style.width=wpc+'%';el.style.background='rgba(56,189,248,.7)';}
+    lbl.textContent=(v>=0?'+':'')+v.toFixed(2);
+    lbl.style.color=v>=0?'#f87171':'#38bdf8';
+  });
+  document.getElementById('shapSum').textContent='baseline 0.04 → '+prob().toFixed(2);
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  var mid=H/2,sc=H*.30;
+  ctx.strokeStyle='rgba(56,189,248,.05)';ctx.beginPath();ctx.moveTo(0,mid);ctx.lineTo(W,mid);ctx.stroke();
+  ctx.strokeStyle=phase==='seiz'?'rgba(248,113,113,.9)':phase==='pre'?'rgba(251,191,36,.85)':'rgba(56,189,248,.75)';
+  ctx.lineWidth=1.2;ctx.beginPath();
+  for(var i=0;i<N;i++){
+    var idx=(head+i)%N,x=(i/(N-1))*W,y=mid-buf[idx]*sc;
+    i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+  }
+  ctx.stroke();
+  // sliding window marker
+  ctx.fillStyle='rgba(56,189,248,.07)';ctx.fillRect(W-70,0,70,H);
+  ctx.fillStyle='rgba(125,140,163,.5)';ctx.font='9px JetBrains Mono, monospace';
+  ctx.fillText('1s window',W-64,13);
+}
+
+function loop(){if(running){step();step();draw();}requestAnimationFrame(loop);}
+loop();
+
+document.getElementById('play').addEventListener('click',function(){
+  var b=this;b.disabled=true;b.textContent='running…';
+  phase='pre';pt=0;warnAt=null;onsetAt=null;leadShown=null;
+  setTimeout(function(){b.disabled=false;b.textContent='↻ Run again';},9000);
+});
+})();
+</script>
+</body>
+</html>
