@@ -58,8 +58,13 @@ section{padding:96px 40px}
 .slabel{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--ink3);text-transform:uppercase;margin-bottom:12px}
 .proj-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:12px;font-weight:500;background:rgba(56,189,248,0.08);display:inline-block;padding:4px 12px;border-radius:100px;border:1px solid rgba(56,189,248,0.2);cursor:pointer;transition:all .15s}
 a.proj-label:hover{background:rgba(56,189,248,0.18);border-color:rgba(56,189,248,0.5)}
-.proj-nav-tab{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;padding:5px 12px;border-radius:6px;border:1px solid transparent;text-decoration:none;transition:all .15s;font-weight:500}
-.proj-nav-tab:hover,.proj-nav-tab.active{background:rgba(56,189,248,0.1);color:var(--accent);border-color:rgba(56,189,248,0.25)}
+.proj-nav-tab{display:inline-flex;align-items:center;gap:8px;font-family:'Outfit',sans-serif;font-size:12.5px;color:var(--c);padding:8px 14px 8px 10px;border-radius:9px;border:1px solid color-mix(in srgb,var(--c) 28%,transparent);background:color-mix(in srgb,var(--c) 7%,transparent);text-decoration:none;transition:all .2s cubic-bezier(.2,.8,.3,1);font-weight:400}
+.proj-nav-tab .tn{font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent);border:1px solid color-mix(in srgb,var(--c) 30%,transparent);border-radius:5px;padding:2px 6px;line-height:1.2;transition:all .2s}
+.proj-nav-tab:hover{border-color:color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.proj-nav-tab:hover .tn{background:color-mix(in srgb,var(--c) 26%,transparent);border-color:color-mix(in srgb,var(--c) 45%,transparent)}
+.proj-nav-tab.active{font-weight:500;border-color:var(--c);background:color-mix(in srgb,var(--c) 18%,transparent);box-shadow:0 0 18px color-mix(in srgb,var(--c) 20%,transparent)}
+.proj-nav-tab.active .tn{color:#080c14;background:var(--c);border-color:var(--c);font-weight:700}
+@media(max-width:640px){.proj-nav-tab{font-size:11.5px;padding:7px 12px 7px 9px}}
 h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,3.8vw,46px);letter-spacing:-1.2px;line-height:1.05;color:var(--ink);margin-bottom:12px;font-weight:400}
 .intro{font-size:16px;font-weight:400;color:var(--ink3);max-width:540px;line-height:1.78;margin-bottom:48px}
 .about-strip{background:var(--paper3);padding:72px 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
@@ -315,12 +320,12 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   <div class="slabel fi">Portfolio</div>
   <h2 class="fi">Projects</h2>
   <!-- PROJECT NAV TABS -->
-  <div id="proj-tabs" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:40px;padding:12px;background:var(--paper2);border:1px solid var(--rule);border-radius:10px">
-    <a href="#proj-01" class="proj-nav-tab active">01 Cancer Center Automation</a>
-    <a href="#proj-02" class="proj-nav-tab">02 Neurocritical Automation</a>
-    <a href="#proj-03" class="proj-nav-tab">03 Epic Analyst Lab</a>
-    <a href="#proj-04" class="proj-nav-tab">04 Automation Governance</a>
-    <a href="#proj-05" class="proj-nav-tab">05 Neurological AI</a>
+  <div id="proj-tabs" style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:40px;padding:14px;background:var(--paper2);border:1px solid var(--rule);border-radius:14px">
+    <a href="#proj-01" class="proj-nav-tab active" style="--c:#f87171"><span class="tn">01</span><span class="tl">Cancer Center Automation</span></a>
+    <a href="#proj-02" class="proj-nav-tab" style="--c:#38bdf8"><span class="tn">02</span><span class="tl">Neurocritical Automation</span></a>
+    <a href="#proj-03" class="proj-nav-tab" style="--c:#34d399"><span class="tn">03</span><span class="tl">Epic Analyst Lab</span></a>
+    <a href="#proj-04" class="proj-nav-tab" style="--c:#fbbf24"><span class="tn">04</span><span class="tl">Automation Governance</span></a>
+    <a href="#proj-05" class="proj-nav-tab" style="--c:#a78bfa"><span class="tn">05</span><span class="tl">Neurological AI</span></a>
   </div>
   <p class="intro fi">Five in-depth projects where neuroscience, clinical automation, and health system operations meet — from CAR-T neurotoxicity surveillance and neuro-ICU seizure alerting to Epic analyst simulations, RPA governance, and EEG machine learning. Each one is a working build that names both what it does for patients and what it is worth to the institution.</p>
 
