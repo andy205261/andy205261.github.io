@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 06 — Epilepsy Monitoring Unit Capacity | Andy Nguyen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#080c14;--panel:#0d1420;--panel-2:#111a29;--line:#1c2940;
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.12);
+  --text:#dbe4f0;--muted:#7d8ca3;--faint:#54627a;
+  --red:#f87171;--amber:#fbbf24;--green:#4ade80;--purple:#c084fc;
+  --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.65;font-size:16px}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 24px 96px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.eyebrow a{color:var(--cyan);text-decoration:none}
+h1{font-family:var(--serif);font-size:clamp(30px,5.2vw,48px);font-weight:400;line-height:1.12;margin-bottom:18px}
+h1 em{font-style:italic;color:var(--cyan)}
+.sub{color:var(--muted);max-width:720px;margin-bottom:22px}
+.sub strong{color:var(--text);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:11px;margin-bottom:50px}
+.chip{font-family:var(--mono);font-size:11px;padding:3px 0;color:var(--faint);border:none;border-radius:0;position:relative}
+.chip:not(:last-child)::after{content:'·';margin:0 0 0 9px;color:rgba(255,255,255,.18)}
+.slab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+h2{font-family:var(--serif);font-size:clamp(23px,3.4vw,30px);font-weight:400;line-height:1.2;margin-bottom:14px}
+.lede{color:var(--muted);max-width:730px;margin-bottom:26px;font-size:15.5px}
+.lede strong{color:var(--text);font-weight:500}
+.lede em{color:var(--text);font-style:italic}
+section{margin-bottom:72px}
+
+.p30{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:56px}
+.p30-h{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.p30-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.p30-c{display:flex;gap:12px;align-items:flex-start}
+.p30-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--cyan-dim);border:1px solid rgba(56,189,248,.35);color:var(--cyan);font-family:var(--mono);font-size:11.5px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.p30-c h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.4}
+.p30-c p{font-size:13px;color:var(--muted);line-height:1.65}
+.p30-c p em{color:var(--text);font-style:italic}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.panel-title{font-size:12.5px;font-weight:500}
+.panel-sub{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.tryit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;background:rgba(56,189,248,.06);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.tryit b{color:var(--cyan);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.modes{display:flex;gap:7px}
+.mini{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:6px 14px;font-family:var(--sans);font-size:12.5px;cursor:pointer;transition:all .2s}
+.mini:hover{border-color:var(--cyan);color:var(--cyan)}
+.mini.on{background:var(--cyan-dim);color:var(--cyan);border-color:rgba(56,189,248,.4)}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* bed board */
+.board{padding:16px 18px 18px}
+.bhead{display:grid;grid-template-columns:104px 1fr;gap:12px;margin-bottom:8px}
+.days{display:grid;grid-template-columns:repeat(14,1fr);gap:3px;font-family:var(--mono);font-size:9px;color:var(--faint);text-align:center}
+.brow{display:grid;grid-template-columns:104px 1fr;gap:12px;align-items:center;margin-bottom:7px}
+.bname{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.bname b{display:block;color:var(--text);font-weight:500;font-size:11.5px}
+.cells{display:grid;grid-template-columns:repeat(14,1fr);gap:3px}
+.c{height:26px;border-radius:4px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);position:relative;transition:all .3s}
+.c.occ{background:rgba(56,189,248,.16);border-color:rgba(56,189,248,.3)}
+.c.evt{background:rgba(251,191,36,.28);border-color:rgba(251,191,36,.5)}
+.c.rdy{background:rgba(74,222,128,.28);border-color:rgba(74,222,128,.55)}
+.c.wst{background:rgba(248,113,113,.18);border-color:rgba(248,113,113,.35)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;padding-top:13px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.lg{display:flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:3px;border:1px solid}
+.sw.o{background:rgba(56,189,248,.16);border-color:rgba(56,189,248,.35)}
+.sw.e{background:rgba(251,191,36,.28);border-color:rgba(251,191,36,.5)}
+.sw.r{background:rgba(74,222,128,.28);border-color:rgba(74,222,128,.55)}
+.sw.w{background:rgba(248,113,113,.18);border-color:rgba(248,113,113,.4)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0;border-top:1px solid var(--line)}
+.st{padding:14px 18px;border-right:1px solid var(--line)}
+.st:last-child{border-right:none}
+.st-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.st-v{font-family:var(--serif);font-size:25px;line-height:1.05}
+.st-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.v-ok{color:var(--green)}.v-cy{color:var(--cyan)}.v-a{color:var(--amber)}.v-bad{color:var(--red)}.v-p{color:var(--purple)}
+
+/* roi */
+.roi{display:grid;grid-template-columns:320px 1fr;gap:0}
+@media(max-width:860px){.roi{grid-template-columns:1fr}}
+.roi-l{padding:20px;border-right:1px solid var(--line)}
+@media(max-width:860px){.roi-l{border-right:none;border-bottom:1px solid var(--line)}}
+.roi-r{padding:20px}
+.par{margin-bottom:15px}
+.par-h{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;margin-bottom:5px}
+.par-h span:first-child{color:var(--muted)}
+.par-v{font-family:var(--mono);font-size:13px;color:var(--cyan)}
+.par input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--line);border-radius:99px;outline:none}
+.par input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--cyan);cursor:pointer}
+.par input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:var(--cyan);cursor:pointer}
+.rmtx{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:11px;margin-bottom:16px}
+.rm{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.rm-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.rm-v{font-family:var(--serif);font-size:26px;line-height:1.05}
+.rm-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.hum{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.28);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.75;color:var(--muted)}
+.hum b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
+.hum strong{color:var(--text);font-weight:500}
+.hum em{color:var(--text)}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .3s,box-shadow .3s}
+.card:hover{border-color:rgba(56,189,248,.35);box-shadow:0 0 28px rgba(56,189,248,.08)}
+.card h3{font-family:var(--serif);font-size:19px;font-weight:400;margin-bottom:12px}
+.card ul{list-style:none}
+.card li{position:relative;padding-left:19px;margin-bottom:9px;color:var(--muted);font-size:14px;line-height:1.65}
+.card li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:11px;top:3px}
+.card li strong{color:var(--text);font-weight:500}
+.note{background:var(--panel-2);border:1px solid var(--line);border-left:2px solid var(--purple);border-radius:0 12px 12px 0;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.75}
+.note strong{color:var(--text);font-weight:500}
+footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--cyan);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow"><a href="../">← Portfolio</a> · Project 06</div>
+<h1>The Ward Where Patients Wait to <em>Have a Seizure</em></h1>
+<p class="sub">An epilepsy monitoring unit admits patients for days, tapers their medication on purpose, and waits — because the only way to find out where a seizure starts is to catch one on camera. Beds are few, the waitlist runs months, and every day a patient stays after the answer is already in the data is <strong>a day the next patient spends waiting at home, still seizing.</strong> This project is about the one decision that governs the whole ward: <strong>do we have enough yet?</strong></p>
+<div class="chips">
+  <span class="chip">Epilepsy monitoring</span>
+  <span class="chip">Video-EEG</span>
+  <span class="chip">Event detection</span>
+  <span class="chip">Capacity &amp; throughput</span>
+  <span class="chip">Surgical pathway</span>
+  <span class="chip">Clinical automation</span>
+</div>
+
+<div class="p30">
+  <div class="p30-h">The 30-second version</div>
+  <div class="p30-g">
+    <div class="p30-c"><div class="p30-n">1</div><div><h4>Some epilepsy can be cured by surgery</h4><p>If seizures always start from one small spot in the brain, a surgeon can remove or ablate it. But first someone has to prove <em>exactly</em> where that spot is.</p></div></div>
+    <div class="p30-c"><div class="p30-n">2</div><div><h4>Proving it means catching seizures on camera</h4><p>The patient is admitted, wired for continuous EEG and video, and their medication is reduced deliberately so seizures happen. The team needs several typical events to localize with confidence.</p></div></div>
+    <div class="p30-c"><div class="p30-n">3</div><div><h4>Nobody knows when they'll have them</h4><p>Could be day two. Could be day seven. So the stay ends not on a schedule but on a judgment call, repeated every morning: <strong>do we have enough data yet?</strong></p></div></div>
+    <div class="p30-c"><div class="p30-n">4</div><div><h4>And that call is made on yesterday's information</h4><p>If events are reviewed the next day, discharge happens a day late — every time. Six beds, a months-long waitlist, and a full day of capacity leaking out of each admission.</p></div></div>
+  </div>
+</div>
+
+<!-- 1. BED BOARD -->
+<section>
+  <div class="slab">01 — The unit</div>
+  <h2>Six beds, fourteen days, one decision repeated daily</h2>
+  <p class="lede">A modeled EMU over two weeks. Each patient needs a target number of typical seizures captured before the team can localize and discharge. The bar is the same in both modes — what changes is <strong>when the team knows they've hit it</strong>. Switch review timing and watch the same clinical events produce a different number of admissions.</p>
+  <div class="panel">
+    <div class="tryit"><b>Try it</b><span>Run it on next-day review first, then switch to same-day and watch the red waste days disappear.</span>
+      <div class="modes">
+        <button class="mini on" id="mNext">Next-day review</button>
+        <button class="mini" id="mSame">Same-day review</button>
+      </div>
+    </div>
+    <div class="panel-head">
+      <div><div class="panel-title">EMU bed board — 14-day window</div><div class="panel-sub">6 beds · video-EEG · target 3 typical events per admission</div></div>
+      <div class="panel-sub" id="modeLbl">mode: next-day review</div>
+    </div>
+    <div class="board">
+      <div class="bhead"><div></div><div class="days" id="days"></div></div>
+      <div id="rows"></div>
+      <div class="legend">
+        <div class="lg"><span class="sw o"></span>monitoring</div>
+        <div class="lg"><span class="sw e"></span>seizure captured</div>
+        <div class="lg"><span class="sw r"></span>target met — ready</div>
+        <div class="lg"><span class="sw w"></span>bed held after answer was in</div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="st"><div class="st-k">Admissions completed</div><div class="st-v v-cy" id="sAdm">—</div><div class="st-s">in 14 days</div></div>
+      <div class="st"><div class="st-k">Average length of stay</div><div class="st-v v-a" id="sLos">—</div><div class="st-s">days</div></div>
+      <div class="st"><div class="st-k">Bed-days after answer</div><div class="st-v v-bad" id="sWaste">—</div><div class="st-s">capacity leaked</div></div>
+      <div class="st"><div class="st-k">Extra admissions enabled</div><div class="st-v v-ok" id="sWait">—</div><div class="st-s">from freed bed-days</div></div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>What the red squares actually are:</strong> not a clinical error, not anyone's fault. They are bed-days where the seizures needed for localization had <em>already been recorded</em> and nobody had reviewed them yet. The patient is lying in a monitored bed, tapered off their medication, waiting for a conversation that will happen tomorrow morning. <em>The information existed. The decision lagged it.</em></div>
+</section>
+
+<!-- 2. THE DECISION -->
+<section>
+  <div class="slab">02 — The bottleneck</div>
+  <h2>Where the day actually goes</h2>
+  <p class="lede">Nothing in this pathway is technically hard. The delay is structural — a chain of handoffs where each link is reasonable and the sum is a lost day per admission.</p>
+  <div class="grid2">
+    <div class="card"><h3>How the day disappears</h3><ul>
+      <li><strong>Events happen overnight</strong> — seizures cluster at night and during sleep-deprivation protocols, which is exactly when the fewest people are watching</li>
+      <li><strong>Review is batched</strong> — a tech works through hours of video-EEG, often the following morning, marking which events are typical</li>
+      <li><strong>The epileptologist rounds once</strong> — if review isn't finished before rounds, the decision waits a full day</li>
+      <li><strong>Discharge has its own tail</strong> — electrode removal, orders, transport, education. Deciding at 2pm often means leaving tomorrow anyway</li>
+    </ul></div>
+    <div class="card"><h3>What automation can and can't do</h3><ul>
+      <li><strong>Can:</strong> flag candidate events as they occur, so the review queue is minutes of clips instead of hours of recording</li>
+      <li><strong>Can:</strong> surface a running count against the target, visible on rounds — "3 typical events captured, target met"</li>
+      <li><strong>Can:</strong> alert staff in real time when an event begins, which is a safety function before it is an efficiency one</li>
+      <li><strong>Cannot:</strong> decide whether an event is <em>typical</em> for that patient — that is the clinical judgment the entire admission exists to produce</li>
+      <li><strong>Cannot:</strong> localize the seizure onset zone. Detection narrows where humans look; it does not replace them</li>
+    </ul></div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>The design principle, same as everywhere else in this portfolio:</strong> the automation moves information to the humans faster. It does not make the call. A detector that flags 40 candidate events and lets a tech confirm 3 in ten minutes has done its entire job — and it is the difference between discharging today and discharging tomorrow.</div>
+</section>
+
+<!-- 3. SAFETY -->
+<section>
+  <div class="slab">03 — The part that isn't about throughput</div>
+  <h2>These patients are seizing on purpose</h2>
+  <p class="lede">It is worth saying plainly: an EMU deliberately provokes seizures in people who have epilepsy, by reducing the medication that was protecting them. That is medically justified — it is the only way to get the recording that makes a curative surgery possible — and it means <strong>the unit carries risks a normal ward does not.</strong></p>
+  <div class="grid2">
+    <div class="card"><h3>What the unit is guarding against</h3><ul>
+      <li><strong>Status epilepticus</strong> — a seizure that doesn't stop on its own. Provoked by the same taper that makes the admission work</li>
+      <li><strong>Falls and injury</strong> — a patient mid-seizure, tethered to electrodes, in an unfamiliar room</li>
+      <li><strong>Post-ictal confusion</strong> — disoriented patients attempting to get up, pull leads, or leave</li>
+      <li><strong>Unwitnessed events</strong> — the worst case is an event nobody sees in real time</li>
+    </ul></div>
+    <div class="card"><h3>Why real-time detection is a safety control first</h3><ul>
+      <li>An event flagged <em>as it happens</em> brings staff to the room — that is the primary purpose, and throughput is a byproduct</li>
+      <li><strong>Alert fatigue applies here too:</strong> a detector tuned too sensitively gets muted, and a muted detector protects nobody</li>
+      <li>Same governance discipline as every other alert: measure the false-positive rate, review it on a schedule, let clinical leadership own the threshold</li>
+      <li>The efficiency case and the safety case want the same thing — <strong>which is the rare situation where nobody has to argue</strong></li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 4. ROI -->
+<section>
+  <div class="slab">04 — The business case</div>
+  <h2>What one day per admission is worth</h2>
+  <p class="lede">EMU beds are scarce, the waitlist is long, and the unit feeds a surgical pathway. That combination means length of stay converts almost directly into <strong>additional patients treated</strong> — and unlike most efficiency projects, the clinical argument and the financial one point the same direction.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div><div class="panel-title">Annual capacity model — 6-bed EMU</div><div class="panel-sub">all inputs adjustable · illustrative, not an institutional projection</div></div>
+      <div class="panel-sub" id="roiTag">baseline assumptions</div>
+    </div>
+    <div class="roi">
+      <div class="roi-l">
+        <div class="par"><div class="par-h"><span>EMU beds</span><span class="par-v" id="vBeds">6</span></div><input type="range" id="pBeds" min="2" max="16" step="1" value="6"></div>
+        <div class="par"><div class="par-h"><span>Occupancy</span><span class="par-v" id="vOcc">85%</span></div><input type="range" id="pOcc" min="55" max="98" step="1" value="85"></div>
+        <div class="par"><div class="par-h"><span>Avg LOS — next-day review</span><span class="par-v" id="vL1">5.2d</span></div><input type="range" id="pL1" min="3" max="9" step="0.1" value="5.2"></div>
+        <div class="par"><div class="par-h"><span>Avg LOS — same-day review</span><span class="par-v" id="vL2">4.3d</span></div><input type="range" id="pL2" min="2.5" max="8" step="0.1" value="4.3"></div>
+        <div class="par"><div class="par-h"><span>Diagnostic yield (localized)</span><span class="par-v" id="vYld">72%</span></div><input type="range" id="pYld" min="45" max="92" step="1" value="72"></div>
+        <div class="par"><div class="par-h"><span>Proceed to surgery / ablation</span><span class="par-v" id="vSrg">32%</span></div><input type="range" id="pSrg" min="10" max="60" step="1" value="32"></div>
+        <div class="par"><div class="par-h"><span>Contribution margin per surgical case</span><span class="par-v" id="vMar">$32,000</span></div><input type="range" id="pMar" min="8000" max="90000" step="2000" value="32000"></div>
+        <div class="par"><div class="par-h"><span>Cost per EMU bed-day</span><span class="par-v" id="vBd">$2,600</span></div><input type="range" id="pBd" min="1200" max="6000" step="100" value="2600"></div>
+      </div>
+      <div class="roi-r">
+        <p style="font-size:13px;color:var(--faint);margin-bottom:14px;line-height:1.6">What changes over a year when the discharge decision stops running a day behind the data:</p>
+        <div class="rmtx">
+          <div class="rm"><div class="rm-k">Admissions — before</div><div class="rm-v v-a" id="oA1">—</div><div class="rm-s">per year</div></div>
+          <div class="rm"><div class="rm-k">Admissions — after</div><div class="rm-v v-cy" id="oA2">—</div><div class="rm-s">per year</div></div>
+          <div class="rm"><div class="rm-k">Additional patients served</div><div class="rm-v v-ok" id="oDelta">—</div><div class="rm-s">off the waitlist</div></div>
+          <div class="rm"><div class="rm-k">Additional surgical candidates</div><div class="rm-v v-p" id="oSurg">—</div><div class="rm-s">localized &amp; eligible</div></div>
+          <div class="rm"><div class="rm-k">Bed-days released</div><div class="rm-v v-cy" id="oBd">—</div><div class="rm-s">same census</div></div>
+          <div class="rm"><div class="rm-k">Total annual value</div><div class="rm-v v-ok" id="oTot">—</div><div class="rm-s">margin + bed-day cost</div></div>
+        </div>
+        <div class="hum" id="hum"><b>How to present this</b><p>—</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>Why this case is unusually easy to make:</strong> most throughput projects have to argue that faster is safe. Here faster <em>is</em> safer — real-time event detection brings staff to a seizing patient sooner, and shortening a deliberately-tapered admission reduces the window in which a provoked seizure can go wrong. <em>And epilepsy surgery, for the right patient, is one of the few genuinely curative procedures in neurology.</em> Every additional patient who reaches it is not a throughput statistic.</div>
+</section>
+
+<!-- 5. CLOSE -->
+<section>
+  <div class="slab">05 — Why this project</div>
+  <h2>A neurology ward that runs on a capacity problem</h2>
+  <p class="lede">This project sits at the intersection the rest of the portfolio has been circling: <strong>a genuinely neurological problem, solved with clinical automation, justified by a capacity argument an operating committee already understands.</strong> The EEG expertise comes from the seizure detection work; the alert governance comes from the neuro-ICU pipeline; the throughput framing comes from the CAR-T capacity model. It is the same analyst toolkit, aimed at a ward where scarcity is the defining constraint.</p>
+  <div class="grid2">
+    <div class="card"><h3>Demonstrated here</h3><ul>
+      <li><strong>Workflow bottleneck analysis</strong> — identifying that the delay is in review timing, not clinical decision-making</li>
+      <li><strong>Automation scoped correctly</strong> — narrow the review queue, never decide typicality</li>
+      <li><strong>Safety-first framing</strong> — real-time detection justified as a patient-safety control before an efficiency one</li>
+      <li><strong>Capacity economics</strong> — LOS converted into admissions, surgical candidates, and waitlist movement</li>
+      <li><strong>Service-line literacy</strong> — understanding that the EMU exists to feed a surgical pathway, not as an end in itself</li>
+    </ul></div>
+    <div class="card"><h3>Interview talking points</h3><ul>
+      <li>"The bottleneck wasn't the decision — it was that the decision ran a day behind the data that would have made it"</li>
+      <li>"Detection narrows where humans look. It never decides whether an event is typical — that judgment is the entire reason for the admission"</li>
+      <li>"In a scarce unit feeding a curative surgery, a day of length of stay is a patient who stays on the waitlist"</li>
+      <li>"This is the rare case where the safety argument and the throughput argument want the identical intervention"</li>
+    </ul></div>
+  </div>
+</section>
+
+<footer>
+  <span>Project 06 · modeled unit &amp; illustrative financials · no PHI · not an institutional projection</span>
+  <span><a href="https://andy205261.github.io">andy205261.github.io</a></span>
+</footer>
+</div>
+
+<script>
+/* ============ BED BOARD ============ */
+var DAYS = 14, TARGET = 3;
+// admissions: start day, days on which seizures occur (relative to admit)
+var ADM = [
+ {bed:0, name:'Pt A · 34F',  start:0,  evts:[1,2,4]},
+ {bed:0, name:'Pt F · 51M',  start:7,  evts:[1,3,4]},
+ {bed:1, name:'Pt B · 22M',  start:0,  evts:[2,5,6]},
+ {bed:1, name:'Pt G · 45F',  start:9,  evts:[1,2,3]},
+ {bed:2, name:'Pt C · 47F',  start:1,  evts:[0,1,3]},
+ {bed:2, name:'Pt H · 29M',  start:6,  evts:[2,4,5]},
+ {bed:3, name:'Pt D · 61M',  start:0,  evts:[3,4,6]},
+ {bed:3, name:'Pt I · 38F',  start:9,  evts:[0,2,3]},
+ {bed:4, name:'Pt E · 19F',  start:2,  evts:[1,2,3]},
+ {bed:4, name:'Pt J · 55M',  start:8,  evts:[1,2,4]},
+ {bed:5, name:'Pt K · 41M',  start:0,  evts:[2,3,5]},
+ {bed:5, name:'Pt L · 27F',  start:8,  evts:[1,2,3]}
+];
+var mode = 'next';
+
+function compute(forceMode){
+  var m = forceMode || mode;
+  var beds = [[],[],[],[],[],[]];
+  var completed=0, totalLos=0, waste=0;
+  var cursor = [0,0,0,0,0,0];
+  ADM.forEach(function(a){
+    var start = Math.max(a.start, cursor[a.bed]);
+    var hitDay = a.evts[TARGET-1];              // day target met (relative)
+    var lag = m==='next' ? 1 : 0;
+    var los = hitDay + 1 + lag;                  // discharge day (relative, inclusive)
+    if (start + los > DAYS) los = DAYS - start;  // truncated at window edge
+    if (los <= 0) return;
+    var rec = {name:a.name, start:start, los:los, evts:a.evts, hitDay:hitDay, lag:lag, bed:a.bed};
+    beds[a.bed].push(rec);
+    cursor[a.bed] = start + los;
+    if (start + hitDay + 1 + lag <= DAYS){ completed++; totalLos += los; waste += lag; }
+  });
+  return {beds:beds, completed:completed, avgLos:completed?totalLos/completed:0, waste:waste};
+}
+
+function render(){
+  var d = compute();
+  var dh = document.getElementById('days');
+  dh.innerHTML = '';
+  for (var i=1;i<=DAYS;i++){ var s=document.createElement('div'); s.textContent=i; dh.appendChild(s); }
+
+  var host = document.getElementById('rows');
+  host.innerHTML = '';
+  for (var b=0;b<6;b++){
+    var row = document.createElement('div'); row.className='brow';
+    var names = d.beds[b].map(function(r){return r.name.split(' · ')[0];}).join(' → ');
+    row.innerHTML = '<div class="bname"><b>Bed '+(b+1)+'</b>'+names+'</div>';
+    var cells = document.createElement('div'); cells.className='cells';
+    var map = new Array(DAYS).fill(null);
+    d.beds[b].forEach(function(r){
+      for (var k=0;k<r.los;k++){
+        var abs = r.start + k;
+        if (abs>=DAYS) break;
+        var cls = 'occ';
+        if (r.evts.indexOf(k) !== -1) cls = 'evt';
+        if (k === r.hitDay) cls = 'rdy';
+        if (k > r.hitDay) cls = 'wst';
+        map[abs] = cls;
+      }
+    });
+    for (var i=0;i<DAYS;i++){
+      var c = document.createElement('div');
+      c.className = 'c' + (map[i] ? ' '+map[i] : '');
+      cells.appendChild(c);
+    }
+    row.appendChild(cells);
+    host.appendChild(row);
+  }
+  document.getElementById('sAdm').textContent = d.completed;
+  document.getElementById('sLos').textContent = d.avgLos.toFixed(1);
+  document.getElementById('sWaste').textContent = d.waste;
+  var base = compute('next');
+  var freed = base.waste - d.waste;
+  var extra = d.avgLos > 0 ? freed / d.avgLos : 0;
+  document.getElementById('sWait').textContent = extra > 0 ? '+' + extra.toFixed(1) : '—';
+  document.getElementById('modeLbl').textContent = 'mode: ' + (mode==='next'?'next-day review':'same-day review');
+}
+
+document.getElementById('mNext').addEventListener('click', function(){
+  mode='next'; this.classList.add('on'); document.getElementById('mSame').classList.remove('on'); render();
+});
+document.getElementById('mSame').addEventListener('click', function(){
+  mode='same'; this.classList.add('on'); document.getElementById('mNext').classList.remove('on'); render();
+});
+render();
+
+/* ============ ROI ============ */
+(function(){
+var R={Beds:6,Occ:85,L1:5.2,L2:4.3,Yld:72,Srg:32,Mar:32000,Bd:2600};
+function money(n){ if(n>=1000000) return '$'+(n/1000000).toFixed(2)+'M'; if(n>=1000) return '$'+Math.round(n/1000)+'K'; return '$'+Math.round(n); }
+function calc(){
+  var bedDays = R.Beds * 365 * R.Occ/100;
+  var a1 = bedDays / R.L1;
+  var a2 = bedDays / R.L2;
+  var delta = a2 - a1;
+  var surg = delta * R.Yld/100 * R.Srg/100;
+  var released = delta * R.L2;
+  var val = surg * R.Mar;
+  document.getElementById('oA1').textContent = Math.round(a1);
+  document.getElementById('oA2').textContent = Math.round(a2);
+  document.getElementById('oDelta').textContent = '+' + Math.round(delta);
+  document.getElementById('oSurg').textContent = '+' + Math.round(surg);
+  document.getElementById('oBd').textContent = Math.round(released);
+  document.getElementById('oTot').textContent = money(val);
+  document.getElementById('hum').innerHTML = '<b>How to present this</b>' +
+   '<p>The headline for an operating committee is capacity, not cost: <strong>' + Math.round(delta) + ' additional admissions a year</strong> from the same six beds and the same staffing — no construction, no new FTEs, just a decision that stops running a day behind the data.</p>' +
+   '<p>Then the part that matters clinically: roughly <strong>' + Math.round(surg) + ' more patients a year</strong> reach a localized diagnosis and become surgical candidates. Modeled contribution <strong>' + money(val) + '</strong>. But the closing line should be the one without a dollar figure: <em>for the right patient, epilepsy surgery can end seizures entirely — and the waitlist is measured in months.</em></p>';
+  document.getElementById('roiTag').textContent = (R.Beds===6&&R.L1===5.2&&R.L2===4.3) ? 'baseline assumptions' : 'custom assumptions';
+}
+[['pBeds','Beds','vBeds',function(v){return v;}],
+ ['pOcc','Occ','vOcc',function(v){return v+'%';}],
+ ['pL1','L1','vL1',function(v){return v+'d';}],
+ ['pL2','L2','vL2',function(v){return v+'d';}],
+ ['pYld','Yld','vYld',function(v){return v+'%';}],
+ ['pSrg','Srg','vSrg',function(v){return v+'%';}],
+ ['pMar','Mar','vMar',function(v){return '$'+(+v).toLocaleString();}],
+ ['pBd','Bd','vBd',function(v){return '$'+(+v).toLocaleString();}]
+].forEach(function(c){var el=document.getElementById(c[0]);
+  el.addEventListener('input',function(){R[c[1]]=+el.value;document.getElementById(c[2]).textContent=c[3](+el.value);calc();});});
+calc();
+})();
+</script>
+</body>
+</html>
