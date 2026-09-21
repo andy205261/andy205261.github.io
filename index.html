@@ -65,6 +65,8 @@ a.proj-label:hover{background:rgba(56,189,248,0.18);border-color:rgba(56,189,248
 .proj-nav-tab.active{font-weight:500;border-color:var(--c);background:color-mix(in srgb,var(--c) 18%,transparent);box-shadow:0 0 18px color-mix(in srgb,var(--c) 20%,transparent)}
 .proj-nav-tab.active .tn{color:#080c14;background:var(--c);border-color:var(--c);font-weight:700}
 @media(max-width:640px){.proj-nav-tab{font-size:11.5px;padding:7px 12px 7px 9px}}
+.proj-nav-tab .tl{padding-left:0}
+.proj-nav-tab .tl::before{display:none}
 h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,3.8vw,46px);letter-spacing:-1.2px;line-height:1.05;color:var(--ink);margin-bottom:12px;font-weight:400}
 .intro{font-size:16px;font-weight:400;color:var(--ink3);max-width:540px;line-height:1.78;margin-bottom:48px}
 .about-strip{background:var(--paper3);padding:72px 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
@@ -326,6 +328,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <a href="#proj-03" class="proj-nav-tab" style="--c:#34d399"><span class="tn">03</span><span class="tl">Epic Analyst Lab</span></a>
     <a href="#proj-04" class="proj-nav-tab" style="--c:#fbbf24"><span class="tn">04</span><span class="tl">Automation Governance</span></a>
     <a href="#proj-05" class="proj-nav-tab" style="--c:#a78bfa"><span class="tn">05</span><span class="tl">Epilepsy Unit Capacity</span></a>
+    <a href="#capstone" class="proj-nav-tab" style="--c:#94a3b8"><span class="tn">MBA</span><span class="tl">Capstone</span></a>
   </div>
   <p class="intro fi">Five in-depth projects where neuroscience, clinical automation, and health system operations meet — from CAR-T neurotoxicity surveillance and neuro-ICU seizure alerting to Epic analyst simulations, RPA governance, and EEG machine learning. Each one is a working build that names both what it does for patients and what it is worth to the institution.</p>
 
@@ -634,6 +637,60 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     </div>
   </div>
 
+  <!-- MBA CAPSTONE -->
+  <div id="capstone" style="margin-bottom:48px">
+    <a href="#capstone" class="proj-label fi" style="text-decoration:none">MBA Capstone — Business Strategy</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">Capital allocation</span><span class="tag">Asset lifecycle</span><span class="tag">Patient safety · BCMA</span><span class="tag">Workforce</span><span class="tag">Ethics</span>
+        </div>
+        <h3>From Reactive to Predictive: a lifecycle strategy for clinical endpoint devices</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">My Capella MBA capstone, written with Stanford Health Care's approval using only public data. Hospitals replace the workstations on wheels that nurses use for barcode medication scanning on a fixed age cycle — but <b style="color:var(--ink);font-weight:600">batteries last 3–5 years and chassis last 7–10</b>, so good chassis get retired while dead batteries stay on the floor. When a scanner fails mid–med pass, nurses work around the safety check. The report recommends replacing on measured condition instead of age, using the vendor service SHC already pays for — a <b style="color:var(--ink);font-weight:600">capital-neutral</b> fix designed to win in a year when capital is committed to seismic construction.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">REPLACEMENTS PER YEAR · 1,000-CART FLEET · PUBLIC PRICING</div>
+          <div class="srow"><span class="slb">Age-based</span><div class="strk"><div class="sbar" style="width:100%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">182</span></div>
+          <div class="srow"><span class="slb">Condition</span><div class="strk"><div class="sbar" style="width:69%;background:#34d399"></div></div><span class="sval" style="color:#34d399">125</span></div>
+          <div class="srow"><span class="slb">Gross avoided</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">$124.5K</span></div>
+          <div class="srow"><span class="slb">Net / yr</span><div class="strk"><div class="sbar" style="width:50%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">+$62.3K</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">NEW CAPITAL NEEDED</div>
+            <div style="font-size:13px;color:var(--ink)">$0 · uses existing service</div>
+          </div>
+          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">EVIDENCE BASE</div>
+            <div style="font-size:13px;color:var(--accent)">19 sources · 24 pages</div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Capella University · MBA-FPX5910</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">MBA Capstone Experience · September 2026</div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
+            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">WHY IT'S A PATIENT-SAFETY ISSUE</div>
+            <div><span style="color:#fbbf24">66%</span> of med administrations involved a workaround</div>
+            <div><span style="color:#f87171">3.06×</span> odds of error when a workaround is used</div>
+            <div style="margin-top:6px">scanner fails → two-identifier check skipped</div>
+            <div style="color:#34d399;margin-top:6px">→ replace on condition, not calendar age</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+            <a href="capstone/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Read the Capstone →</a>
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+          </div>
+          <div class="mrow"><span class="mk">Disciplines</span><span class="mv">Finance · operations · workforce · ethics</span></div>
+          <div class="mrow"><span class="mk">Model</span><span class="mv ok">Interactive · reproduces report Table 2</span></div>
+          <div class="mrow"><span class="mk">Full report</span><span class="mv ok">24-page PDF on the capstone page</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- EXPERIENCE -->
@@ -694,6 +751,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
           <span style="font-size:12px;color:var(--ink3)">Online</span>
           <span style="background:rgba(52,211,153,.15);color:var(--green);font-size:10px;font-family:'DM Mono',monospace;font-weight:600;padding:2px 8px;border-radius:100px">✓ COMPLETED</span>
         </div>
+        <a href="#capstone" style="display:inline-block;margin-top:10px;font-size:12px;color:var(--green);text-decoration:none;font-family:'DM Mono',monospace">Capstone: endpoint lifecycle strategy →</a>
       </div>
       <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:10px;padding:18px;margin-bottom:16px">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:5px">B.S. CYBERSECURITY & INFORMATION ASSURANCE</div>
@@ -788,7 +846,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
 
 <script>
 // Highlight active project tab on scroll
-const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05'];
+const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05','capstone'];
 const navTabs = document.querySelectorAll('.proj-nav-tab');
 window.addEventListener('scroll', () => {
   let current = '';
