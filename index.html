@@ -3,816 +3,431 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anh Truong Nguyen — Clinical AI & Healthcare IT Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>MBA Capstone — Endpoint Lifecycle Strategy | Andy Nguyen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --ink:#f1f5f9;--ink2:#cbd5e1;--ink3:#94a3b8;
-  --paper:#080c14;--paper2:#0e1420;--paper3:#131b2e;
-  --accent:#38bdf8;--accent-bright:#38bdf8;--accent2:rgba(56,189,248,0.1);
-  --teal:#2dd4bf;--teal2:rgba(45,212,191,0.1);
-  --green:#34d399;--green2:rgba(52,211,153,0.1);
-  --amber:#fbbf24;--amber2:rgba(251,191,36,0.1);
-  --purple:#a78bfa;--purple2:rgba(167,139,250,0.1);
-  --red:#f87171;--red2:rgba(248,113,113,0.1);
-  --rule:rgba(255,255,255,0.06);
-  --card-shadow:0 1px 3px rgba(0,0,0,0.4),0 4px 16px rgba(0,0,0,0.3);
-  --card-shadow-hover:0 0 0 1px rgba(56,189,248,0.25),0 8px 32px rgba(56,189,248,0.08),0 2px 8px rgba(0,0,0,0.4);
+  --paper:#080c14;--panel:#0d1420;--panel-2:#111a29;--line:#1c2940;
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.12);
+  --text:#dbe4f0;--muted:#7d8ca3;--faint:#54627a;
+  --red:#f87171;--amber:#fbbf24;--green:#4ade80;--purple:#c084fc;
+  --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
 }
+*{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,12,20,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--rule)}
-.nav-logo{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);letter-spacing:-.3px}
-.nav-logo span{color:var(--accent)}
-.nav-links{display:flex;gap:4px;align-items:center}
-.nav-links a{font-size:13px;font-weight:500;color:var(--ink3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .15s}
-.nav-links a:hover{color:var(--ink);background:rgba(255,255,255,0.06)}
-.nav-cta{background:var(--accent)!important;color:#080c14!important;padding:7px 16px!important;border-radius:6px!important;font-size:12px!important;font-weight:700!important}
-.nav-cta:hover{background:#7dd3fc!important}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden;background:var(--paper)}
-.hero::before{content:'';position:absolute;top:-200px;right:-100px;width:800px;height:800px;background:radial-gradient(ellipse,rgba(56,189,248,0.13) 0%,transparent 65%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-100px;left:10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(167,139,250,0.09) 0%,transparent 65%);pointer-events:none}
-.hero-glow{position:absolute;top:30%;left:-100px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(45,212,191,0.06) 0%,transparent 65%);pointer-events:none}
-.hero-grid{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);background-size:48px 48px}
-.htag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:rgba(56,189,248,0.08);padding:5px 14px;border-radius:100px;letter-spacing:.06em;margin-bottom:24px;border:1px solid rgba(56,189,248,0.2)}
-.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite;box-shadow:0 0 8px var(--accent)}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
-h1{font-family:'DM Serif Display',serif;font-size:clamp(48px,6.5vw,86px);line-height:.98;letter-spacing:-2.5px;color:var(--ink);max-width:760px;margin-bottom:22px;font-weight:400}
-h1 em{font-style:italic;color:var(--accent);text-shadow:0 0 40px rgba(56,189,248,0.3)}
-.hero-sub{font-size:17px;font-weight:400;color:var(--ink3);max-width:520px;line-height:1.75;margin-bottom:36px}
-.ctas{display:flex;gap:8px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.01em;transition:all .18s;font-family:'Outfit',sans-serif}
-.btn-dark{background:var(--accent);color:#080c14;font-weight:700}
-.btn-dark:hover{background:#7dd3fc;transform:translateY(-1px);box-shadow:0 4px 20px rgba(56,189,248,0.35)}
-.btn-li{background:#0077b5;color:#fff}
-.btn-li:hover{background:#005885;transform:translateY(-1px)}
-.btn-out{border:1px solid rgba(255,255,255,0.14);color:var(--ink);background:rgba(255,255,255,0.05)}
-.btn-out:hover{border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.1)}
-.btn-dl{background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-weight:600}
-.btn-dl:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(16,185,129,0.35)}
-.stats{display:flex;gap:40px;margin-top:52px;padding-top:36px;border-top:1px solid var(--rule)}
-.snum{font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1}
-.slbl{font-size:11px;color:var(--ink3);font-weight:400;line-height:1.5;margin-top:3px}
-section{padding:96px 40px}
-.slabel{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--ink3);text-transform:uppercase;margin-bottom:12px}
-.proj-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:12px;font-weight:500;background:rgba(56,189,248,0.08);display:inline-block;padding:4px 12px;border-radius:100px;border:1px solid rgba(56,189,248,0.2);cursor:pointer;transition:all .15s}
-a.proj-label:hover{background:rgba(56,189,248,0.18);border-color:rgba(56,189,248,0.5)}
-.proj-nav-tab{display:inline-flex;align-items:center;gap:8px;font-family:'Outfit',sans-serif;font-size:12.5px;color:var(--c);padding:8px 14px 8px 10px;border-radius:9px;border:1px solid color-mix(in srgb,var(--c) 28%,transparent);background:color-mix(in srgb,var(--c) 7%,transparent);text-decoration:none;transition:all .2s cubic-bezier(.2,.8,.3,1);font-weight:400}
-.proj-nav-tab .tn{font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent);border:1px solid color-mix(in srgb,var(--c) 30%,transparent);border-radius:5px;padding:2px 6px;line-height:1.2;transition:all .2s}
-.proj-nav-tab:hover{border-color:color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 14%,transparent)}
-.proj-nav-tab:hover .tn{background:color-mix(in srgb,var(--c) 26%,transparent);border-color:color-mix(in srgb,var(--c) 45%,transparent)}
-.proj-nav-tab.active{font-weight:500;border-color:var(--c);background:color-mix(in srgb,var(--c) 18%,transparent);box-shadow:0 0 18px color-mix(in srgb,var(--c) 20%,transparent)}
-.proj-nav-tab.active .tn{color:#080c14;background:var(--c);border-color:var(--c);font-weight:700}
-@media(max-width:640px){.proj-nav-tab{font-size:11.5px;padding:7px 12px 7px 9px}}
-.proj-nav-tab .tl{padding-left:0}
-.proj-nav-tab .tl::before{display:none}
-h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,3.8vw,46px);letter-spacing:-1.2px;line-height:1.05;color:var(--ink);margin-bottom:12px;font-weight:400}
-.intro{font-size:16px;font-weight:400;color:var(--ink3);max-width:540px;line-height:1.78;margin-bottom:48px}
-.about-strip{background:var(--paper3);padding:72px 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.about-strip h2{color:var(--ink);margin-bottom:14px;letter-spacing:-1px}
-.about-strip p{font-size:15px;font-weight:300;color:var(--ink3);line-height:1.82;margin-bottom:12px}
-.pivot-list{list-style:none;margin-top:18px}
-.pivot-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink3);margin-bottom:11px;line-height:1.55}
-.pivot-list li::before{content:'→';color:var(--accent);font-family:'DM Mono',monospace;flex-shrink:0;margin-top:1px}
-.about-right{padding:28px;background:rgba(255,255,255,.03);border:1px solid var(--rule);border-radius:12px}
-.about-right .slabel{color:var(--ink3)}
-.qrow{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule)}
-.qrow:last-child{border-bottom:none}
-.qk{font-size:12px;color:var(--ink3)}
-.qv{font-size:13px;font-weight:500;color:var(--ink)}
-.qv.hi{color:var(--green)}
-.card{background:var(--paper2);border:1px solid var(--rule);border-radius:12px;overflow:hidden;transition:all .25s;box-shadow:var(--card-shadow)}
-.card:hover{transform:translateY(-3px);box-shadow:var(--card-shadow-hover);border-color:rgba(56,189,248,0.25)}
-.card-head{padding:22px 22px 16px;border-bottom:1px solid var(--rule)}
-.tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
-.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.04em;padding:3px 9px;border-radius:100px;background:rgba(255,255,255,0.05);color:var(--ink3);border:1px solid var(--rule)}
-.tag.b{background:rgba(56,189,248,0.1);color:var(--accent);border-color:rgba(56,189,248,0.2)}
-.tag.g{background:rgba(52,211,153,0.1);color:var(--green);border-color:rgba(52,211,153,0.2)}
-.tag.a{background:rgba(251,191,36,0.1);color:var(--amber);border-color:rgba(251,191,36,0.2)}
-.tag.p{background:rgba(167,139,250,0.1);color:var(--purple);border-color:rgba(167,139,250,0.2)}
-.tag.t{background:rgba(45,212,191,0.1);color:var(--teal);border-color:rgba(45,212,191,0.2)}
-.tag.r{background:rgba(248,113,113,0.1);color:var(--red);border-color:rgba(248,113,113,0.2)}
-.ctitle{font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:-.4px;color:var(--ink);margin-bottom:6px;font-weight:400}
-.cdesc{font-size:14px;color:var(--ink3);line-height:1.65;font-weight:400}
-.card-body{padding:18px 22px}
-.mrow{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--rule)}
-.mrow:last-child{border-bottom:none}
-.mk{font-size:13px;color:var(--ink3)}
-.mv{font-size:13px;font-weight:600;color:var(--ink)}
-.mv.ok{color:var(--green)}
-.mv.warn{color:var(--amber)}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-bottom:20px;box-shadow:var(--card-shadow)}
-.pan{background:var(--paper2);padding:32px}
-.pan.dk{background:#050810}
-.pan.dk h3{color:var(--ink)}
-.pan.dk p{color:var(--ink3)}
-h3{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-.3px;margin-bottom:10px;font-weight:400}
-.shap{margin:14px 0}
-.srow{display:flex;align-items:center;gap:10px;margin:6px 0}
-.slb{font-size:11px;color:rgba(255,255,255,.3);width:88px;font-family:'DM Mono',monospace}
-.strk{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:10px;overflow:hidden}
-.sbar{height:100%;border-radius:10px}
-.sval{font-size:10px;font-family:'DM Mono',monospace;width:36px;text-align:right}
-.agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.acard{padding:12px;border:1px solid var(--rule);border-radius:8px;background:rgba(255,255,255,0.03);transition:all .18s}
-.acard:hover{border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.06)}
-.aname{font-size:12px;font-weight:600;margin-bottom:2px;color:var(--ink)}
-.adesc{font-size:11px;color:var(--ink3);line-height:1.35}
-.proj-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.proj-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.feat-list{list-style:none;margin:12px 0}
-.feat-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink3);margin-bottom:7px;line-height:1.55}
-.feat-list li::before{content:'▸';color:var(--accent);font-size:10px;line-height:1.6;flex-shrink:0}
-.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.sgroup{padding:20px;background:var(--paper2);border:1px solid var(--rule);border-radius:12px;box-shadow:var(--card-shadow)}
-.sgtitle{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
-.si{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-.si:last-child{border-bottom:none}
-.sn{font-size:12px;color:var(--ink)}
-.sd{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(52,211,153,0.5)}
-.sd.m{background:var(--amber);box-shadow:0 0 6px rgba(251,191,36,0.4)}
-.tl{position:relative;padding-left:20px}
-.tl::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--accent),transparent)}
-.tli{position:relative;margin-bottom:26px;padding-left:18px}
-.tli::before{content:'';position:absolute;left:-24px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--dot-color,var(--accent));border:2.5px solid var(--paper);box-shadow:0 0 0 3px rgba(56,189,248,0.2),0 0 12px rgba(56,189,248,0.3)}
-.tdate{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:3px;letter-spacing:.06em}
-.ttitle{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
-.torg{font-size:11px;color:var(--accent);margin-bottom:5px;font-family:'DM Mono',monospace}
-.tdesc{font-size:13px;color:var(--ink3);line-height:1.65;font-weight:400}
-.certs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.cert{padding:13px 16px;background:var(--paper2);border:1px solid var(--rule);border-radius:10px;box-shadow:var(--card-shadow)}
-.cert strong{color:var(--ink);display:block;font-size:13px;margin-bottom:2px;font-weight:600}
-.cert span{font-size:11px;color:var(--ink3)}
-.csec{background:var(--paper3);padding:88px 40px;position:relative;overflow:hidden;border-top:1px solid var(--rule)}
-.csec::before{content:'';position:absolute;top:-100px;right:-60px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(56,189,248,0.1) 0%,transparent 65%);pointer-events:none}
-.csec::after{content:'';position:absolute;bottom:-80px;left:-40px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(167,139,250,0.07) 0%,transparent 65%);pointer-events:none}
-.cinner{max-width:600px;margin:0 auto;text-align:center;position:relative;z-index:1}
-.csec h2{color:var(--ink);margin-bottom:12px}
-.csec p{color:var(--ink3);margin-bottom:32px;font-size:15px}
-.clinks{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.cl{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;transition:all .18s}
-.cl-em{background:rgba(56,189,248,0.08);color:var(--accent);border:1px solid rgba(56,189,248,0.2)}
-.cl-em:hover{background:rgba(56,189,248,0.14);box-shadow:0 0 20px rgba(56,189,248,0.15)}
-.cl-li{background:#0077b5;color:#fff}
-.cl-li:hover{background:#005885}
-.cl-ph{background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)}
-footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--rule);font-size:12px;color:var(--ink3);background:var(--paper)}
-.avatar-ring{width:80px;height:80px;border-radius:50%;border:2px solid rgba(56,189,248,0.2);overflow:hidden;flex-shrink:0}
-.avatar-ring img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.avatar-sm{width:56px;height:56px;border-radius:50%;border:2px solid rgba(56,189,248,0.2);overflow:hidden;flex-shrink:0}
-.avatar-sm img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.avatar-hero{width:64px;height:64px;border-radius:50%;border:2px solid rgba(56,189,248,0.3);overflow:hidden;flex-shrink:0;box-shadow:0 0 0 4px rgba(56,189,248,0.08),0 0 20px rgba(56,189,248,0.15)}
-.avatar-hero img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.fi{opacity:0;transform:translateY(18px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
-.fi.v{opacity:1;transform:none}
-@media(max-width:768px){
-  nav{padding:0 20px}
-  .hero,section{padding-left:20px;padding-right:20px}
-  h1{font-size:42px;letter-spacing:-1.5px}
-  .split,.about-strip,.proj-grid-2,.proj-grid-3,.sgrid,.certs{grid-template-columns:1fr}
-  .agrid{grid-template-columns:1fr}
-  .stats{gap:22px;flex-wrap:wrap}
-  .hero-inner{grid-template-columns:1fr!important;gap:24px!important}
-  .hero-metrics{grid-template-columns:repeat(2,1fr)!important}
-}
+body{background:var(--paper);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.65;font-size:16px}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 24px 96px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.eyebrow a{color:var(--cyan);text-decoration:none}
+h1{font-family:var(--serif);font-size:clamp(30px,5.2vw,48px);font-weight:400;line-height:1.12;margin-bottom:18px}
+h1 em{font-style:italic;color:var(--cyan)}
+.sub{color:var(--muted);max-width:720px;margin-bottom:20px}
+.sub strong{color:var(--text);font-weight:500}
+.meta{display:flex;flex-wrap:wrap;gap:10px 22px;font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-bottom:22px}
+.meta b{color:var(--muted);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:11px;margin-bottom:26px}
+.chip{font-family:var(--mono);font-size:11px;padding:3px 0;color:var(--faint)}
+.chip:not(:last-child)::after{content:'·';margin:0 0 0 9px;color:rgba(255,255,255,.18)}
+.dl{display:inline-flex;align-items:center;gap:9px;background:var(--cyan);color:#04121f;border-radius:10px;padding:11px 20px;font-weight:600;font-size:14px;text-decoration:none;transition:box-shadow .2s;margin-bottom:50px}
+.dl:hover{box-shadow:0 0 24px rgba(56,189,248,.38)}
+.dl span{font-family:var(--mono);font-size:11px;font-weight:500;opacity:.75}
+.slab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+h2{font-family:var(--serif);font-size:clamp(23px,3.4vw,30px);font-weight:400;line-height:1.2;margin-bottom:14px}
+.lede{color:var(--muted);max-width:740px;margin-bottom:26px;font-size:15.5px}
+.lede strong{color:var(--text);font-weight:500}
+.lede em{color:var(--text);font-style:italic}
+section{margin-bottom:72px}
+
+.p30{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:56px}
+.p30-h{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.p30-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.p30-c{display:flex;gap:12px;align-items:flex-start}
+.p30-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--cyan-dim);border:1px solid rgba(56,189,248,.35);color:var(--cyan);font-family:var(--mono);font-size:11.5px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.p30-c h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.4}
+.p30-c p{font-size:13px;color:var(--muted);line-height:1.65}
+.p30-c p em{color:var(--text);font-style:italic}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.panel-title{font-size:12.5px;font-weight:500}
+.panel-sub{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+
+/* lifespan chart */
+.life{padding:22px 20px 18px}
+.axis{display:grid;grid-template-columns:130px 1fr;gap:14px;margin-bottom:6px}
+.ticks{position:relative;height:16px;font-family:var(--mono);font-size:10px;color:var(--faint)}
+.ticks span{position:absolute;transform:translateX(-50%)}
+.lrow{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;margin-bottom:14px}
+.lname{font-size:13px;color:var(--text);font-weight:500;line-height:1.3}
+.lname small{display:block;font-family:var(--mono);font-size:10px;color:var(--faint);font-weight:400}
+.track{position:relative;height:30px;background:rgba(255,255,255,.025);border-radius:6px;border:1px solid rgba(255,255,255,.05)}
+.band{position:absolute;top:4px;bottom:4px;border-radius:4px}
+.cut{position:absolute;top:-8px;bottom:-8px;width:2px;background:var(--red);box-shadow:0 0 10px rgba(248,113,113,.5)}
+.cutlbl{position:absolute;top:-24px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--red);white-space:nowrap}
+.lfoot{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;padding:16px 20px;border-top:1px solid var(--line);background:var(--panel-2)}
+.lf{font-size:13px;color:var(--muted);line-height:1.6;display:flex;gap:10px}
+.lf b{flex-shrink:0;width:9px;height:9px;border-radius:2px;margin-top:6px}
+.lf strong{color:var(--text);font-weight:500}
+
+/* stat strip */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:17px 18px}
+.stat-v{font-family:var(--serif);font-size:30px;line-height:1.05}
+.stat-k{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5}
+.stat-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:6px}
+.v-ok{color:var(--green)}.v-cy{color:var(--cyan)}.v-a{color:var(--amber)}.v-bad{color:var(--red)}.v-p{color:var(--purple)}
+
+/* model */
+.roi{display:grid;grid-template-columns:320px 1fr;gap:0}
+@media(max-width:860px){.roi{grid-template-columns:1fr}}
+.roi-l{padding:20px;border-right:1px solid var(--line)}
+@media(max-width:860px){.roi-l{border-right:none;border-bottom:1px solid var(--line)}}
+.roi-r{padding:20px}
+.par{margin-bottom:16px}
+.par-h{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;margin-bottom:5px}
+.par-h span:first-child{color:var(--muted)}
+.par-v{font-family:var(--mono);font-size:13px;color:var(--cyan)}
+.par input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--line);border-radius:99px;outline:none}
+.par input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--cyan);cursor:pointer}
+.par input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:var(--cyan);cursor:pointer}
+.par-n{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:4px}
+.reset{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:6px 13px;font-family:var(--sans);font-size:12px;cursor:pointer;transition:all .2s}
+.reset:hover{border-color:var(--cyan);color:var(--cyan)}
+.ledger{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:16px}
+.ledger td{padding:11px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.ledger td:first-child{color:var(--text)}
+.ledger td:nth-child(2){color:var(--faint);font-family:var(--mono);font-size:11px;padding-left:12px}
+.ledger td:last-child{text-align:right;font-family:var(--mono);font-size:14px;white-space:nowrap;padding-left:12px}
+.ledger tr.tot td{border-bottom:none;border-top:1px solid rgba(255,255,255,.18);padding-top:14px}
+.ledger tr.tot td:first-child{font-weight:500}
+.ledger tr.tot td:last-child{font-family:var(--serif);font-size:24px}
+.tog{display:flex;gap:10px;align-items:flex-start;padding:13px 15px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px;cursor:pointer;margin-bottom:14px;transition:border-color .2s}
+.tog:hover{border-color:rgba(56,189,248,.4)}
+.tog.on{border-color:rgba(167,139,250,.45);background:rgba(167,139,250,.06)}
+.box{flex-shrink:0;width:16px;height:16px;border-radius:4px;border:1.5px solid var(--faint);margin-top:2px;position:relative;transition:all .2s}
+.tog.on .box{border-color:var(--purple);background:var(--purple)}
+.tog.on .box::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#080c14;font-size:11px;font-weight:700}
+.tog-t{font-size:13px;color:var(--muted);line-height:1.55}
+.tog-t strong{color:var(--text);font-weight:500}
+#harm{display:none;margin-bottom:14px}
+#harm.show{display:block}
+.hum{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.28);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.75;color:var(--muted)}
+.hum b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
+.hum strong{color:var(--text);font-weight:500}
+.hum em{color:var(--text)}
+
+/* alternatives */
+.alts{display:grid;gap:10px}
+.alt{display:grid;grid-template-columns:118px 1fr;gap:16px;align-items:start;padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-radius:13px}
+@media(max-width:640px){.alt{grid-template-columns:1fr;gap:6px}}
+.alt.pick{border-color:rgba(74,222,128,.42);background:rgba(74,222,128,.04)}
+.alt-s{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.alt.no .alt-s{color:var(--red)}
+.alt.pick .alt-s{color:var(--green)}
+.alt h4{font-size:15px;font-weight:500;margin-bottom:4px}
+.alt p{font-size:13.5px;color:var(--muted);line-height:1.65}
+
+/* phases */
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.ph{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:19px;position:relative}
+.ph-n{font-family:var(--serif);font-size:36px;color:var(--cyan);line-height:1;margin-bottom:6px}
+.ph-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:9px}
+.ph h4{font-size:15px;font-weight:500;margin-bottom:7px}
+.ph p{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:12px}
+.ph-m{font-family:var(--mono);font-size:11px;color:var(--green);border-top:1px solid var(--line);padding-top:10px;line-height:1.6}
+.ph-m b{color:var(--faint);font-weight:400;display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .3s,box-shadow .3s}
+.card:hover{border-color:rgba(56,189,248,.35);box-shadow:0 0 28px rgba(56,189,248,.08)}
+.card h3{font-family:var(--serif);font-size:19px;font-weight:400;margin-bottom:12px}
+.card ul{list-style:none}
+.card li{position:relative;padding-left:19px;margin-bottom:9px;color:var(--muted);font-size:14px;line-height:1.65}
+.card li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:11px;top:3px}
+.card li strong{color:var(--text);font-weight:500}
+.note{background:var(--panel-2);border:1px solid var(--line);border-left:2px solid var(--purple);border-radius:0 12px 12px 0;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.75}
+.note strong{color:var(--text);font-weight:500}
+.note em{color:var(--text)}
+.src{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:10px}
+footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--cyan);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<nav>
-  <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:flex;align-items:center;text-decoration:none">
-    <div id="logo-box" style="position:relative;width:44px;height:44px;border-radius:10px;flex-shrink:0;background:#080c14;border:1.5px solid rgba(52,211,153,.6);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:logo-border 3s ease-in-out infinite">
-      <svg width="32" height="32" viewBox="0 0 32 32">
-        <text id="logo-a" x="16" y="22" font-family="'Arial',sans-serif" font-size="26" font-weight="100"
-          fill="none" stroke="#38bdf8" stroke-width="1" text-anchor="middle">A</text>
-        <path id="wave-path" d="M-32,28 Q-28,23 -24,28 Q-20,33 -16,28 Q-12,23 -8,28 Q-4,33 0,28 Q4,23 8,28 Q12,33 16,28 Q20,23 24,28 Q28,33 32,28 Q36,23 40,28 Q44,33 48,28"
-          fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round"/>
-      </svg>
-    </div>
-  </a>
-  <style>
-  @keyframes logo-border{0%,100%{border-color:rgba(52,211,153,.4);box-shadow:0 0 6px rgba(52,211,153,.1)}50%{border-color:rgba(52,211,153,.9);box-shadow:0 0 16px rgba(52,211,153,.25)}}
-  @keyframes wave-scroll{from{transform:translateX(0)}to{transform:translateX(32px)}}
-  @keyframes a-float{0%,100%{opacity:.7;stroke-width:1}50%{opacity:1;stroke-width:1.5}}
-  #wave-path{animation:wave-scroll 1.4s linear infinite}
-  #logo-a{animation:a-float 2.5s ease-in-out infinite}
-  #logo-box:hover{animation:none;border-color:rgba(52,211,153,1)!important;box-shadow:0 0 20px rgba(52,211,153,.4)!important}
-  </style>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact" class="nav-cta">Contact</a>
-  </div>
-</nav>
+<div class="eyebrow"><a href="../">← Portfolio</a> · MBA Capstone</div>
+<h1>From Reactive to <em>Predictive</em></h1>
+<p class="sub">A lifecycle strategy for the workstations on wheels that nurses use to scan every medication. Hospitals replace these carts by age, but their parts don't wear out at the same rate. The result: <strong>good chassis get thrown away while dead batteries stay on the floor</strong>, and when a scanner fails mid–medication pass, nurses work around the safety check. This capstone argues for replacing on condition instead of age — and shows it can pay for itself without new capital, new vendors, or new staff.</p>
+<div class="meta">
+  <span><b>Capella University</b> · MBA-FPX5910 Capstone Experience</span>
+  <span><b>September 2026</b></span>
+  <span><b>24 pages</b> · 19 sources</span>
+</div>
+<div class="chips">
+  <span class="chip">Capital allocation</span>
+  <span class="chip">Asset lifecycle</span>
+  <span class="chip">Patient safety · BCMA</span>
+  <span class="chip">Workforce &amp; retention</span>
+  <span class="chip">Sustainability</span>
+  <span class="chip">Ethics &amp; data governance</span>
+</div>
+<div style="margin-bottom:50px"></div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-inner" style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
-  <div>
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
-      <div class="avatar-hero"><img src="data:image/jpeg;base64,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" alt="Anh Truong Nguyen"></div>
-      <div>
-        <div style="font-size:15px;font-weight:500;color:var(--ink)">Anh Truong Nguyen</div>
-        <div style="font-size:12px;color:var(--ink3);font-family:'DM Mono',monospace">Healthcare IT · Clinical Informatics</div>
-      </div>
-    </div>
-    <div class="htag"><span class="dot"></span>Healthcare IT · Clinical Informatics · Cybersecurity</div>
-    <h1>Where IT infrastructure<br>meets <em>clinical AI</em></h1>
-    <p class="hero-sub">5+ years in enterprise IT and cybersecurity at Palo Alto Networks, Infineon, and Stanford Health Care, now building clinical AI systems that turn EEG signals, medical imaging, and clinical documents into actionable insights.</p>
-    <div class="ctas">
-      <a href="#projects" class="btn btn-dark">View projects →</a>
-      <a href="https://www.linkedin.com/in/anh-truong-nguyen/" target="_blank" class="btn btn-li">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-      </a>
-      <a href="mailto:nguyenandy770@gmail.com" class="btn btn-out">nguyenandy770@gmail.com</a>
-      <a href="Anh_Truong_(Andy)_Nguyen_Resume.docx" download="Anh_Truong_(Andy)_Nguyen_Resume.docx" class="btn btn-dl">↓ Download resume</a>
-    </div>
-    <div class="stats">
-      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">5+</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Years enterprise<br>IT & health IT</span></div>
-      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">6</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Clinical AI<br>projects built</span></div>
-      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">97.4%</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Peak model<br>accuracy (EEG)</span></div>
-      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">3</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Cloud AI<br>platforms used</span></div>
-    </div>
-  </div>
-  <!-- RIGHT COLUMN -->
-  <div style="display:flex;flex-direction:column;gap:16px">
-    <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:14px;padding:20px;border-left:3px solid var(--accent)">
-      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink3);letter-spacing:.1em;margin-bottom:10px">FEATURED PROJECT</div>
-      <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px">Epileptic Seizure Detection</div>
-      <div style="font-size:12px;color:var(--ink3);line-height:1.6;margin-bottom:12px">EEG classification · 11,500 samples · 97.4% accuracy · 22s pre-ictal warning</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <span style="font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(56,189,248,.1);color:var(--accent);border:1px solid rgba(56,189,248,.2)">EEG</span>
-        <span style="font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.2)">Neurology</span>
-        <span style="font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)">Python</span>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px" class="hero-metrics">
-      <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:10px;padding:16px">
-        <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:4px">AUC-ROC</div>
-        <div style="font-size:24px;font-weight:700;color:var(--green);font-family:'DM Serif Display',serif">0.991</div>
-      </div>
-      <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:10px;padding:16px">
-        <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:4px">SENSITIVITY</div>
-        <div style="font-size:24px;font-weight:700;color:var(--accent);font-family:'DM Serif Display',serif">96.8%</div>
-      </div>
-      <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:10px;padding:16px">
-        <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:4px">FEATURES</div>
-        <div style="font-size:24px;font-weight:700;color:var(--purple);font-family:'DM Serif Display',serif">25</div>
-      </div>
-      <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:10px;padding:16px">
-        <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:4px">WARNING</div>
-        <div style="font-size:24px;font-weight:700;color:var(--amber);font-family:'DM Serif Display',serif">22s</div>
-      </div>
-    </div>
-    <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:10px;padding:16px">
-      <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:8px;letter-spacing:.08em">TECH STACK</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <span style="font-size:11px;color:var(--ink3)">Azure AI Language</span><span style="color:var(--rule)">·</span>
-        <span style="font-size:11px;color:var(--ink3)">ResNet-50</span><span style="color:var(--rule)">·</span>
-        <span style="font-size:11px;color:var(--ink3)">XGBoost + SHAP</span><span style="color:var(--rule)">·</span>
-        <span style="font-size:11px;color:var(--ink3)">FHIR R4</span><span style="color:var(--rule)">·</span>
-        <span style="font-size:11px;color:var(--ink3)">Power BI</span>
-      </div>
-    </div>
-  </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<div class="about-strip" id="about">
-  <div>
-    <div class="slabel" style="color:rgba(241,245,249,.3)">About me</div>
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
-      <div class="avatar-ring"><img src="data:image/jpeg;base64,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" alt="Anh Truong Nguyen"></div>
-      <div>
-        <div style="font-family:'DM Serif Display',serif;font-size:13px;color:var(--ink);letter-spacing:-.2px">Anh Truong Nguyen</div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-top:2px">San Jose, CA</div>
-      </div>
-    </div>
-    <h2>IT engineer turned<br><em style="font-style:italic;color:var(--accent)">clinical informatics</em><br>specialist</h2>
-    <p>I started my career building and securing IT infrastructure — managing enterprise firewalls, deploying thousands of devices, and resolving complex technical issues for global organisations. That foundation taught me how systems fail, how people actually use technology, and how to design solutions that stick.</p>
-    <p>Now I'm applying that same lens to healthcare — where the stakes are higher, the users are clinicians and patients, and a poorly designed interface can mean a life-saving AI tool gets ignored.</p>
-    <ul class="pivot-list">
-      <li>Enterprise IT background gives me credibility with hospital IT departments</li>
-      <li>Cybersecurity expertise maps directly to HIPAA compliance and EHR security</li>
-      <li>5 years of technical support taught me how to translate complexity for non-technical users — exactly what clinical AI needs</li>
-    </ul>
-  </div>
-  <div class="about-right">
-    <div class="slabel">At a glance</div>
-    <div class="qrow"><span class="qk">Location</span><span class="qv">San Jose, CA</span></div>
-    <div class="qrow"><span class="qk">Education</span><span class="qv" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span>MBA Healthcare Mgmt · Capella</span><span style="color:var(--green);font-size:10px;font-family:'DM Mono',monospace;font-weight:600">COMPLETED</span></span></div>
-    <div class="qrow"><span class="qk"></span><span class="qv" style="color:var(--ink3);font-size:12px">B.S. Cybersecurity · Capella</span></div>
-    <div class="qrow"><span class="qk">Current role</span><span class="qv hi">Sr. Solutions Tech Specialist · Stanford Health Care</span></div>
-    <div class="qrow"><span class="qk">Devices managed</span><span class="qv hi">3,000+</span></div>
-    <div class="qrow"><span class="qk">Case resolution</span><span class="qv hi">98% (Palo Alto Networks)</span></div>
-    <div class="qrow"><span class="qk">Target roles</span><span class="qv">Clinical Informatics · Health IT</span></div>
-    <div class="qrow"><span class="qk">Certifications</span><span class="qv">CompTIA A+ · ITIL v4 · PAN</span></div>
+<div class="p30">
+  <div class="p30-h">The 30-second version</div>
+  <div class="p30-g">
+    <div class="p30-c"><div class="p30-n">1</div><div><h4>The cart is where medication safety happens</h4><p>Nurses scan the patient's wristband and the medication at a workstation on wheels. That scan is how hospitals meet the Joint Commission's two-identifier rule.</p></div></div>
+    <div class="p30-c"><div class="p30-n">2</div><div><h4>Its parts wear out on different clocks</h4><p>Batteries last 3–5 years. The chassis lasts 7–10. Replacing the whole cart at one age means you're always <em>too late</em> for one part and <em>too early</em> for the other.</p></div></div>
+    <div class="p30-c"><div class="p30-n">3</div><div><h4>A failed scanner becomes a workaround</h4><p>When the scan fails, nurses find another way to give the dose. Research ties those workarounds to roughly three times the odds of a medication error.</p></div></div>
+    <div class="p30-c"><div class="p30-n">4</div><div><h4>The fix changes the trigger, not the budget</h4><p>Repairs are already covered by the vendor service contract. Sending that service to carts that are <em>about</em> to fail, instead of ones that already have, costs no new capital.</p></div></div>
   </div>
 </div>
 
-<!-- PROJECTS -->
-<section id="projects" style="background:var(--paper)">
-  <div class="slabel fi">Portfolio</div>
-  <h2 class="fi">Projects</h2>
-  <!-- PROJECT NAV TABS -->
-  <div id="proj-tabs" style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:40px;padding:14px;background:var(--paper2);border:1px solid var(--rule);border-radius:14px">
-    <a href="#proj-01" class="proj-nav-tab active" style="--c:#f87171"><span class="tn">01</span><span class="tl">Cancer Center Automation</span></a>
-    <a href="#proj-02" class="proj-nav-tab" style="--c:#38bdf8"><span class="tn">02</span><span class="tl">Neurocritical Automation</span></a>
-    <a href="#proj-03" class="proj-nav-tab" style="--c:#34d399"><span class="tn">03</span><span class="tl">Epic Analyst Lab</span></a>
-    <a href="#proj-04" class="proj-nav-tab" style="--c:#fbbf24"><span class="tn">04</span><span class="tl">Automation Governance</span></a>
-    <a href="#proj-05" class="proj-nav-tab" style="--c:#a78bfa"><span class="tn">05</span><span class="tl">Epilepsy Unit Capacity</span></a>
-  </div>
-  <p class="intro fi">Five in-depth projects where neuroscience, clinical automation, and health system operations meet — from CAR-T neurotoxicity surveillance and neuro-ICU seizure alerting to Epic analyst simulations, RPA governance, and EEG machine learning. Each one is a working build that names both what it does for patients and what it is worth to the institution.</p>
-
-  <!-- PROJECT 1: CAR-T NEUROTOXICITY WATCH -->
-  <div id="proj-01" style="margin-bottom:48px">
-    <a href="#proj-01" class="proj-label fi" style="text-decoration:none">Project 01 — Cancer Center Automation</a>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px">
-          <span class="tag">CAR-T / cell therapy</span><span class="tag">ICANS · ICE score</span><span class="tag">Trend detection</span><span class="tag">Capacity modeling</span><span class="tag">Clinical automation</span>
-        </div>
-        <h3>CAR-T neurotoxicity watch &amp; capacity model</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">CAR-T cell therapy cures cancers nothing else could touch. Its most feared complication is neurological — <b style="color:var(--ink);font-weight:600">ICANS</b>: lucid at noon, confused by evening, seizing by morning. The warning sign is measured by asking a patient to write one sentence. This project automates the catching of that signal through trend detection rather than thresholds, then does what clinical projects usually avoid: it models what catching it 16 hours earlier is worth — in ICU days, in released treatment slots, and in patients who never lose the ability to speak to their family.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">BED 07 · ICE TRAJECTORY OVER 72H</div>
-          <div class="srow"><span class="slb">Hour 16 — score 9</span><div class="strk"><div class="sbar" style="width:90%;background:#34d399"></div></div><span class="sval" style="color:#34d399">stable</span></div>
-          <div class="srow"><span class="slb">Hour 24 — score 8</span><div class="strk"><div class="sbar" style="width:80%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">trend fires</span></div>
-          <div class="srow"><span class="slb">Hour 40 — score 6</span><div class="strk"><div class="sbar" style="width:60%;background:#f87171"></div></div><span class="sval" style="color:#f87171">threshold fires</span></div>
-          <div class="srow"><span class="slb">Detection lead time gained</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">16 h</span></div>
-        </div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">MODELED IMPACT</div>
-            <div style="font-size:13px;color:var(--ink)">58 ICU days avoided / yr</div>
-          </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">CAPACITY RELEASED</div>
-            <div style="font-size:13px;color:var(--accent)">~6 treatment slots / yr</div>
-          </div>
-        </div>
+<!-- 1. THE MISMATCH -->
+<section>
+  <div class="slab">01 — The problem</div>
+  <h2>One replacement age, two very different lifespans</h2>
+  <p class="lede">The whole argument rests on this picture. A uniform replacement cycle of 5–6 years lands <strong>after</strong> the battery has already failed and <strong>before</strong> the chassis is worn out. It isn't a lack of diligence — calendar age is simply the only variable a fleet manager has when nobody is measuring condition. <em>It's the wrong variable.</em></p>
+  <div class="panel">
+    <div class="panel-head">
+      <div><div class="panel-title">Component service life vs. age-based replacement</div><div class="panel-sub">industry service-life ranges for this equipment class (CME Corporation, 2026)</div></div>
+      <div class="panel-sub">years in service</div>
+    </div>
+    <div class="life">
+      <div class="axis"><div></div><div class="ticks" id="ticks"></div></div>
+      <div class="lrow">
+        <div class="lname">Lithium-ion battery<small>3–5 years</small></div>
+        <div class="track"><div class="band" style="left:30%;width:20%;background:rgba(251,191,36,.55)"></div><div class="cut" style="left:55%"><span class="cutlbl">replaced at 5.5 yrs</span></div></div>
       </div>
-      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Cell therapy unit — neurotoxicity board</div>
-          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">ICE assessments q8h · 72-hour window</div>
-        </div>
-        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
-            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">HOUR 24 · TREND ALERT — BED 07</div>
-            <div style="color:#fbbf24">ICE trajectory 10 → 9 → 8 over two assessments</div>
-            <div style="color:var(--ink3)">still grade 1 · patient oriented · <span style="color:#34d399">this is the window</span></div>
-            <div style="margin-top:6px;color:var(--ink3)">→ repeat assessment, rule out sedation</div>
-            <div style="color:var(--ink3)">→ notify cell therapy APP <span style="color:var(--accent)">with the trend</span></div>
-            <div style="margin-top:6px;color:#f87171">threshold-only rule would fire at hour 40</div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="cart/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Board →</a>
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-          </div>
-          <div class="mrow"><span class="mk">Patient board</span><span class="mv">5 patients · scrubbable 72h timeline</span></div>
-          <div class="mrow"><span class="mk">Detection</span><span class="mv ok">Threshold vs trend, side by side</span></div>
-          <div class="mrow"><span class="mk">ROI model</span><span class="mv ok">8 adjustable assumptions</span></div>
-        </div>
+      <div class="lrow">
+        <div class="lname">Cart chassis<small>7–10 years</small></div>
+        <div class="track"><div class="band" style="left:70%;width:30%;background:rgba(56,189,248,.55)"></div><div class="cut" style="left:55%"></div></div>
       </div>
     </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Trend detection</span></div><div class="ctitle">10 → 9 → 7 is a trajectory; 7 alone is a number</div><div class="cdesc">A scrubbable 72-hour board across five CAR-T patients, one of whom is declining on a path no single assessment flags. Switching from threshold logic to a two-assessment delta rule surfaces the decline 16 hours earlier — while the patient is still oriented and steroids can change the outcome. The data required no new device and no new documentation: nurses were already collecting it.</div></div><div class="card-body"><div class="mrow"><span class="mk">Lead time</span><span class="mv">Hour 24 vs hour 40</span></div><div class="mrow"><span class="mk">Tradeoff shown</span><span class="mv ok">Transient dip fires too</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Capacity economics</span></div><div class="ctitle">A bed-day in a full service is a treatment slot</div><div class="cdesc">An interactive model converting earlier detection into severe cases avoided, ICU days, released bed-days, and additional CAR-T treatment slots — with all eight assumptions exposed as sliders, because a business case that hides its inputs is a sales pitch. Built against the reality that cancer services at major centers are capacity-constrained, where length-of-stay converts directly into forgone treatments.</div></div><div class="card-body"><div class="mrow"><span class="mk">Outputs</span><span class="mv">ICU days · bed-days · slots · value</span></div><div class="mrow"><span class="mk">Framing</span><span class="mv ok">Clinical and financial case align</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Clinical governance</span></div><div class="ctitle">ICE anatomy &amp; confirmation-first escalation</div><div class="cdesc">A component-level breakdown of the 10-point ICE assessment — including why handwriting degrades before orientation does — paired with an escalation design that starts with nurse re-assessment rather than a page, protecting alert credibility. Deliberately placed on rung 1 of the autonomy ladder: the differential for a falling score requires a clinician at the bedside.</div></div><div class="card-body"><div class="mrow"><span class="mk">Escalation</span><span class="mv">Confirm → APP → attending + cEEG</span></div><div class="mrow"><span class="mk">Byproduct</span><span class="mv ok">Structured program reporting data</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 1: NEURO-ICU cEEG ALERT PIPELINE -->
-  <div id="proj-02" style="margin-bottom:48px">
-    <a href="#proj-02" class="proj-label fi" style="text-decoration:none">Project 02 — Neurocritical Care Automation</a>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px">
-          <span class="tag">cEEG monitoring</span><span class="tag">Seizure detection</span><span class="tag">Alert governance</span><span class="tag">Device integration</span><span class="tag">Clinical automation</span>
-        </div>
-        <h3>Neuro-ICU cEEG alert pipeline &amp; automation governance</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">Up to a fifth of comatose neuro-ICU patients are seizing with no outward movement — <b style="color:var(--ink);font-weight:600">non-convulsive status epilepticus</b>, visible only on continuous EEG, costing neurons every undetected hour. Detection is a solved math problem; getting the alert to the right clinician without drowning the unit in false alarms is a systems problem. This project maps the seven-hop pipeline from scalp to clinician, makes the sensitivity-versus-alert-burden tradeoff interactive, and proposes an autonomy framework for how much any clinical automation should be allowed to decide.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">THRESHOLD TRADEOFF · 24H MODELED WINDOW</div>
-          <div class="srow"><span class="slb">Max sensitivity (0.18)</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">104 FP</span></div>
-          <div class="srow"><span class="slb">Balanced (0.48)</span><div class="strk"><div class="sbar" style="width:22%;background:#34d399"></div></div><span class="sval" style="color:#34d399">23 FP</span></div>
-          <div class="srow"><span class="slb">Low noise (0.78)</span><div class="strk"><div class="sbar" style="width:7%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">7 FP</span></div>
-          <div class="srow"><span class="slb">Seizures missed at 0.78</span><div class="strk"><div class="sbar" style="width:56%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">5 of 9</span></div>
-        </div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">PIPELINE</div>
-            <div style="font-size:13px;color:var(--ink)">7 hops · 5 owners</div>
-          </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">AUTONOMY MODEL</div>
-            <div style="font-size:13px;color:var(--accent)">5 rungs · reversibility × harm</div>
-          </div>
-        </div>
-      </div>
-      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Bed 7 — cEEG · live detector</div>
-          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Fp1-F7 · F7-T3 · T3-T5 · T5-O1 · 256 Hz</div>
-        </div>
-        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-              <span style="color:#f87171">⚡ RHYTHMIC EVOLVING DISCHARGE</span>
-              <span style="color:var(--ink)">score <b style="color:#f87171">0.91</b></span>
-            </div>
-            <div style="color:var(--ink3)">T1 · 0s &nbsp;→&nbsp; assigned RN, push + <span style="color:var(--accent)">ack required</span></div>
-            <div style="color:var(--ink3)">T2 · 3m &nbsp;→&nbsp; unacknowledged, widen to charge RN + fellow</div>
-            <div style="color:var(--ink3)">T3 · 10m &nbsp;→&nbsp; sustained = <span style="color:#fbbf24">status epilepticus</span>, attending</div>
-            <div style="margin-top:6px;color:#34d399">every event → reviewable record · none disappear</div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="neuro/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Pipeline →</a>
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-          </div>
-          <div class="mrow"><span class="mk">Live signal</span><span class="mv">4-channel cEEG canvas · inject seizure/artifact</span></div>
-          <div class="mrow"><span class="mk">Tuning console</span><span class="mv ok">Interactive threshold · sensitivity vs burden</span></div>
-          <div class="mrow"><span class="mk">Governance</span><span class="mv ok">Escalation tiers + autonomy ladder</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Live simulation</span></div><div class="ctitle">4-channel cEEG with injectable events</div><div class="cdesc">A canvas-rendered EEG stream where background activity, rhythmic evolving seizure discharge, and movement artifact are each synthesized distinctly — and the detector score responds in real time. Injecting an artifact demonstrates exactly why false positives exist: noise can score 0.42 and clear a poorly-set threshold.</div></div><div class="card-body"><div class="mrow"><span class="mk">Channels</span><span class="mv">Longitudinal bipolar montage</span></div><div class="mrow"><span class="mk">States</span><span class="mv ok">Background · seizure · artifact</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Alert governance</span></div><div class="ctitle">The threshold meeting, made interactive</div><div class="cdesc">Nine modeled seizure events — including subtle low-amplitude ones — scored against a false-positive curve. Moving the threshold recomputes seizures caught, seizures missed, false alerts per day, alerts per nurse per shift, detection latency, and positive predictive value, with a live operating curve. Every setting names its own cost.</div></div><div class="card-body"><div class="mrow"><span class="mk">Metrics</span><span class="mv">Sensitivity · PPV · alert burden</span></div><div class="mrow"><span class="mk">Insight</span><span class="mv ok">Max sensitivity ≠ max safety</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Automation framework</span></div><div class="ctitle">Five rungs of clinical autonomy</div><div class="cdesc">A governance model for how much any automation — seizure detector, RPA bot, or predictive model — should be allowed to decide, with reversibility and harm as the axes. Includes the service-identity problem most automation programs discover late: a bot that reads charts is an account that reads charts, and it needs scope, rotation, and attribution.</div></div><div class="card-body"><div class="mrow"><span class="mk">Rungs</span><span class="mv">Record → flag → act → veto → autonomous</span></div><div class="mrow"><span class="mk">Bot identity</span><span class="mv ok">Least privilege + audit attribution</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 10: CLINICAL SYSTEMS ANALYST LAB -->
-  <div id="proj-03" style="margin-bottom:48px">
-    <a href="#proj-03" class="proj-label fi" style="text-decoration:none">Project 03 — Clinical Systems Analyst Lab</a>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px">
-          <span class="tag">HL7 v2</span><span class="tag">Epic ecosystem</span><span class="tag">ServiceNow</span><span class="tag">IAM</span><span class="tag">Patient safety</span>
-        </div>
-        <h3>Epic incident simulations &amp; ticket-queue trainer</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px"><b style="color:var(--ink);font-weight:600">Clinical Systems Analysts</b> live where clinical workflow, system configuration, and risk intersect. This lab turns that job into a practice environment: three decision-based P1/P2 incidents worked end-to-end — an HL7 ORU filing failure with clickable message anatomy, an ADT sequence crisis with a stakeholder pressure-test, and a compromised provider account crossing into IAM and HIPAA breach territory — plus a daily shift trainer that deals 10 random tickets from a 32-scenario pool spanning the whole analyst surface.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">SCENARIO COVERAGE BY DOMAIN</div>
-          <div class="srow"><span class="slb">Interfaces &amp; HL7</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">3 sims</span></div>
-          <div class="srow"><span class="slb">Security &amp; IAM</span><div class="strk"><div class="sbar" style="width:88%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">7 tix</span></div>
-          <div class="srow"><span class="slb">ClinDoc &amp; Orders</span><div class="strk"><div class="sbar" style="width:74%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">8 tix</span></div>
-          <div class="srow"><span class="slb">Willow · Beaker · Radiant</span><div class="strk"><div class="sbar" style="width:66%;background:#34d399"></div></div><span class="sval" style="color:#34d399">7 tix</span></div>
-        </div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">SCENARIO POOL</div>
-            <div style="font-size:13px;color:var(--ink)">3 incidents · 42 tickets</div>
-          </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">REVEAL LAYERS</div>
-            <div style="font-size:13px;color:var(--accent)">Triage → Fix → Know → Pitfalls</div>
-          </div>
-        </div>
-      </div>
-      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Clinical Systems Analyst Lab — Live</div>
-          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Incident sims · Shift trainer · Scenario library</div>
-        </div>
-        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:6px">
-            <a href="csa-lab/incident-sim.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25);text-decoration:none">🚨 Incidents</a>
-            <a href="csa-lab/shift-trainer.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule);text-decoration:none">🎫 Shift Trainer</a>
-          </div>
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
-            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">INC0482913 · P1 — BEAKER-ORU-IN</div>
-            <div style="color:#f87171">FILING ERROR: no matching order found</div>
-            <div style="color:#fbbf24">filler order number SHCB-20260705-000841</div>
-            <div style="margin-top:6px;color:var(--ink3)">error queue: <span style="color:#f87171">1,325</span> · deferred, not purged</div>
-            <div style="margin-top:4px;color:#34d399">→ fix forward · reprocess · safety review</div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="csa-lab/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Enter the Lab →</a>
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-          </div>
-          <div class="mrow"><span class="mk">Incidents</span><span class="mv">ORU filing · ADT crisis · Account compromise</span></div>
-          <div class="mrow"><span class="mk">Daily queue</span><span class="mv ok">10 random tickets / shift · 23 Epic domains</span></div>
-          <div class="mrow"><span class="mk">Build</span><span class="mv ok">Static HTML + JS · zero dependencies</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Incident engine</span></div><div class="ctitle">3 end-to-end incidents · 16 decisions</div><div class="cdesc">Each incident is a chain of decision points with real-world cost feedback: read the HL7 error text before restarting, hold sequence integrity against stakeholder pressure, contain a compromised account atomically. Debriefs include the full incident timeline, systemic RCA, and why every wrong answer fails in production.</div></div><div class="card-body"><div class="mrow"><span class="mk">Scenarios</span><span class="mv">ORU · ADT · Compromise</span></div><div class="mrow"><span class="mk">Debrief</span><span class="mv ok">Timeline + RCA + talking points</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Shift trainer</span></div><div class="ctitle">10 random tickets per shift · 32-scenario pool</div><div class="cdesc">A daily queue simulator that deals priority-sorted tickets across Security/IAM, patient identity, ClinDoc, Orders, Willow, Beaker, Radiant, OpTime, ASAP, Grand Central, Telehealth, FHIR APIs, Interfaces, Reporting, Downtime, and Change control — the full breadth of what lands in an Epic analyst's ServiceNow queue, with a filterable library mode for study by module.</div></div><div class="card-body"><div class="mrow"><span class="mk">Pool</span><span class="mv">42 scenarios · 23 modules</span></div><div class="mrow"><span class="mk">Modes</span><span class="mv ok">Random shift + filtered library</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Knowledge system</span></div><div class="ctitle">Four reveal layers + interview angles</div><div class="cdesc">Every ticket teaches in layers: triage heuristics (scope IS the diagnosis), ordered resolution steps with Epic master files (EMP/SER, EAP/ERX), two-paragraph deep dives on mechanisms — the Chronicles→Clarity→Caboodle data stack, Data Courier discipline, placer/filler matching — and pitfalls capped with a ready-to-say interview line.</div></div><div class="card-body"><div class="mrow"><span class="mk">Interview lines</span><span class="mv">42 ready-to-use answers</span></div><div class="mrow"><span class="mk">Depth</span><span class="mv ok">Master files → data stack → process</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 4: RPA FLEET CONTROL TOWER -->
-  <div id="proj-04" style="margin-bottom:48px">
-    <a href="#proj-04" class="proj-label fi" style="text-decoration:none">Project 04 — Automation Governance</a>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px">
-          <span class="tag">RPA governance</span><span class="tag">Service identity</span><span class="tag">Least privilege</span><span class="tag">Blast radius</span><span class="tag">Audit attribution</span>
-        </div>
-        <h3>RPA fleet control tower</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">A human who makes a mistake makes it once. A bot makes it <b style="color:var(--ink);font-weight:600">4,000 times before lunch</b> — and every one of those actions is signed with a service account nobody can quite explain. This is a control tower for five bots running real healthcare workflows: prior authorization, registration cleanup, In Basket triage, charge reconciliation, discharge outreach. Configure the guardrails, run a 24-hour shift, and watch which controls were load-bearing. The guardrails you skip are the incidents you get.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">24H SHIFT · GOVERNED VS UNGOVERNED</div>
-          <div class="srow"><span class="slb">Ungoverned — hours saved</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">252h</span></div>
-          <div class="srow"><span class="slb">Ungoverned — incidents</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">5</span></div>
-          <div class="srow"><span class="slb">Governed — hours saved</span><div class="strk"><div class="sbar" style="width:67%;background:#34d399"></div></div><span class="sval" style="color:#34d399">168h</span></div>
-          <div class="srow"><span class="slb">Governed — incidents</span><div class="strk"><div class="sbar" style="width:2%;background:#34d399"></div></div><span class="sval" style="color:#34d399">0</span></div>
-        </div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">FLEET</div>
-            <div style="font-size:13px;color:var(--ink)">5 bots · 4,830 daily tasks</div>
-          </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">CONTROLS</div>
-            <div style="font-size:13px;color:var(--accent)">6 guardrails · 5 incident paths</div>
-          </div>
-        </div>
-      </div>
-      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Fleet Control Tower — shift simulator</div>
-          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Guardrail config determines the outcome</div>
-        </div>
-        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
-            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">SHIFT LOG — GUARDRAILS OFF</div>
-            <div style="color:#4ade80">REG-CLEANUP-BOT · 1,674 tasks · 56h returned</div>
-            <div style="color:#f87171">06:30 ⛔ ADT queue depth 9,412 · latency 41m</div>
-            <div style="color:#f87171">07:05 ⛔ transport sent to 3 incorrect rooms</div>
-            <div style="color:#f87171">&nbsp;&nbsp;&nbsp;⛔ 294 unreviewed low-confidence actions</div>
-            <div style="color:#fbbf24">&nbsp;&nbsp;&nbsp;⚠ mean time to detect: 6h · to stop: 40m</div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="automation/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Run the Fleet →</a>
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-          </div>
-          <div class="mrow"><span class="mk">Guardrails</span><span class="mv">Rate · window · exceptions · scope · kill · owner</span></div>
-          <div class="mrow"><span class="mk">Failure modes</span><span class="mv ok">Interface flood · unreviewed actions · scope creep</span></div>
-          <div class="mrow"><span class="mk">Framework</span><span class="mv ok">5-rung autonomy ladder</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Shift simulator</span></div><div class="ctitle">Six guardrails, five incident paths</div><div class="cdesc">Toggle rate limiting, execution windows, exception queues, least-privilege scope, kill switches, and named ownership — then run a modeled 24-hour shift. Removing controls raises throughput by roughly 50% and generates the exact incidents those controls exist to prevent, including a bulk job flooding the ADT interface during morning admissions.</div></div><div class="card-body"><div class="mrow"><span class="mk">Tradeoff</span><span class="mv">252h + 5 incidents vs 168h + 0</span></div><div class="mrow"><span class="mk">Insight</span><span class="mv ok">Throughput is what you pay for safety</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Service identity</span></div><div class="ctitle">A bot that reads charts is an account that reads charts</div><div class="cdesc">Every bot needs an accountable human owner, least-privilege scope, credential rotation, and an audit trail that separates its actions from a human's. The simulation surfaces what happens without them — orphaned bots whose owners left, shared credentials that break attribution, and a triage bot quietly reading restricted charts it never needed.</div></div><div class="card-body"><div class="mrow"><span class="mk">Controls</span><span class="mv">Owner · scope · rotation · attribution</span></div><div class="mrow"><span class="mk">Risk</span><span class="mv ok">Continuous minimum-necessary exposure</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Autonomy framework</span></div><div class="ctitle">Which rung is this task allowed to occupy?</div><div class="cdesc">A governance model scoring automation on reversibility and harm rather than technical feasibility. Most healthcare automation belongs on rung 1 (machine flags, human decides) or rung 2 (machine acts on reversible work) — and the most common governance failure is a bot silently climbing a rung because nobody built the exception queue that was holding it in place.</div></div><div class="card-body"><div class="mrow"><span class="mk">Rungs</span><span class="mv">Record → flag → act → veto → autonomous</span></div><div class="mrow"><span class="mk">Axes</span><span class="mv ok">Reversibility × harm</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECT 5: EMU CAPACITY -->
-  <div id="proj-05" style="margin-bottom:48px">
-    <a href="#proj-05" class="proj-label fi" style="text-decoration:none">Project 05 — Epilepsy Unit Capacity</a>
-    <div class="split fi">
-      <div class="pan dk">
-        <div class="tags" style="margin-bottom:12px">
-          <span class="tag">Epilepsy monitoring</span><span class="tag">Video-EEG</span><span class="tag">Event detection</span><span class="tag">Throughput</span><span class="tag">Surgical pathway</span>
-        </div>
-        <h3>Epilepsy monitoring unit capacity model</h3>
-        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">An epilepsy monitoring unit admits patients for days, tapers their medication on purpose, and waits — because the only way to find where a seizure starts is to catch one on camera. Beds are few and the waitlist runs months. This project shows that the bottleneck isn't clinical: it's that the discharge decision <b style="color:var(--ink);font-weight:600">runs a full day behind the data that would have made it</b>. Same events, same beds, same staff — reviewed same-day instead of next-day, the unit serves measurably more patients.</p>
-        <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">14-DAY BED BOARD · 6 BEDS</div>
-          <div class="srow"><span class="slb">Next-day — avg LOS</span><div class="strk"><div class="sbar" style="width:100%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">6.1 d</span></div>
-          <div class="srow"><span class="slb">Same-day — avg LOS</span><div class="strk"><div class="sbar" style="width:84%;background:#34d399"></div></div><span class="sval" style="color:#34d399">5.1 d</span></div>
-          <div class="srow"><span class="slb">Bed-days held after answer</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">12 → 0</span></div>
-          <div class="srow"><span class="slb">Extra admissions enabled</span><div class="strk"><div class="sbar" style="width:40%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">+2.4</span></div>
-        </div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">ANNUAL CAPACITY</div>
-            <div style="font-size:13px;color:var(--ink)">358 → 433 admissions</div>
-          </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
-            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">SURGICAL PATHWAY</div>
-            <div style="font-size:13px;color:var(--accent)">+17 candidates / yr</div>
-          </div>
-        </div>
-      </div>
-      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
-          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">EMU bed board — 14-day window</div>
-          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">6 beds · target 3 typical events per admission</div>
-        </div>
-        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
-            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">BED 3 · PT C — TARGET MET DAY 4</div>
-            <div style="color:#fbbf24">day 1 · day 2 · day 4 → 3 typical events captured</div>
-            <div style="color:#34d399">day 4 — localization data complete</div>
-            <div style="color:#f87171">day 5 — bed held · events not yet reviewed</div>
-            <div style="margin-top:6px;color:var(--ink3)">patient tapered off medication, waiting for</div>
-            <div style="color:var(--ink3)">a conversation happening <span style="color:#f87171">tomorrow morning</span></div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="emu/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Board →</a>
-            <div style="flex:1;height:1px;background:var(--rule)"></div>
-          </div>
-          <div class="mrow"><span class="mk">Simulator</span><span class="mv">6 beds · 14 days · toggle review timing</span></div>
-          <div class="mrow"><span class="mk">Safety layer</span><span class="mv ok">Real-time detection as a safety control</span></div>
-          <div class="mrow"><span class="mk">ROI model</span><span class="mv ok">8 adjustable assumptions</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-grid-3 fi">
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Bed board simulator</span></div><div class="ctitle">The same events, a different number of patients</div><div class="cdesc">A 14-day board across six beds where red squares mark bed-days held after the localization data was already recorded — not a clinical error, just a decision running behind its own evidence. Switching from next-day to same-day review erases all twelve of them and frees capacity for roughly two and a half more admissions in the same fortnight.</div></div><div class="card-body"><div class="mrow"><span class="mk">LOS</span><span class="mv">6.1 → 5.1 days</span></div><div class="mrow"><span class="mk">Insight</span><span class="mv ok">The data existed; the decision lagged</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Safety first</span></div><div class="ctitle">These patients are seizing on purpose</div><div class="cdesc">An EMU deliberately provokes seizures by tapering the medication that was protecting the patient — medically justified, and it carries risks a normal ward doesn't: status epilepticus, falls, post-ictal confusion, unwitnessed events. Real-time detection is framed here as a patient-safety control first, with throughput as the byproduct rather than the goal.</div></div><div class="card-body"><div class="mrow"><span class="mk">Primary purpose</span><span class="mv">Staff reach a seizing patient sooner</span></div><div class="mrow"><span class="mk">Governance</span><span class="mv ok">False-positive rate reviewed on schedule</span></div></div></div>
-      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Capacity economics</span></div><div class="ctitle">A scarce unit feeding a curative surgery</div><div class="cdesc">Length of stay converts almost directly into patients treated: the model turns one day per admission into 75 additional admissions and roughly 17 more surgical candidates a year from the same six beds and the same staffing. Unusually, the safety argument and the throughput argument want the identical intervention — no tradeoff to negotiate.</div></div><div class="card-body"><div class="mrow"><span class="mk">Framing</span><span class="mv">Capacity first, cost second</span></div><div class="mrow"><span class="mk">Stakes</span><span class="mv ok">Epilepsy surgery can end seizures entirely</span></div></div></div>
-    </div>
-  </div>
-
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" style="background:var(--paper2)">
-  <div class="slabel fi">Work history</div>
-  <h2 class="fi">5+ Years of experience</h2>
-  <p class="intro fi">Consistent track record of high performance — 98% case resolution, 153% target achievement, 30% ticket reduction — across enterprise tech, government, and education sectors.</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start">
-    <div class="tl fi">
-      <div class="tli" style="--dot-color:var(--green)">
-        <div class="tdate">Jun 2026 — Present</div>
-        <div class="ttitle">Senior Solutions Tech Specialist</div>
-        <div class="torg" style="color:var(--accent)">Stanford Health Care · Palo Alto, CA · Contract</div>
-        <div class="tdesc">Embedded senior IT specialist supporting clinical operations across Stanford Health Care field locations — one of the top-ranked academic medical centres in the US. Supporting 500+ clinical staff across SHC sites with HIPAA-compliant endpoint management, EMR workstation configuration, and escalated incident resolution. Partner directly with desktop engineering and network teams to identify root causes of recurring clinical workflow disruptions and drive permanent fixes.</div>
-        <ul class="feat-list" style="margin-top:8px">
-          <li>Oversee lifecycle management of clinical endpoints — desktops, laptops, tablets, and mobile devices — across SHC locations ensuring zero-downtime for patient care workflows</li>
-          <li>Coordinate onsite network troubleshooting, port activation, and hardware/software configuration in live clinical environments</li>
-          <li>Manage asset tracking, warranty, and compliance documentation across the SHC environment aligned to healthcare IT governance standards</li>
-        </ul>
-      </div>
-      <div class="tli">
-        <div class="tdate">Feb 2024 — Jun 2026</div>
-        <div class="ttitle">Computer Support Specialist II</div>
-        <div class="torg">Palo Alto Unified School District · Palo Alto, CA</div>
-        <div class="tdesc">Primary IT lead for 2 elementary schools (~800 students/staff). Manage 3,000+ devices via JAMF Pro MDM. Lead hardware refresh cycles. Cut ticket escalations 30% through Tier 2/3 troubleshooting and staff training programs.</div>
-      </div>
-      <div class="tli">
-        <div class="tdate">Dec 2022 — Feb 2024</div>
-        <div class="ttitle">Technical Support Specialist</div>
-        <div class="torg">Infineon Technologies · San Jose, CA</div>
-        <div class="tdesc">Handled 500+ monthly incidents for 1,000+ global users via Remedy CRM, maintaining SLA compliance. Rebuilt IT documentation and knowledge base, cutting repeat ticket volume.</div>
-      </div>
-      <div class="tli">
-        <div class="tdate">Aug 2021 — Aug 2022</div>
-        <div class="ttitle">Technical Support Engineer</div>
-        <div class="torg">Palo Alto Networks · San Jose, CA</div>
-        <div class="tdesc">Resolved 98% of Level 2 cases without escalation, 95%+ satisfaction. Supported VMware ESXi, Linux, and Palo Alto Firewalls (7000/5000/3000 series). Achieved 153% case closure target. Built diagnostic tools to streamline troubleshooting.</div>
-      </div>
-      <div class="tli">
-        <div class="tdate">May 2021 — Aug 2021</div>
-        <div class="ttitle">Technical Support Specialist</div>
-        <div class="torg">Diocese of San Jose · San Jose, CA</div>
-        <div class="tdesc">Supported 300+ IT assets, managed Active Directory user accounts. Achieved 130% case closure rate and 92% customer satisfaction.</div>
-      </div>
-      <div class="tli">
-        <div class="tdate">Sep 2020 — Apr 2021</div>
-        <div class="ttitle">Technical Support Specialist</div>
-        <div class="torg">City of San Jose · San Jose, CA</div>
-        <div class="tdesc">Delivered IT support to 300 staff across 3 departments. Deployed 200+ PCs and 150+ security updates, boosting productivity by 30%.</div>
-      </div>
-    </div>
-    <div class="fi">
-      <div class="slabel" style="margin-bottom:10px">Education</div>
-      <div style="background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.2);border-radius:10px;padding:18px;margin-bottom:10px">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-bottom:5px;letter-spacing:.06em">MBA — HEALTHCARE MANAGEMENT</div>
-        <div style="font-size:15px;font-weight:500;margin-bottom:2px;color:var(--ink)">Capella University</div>
-        <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
-          <span style="font-size:12px;color:var(--ink3)">Online</span>
-          <span style="background:rgba(52,211,153,.15);color:var(--green);font-size:10px;font-family:'DM Mono',monospace;font-weight:600;padding:2px 8px;border-radius:100px">✓ COMPLETED</span>
-        </div>
-      </div>
-      <div style="background:var(--paper2);border:1px solid var(--rule);border-radius:10px;padding:18px;margin-bottom:16px">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:5px">B.S. CYBERSECURITY & INFORMATION ASSURANCE</div>
-        <div style="font-size:15px;font-weight:500;margin-bottom:4px">Capella University</div>
-        <div style="font-size:12px;color:var(--ink3);margin-bottom:6px">Online · Completed</div>
-        <div style="font-size:12px;color:var(--ink3);line-height:1.6">Foundation in enterprise security, network architecture, and IT governance — directly applicable to HIPAA compliance and healthcare data security.</div>
-      </div>
-      <div class="slabel" style="margin-bottom:10px">Certifications</div>
-      <div class="certs">
-        <div class="cert"><strong>CompTIA A+</strong><span>Hardware & OS support</span></div>
-        <div class="cert"><strong>ITIL v4</strong><span>IT service management</span></div>
-        <div class="cert"><strong>Palo Alto Networks</strong><span>Cybersecurity Specialization</span></div>
-        <div class="cert"><strong>Google IT Support</strong><span>Professional Certificate</span></div>
-      </div>
-      <div style="margin-top:16px;background:rgba(56,189,248,0.06);border:1px solid rgba(56,189,248,0.15);border-radius:10px;padding:18px">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:7px;letter-spacing:.06em">WHAT I BRING TO HEALTHCARE IT</div>
-        <p style="font-size:13px;color:var(--ink2);line-height:1.7;font-weight:300">My B.S. in Cybersecurity, ITIL v4 process knowledge, and hands-on HIPAA-adjacent compliance work give me a strong foundation for healthcare IT roles. I understand how to build systems that are both technically secure and human-centered — a combination that's rare and essential in clinical environments.</p>
-      </div>
+    <div class="lfoot">
+      <div class="lf"><b style="background:rgba(251,191,36,.8)"></b><span><strong>Battery:</strong> already past its reliable window when the cart is finally replaced — the years in between are when bedside failures happen.</span></div>
+      <div class="lf"><b style="background:rgba(56,189,248,.8)"></b><span><strong>Chassis:</strong> retired with 2–5 years of serviceable life left, adding cost and electronic waste for no clinical gain.</span></div>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
-<section id="skills" style="background:var(--paper2)">
-  <div class="slabel fi">Capabilities</div>
-  <h2 class="fi">Full tech stack</h2>
-  <p class="intro fi">From enterprise firewalls and MDM at scale to clinical AI dashboards and FHIR integration — technical breadth with healthcare informatics depth.</p>
-  <div class="sgrid fi">
-    <div class="sgroup">
-      <div class="sgtitle">Clinical AI & informatics</div>
-      <div class="si"><span class="sn">Python / XGBoost / SHAP</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">ResNet-50 / Grad-CAM</span><span class="sd m"></span></div>
-      <div class="si"><span class="sn">HL7 FHIR R4</span><span class="sd m"></span></div>
-      <div class="si"><span class="sn">Azure Machine Learning</span><span class="sd m"></span></div>
-      <div class="si"><span class="sn">CDSS design</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">HIPAA / WCAG 2.1</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">SQL / data auditing</span><span class="sd m"></span></div>
-    </div>
-    <div class="sgroup">
-      <div class="sgtitle">Security & infrastructure</div>
-      <div class="si"><span class="sn">Palo Alto NGFW</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">VMware ESXi</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">MFA / endpoint hardening</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">Active Directory</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">DNS / SSL / TLS</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">Linux / Bash</span><span class="sd"></span></div>
-    </div>
-    <div class="sgroup">
-      <div class="sgtitle">Device & IT ops</div>
-      <div class="si"><span class="sn">JAMF Pro (MDM)</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">Apple DEP / ABM</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">IncidentIQ / Remedy</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">Google Workspace</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">macOS / Windows / iOS</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">ITIL v4 practices</span><span class="sd"></span></div>
-    </div>
-    <div class="sgroup">
-      <div class="sgtitle">Web & development</div>
-      <div class="si"><span class="sn">HTML / CSS / JavaScript</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">WordPress / Apache / Nginx</span><span class="sd"></span></div>
-      <div class="si"><span class="sn">MySQL</span><span class="sd m"></span></div>
-      <div class="si"><span class="sn">D3.js / Chart.js</span><span class="sd m"></span></div>
-      <div class="si"><span class="sn">Streamlit / Dash</span><span class="sd m"></span></div>
-      <div class="si"><span class="sn">WCAG accessibility</span><span class="sd m"></span></div>
-    </div>
+<!-- 2. WHY IT MATTERS -->
+<section>
+  <div class="slab">02 — Why it matters</div>
+  <h2>A broken scanner removes a required safety check</h2>
+  <p class="lede">This isn't an IT inconvenience. Equipment failure is one of the main documented barriers to barcode medication administration, and when the scan doesn't work, nurses still have to give the dose.</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-v v-a">66%</div><div class="stat-k">of observed medication administrations involved a workaround</div><div class="stat-s">van der Veen et al., 2018</div></div>
+    <div class="stat"><div class="stat-v v-bad">3.06×</div><div class="stat-k">adjusted odds of a medication administration error when a workaround is used</div><div class="stat-s">95% CI 2.49–3.78</div></div>
+    <div class="stat"><div class="stat-v v-p">40.4%</div><div class="stat-k">of health care professionals report burnout tied to EHR use</div><div class="stat-s">Wu et al., 2024 · meta-analysis</div></div>
+    <div class="stat"><div class="stat-v v-cy">4.74%</div><div class="stat-k">SHC operating margin — healthy, but not room for low-return spending</div><div class="stat-s">S&amp;P Global Ratings, 2025</div></div>
   </div>
-  <p style="font-size:11px;color:var(--ink3);margin-top:10px;font-family:'DM Mono',monospace">
-    <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:4px;vertical-align:middle"></span>Proficient &nbsp;
-    <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);margin-right:4px;vertical-align:middle"></span>Familiar
-  </p>
+  <div class="note"><strong>Why this bites harder at Stanford specifically:</strong> SHC runs above its 622 licensed beds under a state capacity waiver, with a Medicare case mix index of 2.53. A cart failure a community hospital could absorb lands on units treating some of the most complex patients in the region, with no slack to cushion it. And with $2.3 billion committed to the 300 Pasteur renovation and Redwood City expansion, <em>any proposal that needs new capital is competing with mandatory life-safety construction.</em> That's why the solution had to be capital-neutral.</div>
 </section>
 
-<!-- CONTACT -->
-<div class="csec" id="contact">
-  <div class="cinner">
-    <div style="display:flex;justify-content:center;margin-bottom:20px">
-      <div class="avatar-sm"><img src="data:image/jpeg;base64,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" alt="Anh Truong Nguyen"></div>
+<!-- 3. MODEL -->
+<section>
+  <div class="slab">03 — The financial case</div>
+  <h2>The worked example, made adjustable</h2>
+  <p class="lede">The report deliberately doesn't claim an SHC dollar figure — no internal data was used, per the terms of SHC's approval. Instead it builds a model from <strong>public benchmark prices only</strong>, so each input can be swapped for a real number once finance supplies it. The defaults below reproduce Table 2 in the report exactly. <strong>Move the sliders</strong> to test how sensitive the case is.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div><div class="panel-title">Replacement economics — condition-based vs. age-based</div><div class="panel-sub">hypothetical fleet · public list pricing · not an SHC estimate</div></div>
+      <button class="reset" id="reset">Reset to report values</button>
     </div>
-    <div class="slabel" style="color:rgba(241,245,249,.28);margin-bottom:10px">Get in touch</div>
-    <h2 style="font-size:clamp(26px,4vw,44px);margin-bottom:12px">Let's build clinical IT<br>that actually works</h2>
-    <p>Open to Healthcare IT, Clinical Informatics, and Clinical System Analyst roles. Based in San Jose, CA — open to hybrid and remote.</p>
-    <div class="clinks">
-      <a href="mailto:nguyenandy770@gmail.com" class="cl cl-em">✉ nguyenandy770@gmail.com</a>
-      <a href="https://www.linkedin.com/in/anh-truong-nguyen/" target="_blank" class="cl cl-li">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-      </a>
-      <a href="tel:4087123221" class="cl cl-ph">☎ (408) 712-3221</a>
+    <div class="roi">
+      <div class="roi-l">
+        <div class="par"><div class="par-h"><span>Fleet size</span><span class="par-v" id="vFleet">1,000 carts</span></div><input type="range" id="pFleet" min="200" max="4000" step="50" value="1000"><div class="par-n">round number for illustration</div></div>
+        <div class="par"><div class="par-h"><span>Current age-based cycle</span><span class="par-v" id="vCur">5.5 yrs</span></div><input type="range" id="pCur" min="3" max="7" step="0.5" value="5.5"></div>
+        <div class="par"><div class="par-h"><span>Condition-based chassis life</span><span class="par-v" id="vNew">8 yrs</span></div><input type="range" id="pNew" min="6" max="10" step="0.5" value="8"><div class="par-n">literature range 7–10 years</div></div>
+        <div class="par"><div class="par-h"><span>New cart price</span><span class="par-v" id="vPrice">$2,184</span></div><input type="range" id="pPrice" min="1200" max="6000" step="12" value="2184"><div class="par-n">public list price, UL 60601-1 cart</div></div>
+        <div class="par"><div class="par-h"><span>Battery repower cost</span><span class="par-v" id="vRep">50% of new</span></div><input type="range" id="pRep" min="20" max="90" step="5" value="50"><div class="par-n">vendor-reported repower pricing</div></div>
+      </div>
+      <div class="roi-r">
+        <table class="ledger">
+          <tr><td>Replacements per year, today</td><td id="lCurB">1,000 ÷ 5.5</td><td id="lCur">—</td></tr>
+          <tr><td>Replacements per year, condition-based</td><td id="lNewB">1,000 ÷ 8</td><td id="lNew">—</td></tr>
+          <tr><td>Gross avoided replacement cost</td><td id="lGrossB">57 × $2,184</td><td id="lGross" class="v-ok">—</td></tr>
+          <tr><td>Added battery repower cost</td><td id="lRepB">57 × $1,092</td><td id="lRepC" class="v-bad">—</td></tr>
+          <tr class="tot"><td>Net annual position</td><td>before avoided harm</td><td id="lNet">—</td></tr>
+        </table>
+        <div class="tog" id="tog"><div class="box"></div><div class="tog-t"><strong>Show the upside the report leaves out.</strong> The base case excludes avoided patient harm on purpose, so approval never depends on a contested harm estimate.</div></div>
+        <div id="harm">
+          <div class="par"><div class="par-h"><span>Preventable adverse drug events avoided / yr</span><span class="par-v" id="vAde">2</span></div><input type="range" id="pAde" min="0" max="20" step="1" value="2"><div class="par-n">$3,511–$8,116 each (Hug et al., 2012)</div></div>
+          <table class="ledger"><tr class="tot"><td>Net position with avoided harm</td><td id="lHarmB">range</td><td id="lHarm" class="v-p">—</td></tr></table>
+        </div>
+        <div class="hum" id="hum"><b>What the model shows</b><p>—</p></div>
+      </div>
     </div>
   </div>
-</div>
+  <div class="note" style="margin-top:18px"><strong>What moves the size of the case, not its direction:</strong> high-traffic carts in the ED and perioperative areas wear faster than ambulatory ones, so a single fleet-wide target understates some needs and overstates others — the pilot exists partly to set tiered targets. SHC's negotiated pricing is almost certainly below public list price, which makes the real economics <em>more</em> favorable. And the whole mechanism assumes the vendor agreement allows condition-triggered service requests; if it doesn't, the change moves to the next contract cycle rather than disappearing.</div>
+</section>
 
-<script>
-// Highlight active project tab on scroll
-const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05'];
-const navTabs = document.querySelectorAll('.proj-nav-tab');
-window.addEventListener('scroll', () => {
-  let current = '';
-  projSections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && window.scrollY >= el.offsetTop - 120) current = id;
-  });
-  navTabs.forEach((tab, i) => {
-    tab.classList.toggle('active', tab.getAttribute('href') === '#' + current);
-  });
-});
-</script>
+<!-- 4. ALTERNATIVES -->
+<section>
+  <div class="slab">04 — Options weighed</div>
+  <h2>Three alternatives, and why they lost</h2>
+  <p class="lede">A recommendation is only as credible as the options it beat. Each of these is something a reasonable manager would propose first.</p>
+  <div class="alts">
+    <div class="alt no"><div class="alt-s">Ruled out</div><div><h4>Shorten the age cycle to 3–4 years</h4><p>Keeps pace with the battery, but retires chassis with years of life left — more cost, more e-waste, and it still schedules by the wrong variable. It treats the symptom, not the cause.</p></div></div>
+    <div class="alt no"><div class="alt-s">Ruled out</div><div><h4>Bring component repair in-house</h4><p>Requires new skills, spare-parts inventory, and likely forfeits existing warranty coverage. It turns a simple adjustment into an expensive program with a long payback.</p></div></div>
+    <div class="alt no"><div class="alt-s">Ruled out</div><div><h4>Accept the failure rate as normal business risk</h4><p>The current approach discards serviceable equipment while tolerating avoidable failures. Doing nothing forgoes an improvement that needs no investment.</p></div></div>
+    <div class="alt pick"><div class="alt-s">Recommended</div><div><h4>Replace on measured condition, using the service already paid for</h4><p>Change what triggers a service call — predicted failure instead of actual failure — inside the existing vendor relationship. No new vendor spend, no insourcing, no new nursing procedures. Approve in principle now; confirm the numbers through SHC's internal data process.</p></div></div>
+  </div>
+</section>
+
+<!-- 5. ETHICS & PEOPLE -->
+<section>
+  <div class="slab">05 — People and ethics</div>
+  <h2>The parts a purely technical plan would miss</h2>
+  <div class="grid2">
+    <div class="card"><h3>Ethical conditions</h3><ul>
+      <li><strong>Knowledge creates duty.</strong> Once telemetry shows a cart is failing, keeping it in service is a choice, not an oversight. A written response-threshold policy must exist <em>before</em> monitoring is switched on.</li>
+      <li><strong>Just culture.</strong> Workarounds are visible; the failing equipment behind them often isn't. Scan-rate data must never be used to blame nurses without checking the device first.</li>
+      <li><strong>Fair distribution.</strong> Prioritizing high-acuity units is defensible, but it improves reliability unevenly — so the criteria should be transparent to nursing leadership, not buried in an algorithm.</li>
+      <li><strong>Data governance.</strong> Report reliability by unit, never by individual clinician, and set that limit before the dashboard is designed.</li>
+    </ul></div>
+    <div class="card"><h3>Workforce and leadership</h3><ul>
+      <li><strong>Reliability is a retention issue.</strong> 41% of nurses planning to leave within five years cite stress and burnout. A failing scanner during the med pass is a small, daily contributor.</li>
+      <li><strong>About 30% of SHC staff are unionized</strong>, so any change to the medication-pass environment goes through labor partners and nursing shared governance, not an announcement.</li>
+      <li><strong>Adoption fails on trust, not technology.</strong> The plan briefs councils first, recruits unit champions, and pilots visibly before asking anyone to scale.</li>
+      <li><strong>The vendor is a partner, not a supplier.</strong> The key change can't happen through internal leadership alone — it has to be negotiated.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 6. PHASES -->
+<section>
+  <div class="slab">06 — Implementation</div>
+  <h2>Three phases, each gated by the one before</h2>
+  <p class="lede">Phasing lets SHC test the model's assumptions against its own data before committing at scale — which answers the report's biggest limitation directly.</p>
+  <div class="phases">
+    <div class="ph"><div class="ph-n">1</div><div class="ph-t">Foundation · no capital</div><h4>Fix the data, engage the vendor</h4><p>Clean up device and configuration records so condition can be tied to a specific cart and location — also a HIPAA device-accountability requirement. Open vendor talks. Draft the response-threshold policy.</p><div class="ph-m"><b>Success measure</b>Data accuracy threshold met; vendor agreement reviewed</div></div>
+    <div class="ph"><div class="ph-n">2</div><div class="ph-t">Pilot</div><h4>Monitor a mixed-acuity segment</h4><p>Deploy condition monitoring on a limited slice of the fleet, including high- and low-acuity units, to generate SHC's own failure data and test the threshold policy under real conditions.</p><div class="ph-m"><b>Success measure</b>SHC-specific failure data generated; threshold policy tested</div></div>
+    <div class="ph"><div class="ph-n">3</div><div class="ph-t">Scale · contingent on pilot</div><h4>Enterprise rollout with tiered targets</h4><p>Roll out fleet-wide with service-life targets set by utilization band, using what the pilot learned rather than a single uniform number.</p><div class="ph-m"><b>Success measure</b>Fewer bedside-discovered failures against a confirmed baseline</div></div>
+  </div>
+</section>
+
+<!-- 7. CLOSE -->
+<section>
+  <div class="slab">07 — Why this is here</div>
+  <h2>The business half of the same problem</h2>
+  <p class="lede">The five projects on this portfolio are about what happens when clinical technology fails a patient. This capstone asks the question that comes before any of them get built: <strong>how do you get an organization to fund the fix?</strong> It's written for the people who approve budgets — and it argues from their constraints, not the analyst's enthusiasm.</p>
+  <div class="grid2">
+    <div class="card"><h3>What it demonstrates</h3><ul>
+      <li><strong>Capital strategy under constraint</strong> — designing a solution to win against mandatory construction for scarce capital</li>
+      <li><strong>Financial modeling with honest limits</strong> — a transparent model built from public data, with SHC-specific figures left as named data requests</li>
+      <li><strong>Root-cause framing</strong> — the problem is the scheduling variable, not the equipment or the staff</li>
+      <li><strong>Stakeholder reconciliation</strong> — finance wants predictability, nursing wants fewer failures; the plan gives both</li>
+      <li><strong>Ethics as design requirements</strong> — policies that must exist before the technology switches on</li>
+    </ul></div>
+    <div class="card"><h3>What I'd say in an interview</h3><ul>
+      <li>"Age is the only variable a fleet manager has when nobody measures condition — so the fix is measuring condition, not buying carts sooner"</li>
+      <li>"I built the case so it didn't need a patient-harm number to pass. Harm avoided is upside, not the argument"</li>
+      <li>"At Stanford, a proposal that needs new capital is competing with seismic construction. Capital-neutral wasn't a nice-to-have, it was the entry ticket"</li>
+      <li>"The day you can see a cart failing, keeping it on the floor becomes a decision someone owns"</li>
+    </ul></div>
+  </div>
+  <div class="note" style="margin-top:20px"><strong>On sources:</strong> SHC approved use of its name and public information for this project. Every organizational figure comes from SHC's public bond disclosures (S&amp;P Global Ratings, 2025); every claim about device management comes from published industry and academic literature. No protected health information, confidential information, or internal operational data appears in the report or on this page.</div>
+</section>
+
 <footer>
-  <span style="font-family:'DM Mono',monospace;font-size:11px">Anh Truong Nguyen · Portfolio</span>
-  <span style="font-size:11px">San Jose, CA · Open to Healthcare IT &amp; Clinical Informatics roles</span>
+  <span>MBA Capstone · Capella University · public sources only · no PHI</span>
+  <span><a href="https://andy205261.github.io">andy205261.github.io</a></span>
 </footer>
+</div>
 
 <script>
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
-}, { threshold: 0.08 });
-document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+(function(){
+  var t = document.getElementById('ticks');
+  for (var i = 0; i <= 10; i += 2){
+    var s = document.createElement('span');
+    s.style.left = (i * 10) + '%';
+    s.textContent = i;
+    t.appendChild(s);
+  }
+
+  var D = {Fleet:1000, Cur:5.5, New:8, Price:2184, Rep:50, Ade:2};
+  var R = JSON.parse(JSON.stringify(D));
+  var harmOn = false;
+
+  function r100(n){ return Math.round(n/100)*100; }
+  function usd(n){ var s = n < 0 ? '−' : '+'; return s + '$' + Math.abs(n).toLocaleString('en-US'); }
+  function plain(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+
+  function calc(){
+    var cur = Math.round(R.Fleet / R.Cur);
+    var nw = Math.round(R.Fleet / R.New);
+    var avoided = cur - nw;
+    var repUnit = Math.round(R.Price * R.Rep / 100);
+    var gross = r100(avoided * R.Price);
+    var rep = r100(avoided * repUnit);
+    var net = gross - rep;
+
+    document.getElementById('lCurB').textContent = R.Fleet.toLocaleString() + ' ÷ ' + R.Cur;
+    document.getElementById('lNewB').textContent = R.Fleet.toLocaleString() + ' ÷ ' + R.New;
+    document.getElementById('lCur').textContent = '~' + cur.toLocaleString() + ' carts';
+    document.getElementById('lNew').textContent = '~' + nw.toLocaleString() + ' carts';
+    document.getElementById('lGrossB').textContent = avoided.toLocaleString() + ' × ' + plain(R.Price);
+    document.getElementById('lRepB').textContent = avoided.toLocaleString() + ' × ' + plain(repUnit);
+    document.getElementById('lGross').textContent = usd(gross);
+    document.getElementById('lRepC').textContent = usd(-rep);
+    var ne = document.getElementById('lNet');
+    ne.textContent = usd(net);
+    ne.className = net >= 0 ? 'v-ok' : 'v-bad';
+
+    var lo = net + R.Ade * 3511, hi = net + R.Ade * 8116;
+    document.getElementById('lHarmB').textContent = R.Ade + ' events × $3,511–$8,116';
+    document.getElementById('lHarm').textContent = usd(lo) + ' to ' + usd(hi);
+
+    var perCart = R.Fleet > 0 ? net / R.Fleet : 0;
+    var isDefault = JSON.stringify(R) === JSON.stringify(D);
+    var h = document.getElementById('hum');
+    var msg;
+    if (avoided <= 0){
+      msg = '<p>With the condition-based life set at or below the current cycle, there are no avoided replacements — the model only works if measuring condition lets chassis serve <strong>longer</strong> than the age cutoff allows. That is exactly the literature finding the case rests on: chassis last 7–10 years, well past a 5–6 year cycle.</p>';
+    } else if (net < 0){
+      msg = '<p>At these inputs the added repower cost outweighs the avoided replacements, for a net of <strong>' + usd(net) + '</strong> a year. That happens when repowering costs nearly as much as a new cart — which is the assumption to verify with the vendor first, and why vendor engagement is a phase-one workstream rather than a later step.</p>';
+    } else {
+      msg = '<p><strong>' + avoided.toLocaleString() + ' fewer cart replacements a year</strong> for a net ' + usd(net) + ' — about $' + Math.round(perCart) + ' per cart in the fleet, before counting a single avoided error. ' + (isDefault ? 'These are the report\'s own Table 2 figures.' : 'The direction holds; only the size moved.') + '</p><p>The number is modest on purpose. The point isn\'t that it\'s big — it\'s that <em>it\'s positive without new capital, and without needing anyone to believe a patient-harm estimate.</em> That is what gets a proposal approved in a year when capital is committed to construction.</p>';
+    }
+    h.innerHTML = '<b>What the model shows</b>' + msg;
+  }
+
+  var cfg = [
+    ['pFleet','Fleet','vFleet',function(v){return (+v).toLocaleString()+' carts';}],
+    ['pCur','Cur','vCur',function(v){return v+' yrs';}],
+    ['pNew','New','vNew',function(v){return v+' yrs';}],
+    ['pPrice','Price','vPrice',function(v){return '$'+(+v).toLocaleString();}],
+    ['pRep','Rep','vRep',function(v){return v+'% of new';}],
+    ['pAde','Ade','vAde',function(v){return v;}]
+  ];
+  cfg.forEach(function(c){
+    var el = document.getElementById(c[0]);
+    el.addEventListener('input', function(){
+      R[c[1]] = +el.value;
+      document.getElementById(c[2]).textContent = c[3](el.value);
+      calc();
+    });
+  });
+  document.getElementById('reset').addEventListener('click', function(){
+    R = JSON.parse(JSON.stringify(D));
+    cfg.forEach(function(c){
+      document.getElementById(c[0]).value = D[c[1]];
+      document.getElementById(c[2]).textContent = c[3](D[c[1]]);
+    });
+    calc();
+  });
+  document.getElementById('tog').addEventListener('click', function(){
+    harmOn = !harmOn;
+    this.classList.toggle('on', harmOn);
+    document.getElementById('harm').classList.toggle('show', harmOn);
+  });
+  calc();
+})();
 </script>
 </body>
 </html>
