@@ -8,33 +8,36 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --ink:#f1f5f9;--ink2:#cbd5e1;--ink3:#94a3b8;
-  --paper:#080c14;--paper2:#0e1420;--paper3:#131b2e;
+  --ink:#f1f5f9;--ink2:#d5dee9;--ink3:#a3b3c7;
+  --paper:#0a0f1a;--paper2:#121a28;--paper3:#182136;
   --accent:#38bdf8;--accent-bright:#38bdf8;--accent2:rgba(56,189,248,0.1);
   --teal:#2dd4bf;--teal2:rgba(45,212,191,0.1);
   --green:#34d399;--green2:rgba(52,211,153,0.1);
   --amber:#fbbf24;--amber2:rgba(251,191,36,0.1);
   --purple:#a78bfa;--purple2:rgba(167,139,250,0.1);
   --red:#f87171;--red2:rgba(248,113,113,0.1);
-  --rule:rgba(255,255,255,0.06);
+  --pink:#f472b6;
+  --w03:rgba(255,255,255,0.05);--w04:rgba(255,255,255,0.06);--w05:rgba(255,255,255,0.07);--w06:rgba(255,255,255,0.09);--w07:rgba(255,255,255,0.10);--w10:rgba(255,255,255,0.13);--w14:rgba(255,255,255,0.18);--w25:rgba(255,255,255,0.30);--w28:rgba(255,255,255,0.46);--w30:rgba(255,255,255,0.40);--w50:rgba(255,255,255,0.66);
+  --deep3:#0b1120;--deep:#0d1523;--deep2:#121a2a;--nav-bg:rgba(10,15,26,0.88);--on-accent:#080c14;
+  --rule:rgba(255,255,255,0.10);
   --card-shadow:0 1px 3px rgba(0,0,0,0.4),0 4px 16px rgba(0,0,0,0.3);
   --card-shadow-hover:0 0 0 1px rgba(56,189,248,0.25),0 8px 32px rgba(56,189,248,0.08),0 2px 8px rgba(0,0,0,0.4);
 }
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,12,20,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--rule)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);backdrop-filter:blur(24px);border-bottom:1px solid var(--rule)}
 .nav-logo{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);letter-spacing:-.3px}
 .nav-logo span{color:var(--accent)}
 .nav-links{display:flex;gap:4px;align-items:center}
 .nav-links a{font-size:13px;font-weight:500;color:var(--ink3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .15s}
-.nav-links a:hover{color:var(--ink);background:rgba(255,255,255,0.06)}
-.nav-cta{background:var(--accent)!important;color:#080c14!important;padding:7px 16px!important;border-radius:6px!important;font-size:12px!important;font-weight:700!important}
+.nav-links a:hover{color:var(--ink);background:var(--w06)}
+.nav-cta{background:var(--accent)!important;color:var(--on-accent)!important;padding:7px 16px!important;border-radius:6px!important;font-size:12px!important;font-weight:700!important}
 .nav-cta:hover{background:#7dd3fc!important}
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden;background:var(--paper)}
 .hero::before{content:'';position:absolute;top:-200px;right:-100px;width:800px;height:800px;background:radial-gradient(ellipse,rgba(56,189,248,0.13) 0%,transparent 65%);pointer-events:none}
 .hero::after{content:'';position:absolute;bottom:-100px;left:10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(167,139,250,0.09) 0%,transparent 65%);pointer-events:none}
 .hero-glow{position:absolute;top:30%;left:-100px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(45,212,191,0.06) 0%,transparent 65%);pointer-events:none}
-.hero-grid{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);background-size:48px 48px}
+.hero-grid{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(var(--w50) 1px,transparent 1px),linear-gradient(90deg,var(--w50) 1px,transparent 1px);background-size:48px 48px}
 .htag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:rgba(56,189,248,0.08);padding:5px 14px;border-radius:100px;letter-spacing:.06em;margin-bottom:24px;border:1px solid rgba(56,189,248,0.2)}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite;box-shadow:0 0 8px var(--accent)}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
@@ -43,12 +46,12 @@ h1 em{font-style:italic;color:var(--accent);text-shadow:0 0 40px rgba(56,189,248
 .hero-sub{font-size:17px;font-weight:400;color:var(--ink3);max-width:520px;line-height:1.75;margin-bottom:36px}
 .ctas{display:flex;gap:8px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.01em;transition:all .18s;font-family:'Outfit',sans-serif}
-.btn-dark{background:var(--accent);color:#080c14;font-weight:700}
+.btn-dark{background:var(--accent);color:var(--on-accent);font-weight:700}
 .btn-dark:hover{background:#7dd3fc;transform:translateY(-1px);box-shadow:0 4px 20px rgba(56,189,248,0.35)}
 .btn-li{background:#0077b5;color:#fff}
 .btn-li:hover{background:#005885;transform:translateY(-1px)}
-.btn-out{border:1px solid rgba(255,255,255,0.14);color:var(--ink);background:rgba(255,255,255,0.05)}
-.btn-out:hover{border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.1)}
+.btn-out{border:1px solid var(--w14);color:var(--ink);background:var(--w05)}
+.btn-out:hover{border-color:var(--w25);background:var(--w10)}
 .btn-dl{background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-weight:600}
 .btn-dl:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(16,185,129,0.35)}
 .stats{display:flex;gap:40px;margin-top:52px;padding-top:36px;border-top:1px solid var(--rule)}
@@ -63,7 +66,7 @@ a.proj-label:hover{background:rgba(56,189,248,0.18);border-color:rgba(56,189,248
 .proj-nav-tab:hover{border-color:color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 14%,transparent)}
 .proj-nav-tab:hover .tn{background:color-mix(in srgb,var(--c) 26%,transparent);border-color:color-mix(in srgb,var(--c) 45%,transparent)}
 .proj-nav-tab.active{font-weight:500;border-color:var(--c);background:color-mix(in srgb,var(--c) 18%,transparent);box-shadow:0 0 18px color-mix(in srgb,var(--c) 20%,transparent)}
-.proj-nav-tab.active .tn{color:#080c14;background:var(--c);border-color:var(--c);font-weight:700}
+.proj-nav-tab.active .tn{color:var(--on-accent);background:var(--c);border-color:var(--c);font-weight:700}
 @media(max-width:640px){.proj-nav-tab{font-size:11.5px;padding:7px 12px 7px 9px}}
 .proj-nav-tab .tl{padding-left:0}
 .proj-nav-tab .tl::before{display:none}
@@ -75,7 +78,7 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,3.8vw,46px);letter-
 .pivot-list{list-style:none;margin-top:18px}
 .pivot-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink3);margin-bottom:11px;line-height:1.55}
 .pivot-list li::before{content:'→';color:var(--accent);font-family:'DM Mono',monospace;flex-shrink:0;margin-top:1px}
-.about-right{padding:28px;background:rgba(255,255,255,.03);border:1px solid var(--rule);border-radius:12px}
+.about-right{padding:28px;background:var(--w03);border:1px solid var(--rule);border-radius:12px}
 .about-right .slabel{color:var(--ink3)}
 .qrow{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule)}
 .qrow:last-child{border-bottom:none}
@@ -86,7 +89,7 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,3.8vw,46px);letter-
 .card:hover{transform:translateY(-3px);box-shadow:var(--card-shadow-hover);border-color:rgba(56,189,248,0.25)}
 .card-head{padding:22px 22px 16px;border-bottom:1px solid var(--rule)}
 .tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
-.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.04em;padding:3px 9px;border-radius:100px;background:rgba(255,255,255,0.05);color:var(--ink3);border:1px solid var(--rule)}
+.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.04em;padding:3px 9px;border-radius:100px;background:var(--w05);color:var(--ink3);border:1px solid var(--rule)}
 .tag.b{background:rgba(56,189,248,0.1);color:var(--accent);border-color:rgba(56,189,248,0.2)}
 .tag.g{background:rgba(52,211,153,0.1);color:var(--green);border-color:rgba(52,211,153,0.2)}
 .tag.a{background:rgba(251,191,36,0.1);color:var(--amber);border-color:rgba(251,191,36,0.2)}
@@ -104,18 +107,18 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,3.8vw,46px);letter-
 .mv.warn{color:var(--amber)}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-bottom:20px;box-shadow:var(--card-shadow)}
 .pan{background:var(--paper2);padding:32px}
-.pan.dk{background:#050810}
+.pan.dk{background:var(--deep3)}
 .pan.dk h3{color:var(--ink)}
 .pan.dk p{color:var(--ink3)}
 h3{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-.3px;margin-bottom:10px;font-weight:400}
 .shap{margin:14px 0}
 .srow{display:flex;align-items:center;gap:10px;margin:6px 0}
-.slb{font-size:11px;color:rgba(255,255,255,.3);width:88px;font-family:'DM Mono',monospace}
-.strk{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:10px;overflow:hidden}
+.slb{font-size:11px;color:var(--w30);width:88px;font-family:'DM Mono',monospace}
+.strk{flex:1;height:5px;background:var(--w06);border-radius:10px;overflow:hidden}
 .sbar{height:100%;border-radius:10px}
 .sval{font-size:10px;font-family:'DM Mono',monospace;width:36px;text-align:right}
 .agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.acard{padding:12px;border:1px solid var(--rule);border-radius:8px;background:rgba(255,255,255,0.03);transition:all .18s}
+.acard{padding:12px;border:1px solid var(--rule);border-radius:8px;background:var(--w03);transition:all .18s}
 .acard:hover{border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.06)}
 .aname{font-size:12px;font-weight:600;margin-bottom:2px;color:var(--ink)}
 .adesc{font-size:11px;color:var(--ink3);line-height:1.35}
@@ -127,7 +130,7 @@ h3{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-.3px;marg
 .sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .sgroup{padding:20px;background:var(--paper2);border:1px solid var(--rule);border-radius:12px;box-shadow:var(--card-shadow)}
 .sgtitle{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
-.si{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.si{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--w04)}
 .si:last-child{border-bottom:none}
 .sn{font-size:12px;color:var(--ink)}
 .sd{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(52,211,153,0.5)}
@@ -156,7 +159,7 @@ h3{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-.3px;marg
 .cl-em:hover{background:rgba(56,189,248,0.14);box-shadow:0 0 20px rgba(56,189,248,0.15)}
 .cl-li{background:#0077b5;color:#fff}
 .cl-li:hover{background:#005885}
-.cl-ph{background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule)}
+.cl-ph{background:var(--w04);color:var(--ink3);border:1px solid var(--rule)}
 footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--rule);font-size:12px;color:var(--ink3);background:var(--paper)}
 .avatar-ring{width:80px;height:80px;border-radius:50%;border:2px solid rgba(56,189,248,0.2);overflow:hidden;flex-shrink:0}
 .avatar-ring img{width:100%;height:100%;object-fit:cover;object-position:center top}
@@ -176,18 +179,41 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   .hero-inner{grid-template-columns:1fr!important;gap:24px!important}
   .hero-metrics{grid-template-columns:repeat(2,1fr)!important}
 }
+
+/* ---------- LIGHT THEME ---------- */
+html.light{
+  --ink:#0f172a;--ink2:#334155;--ink3:#64748b;
+  --paper:#f7f9fc;--paper2:#ffffff;--paper3:#eef3f9;
+  --accent:#0369a1;--accent-bright:#0369a1;--accent2:rgba(3,105,161,0.08);
+  --teal:#0f766e;--teal2:rgba(15,118,110,0.09);
+  --green:#047857;--green2:rgba(4,120,87,0.09);
+  --amber:#b45309;--amber2:rgba(180,83,9,0.09);
+  --purple:#6d28d9;--purple2:rgba(109,40,217,0.09);
+  --red:#be123c;--red2:rgba(190,18,60,0.09);
+  --pink:#be185d;
+  --w03:rgba(15,23,42,0.03);--w04:rgba(15,23,42,0.04);--w05:rgba(15,23,42,0.05);--w06:rgba(15,23,42,0.07);--w07:rgba(15,23,42,0.09);--w10:rgba(15,23,42,0.10);--w14:rgba(15,23,42,0.14);--w25:rgba(15,23,42,0.22);--w28:rgba(15,23,42,0.45);--w30:rgba(15,23,42,0.30);--w50:rgba(15,23,42,0.55);
+  --deep3:#f2f6fb;--deep:#eef3f9;--deep2:#e7eef7;--nav-bg:rgba(247,249,252,0.88);--on-accent:#ffffff;
+  --rule:rgba(15,23,42,0.10);
+  --card-shadow:0 1px 2px rgba(15,23,42,0.06),0 4px 14px rgba(15,23,42,0.07);
+  --card-shadow-hover:0 0 0 1px rgba(3,105,161,0.28),0 8px 28px rgba(3,105,161,0.12),0 2px 8px rgba(15,23,42,0.08);
+}
+html.light body{background:var(--paper);color:var(--ink)}
+/* theme toggle */
+.theme-btn{position:fixed;right:18px;bottom:18px;z-index:9999;display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:100px;border:1px solid var(--rule);background:var(--paper2);color:var(--ink2);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.04em;cursor:pointer;box-shadow:var(--card-shadow);transition:all .2s}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
+@media print{.theme-btn{display:none}}
 </style>
 </head>
 <body>
 
 <nav>
   <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:flex;align-items:center;text-decoration:none">
-    <div id="logo-box" style="position:relative;width:44px;height:44px;border-radius:10px;flex-shrink:0;background:#080c14;border:1.5px solid rgba(52,211,153,.6);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:logo-border 3s ease-in-out infinite">
+    <div id="logo-box" style="position:relative;width:44px;height:44px;border-radius:10px;flex-shrink:0;background:var(--deep);border:1.5px solid rgba(52,211,153,.6);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:logo-border 3s ease-in-out infinite">
       <svg width="32" height="32" viewBox="0 0 32 32">
         <text id="logo-a" x="16" y="22" font-family="'Arial',sans-serif" font-size="26" font-weight="100"
-          fill="none" stroke="#38bdf8" stroke-width="1" text-anchor="middle">A</text>
+          fill="none" stroke="var(--accent)" stroke-width="1" text-anchor="middle">A</text>
         <path id="wave-path" d="M-32,28 Q-28,23 -24,28 Q-20,33 -16,28 Q-12,23 -8,28 Q-4,33 0,28 Q4,23 8,28 Q12,33 16,28 Q20,23 24,28 Q28,33 32,28 Q36,23 40,28 Q44,33 48,28"
-          fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round"/>
+          fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/>
       </svg>
     </div>
   </a>
@@ -307,7 +333,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   <div class="about-right">
     <div class="slabel">At a glance</div>
     <div class="qrow"><span class="qk">Location</span><span class="qv">San Jose, CA</span></div>
-    <div class="qrow"><span class="qk">Education</span><span class="qv" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span>DBA · Capella</span><span style="color:#a78bfa;font-size:10px;font-family:'DM Mono',monospace;font-weight:600">STARTS OCT 2026</span></span></div>
+    <div class="qrow"><span class="qk">Education</span><span class="qv" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span>DBA · Capella</span><span style="color:var(--purple);font-size:10px;font-family:'DM Mono',monospace;font-weight:600">STARTS OCT 2026</span></span></div>
     <div class="qrow"><span class="qk"></span><span class="qv" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span>MBA Healthcare Mgmt · Capella</span><span style="color:var(--green);font-size:10px;font-family:'DM Mono',monospace;font-weight:600">COMPLETED</span></span></div>
     <div class="qrow"><span class="qk"></span><span class="qv" style="color:var(--ink3);font-size:12px">B.S. Cybersecurity · Capella</span></div>
     <div class="qrow"><span class="qk">Current role</span><span class="qv hi">Sr. Solutions Tech Specialist · Stanford Health Care</span></div>
@@ -324,12 +350,12 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   <h2 class="fi">Projects</h2>
   <!-- PROJECT NAV TABS -->
   <div id="proj-tabs" style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:40px;padding:14px;background:var(--paper2);border:1px solid var(--rule);border-radius:14px">
-    <a href="#proj-01" class="proj-nav-tab active" style="--c:#f87171"><span class="tn">01</span><span class="tl">Cancer Center Automation</span></a>
-    <a href="#proj-02" class="proj-nav-tab" style="--c:#38bdf8"><span class="tn">02</span><span class="tl">Neurocritical Automation</span></a>
-    <a href="#proj-03" class="proj-nav-tab" style="--c:#34d399"><span class="tn">03</span><span class="tl">Epic Analyst Lab</span></a>
-    <a href="#proj-04" class="proj-nav-tab" style="--c:#fbbf24"><span class="tn">04</span><span class="tl">Automation Governance</span></a>
-    <a href="#proj-05" class="proj-nav-tab" style="--c:#a78bfa"><span class="tn">05</span><span class="tl">Epilepsy Unit Capacity</span></a>
-    <a href="#capstone" class="proj-nav-tab" style="--c:#f472b6"><span class="tn">MBA</span><span class="tl">Capstone</span></a>
+    <a href="#proj-01" class="proj-nav-tab active" style="--c:var(--red)"><span class="tn">01</span><span class="tl">Cancer Center Automation</span></a>
+    <a href="#proj-02" class="proj-nav-tab" style="--c:var(--accent)"><span class="tn">02</span><span class="tl">Neurocritical Automation</span></a>
+    <a href="#proj-03" class="proj-nav-tab" style="--c:var(--green)"><span class="tn">03</span><span class="tl">Epic Analyst Lab</span></a>
+    <a href="#proj-04" class="proj-nav-tab" style="--c:var(--amber)"><span class="tn">04</span><span class="tl">Automation Governance</span></a>
+    <a href="#proj-05" class="proj-nav-tab" style="--c:var(--purple)"><span class="tn">05</span><span class="tl">Epilepsy Unit Capacity</span></a>
+    <a href="#capstone" class="proj-nav-tab" style="--c:var(--pink)"><span class="tn">MBA</span><span class="tl">Capstone</span></a>
   </div>
   <p class="intro fi">Five in-depth projects where neuroscience, clinical automation, and health system operations meet — from CAR-T neurotoxicity surveillance and neuro-ICU seizure alerting to Epic analyst simulations, RPA governance, and EEG machine learning. Each one is a working build that names both what it does for patients and what it is worth to the institution.</p>
 
@@ -344,40 +370,40 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <h3>CAR-T neurotoxicity watch &amp; capacity model</h3>
         <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">CAR-T cell therapy cures cancers nothing else could touch. Its most feared complication is neurological — <b style="color:var(--ink);font-weight:600">ICANS</b>: lucid at noon, confused by evening, seizing by morning. The warning sign is measured by asking a patient to write one sentence. This project automates the catching of that signal through trend detection rather than thresholds, then does what clinical projects usually avoid: it models what catching it 16 hours earlier is worth — in ICU days, in released treatment slots, and in patients who never lose the ability to speak to their family.</p>
         <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">BED 07 · ICE TRAJECTORY OVER 72H</div>
-          <div class="srow"><span class="slb">Hour 16 — score 9</span><div class="strk"><div class="sbar" style="width:90%;background:#34d399"></div></div><span class="sval" style="color:#34d399">stable</span></div>
-          <div class="srow"><span class="slb">Hour 24 — score 8</span><div class="strk"><div class="sbar" style="width:80%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">trend fires</span></div>
-          <div class="srow"><span class="slb">Hour 40 — score 6</span><div class="strk"><div class="sbar" style="width:60%;background:#f87171"></div></div><span class="sval" style="color:#f87171">threshold fires</span></div>
-          <div class="srow"><span class="slb">Detection lead time gained</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">16 h</span></div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--w28);margin-bottom:8px;letter-spacing:.08em">BED 07 · ICE TRAJECTORY OVER 72H</div>
+          <div class="srow"><span class="slb">Hour 16 — score 9</span><div class="strk"><div class="sbar" style="width:90%;background:var(--green)"></div></div><span class="sval" style="color:var(--green)">stable</span></div>
+          <div class="srow"><span class="slb">Hour 24 — score 8</span><div class="strk"><div class="sbar" style="width:80%;background:var(--amber)"></div></div><span class="sval" style="color:var(--amber)">trend fires</span></div>
+          <div class="srow"><span class="slb">Hour 40 — score 6</span><div class="strk"><div class="sbar" style="width:60%;background:var(--red)"></div></div><span class="sval" style="color:var(--red)">threshold fires</span></div>
+          <div class="srow"><span class="slb">Detection lead time gained</span><div class="strk"><div class="sbar" style="width:100%;background:var(--accent)"></div></div><span class="sval" style="color:var(--accent)">16 h</span></div>
         </div>
         <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">MODELED IMPACT</div>
             <div style="font-size:13px;color:var(--ink)">58 ICU days avoided / yr</div>
           </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">CAPACITY RELEASED</div>
             <div style="font-size:13px;color:var(--accent)">~6 treatment slots / yr</div>
           </div>
         </div>
       </div>
       <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+        <div style="background:var(--deep2);padding:12px 16px;border-bottom:1px solid var(--w07)">
           <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Cell therapy unit — neurotoxicity board</div>
           <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">ICE assessments q8h · 72-hour window</div>
         </div>
         <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
+          <div style="background:var(--deep);border:1px solid var(--w07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
             <div style="color:var(--ink);margin-bottom:6px;font-size:12px">HOUR 24 · TREND ALERT — BED 07</div>
-            <div style="color:#fbbf24">ICE trajectory 10 → 9 → 8 over two assessments</div>
-            <div style="color:var(--ink3)">still grade 1 · patient oriented · <span style="color:#34d399">this is the window</span></div>
+            <div style="color:var(--amber)">ICE trajectory 10 → 9 → 8 over two assessments</div>
+            <div style="color:var(--ink3)">still grade 1 · patient oriented · <span style="color:var(--green)">this is the window</span></div>
             <div style="margin-top:6px;color:var(--ink3)">→ repeat assessment, rule out sedation</div>
             <div style="color:var(--ink3)">→ notify cell therapy APP <span style="color:var(--accent)">with the trend</span></div>
-            <div style="margin-top:6px;color:#f87171">threshold-only rule would fire at hour 40</div>
+            <div style="margin-top:6px;color:var(--red)">threshold-only rule would fire at hour 40</div>
           </div>
           <div style="display:flex;gap:8px;align-items:center">
             <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="cart/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Board →</a>
+            <a href="cart/" target="_blank" style="padding:8px 18px;background:var(--accent);color:var(--on-accent);border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Board →</a>
             <div style="flex:1;height:1px;background:var(--rule)"></div>
           </div>
           <div class="mrow"><span class="mk">Patient board</span><span class="mv">5 patients · scrubbable 72h timeline</span></div>
@@ -404,42 +430,42 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <h3>Neuro-ICU cEEG alert pipeline &amp; automation governance</h3>
         <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">Up to a fifth of comatose neuro-ICU patients are seizing with no outward movement — <b style="color:var(--ink);font-weight:600">non-convulsive status epilepticus</b>, visible only on continuous EEG, costing neurons every undetected hour. Detection is a solved math problem; getting the alert to the right clinician without drowning the unit in false alarms is a systems problem. This project maps the seven-hop pipeline from scalp to clinician, makes the sensitivity-versus-alert-burden tradeoff interactive, and proposes an autonomy framework for how much any clinical automation should be allowed to decide.</p>
         <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">THRESHOLD TRADEOFF · 24H MODELED WINDOW</div>
-          <div class="srow"><span class="slb">Max sensitivity (0.18)</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">104 FP</span></div>
-          <div class="srow"><span class="slb">Balanced (0.48)</span><div class="strk"><div class="sbar" style="width:22%;background:#34d399"></div></div><span class="sval" style="color:#34d399">23 FP</span></div>
-          <div class="srow"><span class="slb">Low noise (0.78)</span><div class="strk"><div class="sbar" style="width:7%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">7 FP</span></div>
-          <div class="srow"><span class="slb">Seizures missed at 0.78</span><div class="strk"><div class="sbar" style="width:56%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">5 of 9</span></div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--w28);margin-bottom:8px;letter-spacing:.08em">THRESHOLD TRADEOFF · 24H MODELED WINDOW</div>
+          <div class="srow"><span class="slb">Max sensitivity (0.18)</span><div class="strk"><div class="sbar" style="width:100%;background:var(--red)"></div></div><span class="sval" style="color:var(--red)">104 FP</span></div>
+          <div class="srow"><span class="slb">Balanced (0.48)</span><div class="strk"><div class="sbar" style="width:22%;background:var(--green)"></div></div><span class="sval" style="color:var(--green)">23 FP</span></div>
+          <div class="srow"><span class="slb">Low noise (0.78)</span><div class="strk"><div class="sbar" style="width:7%;background:var(--amber)"></div></div><span class="sval" style="color:var(--amber)">7 FP</span></div>
+          <div class="srow"><span class="slb">Seizures missed at 0.78</span><div class="strk"><div class="sbar" style="width:56%;background:var(--purple)"></div></div><span class="sval" style="color:var(--purple)">5 of 9</span></div>
         </div>
         <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">PIPELINE</div>
             <div style="font-size:13px;color:var(--ink)">7 hops · 5 owners</div>
           </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">AUTONOMY MODEL</div>
             <div style="font-size:13px;color:var(--accent)">5 rungs · reversibility × harm</div>
           </div>
         </div>
       </div>
       <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+        <div style="background:var(--deep2);padding:12px 16px;border-bottom:1px solid var(--w07)">
           <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Bed 7 — cEEG · live detector</div>
           <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Fp1-F7 · F7-T3 · T3-T5 · T5-O1 · 256 Hz</div>
         </div>
         <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
+          <div style="background:var(--deep);border:1px solid var(--w07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-              <span style="color:#f87171">⚡ RHYTHMIC EVOLVING DISCHARGE</span>
-              <span style="color:var(--ink)">score <b style="color:#f87171">0.91</b></span>
+              <span style="color:var(--red)">⚡ RHYTHMIC EVOLVING DISCHARGE</span>
+              <span style="color:var(--ink)">score <b style="color:var(--red)">0.91</b></span>
             </div>
             <div style="color:var(--ink3)">T1 · 0s &nbsp;→&nbsp; assigned RN, push + <span style="color:var(--accent)">ack required</span></div>
             <div style="color:var(--ink3)">T2 · 3m &nbsp;→&nbsp; unacknowledged, widen to charge RN + fellow</div>
-            <div style="color:var(--ink3)">T3 · 10m &nbsp;→&nbsp; sustained = <span style="color:#fbbf24">status epilepticus</span>, attending</div>
-            <div style="margin-top:6px;color:#34d399">every event → reviewable record · none disappear</div>
+            <div style="color:var(--ink3)">T3 · 10m &nbsp;→&nbsp; sustained = <span style="color:var(--amber)">status epilepticus</span>, attending</div>
+            <div style="margin-top:6px;color:var(--green)">every event → reviewable record · none disappear</div>
           </div>
           <div style="display:flex;gap:8px;align-items:center">
             <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="neuro/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Pipeline →</a>
+            <a href="neuro/" target="_blank" style="padding:8px 18px;background:var(--accent);color:var(--on-accent);border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Pipeline →</a>
             <div style="flex:1;height:1px;background:var(--rule)"></div>
           </div>
           <div class="mrow"><span class="mk">Live signal</span><span class="mv">4-channel cEEG canvas · inject seizure/artifact</span></div>
@@ -466,43 +492,43 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <h3>Epic incident simulations &amp; ticket-queue trainer</h3>
         <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px"><b style="color:var(--ink);font-weight:600">Clinical Systems Analysts</b> live where clinical workflow, system configuration, and risk intersect. This lab turns that job into a practice environment: three decision-based P1/P2 incidents worked end-to-end — an HL7 ORU filing failure with clickable message anatomy, an ADT sequence crisis with a stakeholder pressure-test, and a compromised provider account crossing into IAM and HIPAA breach territory — plus a daily shift trainer that deals 10 random tickets from a 32-scenario pool spanning the whole analyst surface.</p>
         <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">SCENARIO COVERAGE BY DOMAIN</div>
-          <div class="srow"><span class="slb">Interfaces &amp; HL7</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">3 sims</span></div>
-          <div class="srow"><span class="slb">Security &amp; IAM</span><div class="strk"><div class="sbar" style="width:88%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">7 tix</span></div>
-          <div class="srow"><span class="slb">ClinDoc &amp; Orders</span><div class="strk"><div class="sbar" style="width:74%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">8 tix</span></div>
-          <div class="srow"><span class="slb">Willow · Beaker · Radiant</span><div class="strk"><div class="sbar" style="width:66%;background:#34d399"></div></div><span class="sval" style="color:#34d399">7 tix</span></div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--w28);margin-bottom:8px;letter-spacing:.08em">SCENARIO COVERAGE BY DOMAIN</div>
+          <div class="srow"><span class="slb">Interfaces &amp; HL7</span><div class="strk"><div class="sbar" style="width:100%;background:var(--accent)"></div></div><span class="sval" style="color:var(--accent)">3 sims</span></div>
+          <div class="srow"><span class="slb">Security &amp; IAM</span><div class="strk"><div class="sbar" style="width:88%;background:var(--purple)"></div></div><span class="sval" style="color:var(--purple)">7 tix</span></div>
+          <div class="srow"><span class="slb">ClinDoc &amp; Orders</span><div class="strk"><div class="sbar" style="width:74%;background:var(--amber)"></div></div><span class="sval" style="color:var(--amber)">8 tix</span></div>
+          <div class="srow"><span class="slb">Willow · Beaker · Radiant</span><div class="strk"><div class="sbar" style="width:66%;background:var(--green)"></div></div><span class="sval" style="color:var(--green)">7 tix</span></div>
         </div>
         <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">SCENARIO POOL</div>
             <div style="font-size:13px;color:var(--ink)">3 incidents · 42 tickets</div>
           </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">REVEAL LAYERS</div>
             <div style="font-size:13px;color:var(--accent)">Triage → Fix → Know → Pitfalls</div>
           </div>
         </div>
       </div>
       <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+        <div style="background:var(--deep2);padding:12px 16px;border-bottom:1px solid var(--w07)">
           <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Clinical Systems Analyst Lab — Live</div>
           <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Incident sims · Shift trainer · Scenario library</div>
         </div>
         <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
           <div style="display:flex;gap:6px">
             <a href="csa-lab/incident-sim.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25);text-decoration:none">🚨 Incidents</a>
-            <a href="csa-lab/shift-trainer.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.04);color:var(--ink3);border:1px solid var(--rule);text-decoration:none">🎫 Shift Trainer</a>
+            <a href="csa-lab/shift-trainer.html" target="_blank" rel="noopener" style="padding:5px 12px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;background:var(--w04);color:var(--ink3);border:1px solid var(--rule);text-decoration:none">🎫 Shift Trainer</a>
           </div>
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
+          <div style="background:var(--deep);border:1px solid var(--w07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.7">
             <div style="color:var(--ink);margin-bottom:6px;font-size:12px">INC0482913 · P1 — BEAKER-ORU-IN</div>
-            <div style="color:#f87171">FILING ERROR: no matching order found</div>
-            <div style="color:#fbbf24">filler order number SHCB-20260705-000841</div>
-            <div style="margin-top:6px;color:var(--ink3)">error queue: <span style="color:#f87171">1,325</span> · deferred, not purged</div>
-            <div style="margin-top:4px;color:#34d399">→ fix forward · reprocess · safety review</div>
+            <div style="color:var(--red)">FILING ERROR: no matching order found</div>
+            <div style="color:var(--amber)">filler order number SHCB-20260705-000841</div>
+            <div style="margin-top:6px;color:var(--ink3)">error queue: <span style="color:var(--red)">1,325</span> · deferred, not purged</div>
+            <div style="margin-top:4px;color:var(--green)">→ fix forward · reprocess · safety review</div>
           </div>
           <div style="display:flex;gap:8px;align-items:center">
             <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="csa-lab/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Enter the Lab →</a>
+            <a href="csa-lab/" target="_blank" style="padding:8px 18px;background:var(--accent);color:var(--on-accent);border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Enter the Lab →</a>
             <div style="flex:1;height:1px;background:var(--rule)"></div>
           </div>
           <div class="mrow"><span class="mk">Incidents</span><span class="mv">ORU filing · ADT crisis · Account compromise</span></div>
@@ -529,40 +555,40 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <h3>RPA fleet control tower</h3>
         <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">A human who makes a mistake makes it once. A bot makes it <b style="color:var(--ink);font-weight:600">4,000 times before lunch</b> — and every one of those actions is signed with a service account nobody can quite explain. This is a control tower for five bots running real healthcare workflows: prior authorization, registration cleanup, In Basket triage, charge reconciliation, discharge outreach. Configure the guardrails, run a 24-hour shift, and watch which controls were load-bearing. The guardrails you skip are the incidents you get.</p>
         <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">24H SHIFT · GOVERNED VS UNGOVERNED</div>
-          <div class="srow"><span class="slb">Ungoverned — hours saved</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">252h</span></div>
-          <div class="srow"><span class="slb">Ungoverned — incidents</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">5</span></div>
-          <div class="srow"><span class="slb">Governed — hours saved</span><div class="strk"><div class="sbar" style="width:67%;background:#34d399"></div></div><span class="sval" style="color:#34d399">168h</span></div>
-          <div class="srow"><span class="slb">Governed — incidents</span><div class="strk"><div class="sbar" style="width:2%;background:#34d399"></div></div><span class="sval" style="color:#34d399">0</span></div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--w28);margin-bottom:8px;letter-spacing:.08em">24H SHIFT · GOVERNED VS UNGOVERNED</div>
+          <div class="srow"><span class="slb">Ungoverned — hours saved</span><div class="strk"><div class="sbar" style="width:100%;background:var(--red)"></div></div><span class="sval" style="color:var(--red)">252h</span></div>
+          <div class="srow"><span class="slb">Ungoverned — incidents</span><div class="strk"><div class="sbar" style="width:100%;background:var(--red)"></div></div><span class="sval" style="color:var(--red)">5</span></div>
+          <div class="srow"><span class="slb">Governed — hours saved</span><div class="strk"><div class="sbar" style="width:67%;background:var(--green)"></div></div><span class="sval" style="color:var(--green)">168h</span></div>
+          <div class="srow"><span class="slb">Governed — incidents</span><div class="strk"><div class="sbar" style="width:2%;background:var(--green)"></div></div><span class="sval" style="color:var(--green)">0</span></div>
         </div>
         <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">FLEET</div>
             <div style="font-size:13px;color:var(--ink)">5 bots · 4,830 daily tasks</div>
           </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">CONTROLS</div>
             <div style="font-size:13px;color:var(--accent)">6 guardrails · 5 incident paths</div>
           </div>
         </div>
       </div>
       <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+        <div style="background:var(--deep2);padding:12px 16px;border-bottom:1px solid var(--w07)">
           <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Fleet Control Tower — shift simulator</div>
           <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Guardrail config determines the outcome</div>
         </div>
         <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
+          <div style="background:var(--deep);border:1px solid var(--w07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
             <div style="color:var(--ink);margin-bottom:6px;font-size:12px">SHIFT LOG — GUARDRAILS OFF</div>
-            <div style="color:#4ade80">REG-CLEANUP-BOT · 1,674 tasks · 56h returned</div>
-            <div style="color:#f87171">06:30 ⛔ ADT queue depth 9,412 · latency 41m</div>
-            <div style="color:#f87171">07:05 ⛔ transport sent to 3 incorrect rooms</div>
-            <div style="color:#f87171">&nbsp;&nbsp;&nbsp;⛔ 294 unreviewed low-confidence actions</div>
-            <div style="color:#fbbf24">&nbsp;&nbsp;&nbsp;⚠ mean time to detect: 6h · to stop: 40m</div>
+            <div style="color:var(--green)">REG-CLEANUP-BOT · 1,674 tasks · 56h returned</div>
+            <div style="color:var(--red)">06:30 ⛔ ADT queue depth 9,412 · latency 41m</div>
+            <div style="color:var(--red)">07:05 ⛔ transport sent to 3 incorrect rooms</div>
+            <div style="color:var(--red)">&nbsp;&nbsp;&nbsp;⛔ 294 unreviewed low-confidence actions</div>
+            <div style="color:var(--amber)">&nbsp;&nbsp;&nbsp;⚠ mean time to detect: 6h · to stop: 40m</div>
           </div>
           <div style="display:flex;gap:8px;align-items:center">
             <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="automation/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Run the Fleet →</a>
+            <a href="automation/" target="_blank" style="padding:8px 18px;background:var(--accent);color:var(--on-accent);border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Run the Fleet →</a>
             <div style="flex:1;height:1px;background:var(--rule)"></div>
           </div>
           <div class="mrow"><span class="mk">Guardrails</span><span class="mv">Rate · window · exceptions · scope · kill · owner</span></div>
@@ -589,40 +615,40 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <h3>Epilepsy monitoring unit capacity model</h3>
         <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">An epilepsy monitoring unit admits patients for days, tapers their medication on purpose, and waits — because the only way to find where a seizure starts is to catch one on camera. Beds are few and the waitlist runs months. This project shows that the bottleneck isn't clinical: it's that the discharge decision <b style="color:var(--ink);font-weight:600">runs a full day behind the data that would have made it</b>. Same events, same beds, same staff — reviewed same-day instead of next-day, the unit serves measurably more patients.</p>
         <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">14-DAY BED BOARD · 6 BEDS</div>
-          <div class="srow"><span class="slb">Next-day — avg LOS</span><div class="strk"><div class="sbar" style="width:100%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">6.1 d</span></div>
-          <div class="srow"><span class="slb">Same-day — avg LOS</span><div class="strk"><div class="sbar" style="width:84%;background:#34d399"></div></div><span class="sval" style="color:#34d399">5.1 d</span></div>
-          <div class="srow"><span class="slb">Bed-days held after answer</span><div class="strk"><div class="sbar" style="width:100%;background:#f87171"></div></div><span class="sval" style="color:#f87171">12 → 0</span></div>
-          <div class="srow"><span class="slb">Extra admissions enabled</span><div class="strk"><div class="sbar" style="width:40%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">+2.4</span></div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--w28);margin-bottom:8px;letter-spacing:.08em">14-DAY BED BOARD · 6 BEDS</div>
+          <div class="srow"><span class="slb">Next-day — avg LOS</span><div class="strk"><div class="sbar" style="width:100%;background:var(--amber)"></div></div><span class="sval" style="color:var(--amber)">6.1 d</span></div>
+          <div class="srow"><span class="slb">Same-day — avg LOS</span><div class="strk"><div class="sbar" style="width:84%;background:var(--green)"></div></div><span class="sval" style="color:var(--green)">5.1 d</span></div>
+          <div class="srow"><span class="slb">Bed-days held after answer</span><div class="strk"><div class="sbar" style="width:100%;background:var(--red)"></div></div><span class="sval" style="color:var(--red)">12 → 0</span></div>
+          <div class="srow"><span class="slb">Extra admissions enabled</span><div class="strk"><div class="sbar" style="width:40%;background:var(--accent)"></div></div><span class="sval" style="color:var(--accent)">+2.4</span></div>
         </div>
         <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">ANNUAL CAPACITY</div>
             <div style="font-size:13px;color:var(--ink)">358 → 433 admissions</div>
           </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">SURGICAL PATHWAY</div>
             <div style="font-size:13px;color:var(--accent)">+17 candidates / yr</div>
           </div>
         </div>
       </div>
       <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+        <div style="background:var(--deep2);padding:12px 16px;border-bottom:1px solid var(--w07)">
           <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">EMU bed board — 14-day window</div>
           <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">6 beds · target 3 typical events per admission</div>
         </div>
         <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
+          <div style="background:var(--deep);border:1px solid var(--w07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
             <div style="color:var(--ink);margin-bottom:6px;font-size:12px">BED 3 · PT C — TARGET MET DAY 4</div>
-            <div style="color:#fbbf24">day 1 · day 2 · day 4 → 3 typical events captured</div>
-            <div style="color:#34d399">day 4 — localization data complete</div>
-            <div style="color:#f87171">day 5 — bed held · events not yet reviewed</div>
+            <div style="color:var(--amber)">day 1 · day 2 · day 4 → 3 typical events captured</div>
+            <div style="color:var(--green)">day 4 — localization data complete</div>
+            <div style="color:var(--red)">day 5 — bed held · events not yet reviewed</div>
             <div style="margin-top:6px;color:var(--ink3)">patient tapered off medication, waiting for</div>
-            <div style="color:var(--ink3)">a conversation happening <span style="color:#f87171">tomorrow morning</span></div>
+            <div style="color:var(--ink3)">a conversation happening <span style="color:var(--red)">tomorrow morning</span></div>
           </div>
           <div style="display:flex;gap:8px;align-items:center">
             <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="emu/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Board →</a>
+            <a href="emu/" target="_blank" style="padding:8px 18px;background:var(--accent);color:var(--on-accent);border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Board →</a>
             <div style="flex:1;height:1px;background:var(--rule)"></div>
           </div>
           <div class="mrow"><span class="mk">Simulator</span><span class="mv">6 beds · 14 days · toggle review timing</span></div>
@@ -649,39 +675,39 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
         <h3>From Reactive to Predictive: a lifecycle strategy for clinical endpoint devices</h3>
         <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">My Capella MBA capstone, written with Stanford Health Care's approval using only public data. Hospitals replace the workstations on wheels that nurses use for barcode medication scanning on a fixed age cycle — but <b style="color:var(--ink);font-weight:600">batteries last 3–5 years and chassis last 7–10</b>, so good chassis get retired while dead batteries stay on the floor. When a scanner fails mid–med pass, nurses work around the safety check. The report recommends replacing on measured condition instead of age, using the vendor service SHC already pays for — a <b style="color:var(--ink);font-weight:600">capital-neutral</b> fix designed to win in a year when capital is committed to seismic construction.</p>
         <div class="shap">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);margin-bottom:8px;letter-spacing:.08em">REPLACEMENTS PER YEAR · 1,000-CART FLEET · PUBLIC PRICING</div>
-          <div class="srow"><span class="slb">Age-based</span><div class="strk"><div class="sbar" style="width:100%;background:#fbbf24"></div></div><span class="sval" style="color:#fbbf24">182</span></div>
-          <div class="srow"><span class="slb">Condition</span><div class="strk"><div class="sbar" style="width:69%;background:#34d399"></div></div><span class="sval" style="color:#34d399">125</span></div>
-          <div class="srow"><span class="slb">Gross avoided</span><div class="strk"><div class="sbar" style="width:100%;background:#38bdf8"></div></div><span class="sval" style="color:#38bdf8">$124.5K</span></div>
-          <div class="srow"><span class="slb">Net / yr</span><div class="strk"><div class="sbar" style="width:50%;background:#a78bfa"></div></div><span class="sval" style="color:#a78bfa">+$62.3K</span></div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--w28);margin-bottom:8px;letter-spacing:.08em">REPLACEMENTS PER YEAR · 1,000-CART FLEET · PUBLIC PRICING</div>
+          <div class="srow"><span class="slb">Age-based</span><div class="strk"><div class="sbar" style="width:100%;background:var(--amber)"></div></div><span class="sval" style="color:var(--amber)">182</span></div>
+          <div class="srow"><span class="slb">Condition</span><div class="strk"><div class="sbar" style="width:69%;background:var(--green)"></div></div><span class="sval" style="color:var(--green)">125</span></div>
+          <div class="srow"><span class="slb">Gross avoided</span><div class="strk"><div class="sbar" style="width:100%;background:var(--accent)"></div></div><span class="sval" style="color:var(--accent)">$124.5K</span></div>
+          <div class="srow"><span class="slb">Net / yr</span><div class="strk"><div class="sbar" style="width:50%;background:var(--purple)"></div></div><span class="sval" style="color:var(--purple)">+$62.3K</span></div>
         </div>
         <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">NEW CAPITAL NEEDED</div>
             <div style="font-size:13px;color:var(--ink)">$0 · uses existing service</div>
           </div>
-          <div style="padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
             <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">EVIDENCE BASE</div>
             <div style="font-size:13px;color:var(--accent)">19 sources · 24 pages</div>
           </div>
         </div>
       </div>
       <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="background:#0b0f1c;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+        <div style="background:var(--deep2);padding:12px 16px;border-bottom:1px solid var(--w07)">
           <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Capella University · MBA-FPX5910</div>
           <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">MBA Capstone Experience · September 2026</div>
         </div>
         <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
-          <div style="background:#080c14;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
+          <div style="background:var(--deep);border:1px solid var(--w07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
             <div style="color:var(--ink);margin-bottom:6px;font-size:12px">WHY IT'S A PATIENT-SAFETY ISSUE</div>
-            <div><span style="color:#fbbf24">66%</span> of med administrations involved a workaround</div>
-            <div><span style="color:#f87171">3.06×</span> odds of error when a workaround is used</div>
+            <div><span style="color:var(--amber)">66%</span> of med administrations involved a workaround</div>
+            <div><span style="color:var(--red)">3.06×</span> odds of error when a workaround is used</div>
             <div style="margin-top:6px">scanner fails → two-identifier check skipped</div>
-            <div style="color:#34d399;margin-top:6px">→ replace on condition, not calendar age</div>
+            <div style="color:var(--green);margin-top:6px">→ replace on condition, not calendar age</div>
           </div>
           <div style="display:flex;gap:8px;align-items:center">
             <div style="flex:1;height:1px;background:var(--rule)"></div>
-            <a href="capstone/" target="_blank" style="padding:8px 18px;background:var(--accent);color:#080c14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Read the Capstone →</a>
+            <a href="capstone/" target="_blank" style="padding:8px 18px;background:var(--accent);color:var(--on-accent);border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Read the Capstone →</a>
             <div style="flex:1;height:1px;background:var(--rule)"></div>
           </div>
           <div class="mrow"><span class="mk">Disciplines</span><span class="mv">Finance · operations · workforce · ethics</span></div>
@@ -746,12 +772,12 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
     <div class="fi">
       <div class="slabel" style="margin-bottom:10px">Education</div>
       <div style="background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.22);border-radius:10px;padding:18px;margin-bottom:10px">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:#a78bfa;margin-bottom:5px;letter-spacing:.06em">DOCTOR OF BUSINESS ADMINISTRATION (DBA)</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--purple);margin-bottom:5px;letter-spacing:.06em">DOCTOR OF BUSINESS ADMINISTRATION (DBA)</div>
         <div style="font-size:15px;font-weight:500;margin-bottom:2px;color:var(--ink)">Capella University</div>
         <div style="font-size:12px;color:var(--ink3);margin-top:2px">Organizational Leadership &amp; Development</div>
         <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
           <span style="font-size:12px;color:var(--ink3)">FlexPath · Online</span>
-          <span style="background:rgba(167,139,250,.15);color:#a78bfa;font-size:10px;font-family:'DM Mono',monospace;font-weight:600;padding:2px 8px;border-radius:100px">STARTS OCT 2026</span>
+          <span style="background:rgba(167,139,250,.15);color:var(--purple);font-size:10px;font-family:'DM Mono',monospace;font-weight:600;padding:2px 8px;border-radius:100px">STARTS OCT 2026</span>
         </div>
       </div>
       <div style="background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.2);border-radius:10px;padding:18px;margin-bottom:10px">
@@ -879,6 +905,17 @@ const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
 }, { threshold: 0.08 });
 document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+</script>
+<button class="theme-btn" id="themeBtn" aria-label="Toggle light and dark theme"><span id="themeIcon">☀</span><span id="themeTxt">LIGHT</span></button>
+<script>
+(function(){var r=document.documentElement,b=document.getElementById('themeBtn');
+function set(m){if(m==='light'){r.classList.add('light')}else{r.classList.remove('light')}
+document.getElementById('themeIcon').textContent=m==='light'?'☽':'☀';
+document.getElementById('themeTxt').textContent=m==='light'?'DARK':'LIGHT';
+try{localStorage.setItem('theme',m)}catch(e){}}
+var saved=null;try{saved=localStorage.getItem('theme')}catch(e){}
+set(saved||'dark');
+b.addEventListener('click',function(){set(r.classList.contains('light')?'dark':'light')});})();
 </script>
 </body>
 </html>
