@@ -201,6 +201,13 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   .theme-btn{right:12px;bottom:12px;padding:8px 12px;font-size:10px}
 }
 
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:10px;margin:4px 0 18px}
+.res a{display:block;text-decoration:none;background:var(--paper2);border:1px solid var(--rule);border-left:3px solid var(--c);border-radius:12px;padding:14px 16px;transition:all .2s cubic-bezier(.2,.8,.3,1)}
+.res a:hover{background:color-mix(in srgb,var(--c) 8%,var(--paper2));border-color:color-mix(in srgb,var(--c) 45%,transparent);transform:translateY(-2px)}
+.res .rv{font-family:'DM Serif Display',serif;font-size:26px;line-height:1.1;color:var(--c)}
+.res .rl{font-size:12px;color:var(--ink2);line-height:1.5;margin-top:5px}
+.res .rp{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:var(--ink3);margin-top:7px;text-transform:uppercase}
+@media(max-width:640px){.res{grid-template-columns:repeat(2,1fr)}.res .rv{font-size:22px}}
 /* ---------- LIGHT THEME ---------- */
 html.light{
   --ink:#0f172a;--ink2:#334155;--ink3:#64748b;
@@ -369,9 +376,12 @@ html.light body{background:var(--paper);color:var(--ink)}
 <section id="projects" style="background:var(--paper)">
   <div class="slabel fi">Portfolio</div>
   <h2 class="fi">Projects</h2>
-  <div class="fi" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:2px 0 16px;padding:11px 16px;background:var(--accent2);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);border-left:3px solid var(--accent);border-radius:12px;max-width:840px">
-    <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--accent);white-space:nowrap">START HERE</span>
-    <span style="font-size:13.5px;color:var(--ink2);line-height:1.6">Hiring for a Clinical Systems Analyst? Read <a href="#proj-03" style="color:var(--green);font-weight:500;text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--green) 40%,transparent)">03 &middot; Epic Analyst Lab</a>, then <a href="#proj-01" style="color:var(--red);font-weight:500;text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--red) 40%,transparent)">01 &middot; Cancer Center Automation</a>.</span>
+  <div class="res fi">
+    <a href="#proj-01" style="--c:var(--red)"><div class="rv">16 h</div><div class="rl">earlier ICANS detection &mdash; 58 ICU days avoided / yr</div><div class="rp">01 &middot; Cancer center</div></a>
+    <a href="#proj-02" style="--c:var(--accent)"><div class="rv">104 &rarr; 7</div><div class="rl">false alarms per 24 h after threshold tuning</div><div class="rp">02 &middot; Neuro-ICU cEEG</div></a>
+    <a href="#proj-03" style="--c:var(--green)"><div class="rv">42</div><div class="rl">Epic tickets and 3 P1/P2 incidents worked end to end</div><div class="rp">03 &middot; Epic analyst lab</div></a>
+    <a href="#proj-04" style="--c:var(--amber)"><div class="rv">5 &rarr; 0</div><div class="rl">bot incidents per shift once guardrails are on</div><div class="rp">04 &middot; RPA governance</div></a>
+    <a href="#proj-05" style="--c:var(--purple)"><div class="rv">358 &rarr; 433</div><div class="rl">EMU admissions per year, same beds and staff</div><div class="rp">05 &middot; Epilepsy unit</div></a>
   </div>
   <!-- PROJECT NAV TABS -->
   <div id="proj-tabs" style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:40px;padding:14px;background:var(--paper2);border:1px solid var(--rule);border-radius:14px">
