@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 06 — Sleep Apnea Care Gap | Andy Nguyen</title>
+<meta name="description" content="A sleep study result stored as a PDF is invisible to every rule, registry and pre-op checklist. A modeled surgical month showing what changes when the result becomes data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#080c14;--panel:#0d1420;--panel-2:#111a29;--line:#1c2940;
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.12);
+  --text:#dbe4f0;--muted:#7d8ca3;--faint:#54627a;
+  --red:#f87171;--amber:#fbbf24;--green:#4ade80;--purple:#c084fc;--teal:#2dd4bf;
+  --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.65;font-size:16px}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 24px 96px}
+@media(max-width:560px){.wrap{padding:40px 16px 80px}}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.eyebrow a{color:var(--cyan);text-decoration:none}
+h1{font-family:var(--serif);font-size:clamp(30px,5.2vw,48px);font-weight:400;line-height:1.12;margin-bottom:18px}
+h1 em{font-style:italic;color:var(--teal)}
+.sub{color:var(--muted);max-width:720px;margin-bottom:22px}
+.sub strong{color:var(--text);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:11px;margin-bottom:50px}
+.chip{font-family:var(--mono);font-size:11px;padding:3px 0;color:var(--faint)}
+.chip:not(:last-child)::after{content:'·';margin:0 0 0 9px;color:rgba(255,255,255,.18)}
+.slab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+h2{font-family:var(--serif);font-size:clamp(23px,3.4vw,30px);font-weight:400;line-height:1.2;margin-bottom:14px}
+.lede{color:var(--muted);max-width:730px;margin-bottom:26px;font-size:15.5px}
+.lede strong{color:var(--text);font-weight:500}
+.lede em{color:var(--text);font-style:italic}
+section{margin-bottom:72px}
+
+.p30{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:56px}
+.p30-h{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.p30-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.p30-c{display:flex;gap:12px;align-items:flex-start}
+.p30-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--cyan-dim);border:1px solid rgba(56,189,248,.35);color:var(--cyan);font-family:var(--mono);font-size:11.5px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.p30-c h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.4}
+.p30-c p{font-size:13px;color:var(--muted);line-height:1.65}
+.p30-c p em{color:var(--text);font-style:italic}
+.p30-c p strong{color:var(--text);font-weight:500}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.panel-title{font-size:12.5px;font-weight:500}
+.panel-sub{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.tryit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;background:rgba(56,189,248,.06);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.tryit b{color:var(--cyan);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.modes{display:flex;gap:7px;flex-wrap:wrap}
+.mini{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:6px 14px;font-family:var(--sans);font-size:12.5px;cursor:pointer;transition:all .2s}
+.mini:hover{border-color:var(--cyan);color:var(--cyan)}
+.mini.on{background:var(--cyan-dim);color:var(--cyan);border-color:rgba(56,189,248,.4)}
+.mini:focus-visible,input[type=range]:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+/* controls row */
+.ctrl{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--line)}
+@media(max-width:760px){.ctrl{grid-template-columns:1fr}}
+.ctrl>div{padding:14px 18px}
+.ctrl>div:first-child{border-right:1px solid var(--line)}
+@media(max-width:760px){.ctrl>div:first-child{border-right:none;border-bottom:1px solid var(--line)}}
+.ctrl-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.cut{display:flex;align-items:center;gap:12px}
+.cut input{flex:1}
+.cut-v{font-family:var(--mono);font-size:13px;color:var(--cyan);min-width:34px;text-align:right}
+.cut-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:6px}
+
+/* population grid */
+.pop{padding:18px}
+.dots{display:grid;grid-template-columns:repeat(25,1fr);gap:4px}
+@media(max-width:560px){.dots{gap:2.5px}}
+.d{aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.06);transition:background .35s,box-shadow .35s,transform .2s;cursor:default;position:relative}
+.d:hover{transform:scale(1.35);z-index:2}
+.d.tl{background:var(--teal)}
+.d.gr{background:var(--green)}
+.d.rd{background:var(--red)}
+.d.rd.kn{box-shadow:0 0 0 2px var(--paper),0 0 0 3.5px var(--cyan)}
+.d.rr{background:rgba(251,191,36,.95)}
+.d.fa{background:rgba(251,191,36,.28)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;padding-top:13px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.lg{display:flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:50%}
+.sw.tl{background:var(--teal)}.sw.gr{background:var(--green)}.sw.rd{background:var(--red)}
+.sw.kn{background:var(--red);box-shadow:0 0 0 1.5px var(--paper),0 0 0 3px var(--cyan)}
+.sw.rr{background:rgba(251,191,36,.95)}.sw.fa{background:rgba(251,191,36,.28)}.sw.nn{background:rgba(255,255,255,.08)}
+.tip{min-height:22px;margin-top:12px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;border-top:1px solid var(--line)}
+.st{padding:14px 18px;border-right:1px solid var(--line)}
+.st:last-child{border-right:none}
+.st-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.st-v{font-family:var(--serif);font-size:25px;line-height:1.05}
+.st-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.v-ok{color:var(--green)}.v-cy{color:var(--cyan)}.v-a{color:var(--amber)}.v-bad{color:var(--red)}.v-p{color:var(--purple)}.v-t{color:var(--teal)}
+
+/* case log */
+.log{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:var(--mono);font-size:11.5px;line-height:1.8;color:var(--faint)}
+.log .h{color:var(--text);font-size:12px;margin-bottom:4px}
+.log .a{color:var(--amber)}.log .r{color:var(--red)}.log .g{color:var(--green)}.log .c{color:var(--cyan)}.log .t{color:var(--teal)}
+
+/* code tabs */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);background:var(--panel-2);overflow-x:auto}
+.tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);padding:12px 18px;font-family:var(--sans);font-size:13px;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--text)}
+.tab.on{color:var(--cyan);border-bottom-color:var(--cyan)}
+.tab:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+.pane{display:none;animation:fade .3s ease}
+.pane.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pane-cap{padding:12px 18px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);line-height:1.6}
+.pane-cap strong{color:var(--text);font-weight:500}
+pre{margin:0;padding:18px;overflow-x:auto;font-family:var(--mono);font-size:12px;line-height:1.75;color:#b6c3d6;background:var(--paper)}
+pre .k{color:var(--purple)}pre .s{color:var(--green)}pre .n{color:var(--amber)}pre .c{color:var(--faint);font-style:italic}pre .f{color:var(--cyan)}pre .x{color:var(--red)}pre .t{color:var(--teal)}
+
+/* pdf mock */
+.pdf{margin:18px;max-width:560px;background:#eef0f3;color:#222;border-radius:4px;padding:22px 24px;font-family:Georgia,serif;font-size:12.5px;line-height:1.6;box-shadow:0 8px 30px rgba(0,0,0,.4);transform:rotate(-.4deg);position:relative}
+.pdf h5{font-family:Georgia,serif;font-size:15px;font-weight:700;margin-bottom:2px}
+.pdf .m{font-size:10.5px;color:#666;margin-bottom:12px}
+.pdf table{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0 10px}
+.pdf td{border-bottom:1px solid #cfd3d9;padding:3px 0}
+.pdf td:last-child{text-align:right;font-family:'Courier New',monospace}
+.pdf .stamp{position:absolute;top:14px;right:16px;font-family:var(--mono);font-size:9px;color:#9aa;border:1px solid #bbc;padding:2px 6px;border-radius:3px;letter-spacing:.1em}
+.pdf-note{padding:0 18px 18px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+.pdf-note b{color:var(--red);font-weight:500}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;padding:18px}
+.fs{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px;position:relative}
+.fs-n{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.12em;margin-bottom:6px}
+.fs h4{font-size:13.5px;font-weight:500;margin-bottom:5px;line-height:1.35}
+.fs p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.fs.human{border-color:rgba(192,132,252,.4);background:rgba(192,132,252,.06)}
+.fs.human .fs-n{color:var(--purple)}
+
+/* roi */
+.roi{display:grid;grid-template-columns:330px 1fr;gap:0}
+@media(max-width:860px){.roi{grid-template-columns:1fr}}
+.roi-l{padding:20px;border-right:1px solid var(--line)}
+@media(max-width:860px){.roi-l{border-right:none;border-bottom:1px solid var(--line)}}
+.roi-r{padding:20px}
+.par{margin-bottom:15px}
+.par-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12.5px;margin-bottom:5px}
+.par-h span:first-child{color:var(--muted)}
+.par-v{font-family:var(--mono);font-size:13px;color:var(--cyan);white-space:nowrap}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--line);border-radius:99px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--cyan);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:var(--cyan);cursor:pointer}
+.rmtx{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:11px;margin-bottom:16px}
+.rm{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.rm-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.rm-v{font-family:var(--serif);font-size:26px;line-height:1.05}
+.rm-s{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:3px}
+.hum{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.28);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.75;color:var(--muted)}
+.hum b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
+.hum p+p{margin-top:8px}
+.hum strong{color:var(--text);font-weight:500}
+.hum em{color:var(--text)}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .3s,box-shadow .3s}
+.card:hover{border-color:rgba(56,189,248,.35);box-shadow:0 0 28px rgba(56,189,248,.08)}
+.card h3{font-family:var(--serif);font-size:19px;font-weight:400;margin-bottom:12px}
+.card ul{list-style:none}
+.card li{position:relative;padding-left:19px;margin-bottom:9px;color:var(--muted);font-size:14px;line-height:1.65}
+.card li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:11px;top:3px}
+.card li strong{color:var(--text);font-weight:500}
+.card li em{color:var(--text)}
+.note{background:var(--panel-2);border:1px solid var(--line);border-left:2px solid var(--purple);border-radius:0 12px 12px 0;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.75}
+.note strong{color:var(--text);font-weight:500}
+.note em{color:var(--text)}
+.src{font-size:13px;color:var(--faint);line-height:1.8}
+.src li{margin-left:18px;margin-bottom:4px}
+.src a{color:var(--muted)}
+footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--cyan);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow"><a href="../">← Portfolio</a> · Project 06</div>
+<h1>The Diagnosis That <em>Became a PDF</em></h1>
+<p class="sub">A patient spends a night in a sleep lab. The study finds severe obstructive sleep apnea, and the result comes back to the chart the way it often does: <strong>as a scanned report.</strong> A human can open it. No rule, registry, or pre-op checklist can. Two years later that patient is scheduled for surgery, and the system that should warn anesthesia <strong>cannot see a diagnosis it is already holding.</strong> This project is about turning a sleep study from a document into data.</p>
+<div class="chips">
+  <span class="chip">Sleep medicine</span>
+  <span class="chip">Perioperative safety</span>
+  <span class="chip">HL7 v2 ORU</span>
+  <span class="chip">FHIR R4</span>
+  <span class="chip">LOINC</span>
+  <span class="chip">STOP-Bang screening</span>
+  <span class="chip">Clarity-style SQL</span>
+</div>
+
+<div class="p30">
+  <div class="p30-h">The 30-second version</div>
+  <div class="p30-g">
+    <div class="p30-c"><div class="p30-n">1</div><div><h4>Sleep apnea matters in the operating room</h4><p>Anesthesia and post-op opioids relax the airway further. A patient with severe obstructive sleep apnea needs a different plan: <em>their CPAP at bedside, careful opioid dosing, closer monitoring.</em></p></div></div>
+    <div class="p30-c"><div class="p30-n">2</div><div><h4>Most cases are never diagnosed</h4><p>So pre-op teams screen with a short questionnaire, <strong>STOP-Bang</strong>. It catches most high-risk patients, but it flags many who turn out fine, and it misses some.</p></div></div>
+    <div class="p30-c"><div class="p30-n">3</div><div><h4>The diagnosed ones should be the easy part</h4><p>They already had the gold-standard test. But when the result lives in a scanned PDF, the chart cannot act on it. <em>They get screened like strangers</em>, and a CPAP user who no longer snores can score low.</p></div></div>
+    <div class="p30-c"><div class="p30-n">4</div><div><h4>The fix is an interface, not an algorithm</h4><p>Send the key numbers as coded, discrete results. Then one simple rule can do what the questionnaire can't: <strong>recognize every patient whose diagnosis is already on file.</strong></p></div></div>
+  </div>
+</div>
+
+<!-- 1. THE MONTH -->
+<section>
+  <div class="slab">01 — One surgical month</div>
+  <h2>400 patients, one pre-op checkpoint, two ways to store a result</h2>
+  <p class="lede">Each dot is a modeled elective-surgery patient. About one in six has moderate-to-severe sleep apnea, and about a third of those were already diagnosed by a sleep study on file. Everyone goes through the same pre-op screen. What changes is <strong>whether the chart can read the result of the study that already happened.</strong></p>
+  <div class="panel">
+    <div class="tryit"><b>Try it</b><span>Start on “Stored as PDF” and look for the ringed red dots. Switch to “Structured result” and watch them turn teal. Then move the cutoff and watch the amber flood.</span></div>
+    <div class="ctrl">
+      <div>
+        <div class="ctrl-k">How the sleep study reaches the chart</div>
+        <div class="modes" role="group" aria-label="Result storage">
+          <button class="mini on" id="mPdf" aria-pressed="true">Stored as PDF</button>
+          <button class="mini" id="mStr" aria-pressed="false">Structured result</button>
+        </div>
+      </div>
+      <div>
+        <div class="ctrl-k">STOP-Bang cutoff for a pre-op flag</div>
+        <div class="cut"><input type="range" id="cut" min="3" max="6" step="1" value="3" aria-label="STOP-Bang cutoff"><span class="cut-v" id="cutV">≥ 3</span></div>
+        <div class="cut-s" id="cutS">standard cutoff · high sensitivity, many flags</div>
+      </div>
+    </div>
+    <div class="panel-head">
+      <div><div class="panel-title">Elective surgery population — one month</div><div class="panel-sub">400 modeled patients · synthetic data · no PHI</div></div>
+      <div class="panel-sub" id="modeLbl">mode: stored as PDF</div>
+    </div>
+    <div class="pop">
+      <div class="dots" id="dots" aria-label="Patient population grid"></div>
+      <div class="tip" id="tip">Hover or tap a dot to see the patient.</div>
+      <div class="legend">
+        <div class="lg"><span class="sw tl"></span>known OSA, recognized from result</div>
+        <div class="lg"><span class="sw gr"></span>OSA caught by screening</div>
+        <div class="lg"><span class="sw rd"></span>OSA missed</div>
+        <div class="lg"><span class="sw kn"></span>missed, diagnosis already in chart</div>
+        <div class="lg"><span class="sw rr"></span>diagnosed patient re-referred for a new study</div>
+        <div class="lg"><span class="sw fa"></span>flagged, no significant OSA</div>
+        <div class="lg"><span class="sw nn"></span>not flagged, no significant OSA</div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="st"><div class="st-k">Mod–severe OSA recognized</div><div class="st-v v-cy" id="sRec">—</div><div class="st-s" id="sRecS">before surgery</div></div>
+      <div class="st"><div class="st-k">Missed</div><div class="st-v v-bad" id="sMiss">—</div><div class="st-s" id="sMissS">reach the OR unflagged</div></div>
+      <div class="st"><div class="st-k">Pre-op flags to work</div><div class="st-v v-a" id="sFlags">—</div><div class="st-s" id="sFlagsS">this month</div></div>
+      <div class="st"><div class="st-k">Repeat sleep studies</div><div class="st-v v-p" id="sRe">—</div><div class="st-s">for already-diagnosed patients</div></div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>What the ringed red dots are:</strong> patients whose sleep apnea had <em>already been proven</em> by overnight testing, and who still reached surgery unflagged. Often they are the ones treating it well: CPAP ended the snoring, the tiredness improved, blood pressure is controlled. The questionnaire asks about symptoms, and treatment removed the symptoms. <em>The answer was in the chart. The chart couldn't read it.</em></div>
+</section>
+
+<!-- 2. THREE FORMATS -->
+<section>
+  <div class="slab">02 — Same result, three formats</div>
+  <h2>What the chart actually receives</h2>
+  <p class="lede">The clinical content is identical in all three tabs. The difference is <strong>who can use it</strong>: a person with time to open a document, or every rule, report, and registry in the system.</p>
+  <div class="panel">
+    <div class="tabs" role="tablist">
+      <button class="tab on" role="tab" aria-selected="true" data-p="pPdf">Scanned PDF</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="pHl7">HL7 v2 ORU^R01</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="pFhir">FHIR R4</button>
+    </div>
+
+    <div class="pane on" id="pPdf" role="tabpanel">
+      <div class="pane-cap"><strong>Today in many workflows:</strong> the sleep system produces a report, it is faxed or exported as a document, and it lands in the chart's media section. Readable by a person who knows to look. Invisible to everything else.</div>
+      <div class="pdf">
+        <span class="stamp">SCANNED · MEDIA</span>
+        <h5>Polysomnography Report</h5>
+        <div class="m">Diagnostic study · attended, in-lab · synthetic example</div>
+        <table>
+          <tr><td>Total sleep time</td><td>352 min</td></tr>
+          <tr><td>Sleep efficiency</td><td>81%</td></tr>
+          <tr><td>Obstructive apnea–hypopnea index</td><td>31.4 /h</td></tr>
+          <tr><td>Oxygen desaturation index</td><td>27.9 /h</td></tr>
+          <tr><td>Respiratory disturbance index</td><td>34.0 /h</td></tr>
+        </table>
+        <div>Impression: <b>severe obstructive sleep apnea.</b> Recommend CPAP titration.</div>
+      </div>
+      <div class="pdf-note">rules that can read this: <b>0</b> · queries that can find it: <b>0</b> · pre-op alerts it can trigger: <b>0</b></div>
+    </div>
+
+    <div class="pane" id="pHl7" role="tabpanel">
+      <div class="pane-cap"><strong>The interface-analyst version:</strong> the same numbers as discrete OBX segments with LOINC codes, so the EHR files them as results rather than a document. Note the last line: <strong>not every metric has a standard code.</strong> Sleep efficiency goes out on a local code, which means someone has to own a mapping table.</div>
+<pre><span class="c">// synthetic message · illustrative facility names · no PHI</span>
+<span class="f">MSH</span>|^~\&amp;|SLEEPSYS|SLEEPLAB|EHR|HOSP|20260924073000||<span class="k">ORU^R01</span>|MSG000184|P|2.5.1
+<span class="f">PID</span>|1||TEST00042^^^HOSP^MR||TEST^PATIENT||19680312|M
+<span class="f">OBR</span>|1|ORD7731|RES7731|<span class="t">90568-7^Polysomnography panel^LN</span>|||20260921220000|||||||||||||||20260924072500||SLP|F
+<span class="f">OBX</span>|1|NM|<span class="t">90563-8^Obstructive apnea hypopnea index^LN</span>||<span class="n">31.4</span>|/h^per hour^UCUM|&lt;5|<span class="x">H</span>|||F
+<span class="f">OBX</span>|2|NM|<span class="t">90567-9^Oxygen desaturation index^LN</span>||<span class="n">27.9</span>|/h^per hour^UCUM|&lt;5|<span class="x">H</span>|||F
+<span class="f">OBX</span>|3|NM|<span class="t">90566-1^Respiratory disturbance index^LN</span>||<span class="n">34.0</span>|/h^per hour^UCUM|&lt;5|<span class="x">H</span>|||F
+<span class="f">OBX</span>|4|NM|<span class="s">SLP-SE^Sleep efficiency^L</span>||<span class="n">81</span>|%^percent^UCUM|&gt;=85|<span class="x">L</span>|||F   <span class="c">// local code: needs a mapping owner</span>
+<span class="f">OBX</span>|5|ED|<span class="t">PDFRPT^Full report^L</span>||^AP^PDF^Base64^JVBERi0xLjcK...||||||F   <span class="c">// keep the narrative, too</span></pre>
+    </div>
+
+    <div class="pane" id="pFhir" role="tabpanel">
+      <div class="pane-cap"><strong>The API version:</strong> a DiagnosticReport that carries the PDF for humans in <code style="font-family:var(--mono);color:var(--text)">presentedForm</code> and discrete Observations for machines. The document is not thrown away; it stops being the <em style="color:var(--text)">only</em> copy.</div>
+<pre>{
+  <span class="s">"resourceType"</span>: <span class="s">"Observation"</span>,
+  <span class="s">"status"</span>: <span class="s">"final"</span>,
+  <span class="s">"category"</span>: [{ <span class="s">"coding"</span>: [{ <span class="s">"system"</span>: <span class="s">"http://terminology.hl7.org/CodeSystem/observation-category"</span>, <span class="s">"code"</span>: <span class="s">"procedure"</span> }] }],
+  <span class="s">"code"</span>: { <span class="s">"coding"</span>: [{ <span class="s">"system"</span>: <span class="s">"http://loinc.org"</span>, <span class="s">"code"</span>: <span class="t">"90563-8"</span>, <span class="s">"display"</span>: <span class="s">"Obstructive apnea hypopnea index"</span> }] },
+  <span class="s">"subject"</span>: { <span class="s">"reference"</span>: <span class="s">"Patient/example-042"</span> },
+  <span class="s">"effectiveDateTime"</span>: <span class="s">"2026-09-21T22:00:00-07:00"</span>,
+  <span class="s">"valueQuantity"</span>: { <span class="s">"value"</span>: <span class="n">31.4</span>, <span class="s">"unit"</span>: <span class="s">"per hour"</span>, <span class="s">"system"</span>: <span class="s">"http://unitsofmeasure.org"</span>, <span class="s">"code"</span>: <span class="s">"/h"</span> },
+  <span class="s">"interpretation"</span>: [{ <span class="s">"coding"</span>: [{ <span class="s">"system"</span>: <span class="s">"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"</span>, <span class="s">"code"</span>: <span class="x">"H"</span> }] }]
+}
+
+<span class="c">// parent DiagnosticReport: code 90568-7 (Polysomnography panel),</span>
+<span class="c">// result[] → the Observations, presentedForm[] → the original PDF</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- 3. THE RULE -->
+<section>
+  <div class="slab">03 — What becomes possible</div>
+  <h2>A query that returns zero rows today</h2>
+  <p class="lede">Once the index is a discrete result, the question “who is scheduled for surgery in the next two weeks with known moderate-to-severe sleep apnea?” becomes <strong>a report anyone can run</strong>, and the same logic can drive a pre-op flag. Against PDF-only results, the identical query returns nothing, because there is nothing to query.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div><div class="panel-title">Pre-op OSA worklist</div><div class="panel-sub">Clarity-style SQL · illustrative · table, column and LOINC-mapping names vary by build</div></div>
+    </div>
+<pre><span class="c">-- Patients with surgery in the next 14 days and a prior obstructive AHI of 15 or more</span>
+<span class="k">SELECT</span>  pat.PAT_MRN_ID,
+        orc.SURGERY_DATE,
+        res.ORD_NUM_VALUE        <span class="k">AS</span> oahi,
+        res.RESULT_TIME          <span class="k">AS</span> study_date,
+        <span class="k">CASE WHEN</span> res.ORD_NUM_VALUE &gt;= <span class="n">30</span> <span class="k">THEN</span> <span class="s">'SEVERE'</span> <span class="k">ELSE</span> <span class="s">'MODERATE'</span> <span class="k">END AS</span> severity
+<span class="k">FROM</span>    OR_CASE orc
+<span class="k">JOIN</span>    PATIENT pat          <span class="k">ON</span> pat.PAT_ID = orc.PAT_ID
+<span class="k">JOIN</span>    ORDER_PROC op        <span class="k">ON</span> op.PAT_ID = orc.PAT_ID
+<span class="k">JOIN</span>    ORDER_RESULTS res    <span class="k">ON</span> res.ORDER_PROC_ID = op.ORDER_PROC_ID
+<span class="k">JOIN</span>    COMPONENT_LOINC_MAP m <span class="k">ON</span> m.COMPONENT_ID = res.COMPONENT_ID   <span class="c">-- local mapping; name varies</span>
+<span class="k">WHERE</span>   m.LOINC_CODE = <span class="t">'90563-8'</span>                                      <span class="c">-- obstructive AHI</span>
+  <span class="k">AND</span>   res.ORD_NUM_VALUE &gt;= <span class="n">15</span>
+  <span class="k">AND</span>   res.RESULT_TIME &gt;= <span class="f">DATEADD</span>(<span class="k">year</span>, <span class="n">-5</span>, <span class="f">GETDATE</span>())
+  <span class="k">AND</span>   orc.SURGERY_DATE <span class="k">BETWEEN</span> <span class="f">GETDATE</span>() <span class="k">AND</span> <span class="f">DATEADD</span>(<span class="k">day</span>, <span class="n">14</span>, <span class="f">GETDATE</span>())
+<span class="k">ORDER BY</span> orc.SURGERY_DATE;
+
+<span class="c">-- Against PDF-only results: 0 rows. The AHI lives inside a scanned image.</span></pre>
+  </div>
+
+  <div class="panel" style="margin-top:18px">
+    <div class="panel-head"><div><div class="panel-title">The pre-op flag, step by step</div><div class="panel-sub">automation moves information · humans make the plan</div></div></div>
+    <div class="flow">
+      <div class="fs"><div class="fs-n">1 · TRIGGER</div><h4>Pre-op visit or case scheduled</h4><p>The check runs once per surgical episode, at the point the team is already reviewing the chart.</p></div>
+      <div class="fs"><div class="fs-n">2 · KNOWN?</div><h4>Discrete AHI ≥ 15 in the last 5 years</h4><p>If yes: flag as <em>known OSA</em>, prompt to confirm CPAP use and bring the device. No questionnaire needed.</p></div>
+      <div class="fs"><div class="fs-n">3 · SCREEN</div><h4>Otherwise, STOP-Bang at the chosen cutoff</h4><p>Flag as <em>possible OSA</em>. Four of the eight items (blood pressure history, BMI, age, sex) can often prefill from structured data.</p></div>
+      <div class="fs human"><div class="fs-n">4 · HUMAN DECISION</div><h4>Anesthesia sets the plan</h4><p>Monitoring level, opioid strategy, sleep-medicine referral, whether to proceed. The flag informs; it does not decide.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. LIMITS -->
+<section>
+  <div class="slab">04 — What this can't do</div>
+  <h2>Screening is not diagnosis, and flags are not free</h2>
+  <p class="lede">Move the cutoff in the simulator and the tradeoff is plain: at the standard cutoff, <strong>more than half of all patients get flagged</strong> and most of them do not have significant sleep apnea. Raise it and the flags shrink, but real cases slip through. Structuring the result does not remove that tradeoff for undiagnosed patients. It removes it for the ones <em>already diagnosed</em>.</p>
+  <div class="grid2">
+    <div class="card"><h3>Limits worth saying out loud</h3><ul>
+      <li><strong>STOP-Bang is a screen.</strong> High sensitivity, low specificity at the usual cutoff. A flag means “consider,” never “has”</li>
+      <li><strong>It asks about symptoms,</strong> so treated patients can under-score. That is exactly the group a structured result catches</li>
+      <li><strong>The sex item has been questioned</strong> in the literature as a reason women may be under-screened. Worth monitoring flag rates by sex</li>
+      <li><strong>A 5-year lookback is a design choice.</strong> Weight change or surgery can change severity; the flag should show the study date</li>
+      <li><strong>Home sleep tests</strong> report differently from in-lab studies. The interface has to handle both, or the rule quietly misses one</li>
+    </ul></div>
+    <div class="card"><h3>Governance, same as every alert</h3><ul>
+      <li><strong>Alert fatigue is the failure mode.</strong> A pre-op team drowning in flags learns to click through them</li>
+      <li><strong>Split the flag:</strong> “known OSA, bring CPAP” is high-value and low-volume. “Possible OSA” is high-volume and needs its own threshold</li>
+      <li><strong>Measure it:</strong> flag volume, action rate, and how many known-OSA patients still arrive without their device</li>
+      <li><strong>Own the mapping table.</strong> A local code that silently stops mapping after a sleep-system upgrade breaks the rule with no error</li>
+      <li>Clinical leadership owns the cutoff. The analyst owns making the tradeoff visible</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 5. ROI -->
+<section>
+  <div class="slab">05 — The business case</div>
+  <h2>What a result that can be read is worth</h2>
+  <p class="lede">Lead with capacity and safety, dollars second. Every repeat sleep study ordered for an already-diagnosed patient is <strong>a sleep-lab night taken from someone on the waitlist</strong>, and every known patient who reaches the OR unflagged is avoidable risk.</p>
+  <div class="panel">
+    <div class="panel-head">
+      <div><div class="panel-title">Annual model — surgical program</div><div class="panel-sub">all inputs adjustable · illustrative, not an institutional projection</div></div>
+      <div class="panel-sub" id="roiTag">baseline assumptions</div>
+    </div>
+    <div class="roi">
+      <div class="roi-l">
+        <div class="par"><div class="par-h"><span>Elective surgeries per year</span><span class="par-v" id="vS">18,000</span></div><input type="range" id="pS" min="4000" max="60000" step="1000" value="18000"></div>
+        <div class="par"><div class="par-h"><span>Moderate–severe OSA prevalence</span><span class="par-v" id="vPrev">20%</span></div><input type="range" id="pPrev" min="8" max="40" step="1" value="20"></div>
+        <div class="par"><div class="par-h"><span>Of those, already diagnosed</span><span class="par-v" id="vDx">25%</span></div><input type="range" id="pDx" min="10" max="60" step="1" value="25"></div>
+        <div class="par"><div class="par-h"><span>Diagnosed with PDF-only result</span><span class="par-v" id="vPdf">70%</span></div><input type="range" id="pPdf" min="10" max="100" step="5" value="70"></div>
+        <div class="par"><div class="par-h"><span>Screen catches known patients</span><span class="par-v" id="vSens">85%</span></div><input type="range" id="pSens" min="60" max="98" step="1" value="85"></div>
+        <div class="par"><div class="par-h"><span>Flagged known patients re-referred</span><span class="par-v" id="vRe">40%</span></div><input type="range" id="pRe" min="0" max="80" step="5" value="40"></div>
+        <div class="par"><div class="par-h"><span>Excess complication risk if unrecognized</span><span class="par-v" id="vRisk">4%</span></div><input type="range" id="pRisk" min="1" max="12" step="0.5" value="4"></div>
+        <div class="par"><div class="par-h"><span>Cost per respiratory complication</span><span class="par-v" id="vCc">$15,000</span></div><input type="range" id="pCc" min="3000" max="60000" step="1000" value="15000"></div>
+        <div class="par"><div class="par-h"><span>Cost per sleep study</span><span class="par-v" id="vPsg">$1,200</span></div><input type="range" id="pPsg" min="200" max="3500" step="100" value="1200"></div>
+        <div class="par"><div class="par-h"><span>Chart-search minutes per known patient</span><span class="par-v" id="vMin">6 min</span></div><input type="range" id="pMin" min="0" max="20" step="1" value="6"></div>
+      </div>
+      <div class="roi-r">
+        <p style="font-size:13px;color:var(--faint);margin-bottom:14px;line-height:1.6">What changes over a year when every discharged sleep study also arrives as discrete, coded results:</p>
+        <div class="rmtx">
+          <div class="rm"><div class="rm-k">Known OSA, invisible today</div><div class="rm-v v-a" id="oInv">—</div><div class="rm-s">surgical patients / yr</div></div>
+          <div class="rm"><div class="rm-k">Unflagged known patients</div><div class="rm-v v-bad" id="oMiss">—</div><div class="rm-s">now recognized</div></div>
+          <div class="rm"><div class="rm-k">Sleep-lab nights freed</div><div class="rm-v v-t" id="oNights">—</div><div class="rm-s">repeat studies avoided</div></div>
+          <div class="rm"><div class="rm-k">Pre-op nursing hours</div><div class="rm-v v-cy" id="oHrs">—</div><div class="rm-s">no longer hunting PDFs</div></div>
+          <div class="rm"><div class="rm-k">Complications avoided</div><div class="rm-v v-ok" id="oComp">—</div><div class="rm-s">modeled, per year</div></div>
+          <div class="rm"><div class="rm-k">Total annual value</div><div class="rm-v v-p" id="oTot">—</div><div class="rm-s">studies + complications</div></div>
+        </div>
+        <div class="hum" id="hum"><b>How to present this</b><p>—</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:18px"><strong>Why the cost side is small on purpose:</strong> this is an interface build, not a new program. The sleep system already produces these numbers; the EHR already has a results pipeline and a rule engine. The work is a result feed, a LOINC mapping, a rule, and a governance cadence. <em>That is why the capacity argument can lead: the investment is mostly analyst time.</em></div>
+</section>
+
+<!-- 6. CLOSE -->
+<section>
+  <div class="slab">06 — Why this project</div>
+  <h2>The same pattern, one layer down</h2>
+  <p class="lede">The epilepsy unit project found a decision running a day behind its own data. This one finds a decision that <strong>can't see its data at all</strong>, because the data arrived as a picture. The toolkit is the portfolio's: clinical context from the neurology work, alert governance from the neuro-ICU pipeline, and the interface literacy from the Epic analyst lab, aimed at a gap that is common, fixable, and unglamorous.</p>
+  <div class="grid2">
+    <div class="card"><h3>Demonstrated here</h3><ul>
+      <li><strong>Interface design</strong>: HL7 v2 ORU and FHIR R4 for the same result, with LOINC coding and an honest local-code gap</li>
+      <li><strong>Data-to-decision thinking</strong>: tracing why a known diagnosis fails to reach the OR</li>
+      <li><strong>Reporting</strong>: a Clarity-style worklist query that only works once the data is discrete</li>
+      <li><strong>Alert governance</strong>: splitting a high-value flag from a high-volume one, with metrics</li>
+      <li><strong>Capacity framing</strong>: sleep-lab nights and nursing hours before dollars</li>
+    </ul></div>
+    <div class="card"><h3>Interview talking points</h3><ul>
+      <li>“The diagnosis was in the chart. The chart just couldn't read it.”</li>
+      <li>“The patients the questionnaire misses are often the ones treating it well: CPAP stopped the snoring”</li>
+      <li>“Keep the PDF for humans, add discrete results for machines. It's not either-or”</li>
+      <li>“Every repeat sleep study for a diagnosed patient is a night taken from someone on the waitlist”</li>
+      <li>“The hardest part isn't the rule. It's owning the mapping table after the next upgrade”</li>
+    </ul></div>
+  </div>
+</section>
+
+<section style="margin-bottom:0">
+  <div class="slab">Evidence notes</div>
+  <ul class="src">
+    <li>LOINC codes shown are from the LOINC Polysomnography panel (90568-7): <a href="https://loinc.org/90568-7" target="_blank" rel="noopener">loinc.org/90568-7</a>, including 90563-8 obstructive AHI, 90567-9 oxygen desaturation index, 90566-1 respiratory disturbance index. Sleep efficiency is shown on a local code deliberately.</li>
+    <li>STOP-Bang performance: high sensitivity for moderate and severe OSA at a cutoff of 3 with low specificity; higher cutoffs trade sensitivity for specificity (e.g. Nagappa et al., 2015 meta-analysis; Chung et al., alternative scoring models, <a href="https://jcsm.aasm.org/doi/10.5664/jcsm.4022" target="_blank" rel="noopener">J Clin Sleep Med</a>). The simulated population is tuned to reproduce that shape, not any specific study's numbers.</li>
+    <li>“Most moderate-to-severe OSA is undiagnosed” reflects widely cited population estimates; the simulator's 25% diagnosed share is an assumption.</li>
+    <li>All patients, messages, and financial inputs are synthetic or illustrative. No PHI. Not an institutional projection.</li>
+  </ul>
+</section>
+
+<footer>
+  <span>Project 06 · synthetic population &amp; illustrative financials · no PHI · not an institutional projection</span>
+  <span><a href="https://andy205261.github.io">andy205261.github.io</a></span>
+</footer>
+</div>
+
+<script>
+/* ============ POPULATION ============ */
+(function(){
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var r = mulberry32(7), P = [];
+var SEV = ['no significant OSA','mild OSA','moderate OSA','severe OSA'];
+for (var i=0;i<400;i++){
+  var u=r(), sev=u<0.60?0:u<0.78?1:u<0.90?2:3;
+  var known = sev>=2 ? r()<0.25 : (sev===1 ? r()<0.05 : false);
+  var mean=[2.4,3.3,4.3,5.1][sev];
+  var g=(r()+r()+r()+r()-2)*1.35;
+  var sb=Math.max(0,Math.min(8,Math.round(mean+g*1.9)));
+  if (known) sb=Math.max(0, sb-(r()<0.6?1:0));   // treated patients report fewer symptoms
+  var age = 28 + Math.floor(r()*52), sex = r()<0.5?'F':'M';
+  P.push({id:101+i, sev:sev, known:known, sb:sb, age:age, sex:sex});
+}
+var mode='pdf', cut=3;
+var host=document.getElementById('dots'), tip=document.getElementById('tip'), els=[];
+P.forEach(function(p,i){
+  var d=document.createElement('div'); d.className='d'; d.tabIndex=-1;
+  d.addEventListener('mouseenter',function(){ show(i); });
+  d.addEventListener('click',function(){ show(i); });
+  host.appendChild(d); els.push(d);
+});
+function classify(p){
+  var sig = p.sev>=2, flagged = p.sb>=cut;
+  if (mode==='str' && p.known && sig) return 'tl';
+  if (sig) {
+    if (flagged) return (p.known && mode==='pdf') ? 'rr' : 'gr';
+    return 'rd';
+  }
+  return flagged ? 'fa' : '';
+}
+function show(i){
+  var p=P[i], c=classify(p), what={
+    tl:'<span style="color:var(--teal)">recognized from discrete result → known-OSA pathway</span>',
+    gr:'<span style="color:var(--green)">flagged by screen → possible OSA</span>',
+    rd: p.known ? '<span style="color:var(--red)">missed · diagnosis already in chart as PDF</span>' : '<span style="color:var(--red)">missed · undiagnosed, screened low</span>',
+    rr:'<span style="color:var(--amber)">flagged as possible OSA · re-referred for a study they already had</span>',
+    fa:'<span style="color:var(--amber)">flagged · no significant OSA</span>',
+    '':'not flagged'
+  }[c];
+  tip.innerHTML = 'Pt '+p.id+' · '+p.age+p.sex+' · '+SEV[p.sev]+(p.known?' (diagnosed)':'')+' · STOP-Bang '+p.sb+' → '+what;
+}
+function render(){
+  var rec=0, miss=0, missKnown=0, flags=0, re=0, total=0;
+  P.forEach(function(p,i){
+    var c=classify(p);
+    els[i].className='d'+(c?' '+c:'')+(c==='rd'&&p.known?' kn':'');
+    if (p.sev>=2){ total++; if (c==='rd'){ miss++; if(p.known) missKnown++; } else rec++; }
+    if (c==='gr'||c==='rr'||c==='fa'||c==='tl') flags++;
+    if (c==='rr') re++;
+  });
+  document.getElementById('sRec').textContent = rec+' / '+total;
+  document.getElementById('sMiss').textContent = miss;
+  document.getElementById('sMissS').textContent = missKnown>0 ? missKnown+' already diagnosed' : 'none already diagnosed';
+  document.getElementById('sFlags').textContent = flags;
+  document.getElementById('sFlagsS').textContent = Math.round(flags/4)+'% of all patients';
+  document.getElementById('sRe').textContent = re;
+  document.getElementById('modeLbl').textContent = 'mode: '+(mode==='pdf'?'stored as PDF':'structured result');
+  document.getElementById('cutV').textContent = '≥ '+cut;
+  document.getElementById('cutS').textContent = {3:'standard cutoff · high sensitivity, many flags',4:'fewer flags · more cases slip through',5:'high-specificity cutoff · many cases missed',6:'very few flags · most cases missed'}[cut];
+}
+function setMode(m){
+  mode=m;
+  var a=document.getElementById('mPdf'), b=document.getElementById('mStr');
+  a.classList.toggle('on',m==='pdf'); b.classList.toggle('on',m==='str');
+  a.setAttribute('aria-pressed',m==='pdf'); b.setAttribute('aria-pressed',m==='str');
+  render();
+}
+document.getElementById('mPdf').addEventListener('click',function(){setMode('pdf');});
+document.getElementById('mStr').addEventListener('click',function(){setMode('str');});
+document.getElementById('cut').addEventListener('input',function(){cut=+this.value;render();});
+render();
+})();
+
+/* ============ TABS ============ */
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-selected','false');});
+    document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on');});
+    t.classList.add('on'); t.setAttribute('aria-selected','true');
+    document.getElementById(t.dataset.p).classList.add('on');
+  });
+});
+
+/* ============ ROI ============ */
+(function(){
+var R={S:18000,Prev:20,Dx:25,Pdf:70,Sens:85,Re:40,Risk:4,Cc:15000,Psg:1200,Min:6};
+var BASE=JSON.stringify(R);
+function money(n){ if(n>=1000000) return '$'+(n/1000000).toFixed(2)+'M'; if(n>=1000) return '$'+Math.round(n/1000)+'K'; return '$'+Math.round(n); }
+function fmt(n){ return Math.round(n).toLocaleString(); }
+function calc(){
+  var known = R.S*R.Prev/100*R.Dx/100;
+  var inv = known*R.Pdf/100;
+  var miss = inv*(1-R.Sens/100);
+  var nights = inv*R.Sens/100*R.Re/100;
+  var hrs = inv*R.Min/60;
+  var comp = miss*R.Risk/100;
+  var val = nights*R.Psg + comp*R.Cc;
+  document.getElementById('oInv').textContent = fmt(inv);
+  document.getElementById('oMiss').textContent = fmt(miss);
+  document.getElementById('oNights').textContent = fmt(nights);
+  document.getElementById('oHrs').textContent = fmt(hrs);
+  document.getElementById('oComp').textContent = comp<10 ? comp.toFixed(1) : fmt(comp);
+  document.getElementById('oTot').textContent = money(val);
+  document.getElementById('hum').innerHTML = '<b>How to present this</b>' +
+   '<p>Open with capacity: <strong>'+fmt(nights)+' sleep-lab nights a year</strong> go back to patients on the waitlist, because diagnosed patients stop being re-tested for a condition already on file. Pre-op nurses get back about <strong>'+fmt(hrs)+' hours</strong> they now spend opening scanned reports.</p>' +
+   '<p>Then safety: roughly <strong>'+fmt(miss)+' patients a year</strong> with a proven diagnosis currently reach surgery unflagged; the model puts avoided complications at <strong>'+(comp<10?comp.toFixed(1):fmt(comp))+'</strong>. Modeled value <strong>'+money(val)+'</strong>. Close without a dollar figure: <em>the test was already done, and the patient already paid for it with a night in the lab.</em></p>';
+  document.getElementById('roiTag').textContent = JSON.stringify(R)===BASE ? 'baseline assumptions' : 'custom assumptions';
+}
+[['pS','S','vS',function(v){return (+v).toLocaleString();}],
+ ['pPrev','Prev','vPrev',function(v){return v+'%';}],
+ ['pDx','Dx','vDx',function(v){return v+'%';}],
+ ['pPdf','Pdf','vPdf',function(v){return v+'%';}],
+ ['pSens','Sens','vSens',function(v){return v+'%';}],
+ ['pRe','Re','vRe',function(v){return v+'%';}],
+ ['pRisk','Risk','vRisk',function(v){return v+'%';}],
+ ['pCc','Cc','vCc',function(v){return '$'+(+v).toLocaleString();}],
+ ['pPsg','Psg','vPsg',function(v){return '$'+(+v).toLocaleString();}],
+ ['pMin','Min','vMin',function(v){return v+' min';}]
+].forEach(function(c){var el=document.getElementById(c[0]);
+  el.addEventListener('input',function(){R[c[1]]=+el.value;document.getElementById(c[2]).textContent=c[3](+el.value);calc();});});
+calc();
+})();
+</script>
+</body>
+</html>
