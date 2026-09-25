@@ -175,6 +175,58 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-ra
 .src{font-size:13px;color:var(--faint);line-height:1.8}
 .src li{margin-left:18px;margin-bottom:4px}
 .src a{color:var(--muted)}
+/* one-patient story */
+.story{padding:18px}
+.lanes{display:grid;grid-template-columns:110px repeat(4,1fr);gap:8px;align-items:stretch}
+@media(max-width:820px){.lanes{grid-template-columns:1fr}.lanes .lh,.lanes .corner{display:none}}
+.corner{}
+.lh{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:4px 2px}
+.lane-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;padding:0 2px}
+.lane-lbl.p{color:var(--red)}.lane-lbl.s{color:var(--teal)}
+@media(max-width:820px){.lane-lbl{display:none}}
+.sc{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:12.5px;color:var(--muted);line-height:1.55;transition:opacity .35s,border-color .35s,transform .35s;position:relative}
+.sc .k{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.sc strong{color:var(--text);font-weight:500}
+.sc.off{opacity:.14;transform:translateY(4px)}
+.sc.bad{border-color:rgba(248,113,113,.45)}
+.sc.good{border-color:rgba(45,212,191,.45)}
+.sc.same{border-style:dashed}
+.mlane{display:none;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin:6px 0 -2px}
+@media(max-width:820px){.mlane{display:block}}
+.stepbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;border-top:1px solid var(--line);background:var(--panel-2)}
+.stepbar .msg{flex:1;min-width:220px;font-size:13px;color:var(--muted)}
+.stepbar .msg strong{color:var(--text);font-weight:500}
+.pips{display:flex;gap:5px}
+.pip{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.pip.on{background:var(--cyan)}
+
+/* patient card */
+.pcard{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.pc{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.pc .k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.pc .v{font-size:13px;color:var(--text);line-height:1.45}
+.pc .v.r{color:var(--red)}.pc .v.g{color:var(--green)}.pc .v.t{color:var(--teal)}.pc .v.a{color:var(--amber)}.pc .v.m{color:var(--muted)}
+.d.sel{outline:2px solid var(--text);outline-offset:2px}
+
+/* interface drill */
+.drill-msg{padding:16px 18px;background:var(--paper);font-family:var(--mono);font-size:12.5px;line-height:1.9;overflow-x:auto;white-space:nowrap;border-bottom:1px solid var(--line)}
+.fld{cursor:pointer;border-radius:3px;padding:1px 2px;color:#b6c3d6;transition:background .2s}
+.fld:hover,.fld.on{background:rgba(56,189,248,.16);color:var(--text)}
+.fld.hot{color:var(--amber)}
+.fld.chg{color:var(--red);background:rgba(248,113,113,.14)}
+.pipe{color:var(--faint)}
+.fdetail{padding:12px 18px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);min-height:48px}
+.fdetail b{font-family:var(--mono);font-size:11px;color:var(--cyan);font-weight:500;margin-right:8px}
+.chain{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;padding:16px 18px}
+.ch{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:12px}
+.ch .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.ch .v{font-size:13px;line-height:1.5;color:var(--text)}
+.ch.ok{border-color:rgba(74,222,128,.4)}.ch.ok .v{color:var(--green)}
+.ch.bad{border-color:rgba(248,113,113,.45)}.ch.bad .v{color:var(--red)}
+.ch.warn{border-color:rgba(251,191,36,.45)}.ch.warn .v{color:var(--amber)}
+.verdict{margin:0 18px 18px;padding:12px 14px;border-radius:10px;font-size:13.5px;line-height:1.65;color:var(--muted);border:1px solid var(--line);background:var(--panel-2)}
+.verdict strong{color:var(--text);font-weight:500}
+
 footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 footer a{color:var(--cyan);text-decoration:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -206,9 +258,48 @@ footer a{color:var(--cyan);text-decoration:none}
   </div>
 </div>
 
-<!-- 1. THE MONTH -->
+<!-- 0. ONE PATIENT -->
 <section>
-  <div class="slab">01 — One surgical month</div>
+  <div class="slab">01 — One patient, two paths</div>
+  <h2>Same patient, same test, different ending</h2>
+  <p class="lede">Before the numbers, the story. Pt 407 is a 58-year-old woman whose sleep apnea was diagnosed two years before her surgery. Step through what happens when her result is stored as a PDF, and what happens when it is stored as data. <strong>Only one thing differs between the two rows: the format of step 2.</strong></p>
+  <div class="panel">
+    <div class="story">
+      <div class="lanes">
+        <div class="corner"></div>
+        <div class="lh">1 · 2024 · The test</div>
+        <div class="lh">2 · The result arrives</div>
+        <div class="lh">3 · 2026 · Pre-op check</div>
+        <div class="lh">4 · Day of surgery</div>
+
+        <div class="lane-lbl p">Stored as PDF</div>
+        <div class="mlane" style="color:var(--red)">Path A · stored as PDF</div>
+        <div class="sc same" data-s="1"><span class="k">Sleep lab</span>Overnight study: obstructive AHI <strong>22.6 /h</strong>, moderate OSA. She starts CPAP and uses it every night.</div>
+        <div class="sc bad" data-s="2"><span class="k">Chart</span>The report is <strong>scanned into the media tab</strong>. A person can open it. The EHR stores a picture, not a number.</div>
+        <div class="sc bad" data-s="3"><span class="k">Pre-op</span>The rule finds <strong>no AHI on file</strong>. The questionnaire asks about snoring and tiredness; CPAP fixed both. <strong>STOP-Bang 2</strong>, below the cutoff.</div>
+        <div class="sc bad" data-s="4"><span class="k">Operating room</span>Anesthesia <strong>doesn't know</strong>. No CPAP at bedside, a standard opioid plan, routine monitoring.</div>
+
+        <div class="lane-lbl s">Structured result</div>
+        <div class="mlane" style="color:var(--teal)">Path B · structured result</div>
+        <div class="sc same" data-s="1"><span class="k">Sleep lab</span>The same study, the same 22.6, the same CPAP. <strong>Nothing clinical changes.</strong></div>
+        <div class="sc good" data-s="2"><span class="k">Chart</span>The interface files <strong>LOINC 90563-8 = 22.6 /h</strong> as a discrete result, and attaches the PDF too.</div>
+        <div class="sc good" data-s="3"><span class="k">Pre-op</span>The rule finds <strong>AHI 22.6 from 2024</strong> and raises a known-OSA flag. The questionnaire score no longer matters.</div>
+        <div class="sc good" data-s="4"><span class="k">Operating room</span>Anesthesia plans for it: <strong>CPAP brought in</strong>, opioid-sparing pain control, continuous oximetry after surgery.</div>
+      </div>
+    </div>
+    <div class="stepbar">
+      <div class="pips" id="pips"><span class="pip on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
+      <div class="msg" id="stepMsg">—</div>
+      <button class="mini" id="stPrev">← Back</button>
+      <button class="mini on" id="stNext">Next step →</button>
+      <button class="mini" id="stAll">Show all</button>
+    </div>
+  </div>
+</section>
+
+<!-- 1. THE MONTH -->
+<section id="month">
+  <div class="slab">02 — One surgical month</div>
   <h2>400 patients, one pre-op checkpoint, two ways to store a result</h2>
   <p class="lede">Each dot is a modeled elective-surgery patient. About one in six has moderate-to-severe sleep apnea, and about a third of those were already diagnosed by a sleep study on file. Everyone goes through the same pre-op screen. What changes is <strong>whether the chart can read the result of the study that already happened.</strong></p>
   <div class="panel">
@@ -233,7 +324,8 @@ footer a{color:var(--cyan);text-decoration:none}
     </div>
     <div class="pop">
       <div class="dots" id="dots" aria-label="Patient population grid"></div>
-      <div class="tip" id="tip">Hover or tap a dot to see the patient.</div>
+      <div class="tip" id="tip">Tap any dot to follow that patient.</div>
+      <div class="pcard" id="pcard"></div>
       <div class="legend">
         <div class="lg"><span class="sw tl"></span>known OSA, recognized from result</div>
         <div class="lg"><span class="sw gr"></span>OSA caught by screening</div>
@@ -256,7 +348,7 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <!-- 2. THREE FORMATS -->
 <section>
-  <div class="slab">02 — Same result, three formats</div>
+  <div class="slab">03 — Same result, three formats</div>
   <h2>What the chart actually receives</h2>
   <p class="lede">The clinical content is identical in all three tabs. The difference is <strong>who can use it</strong>: a person with time to open a document, or every rule, report, and registry in the system.</p>
   <div class="panel">
@@ -314,11 +406,29 @@ footer a{color:var(--cyan);text-decoration:none}
 <span class="c">// result[] → the Observations, presentedForm[] → the original PDF</span></pre>
     </div>
   </div>
+
+  <div class="panel" style="margin-top:18px">
+    <div class="panel-head">
+      <div><div class="panel-title">Interface drill — the rule that stopped firing</div><div class="panel-sub">the ticket a clinical systems analyst actually gets · synthetic</div></div>
+      <div class="panel-sub" id="drillTag">state: normal feed</div>
+    </div>
+    <div class="tryit"><b>Try it</b><span>Tap any field in the OBX segment to see what it is. Then run the upgrade and watch the flag disappear without a single error.</span>
+      <div class="modes" role="group" aria-label="Feed state">
+        <button class="mini on" data-d="ok">Normal feed</button>
+        <button class="mini" data-d="up">After sleep-system upgrade</button>
+        <button class="mini" data-d="mon">With feed monitoring</button>
+      </div>
+    </div>
+    <div class="drill-msg" id="drillMsg"></div>
+    <div class="fdetail" id="fDetail"><b>OBX-3</b>Tap a field above to see its name and what the rule does with it.</div>
+    <div class="chain" id="chain"></div>
+    <div class="verdict" id="verdict"></div>
+  </div>
 </section>
 
 <!-- 3. THE RULE -->
 <section>
-  <div class="slab">03 — What becomes possible</div>
+  <div class="slab">04 — What becomes possible</div>
   <h2>A query that returns zero rows today</h2>
   <p class="lede">Once the index is a discrete result, the question “who is scheduled for surgery in the next two weeks with known moderate-to-severe sleep apnea?” becomes <strong>a report anyone can run</strong>, and the same logic can drive a pre-op flag. Against PDF-only results, the identical query returns nothing, because there is nothing to query.</p>
   <div class="panel">
@@ -358,7 +468,7 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <!-- 4. LIMITS -->
 <section>
-  <div class="slab">04 — What this can't do</div>
+  <div class="slab">05 — What this can't do</div>
   <h2>Screening is not diagnosis, and flags are not free</h2>
   <p class="lede">Move the cutoff in the simulator and the tradeoff is plain: at the standard cutoff, <strong>more than half of all patients get flagged</strong> and most of them do not have significant sleep apnea. Raise it and the flags shrink, but real cases slip through. Structuring the result does not remove that tradeoff for undiagnosed patients. It removes it for the ones <em>already diagnosed</em>.</p>
   <div class="grid2">
@@ -381,7 +491,7 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <!-- 5. ROI -->
 <section>
-  <div class="slab">05 — The business case</div>
+  <div class="slab">06 — The business case</div>
   <h2>What a result that can be read is worth</h2>
   <p class="lede">Lead with capacity and safety, dollars second. Every repeat sleep study ordered for an already-diagnosed patient is <strong>a sleep-lab night taken from someone on the waitlist</strong>, and every known patient who reaches the OR unflagged is avoidable risk.</p>
   <div class="panel">
@@ -421,13 +531,14 @@ footer a{color:var(--cyan);text-decoration:none}
 
 <!-- 6. CLOSE -->
 <section>
-  <div class="slab">06 — Why this project</div>
+  <div class="slab">07 — Why this project</div>
   <h2>The same pattern, one layer down</h2>
   <p class="lede">The epilepsy unit project found a decision running a day behind its own data. This one finds a decision that <strong>can't see its data at all</strong>, because the data arrived as a picture. The toolkit is the portfolio's: clinical context from the neurology work, alert governance from the neuro-ICU pipeline, and the interface literacy from the Epic analyst lab, aimed at a gap that is common, fixable, and unglamorous.</p>
   <div class="grid2">
     <div class="card"><h3>Demonstrated here</h3><ul>
       <li><strong>Interface design</strong>: HL7 v2 ORU and FHIR R4 for the same result, with LOINC coding and an honest local-code gap</li>
       <li><strong>Data-to-decision thinking</strong>: tracing why a known diagnosis fails to reach the OR</li>
+      <li><strong>Interface troubleshooting</strong>: a vendor upgrade that silently breaks a mapping, and the volume monitor that catches it</li>
       <li><strong>Reporting</strong>: a Clarity-style worklist query that only works once the data is discrete</li>
       <li><strong>Alert governance</strong>: splitting a high-value flag from a high-volume one, with metrics</li>
       <li><strong>Capacity framing</strong>: sleep-lab nights and nursing hours before dollars</li>
@@ -438,6 +549,7 @@ footer a{color:var(--cyan);text-decoration:none}
       <li>“Keep the PDF for humans, add discrete results for machines. It's not either-or”</li>
       <li>“Every repeat sleep study for a diagnosed patient is a night taken from someone on the waitlist”</li>
       <li>“The hardest part isn't the rule. It's owning the mapping table after the next upgrade”</li>
+      <li>“Monitor the meaning, not just the traffic: messages kept flowing while the flag went dark”</li>
     </ul></div>
   </div>
 </section>
@@ -474,12 +586,13 @@ for (var i=0;i<400;i++){
   var age = 28 + Math.floor(r()*52), sex = r()<0.5?'F':'M';
   P.push({id:101+i, sev:sev, known:known, sb:sb, age:age, sex:sex});
 }
-var mode='pdf', cut=3;
-var host=document.getElementById('dots'), tip=document.getElementById('tip'), els=[];
+var mode='pdf', cut=3, sel=306;   // Pt 407: diagnosed, moderate, STOP-Bang 2
+var host=document.getElementById('dots'), tip=document.getElementById('tip'), card=document.getElementById('pcard'), els=[];
 P.forEach(function(p,i){
-  var d=document.createElement('div'); d.className='d'; d.tabIndex=-1;
-  d.addEventListener('mouseenter',function(){ show(i); });
-  d.addEventListener('click',function(){ show(i); });
+  var d=document.createElement('div'); d.className='d';
+  d.setAttribute('role','button'); d.setAttribute('aria-label','Patient '+p.id);
+  d.addEventListener('mouseenter',function(){ sel=i; paint(); });
+  d.addEventListener('click',function(){ sel=i; paint(); });
   host.appendChild(d); els.push(d);
 });
 function classify(p){
@@ -491,16 +604,28 @@ function classify(p){
   }
   return flagged ? 'fa' : '';
 }
-function show(i){
-  var p=P[i], c=classify(p), what={
-    tl:'<span style="color:var(--teal)">recognized from discrete result → known-OSA pathway</span>',
-    gr:'<span style="color:var(--green)">flagged by screen → possible OSA</span>',
-    rd: p.known ? '<span style="color:var(--red)">missed · diagnosis already in chart as PDF</span>' : '<span style="color:var(--red)">missed · undiagnosed, screened low</span>',
-    rr:'<span style="color:var(--amber)">flagged as possible OSA · re-referred for a study they already had</span>',
-    fa:'<span style="color:var(--amber)">flagged · no significant OSA</span>',
-    '':'not flagged'
+function cell(k,v,c){ return '<div class="pc"><div class="k">'+k+'</div><div class="v '+(c||'')+'">'+v+'</div></div>'; }
+function paint(){
+  els.forEach(function(e,i){ e.classList.toggle('sel', i===sel); });
+  var p=P[sel], c=classify(p), sig=p.sev>=2;
+  tip.innerHTML = '<span style="color:var(--text)">Pt '+p.id+' · '+p.age+p.sex+'</span> · '+SEV[p.sev];
+  var study = !p.known ? ['none on file','m'] : (mode==='pdf' ? ['yes · scanned PDF','a'] : ['yes · discrete result','t']);
+  var rule;
+  if (!p.known) rule=['nothing to read','m'];
+  else if (mode==='pdf') rule=['nothing · AHI is inside an image','r'];
+  else rule = sig ? ['AHI ≥ 15 → known-OSA flag','t'] : ['AHI < 15 → no flag','m'];
+  var skip = (mode==='str' && p.known && sig);
+  var scr = skip ? ['not needed','m'] : ['STOP-Bang '+p.sb+(p.sb>=cut?' ≥ ':' < ')+cut+(p.sb>=cut?' → flagged':' → not flagged'), p.sb>=cut?'a':'m'];
+  var out = {
+    tl:['Recognized from the result · anesthesia plans for OSA','t'],
+    gr:['Caught by the screen · evaluated before surgery','g'],
+    rd: p.known ? ['Missed · reaches surgery unflagged, diagnosis already on file','r'] : ['Missed · undiagnosed and screened low','r'],
+    rr:['Flagged as “possible” OSA · re-referred for a study she already had'.replace('she', p.sex==='M'?'he':'she'),'a'],
+    fa:['Flagged · extra work-up, no significant OSA','a'],
+    '':['Not flagged · correctly, no significant OSA','m']
   }[c];
-  tip.innerHTML = 'Pt '+p.id+' · '+p.age+p.sex+' · '+SEV[p.sev]+(p.known?' (diagnosed)':'')+' · STOP-Bang '+p.sb+' → '+what;
+  card.innerHTML = cell('Sleep study on file',study[0],study[1]) + cell('What the rule can read',rule[0],rule[1]) +
+                   cell('Pre-op questionnaire',scr[0],scr[1]) + cell('Outcome',out[0],out[1]);
 }
 function render(){
   var rec=0, miss=0, missKnown=0, flags=0, re=0, total=0;
@@ -520,6 +645,7 @@ function render(){
   document.getElementById('modeLbl').textContent = 'mode: '+(mode==='pdf'?'stored as PDF':'structured result');
   document.getElementById('cutV').textContent = '≥ '+cut;
   document.getElementById('cutS').textContent = {3:'standard cutoff · high sensitivity, many flags',4:'fewer flags · more cases slip through',5:'high-specificity cutoff · many cases missed',6:'very few flags · most cases missed'}[cut];
+  paint();
 }
 function setMode(m){
   mode=m;
@@ -532,6 +658,71 @@ document.getElementById('mPdf').addEventListener('click',function(){setMode('pdf
 document.getElementById('mStr').addEventListener('click',function(){setMode('str');});
 document.getElementById('cut').addEventListener('input',function(){cut=+this.value;render();});
 render();
+})();
+
+/* ============ ONE PATIENT ============ */
+(function(){
+var step=1, MSG={
+ 1:'<strong>Step 1:</strong> the test is identical. Both paths start with the same proven diagnosis.',
+ 2:'<strong>Step 2:</strong> the only difference. One chart holds a picture of the result; the other holds the number.',
+ 3:'<strong>Step 3:</strong> rules can only read numbers, and CPAP removed the symptoms the questionnaire asks about.',
+ 4:'<strong>Step 4:</strong> same patient, same diagnosis, a different plan in the OR. Now multiply by a whole surgical month.'};
+var cards=document.querySelectorAll('.sc'), pips=document.querySelectorAll('.pip'), nx=document.getElementById('stNext');
+function show(){
+  cards.forEach(function(c){ c.classList.toggle('off', +c.dataset.s>step); });
+  pips.forEach(function(p,i){ p.classList.toggle('on', i<step); });
+  document.getElementById('stepMsg').innerHTML = MSG[Math.min(step,4)];
+  nx.textContent = step>=4 ? 'See 400 patients ↓' : 'Next step →';
+}
+nx.addEventListener('click',function(){ if(step>=4){ document.getElementById('month').scrollIntoView({behavior:'smooth'}); return; } step++; show(); });
+document.getElementById('stPrev').addEventListener('click',function(){ step=Math.max(1,step-1); show(); });
+document.getElementById('stAll').addEventListener('click',function(){ step=4; show(); });
+show();
+})();
+
+/* ============ INTERFACE DRILL ============ */
+(function(){
+var NAMES=['Segment type','OBX-1 · Set ID','OBX-2 · Value type (NM = numeric)','OBX-3 · Observation identifier (the code the rule matches on)','OBX-4 · Observation sub-ID','OBX-5 · Observation value (the number)','OBX-6 · Units','OBX-7 · Reference range','OBX-8 · Abnormal flag','OBX-9 · Probability','OBX-10 · Nature of abnormal test','OBX-11 · Result status (F = final)'];
+var MSGS={
+  ok:['OBX','1','NM','90563-8^Obstructive apnea hypopnea index^LN','','22.6','/h^per hour^UCUM','&lt;5','H','','','F'],
+  up:['OBX','1','NM','OAHI^Obstructive AHI^SLPV2','','22.6','/h^per hour^UCUM','&lt;5','H','','','F']
+};
+MSGS.mon=MSGS.up;
+var CHAINS={
+  ok:[['1 · Message','Accepted by interface engine','ok'],['2 · Mapping table','LN 90563-8 → OSA-AHI component','ok'],['3 · Result filed','Discrete result, AHI = 22.6','ok'],['4 · Pre-op rule','AHI ≥ 15 → known-OSA flag','ok']],
+  up:[['1 · Message','Accepted by interface engine','ok'],['2 · Mapping table','No entry for SLPV2 “OAHI”','bad'],['3 · Result filed','Filed as unmapped local component','warn'],['4 · Pre-op rule','Finds no AHI · no flag · no error','bad']],
+  mon:[['1 · Message','Accepted by interface engine','ok'],['2 · Feed monitor','Mapped AHI results: 0 this week (baseline ≈ 35)','warn'],['3 · Ticket','Analyst adds SLPV2 “OAHI” → 90563-8','ok'],['4 · Backfill','Re-file the week’s results · flags restored','ok']]
+};
+var VERD={
+  ok:'<strong>Working as designed.</strong> The rule matches on the code in OBX-3, not on the words. As long as the code is one the mapping table knows, the value in OBX-5 reaches the rule.',
+  up:'<strong>The silent failure.</strong> The vendor upgrade changed OBX-3 from the LOINC code to its own local code. The message is valid, the engine accepts it, the result even appears in the chart. But the mapping table has no entry for the new code, so the rule sees nothing. <strong>No interface error, no alert, no ticket</strong>, and every diagnosed patient quietly goes back to being screened like a stranger.',
+  mon:'<strong>How it gets caught.</strong> A simple volume check on <em>mapped</em> results, not just messages received, notices that AHI results dropped to zero while message volume stayed normal. That opens a ticket instead of waiting for a harmed patient to reveal the gap. The fix is one mapping row and a backfill; the lesson is to <strong>monitor the meaning, not just the traffic.</strong>'
+};
+var state='ok', selF=3;
+function draw(){
+  var m=MSGS[state], html='';
+  m.forEach(function(v,i){
+    if(i>0) html+='<span class="pipe">|</span>';
+    var cls='fld'+(i===selF?' on':'')+((i===5)?' hot':'')+((i===3&&state!=='ok')?' chg':'');
+    html+='<span class="'+cls+'" data-f="'+i+'">'+(v===''?'&nbsp;':v)+'</span>';
+  });
+  document.getElementById('drillMsg').innerHTML=html;
+  document.querySelectorAll('#drillMsg .fld').forEach(function(f){ f.addEventListener('click',function(){ selF=+f.dataset.f; draw(); }); });
+  var extra = selF===3 ? (state==='ok' ? ' Currently LOINC, which the mapping table knows.' : ' <span style="color:var(--red)">Changed by the upgrade to a vendor code the mapping table has never seen.</span>') :
+              selF===5 ? ' The value is identical in every state. The number was never the problem.' : '';
+  document.getElementById('fDetail').innerHTML='<b>'+NAMES[selF].split(' · ')[0]+'</b>'+(NAMES[selF].split(' · ')[1]||NAMES[selF])+'.'+extra;
+  document.getElementById('chain').innerHTML=CHAINS[state].map(function(c){ return '<div class="ch '+c[2]+'"><div class="k">'+c[0]+'</div><div class="v">'+c[1]+'</div></div>'; }).join('');
+  document.getElementById('verdict').innerHTML=VERD[state];
+  document.getElementById('drillTag').textContent='state: '+{ok:'normal feed',up:'after upgrade',mon:'with feed monitoring'}[state];
+}
+document.querySelectorAll('[data-d]').forEach(function(b){
+  b.addEventListener('click',function(){
+    state=b.dataset.d;
+    document.querySelectorAll('[data-d]').forEach(function(x){ x.classList.toggle('on', x===b); });
+    draw();
+  });
+});
+draw();
 })();
 
 /* ============ TABS ============ */
