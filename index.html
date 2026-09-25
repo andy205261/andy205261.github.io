@@ -382,6 +382,7 @@ html.light body{background:var(--paper);color:var(--ink)}
     <a href="#proj-03" style="--c:var(--green)"><div class="rv">42</div><div class="rl">Epic tickets and 3 P1/P2 incidents worked end to end</div><div class="rp">03 &middot; Epic analyst lab</div></a>
     <a href="#proj-04" style="--c:var(--amber)"><div class="rv">5 &rarr; 0</div><div class="rl">bot incidents per shift once guardrails are on</div><div class="rp">04 &middot; RPA governance</div></a>
     <a href="#proj-05" style="--c:var(--purple)"><div class="rv">358 &rarr; 433</div><div class="rl">EMU admissions per year, same beds and staff</div><div class="rp">05 &middot; Epilepsy unit</div></a>
+    <a href="#proj-06" style="--c:var(--teal)"><div class="rv">7 &rarr; 1</div><div class="rl">OSA patients reaching surgery unflagged, per modeled month</div><div class="rp">06 &middot; Sleep apnea gap</div></a>
   </div>
   <!-- PROJECT NAV TABS -->
   <div id="proj-tabs" style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:40px;padding:14px;background:var(--paper2);border:1px solid var(--rule);border-radius:14px">
@@ -390,9 +391,10 @@ html.light body{background:var(--paper);color:var(--ink)}
     <a href="#proj-03" class="proj-nav-tab" style="--c:var(--green)"><span class="tn">03</span><span class="tl">Epic Analyst Lab</span></a>
     <a href="#proj-04" class="proj-nav-tab" style="--c:var(--amber)"><span class="tn">04</span><span class="tl">Automation Governance</span></a>
     <a href="#proj-05" class="proj-nav-tab" style="--c:var(--purple)"><span class="tn">05</span><span class="tl">Epilepsy Unit Capacity</span></a>
+    <a href="#proj-06" class="proj-nav-tab" style="--c:var(--teal)"><span class="tn">06</span><span class="tl">Sleep Apnea Care Gap</span></a>
     <a href="#capstone" class="proj-nav-tab" style="--c:var(--pink)"><span class="tn">MBA</span><span class="tl">Capstone</span></a>
   </div>
-  <p class="intro fi">Five in-depth projects where neuroscience, clinical automation, and health system operations meet — from CAR-T neurotoxicity surveillance and neuro-ICU seizure alerting to Epic analyst simulations, RPA governance, and EEG machine learning. Each one is a working build that names both what it does for patients and what it is worth to the institution.</p>
+  <p class="intro fi">Six in-depth projects where neuroscience, clinical automation, and health system operations meet — from CAR-T neurotoxicity surveillance and neuro-ICU seizure alerting to Epic analyst simulations, RPA governance, epilepsy unit capacity, and sleep study interfaces. Each one is a working build that names both what it does for patients and what it is worth to the institution.</p>
 
   <!-- PROJECT 1: CAR-T NEUROTOXICITY WATCH -->
   <div id="proj-01" style="margin-bottom:48px">
@@ -699,6 +701,66 @@ html.light body{background:var(--paper);color:var(--ink)}
     </div>
   </div>
 
+  <!-- PROJECT 6: SLEEP APNEA CARE GAP -->
+  <div id="proj-06" style="margin-bottom:48px">
+    <a href="#proj-06" class="proj-label fi" style="text-decoration:none">Project 06 — Sleep Apnea Care Gap</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">Sleep medicine</span><span class="tag">Perioperative safety</span><span class="tag">HL7 v2 ORU</span><span class="tag">FHIR R4 · LOINC</span><span class="tag">STOP-Bang</span>
+        </div>
+        <h3>The diagnosis that became a PDF</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">A sleep study proves obstructive sleep apnea, and the result comes back to the chart as a scanned report. A person can open it; no rule, registry, or pre-op checklist can. When that patient is scheduled for surgery, they get screened like a stranger, and a CPAP user who no longer snores can score low. This project shows the fix is <b style="color:var(--ink);font-weight:600">an interface, not an algorithm</b>: send the key numbers as coded results, and one simple rule recognizes every patient whose diagnosis is already on file.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--w28);margin-bottom:8px;letter-spacing:.08em">ONE MODELED SURGICAL MONTH · 400 PATIENTS · STOP-BANG ≥ 3</div>
+          <div class="srow"><span class="slb">OSA missed — PDF result</span><div class="strk"><div class="sbar" style="width:100%;background:var(--red)"></div></div><span class="sval" style="color:var(--red)">7</span></div>
+          <div class="srow"><span class="slb">OSA missed — structured</span><div class="strk"><div class="sbar" style="width:14%;background:var(--green)"></div></div><span class="sval" style="color:var(--green)">1</span></div>
+          <div class="srow"><span class="slb">Repeat sleep studies</span><div class="strk"><div class="sbar" style="width:100%;background:var(--amber)"></div></div><span class="sval" style="color:var(--amber)">17 → 0</span></div>
+          <div class="srow"><span class="slb">Patients flagged by screen</span><div class="strk"><div class="sbar" style="width:59%;background:var(--teal)"></div></div><span class="sval" style="color:var(--teal)">59%</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">SLEEP-LAB CAPACITY</div>
+            <div style="font-size:13px;color:var(--ink)">214 nights freed / yr</div>
+          </div>
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">STANDARDS</div>
+            <div style="font-size:13px;color:var(--teal)">ORU · FHIR · LOINC</div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:var(--deep2);padding:12px 16px;border-bottom:1px solid var(--w07)">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Pre-op checkpoint — one surgical month</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">400 synthetic patients · PDF vs structured result</div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="background:var(--deep);border:1px solid var(--w07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75">
+            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">PT 407 · 58F · MODERATE OSA · STUDY ON FILE</div>
+            <div style="color:var(--amber)">obstructive AHI 22.6 /h — inside a scanned PDF</div>
+            <div>CPAP nightly → no snoring, not tired</div>
+            <div style="color:var(--red)">STOP-Bang 2 · below cutoff · not flagged</div>
+            <div style="margin-top:6px;color:var(--ink3)">structured: LOINC 90563-8 = 22.6</div>
+            <div style="color:var(--green)">→ known-OSA flag · bring CPAP · anesthesia plans</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+            <a href="sleep/" target="_blank" style="padding:8px 18px;background:var(--accent);color:var(--on-accent);border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the Month →</a>
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+          </div>
+          <div class="mrow"><span class="mk">Simulator</span><span class="mv">400 patients · storage toggle · cutoff slider</span></div>
+          <div class="mrow"><span class="mk">Interface</span><span class="mv ok">Same result as PDF, ORU, and FHIR</span></div>
+          <div class="mrow"><span class="mk">ROI model</span><span class="mv ok">10 adjustable assumptions</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Population simulator</span></div><div class="ctitle">The answer was in the chart</div><div class="cdesc">Four hundred modeled surgical patients pass one pre-op screen. With sleep study results stored as PDFs, seven patients with moderate-to-severe OSA reach surgery unflagged, six of them already diagnosed, and seventeen diagnosed patients get referred for a study they already had. With structured results, the missed count drops to one and the repeat studies disappear.</div></div><div class="card-body"><div class="mrow"><span class="mk">Missed</span><span class="mv">7 → 1 per month</span></div><div class="mrow"><span class="mk">Insight</span><span class="mv ok">Treatment hides symptoms, not the result</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Interface design</span></div><div class="ctitle">One result, three formats</div><div class="cdesc">The same polysomnography result shown as a scanned report, an HL7 v2 ORU^R01 with LOINC-coded OBX segments, and a FHIR R4 Observation under a DiagnosticReport that keeps the PDF in presentedForm. Includes the unglamorous part: sleep efficiency has no code in the panel, so it rides on a local code that someone has to own.</div></div><div class="card-body"><div class="mrow"><span class="mk">Codes</span><span class="mv">90568-7 · 90563-8 · 90567-9</span></div><div class="mrow"><span class="mk">Design</span><span class="mv ok">Keep the PDF, add the data</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Governance &amp; ROI</span></div><div class="ctitle">Split the flag, lead with capacity</div><div class="cdesc">At the standard STOP-Bang cutoff more than half of all patients get flagged, which is how alerts get ignored. The design splits a low-volume “known OSA, bring CPAP” flag from a high-volume “possible OSA” screen, and the business case leads with sleep-lab nights returned to the waitlist and nursing hours no longer spent hunting scanned reports.</div></div><div class="card-body"><div class="mrow"><span class="mk">Framing</span><span class="mv">Capacity first, cost second</span></div><div class="mrow"><span class="mk">Worklist</span><span class="mv ok">Clarity-style query, 0 rows on PDFs</span></div></div></div>
+    </div>
+  </div>
+
   <!-- MBA CAPSTONE -->
   <div id="capstone" style="margin-bottom:48px">
     <a href="#capstone" class="proj-label fi" style="text-decoration:none">MBA Capstone — Business Strategy</a>
@@ -916,7 +978,7 @@ html.light body{background:var(--paper);color:var(--ink)}
 
 <script>
 // Highlight active project tab on scroll
-const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05','capstone'];
+const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05','proj-06','capstone'];
 const navTabs = document.querySelectorAll('.proj-nav-tab');
 window.addEventListener('scroll', () => {
   let current = '';
