@@ -70,7 +70,7 @@ footer { border-top:1px solid var(--line); padding-top:18px; font-size:.85rem; c
 <div class="wrap">
 
 <header>
-  <span class="eyebrow">Project 11 · Clinical interfaces</span>
+  <span class="eyebrow">Project 07 · Clinical interfaces</span>
   <h1>Interface Triage Agent</h1>
   <p class="lede">A local AI agent that works an HL7 v2 interface error queue. It explains each rejected message in plain English, routes it to the team that owns the fix, and drafts the ticket. It runs entirely on a laptop, on synthetic patients.</p>
   <div class="chips"><span class="chip">qwen3:8b via Ollama</span><span class="chip">MacBook Pro M3 Pro, 18GB</span><span class="chip">HL7 v2.5.1</span><span class="chip">Synthea synthetic data</span><span class="chip">Python</span></div>
@@ -86,7 +86,7 @@ footer { border-top:1px solid var(--line); padding-top:18px; font-size:.85rem; c
     <div class="tile"><span class="k">Faults detected</span><span class="v">100%</span><span class="s">0 false positives</span></div>
     <div class="tile"><span class="k">Time per message</span><span class="v">20.7s</span><span class="s">median, on a laptop</span></div>
     <div class="tile"><span class="k">Valid structured output</span><span class="v">100%</span><span class="s">schema-checked JSON</span></div>
-    <div class='tile'><span class='k'>Explanations judged correct</span><span class='v'>100%</span><span class='s'>85% clear · 85% actionable · 20 hand-graded</span></div>
+    <div class='tile'><span class='k'>Explanations judged correct</span><span class='v'>100%</span><span class='s'>85% clear · 85% actionable · 20 hand-reviewed</span></div>
   </div>
 </section>
 
@@ -97,7 +97,7 @@ footer { border-top:1px solid var(--line); padding-top:18px; font-size:.85rem; c
     <li><h3>Inject faults</h3><p>Each queued message gets one known error; the answer key is kept aside.</p></li>
     <li><h3>Validate</h3><p>Rule-based checks find every error with a rule ID and field path.</p></li>
     <li class="llm"><h3>Triage</h3><p>The local model explains, routes and drafts a ticket, looking up field definitions through a tool.</p></li>
-    <li><h3>Score</h3><p>Routing is graded against the answer key; explanations are hand-graded.</p></li>
+    <li><h3>Score</h3><p>Routing is graded against the answer key; explanations are reviewed by hand.</p></li>
   </ol>
   <p class="callout">Code decides whether a message is broken; the model only explains why and who should fix it. Detection stays reproducible and auditable, and the model's mistakes are limited to wording and routing, which are measured here.</p>
 </section>
