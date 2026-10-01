@@ -30,6 +30,8 @@ header { display:grid; gap:18px; }
 .chips { display:flex; flex-wrap:wrap; gap:8px; }
 .chip { font-family:var(--mono); font-size:.74rem; border:1px solid var(--line); border-radius:999px; padding:3px 10px; color:var(--muted); }
 .btn { justify-self:start; font-weight:500; text-decoration:none; color:var(--accent-ink); background:var(--accent); padding:9px 16px; border-radius:8px; }
+.plain { background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:12px; padding:16px 20px; display:grid; gap:6px; max-width:68ch; }
+.plain p { color:var(--fg); }
 .banner { border:1px solid var(--warn); color:var(--warn); border-radius:10px; padding:12px 16px; }
 .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr)); gap:12px; }
 .tile { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; display:grid; gap:2px; }
@@ -76,6 +78,8 @@ footer { border-top:1px solid var(--line); padding-top:18px; font-size:.85rem; c
   <div class="chips"><span class="chip">qwen3:8b via Ollama</span><span class="chip">MacBook Pro M3 Pro, 18GB</span><span class="chip">HL7 v2.5.1</span><span class="chip">Synthea synthetic data</span><span class="chip">Python</span></div>
   <a class='btn' href='https://github.com/andy205261/interface-triage-agent'>View the code on GitHub</a>
 </header>
+
+<aside class="plain" aria-label="Plain-language summary"><span class="eyebrow">In plain terms</span><p>Hospital systems send each other messages about patients, and when one is rejected, an analyst has to find the problem and send it to the right team. This project automates the first pass. Strict rules find what&#39;s wrong, and a private AI on a laptop explains it in plain language and picks the team to fix it. Tested on 200 messages with fake patients, it chose the right team 95.5% of the time.</p></aside>
 
 
 
