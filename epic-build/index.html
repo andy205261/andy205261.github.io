@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICE Score Build Packet — Epic Application Analyst Work | Andy Nguyen</title>
+<meta name="description" content="A complete Epic build packet for ICE score documentation and an ICANS deterioration advisory: workflow, build inventory, BPA specification, alert burden model, test script, and change control.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@200;300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#0a0f1a;--paper2:#121a28;--paper3:#182136;--deep:#0d1523;--deep2:#0b1120;
+  --ink:#f1f5f9;--ink2:#d5dee9;--ink3:#a3b3c7;--ink4:#7387a0;
+  --rule:rgba(255,255,255,.10);--rule2:rgba(255,255,255,.06);
+  --accent:#38bdf8;--green:#34d399;--amber:#fbbf24;--red:#f87171;--purple:#a78bfa;--teal:#2dd4bf;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'DM Mono','SF Mono',ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink2);font-family:var(--sans);font-weight:300;line-height:1.68;font-size:15.5px}
+.wrap{max-width:1000px;margin:0 auto;padding:48px 20px 96px}
+a{color:var(--accent)}
+.back{display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-decoration:none;color:var(--accent);margin-bottom:28px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:13px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,5.4vw,48px);line-height:1.1;color:var(--ink);margin-bottom:18px;letter-spacing:-.4px}
+h1 em{font-style:italic;color:var(--red)}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(22px,3.4vw,29px);line-height:1.2;color:var(--ink);margin-bottom:12px}
+h3{font-family:var(--sans);font-weight:500;font-size:15.5px;color:var(--ink);margin-bottom:6px}
+p{margin-bottom:14px;max-width:70ch}
+.lede{font-size:16.5px;color:var(--ink2);max-width:68ch}
+.lede strong{color:var(--ink);font-weight:500}
+section{margin-top:68px}
+.slab{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:11px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+.chip{font-family:var(--mono);font-size:11px;color:var(--ink4)}
+.chip:not(:last-child)::after{content:'·';margin-left:10px;color:rgba(255,255,255,.2)}
+
+/* 30 second */
+.p30{background:var(--paper3);border:1px solid var(--rule);border-radius:16px;padding:22px;margin-top:30px}
+.p30-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.p30-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:17px}
+.p30-c{display:flex;gap:12px;align-items:flex-start;min-width:0}
+.p30-n{flex-shrink:0;width:23px;height:23px;border-radius:50%;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.35);color:var(--accent);font-family:var(--mono);font-size:11px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.p30-c h4{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:4px;line-height:1.4}
+.p30-c p{font-size:12.5px;color:var(--ink3);line-height:1.6;margin:0}
+
+/* panels */
+.panel{background:var(--paper2);border:1px solid var(--rule);border-radius:16px;overflow:hidden;margin-top:20px}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;background:var(--paper3);border-bottom:1px solid var(--rule)}
+.pt{font-size:12.5px;font-weight:500;color:var(--ink)}
+.ps{font-family:var(--mono);font-size:10.5px;color:var(--ink4)}
+.pb{padding:18px}
+
+/* workflow */
+.flow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:720px){.flow{grid-template-columns:1fr}}
+.fcol{background:var(--deep);border:1px solid var(--rule);border-radius:13px;padding:16px;min-width:0}
+.fcol h3{font-size:13px;font-family:var(--mono);font-weight:400;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.fcol.now h3{color:var(--amber)}
+.fcol.next h3{color:var(--green)}
+.step{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--rule2);font-size:13px;color:var(--ink3);line-height:1.55}
+.step:last-child{border-bottom:none}
+.step b{flex-shrink:0;width:19px;height:19px;border-radius:5px;background:var(--paper3);color:var(--ink4);font-family:var(--mono);font-size:10px;display:flex;align-items:center;justify-content:center;margin-top:2px;font-weight:400}
+.fcol.next .step b{background:rgba(52,211,153,.14);color:var(--green)}
+.gap{font-family:var(--mono);font-size:11px;color:var(--amber);margin-top:12px;padding-top:11px;border-top:1px dashed rgba(251,191,36,.3)}
+.fcol.next .gap{color:var(--green);border-top-color:rgba(52,211,153,.3)}
+
+/* tables */
+.tscroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:600px}
+th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);font-weight:400;padding:9px 12px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--rule2);color:var(--ink3);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.nm{color:var(--ink);font-weight:400}
+td.mono,th.mono{font-family:var(--mono);font-size:11.5px;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;padding:2px 8px;border-radius:100px;white-space:nowrap}
+.pill.new{background:rgba(52,211,153,.14);color:var(--green)}
+.pill.mod{background:rgba(251,191,36,.14);color:var(--amber)}
+.pill.calc{background:rgba(167,139,250,.14);color:var(--purple)}
+.pill.ex{background:rgba(255,255,255,.07);color:var(--ink4)}
+
+/* spec list */
+.spec{display:grid;grid-template-columns:150px 1fr;gap:0}
+@media(max-width:640px){.spec{grid-template-columns:1fr}}
+.spec dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);padding:11px 0 11px 0;border-bottom:1px solid var(--rule2)}
+.spec dd{font-size:13.5px;color:var(--ink3);padding:11px 0;border-bottom:1px solid var(--rule2);min-width:0}
+.spec dd:last-of-type,.spec dt:last-of-type{border-bottom:none}
+.spec code,code.inl{font-family:var(--mono);font-size:12px;background:var(--deep2);border:1px solid var(--rule2);border-radius:5px;padding:1px 6px;color:var(--ink2)}
+.spec ul{margin:4px 0 0;padding-left:17px}
+.spec li{margin-bottom:3px}
+
+/* code block */
+pre{background:var(--deep2);border:1px solid var(--rule);border-radius:12px;padding:16px;overflow-x:auto;font-family:var(--mono);font-size:12px;line-height:1.75;color:var(--ink2)}
+pre .k{color:var(--purple)}
+pre .s{color:var(--green)}
+pre .c{color:var(--ink4)}
+pre .f{color:var(--accent)}
+
+/* alert model */
+.roi{display:grid;grid-template-columns:300px 1fr}
+@media(max-width:820px){.roi{grid-template-columns:1fr}}
+.roi-l{padding:18px;border-right:1px solid var(--rule)}
+@media(max-width:820px){.roi-l{border-right:none;border-bottom:1px solid var(--rule)}}
+.roi-r{padding:18px}
+.par{margin-bottom:15px}
+.par-h{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;margin-bottom:5px;gap:10px}
+.par-h span:first-child{color:var(--ink3)}
+.par-v{font-family:var(--mono);font-size:12.5px;color:var(--accent);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--rule);border-radius:99px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:15px;height:15px;border:none;border-radius:50%;background:var(--accent);cursor:pointer}
+.par-n{font-family:var(--mono);font-size:10px;color:var(--ink4);margin-top:4px}
+.ledger{width:100%;min-width:0;border-collapse:collapse;font-size:13.5px}
+.ledger td{padding:10px 2px;border-bottom:1px solid var(--rule2)}
+.ledger td:last-child{text-align:right;font-family:var(--mono);font-size:14px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ledger tr.tot td{border-bottom:none;border-top:1px solid rgba(255,255,255,.18);padding-top:13px}
+.ledger tr.tot td:last-child{font-family:var(--serif);font-size:23px}
+.v-ok{color:var(--green)}.v-a{color:var(--amber)}.v-bad{color:var(--red)}.v-cy{color:var(--accent)}
+.note{font-size:12px;color:var(--ink4);margin-top:13px;line-height:1.6}
+
+/* test script */
+.tcase{display:grid;grid-template-columns:62px 1fr 1fr 96px;gap:12px;padding:12px;border-bottom:1px solid var(--rule2);align-items:start;font-size:13px}
+@media(max-width:760px){.tcase{grid-template-columns:1fr;gap:5px}.tcase .lbl{display:inline}}
+.tcase:last-child{border-bottom:none}
+.tid{font-family:var(--mono);font-size:11px;color:var(--ink4)}
+.tcase .st{color:var(--ink2)}
+.tcase .ex{color:var(--ink3)}
+.lbl{display:none;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-right:6px}
+.tbtn{font-family:var(--mono);font-size:10.5px;padding:5px 10px;border-radius:7px;border:1px solid var(--rule);background:transparent;color:var(--ink4);cursor:pointer;transition:all .15s;width:88px}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tbtn.pass{background:rgba(52,211,153,.14);border-color:rgba(52,211,153,.45);color:var(--green)}
+.tsum{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;background:var(--paper3);border-top:1px solid var(--rule);font-family:var(--mono);font-size:11.5px;color:var(--ink3)}
+.bar{flex:1;min-width:120px;height:5px;background:var(--rule);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+
+/* timeline */
+.cc{display:grid;grid-template-columns:auto 1fr;gap:0 16px}
+.cc .mk{display:flex;flex-direction:column;align-items:center}
+.cc .dot{width:10px;height:10px;border-radius:50%;background:var(--c);margin-top:7px;flex-shrink:0}
+.cc .ln{width:1px;flex:1;background:var(--rule);margin:5px 0}
+.cc .bd{padding-bottom:22px;min-width:0}
+.cc .env{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);margin-bottom:3px}
+.cc p{font-size:13px;color:var(--ink3);margin:0;max-width:62ch}
+
+.scope{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.26);border-left:3px solid var(--amber);border-radius:13px;padding:17px 19px;margin-top:22px}
+.scope h3{color:var(--amber)}
+.scope p,.scope li{font-size:13.5px;color:var(--ink3)}
+.scope ul{margin:7px 0 0;padding-left:18px}
+.scope li{margin-bottom:5px}
+.foot{margin-top:72px;padding-top:22px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink4);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot a{text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back" href="https://andy205261.github.io/">← Portfolio</a>
+
+<div class="eyebrow">Epic build packet · Clinical application analyst work</div>
+<h1>ICE score documentation<br>and an <em>ICANS deterioration</em> advisory</h1>
+<p class="lede">Project 01 modeled what catching ICANS 16 hours earlier is worth. This is the other half: <strong>what it actually takes to build that in Epic</strong> — the flowsheet rows, the advisory logic, the test script, and the change control it moves through before a nurse ever sees it.</p>
+
+<div class="chips">
+  <span class="chip">ClinDoc</span><span class="chip">Flowsheet build</span><span class="chip">BPA</span><span class="chip">SmartSet</span><span class="chip">Clarity validation</span><span class="chip">Change control</span>
+</div>
+
+<div class="p30">
+  <div class="p30-h">The 30-second version</div>
+  <div class="p30-g">
+    <div class="p30-c"><div class="p30-n">1</div><div><h4>The score exists, the trend doesn't</h4><p>Nurses document ICE every 8 hours. The number is charted, but nothing watches it fall.</p></div></div>
+    <div class="p30-c"><div class="p30-n">2</div><div><h4>Build it as data, not a note</h4><p>Five discrete flowsheet rows and a calculated total, so the score is queryable rather than trapped in narrative text.</p></div></div>
+    <div class="p30-c"><div class="p30-n">3</div><div><h4>Fire on the slope</h4><p>The advisory triggers on a drop across consecutive assessments, not on crossing a fixed number.</p></div></div>
+    <div class="p30-c"><div class="p30-n">4</div><div><h4>Budget the interruptions</h4><p>Alert volume is modeled before build, because an advisory nobody reads is worse than none.</p></div></div>
+  </div>
+</div>
+
+<section>
+  <div class="slab">The gap</div>
+  <h2>Where the signal gets lost</h2>
+  <p>ICANS announces itself gradually. A patient scores 10 at the morning assessment, 9 at the evening one, 7 overnight. Each individual score looks survivable. The slope is what matters, and the slope is invisible when scores live as free text in a progress note and each shift sees only its own assessment.</p>
+
+  <div class="panel"><div class="pb">
+  <div class="flow">
+    <div class="fcol now">
+      <h3>Current state</h3>
+      <div class="step"><b>1</b><div>Nurse performs ICE assessment at shift start</div></div>
+      <div class="step"><b>2</b><div>Total score typed into a narrative note or a single free-text flowsheet row</div></div>
+      <div class="step"><b>3</b><div>Oncoming shift reads handoff; prior scores require opening earlier notes</div></div>
+      <div class="step"><b>4</b><div>Decline noticed when the score reaches a number someone remembers as concerning</div></div>
+      <div class="step"><b>5</b><div>Provider paged, neuro exam, imaging, steroids considered</div></div>
+      <div class="gap">No discrete data · no trend · no automated notification</div>
+    </div>
+    <div class="fcol next">
+      <h3>Future state</h3>
+      <div class="step"><b>1</b><div>Nurse completes ICE on a CAR-T navigator section — five discrete rows</div></div>
+      <div class="step"><b>2</b><div>Total calculates on file; ICANS grade derives from the total</div></div>
+      <div class="step"><b>3</b><div>Prior 72 hours visible as a trend in the same section</div></div>
+      <div class="step"><b>4</b><div>Advisory fires to the care team when the score drops by the configured amount between consecutive assessments</div></div>
+      <div class="step"><b>5</b><div>Acknowledge reasons drive the next action: page provider, order imaging, open the ICANS SmartSet, or document a benign explanation</div></div>
+      <div class="gap">Discrete · trended · reportable in Clarity</div>
+    </div>
+  </div>
+  </div></div>
+</section>
+
+<section>
+  <div class="slab">Build inventory · 1 of 4</div>
+  <h2>Flowsheet rows</h2>
+  <p>The ICE assessment is five items scoring to a maximum of 10, per the ASTCT consensus definition. Each becomes its own row so the components are individually reportable — the question of <em>which</em> item failed first is clinically interesting and currently unanswerable.</p>
+
+  <div class="panel">
+    <div class="ph"><span class="pt">Flowsheet row build request</span><span class="ps">Record IDs assigned at build</span></div>
+    <div class="tscroll"><table>
+      <thead><tr><th>Row name</th><th>Type</th><th>Values</th><th class="mono">Max</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">ICE — Orientation</td><td>Custom list</td><td>Year · month · city · hospital (1 point each)</td><td class="mono">4</td><td><span class="pill new">New</span></td></tr>
+        <tr><td class="nm">ICE — Naming</td><td>Custom list</td><td>Names 3 objects / 2 / 1 / 0</td><td class="mono">3</td><td><span class="pill new">New</span></td></tr>
+        <tr><td class="nm">ICE — Following commands</td><td>Custom list</td><td>Follows simple command · Does not</td><td class="mono">1</td><td><span class="pill new">New</span></td></tr>
+        <tr><td class="nm">ICE — Writing</td><td>Custom list</td><td>Writes standard sentence · Unable</td><td class="mono">1</td><td><span class="pill new">New</span></td></tr>
+        <tr><td class="nm">ICE — Attention</td><td>Custom list</td><td>Counts back from 100 by 10 · Unable</td><td class="mono">1</td><td><span class="pill new">New</span></td></tr>
+        <tr><td class="nm">ICE — Total score</td><td>Numeric, read-only</td><td>Sum of the five rows above</td><td class="mono">10</td><td><span class="pill calc">Calculated</span></td></tr>
+        <tr><td class="nm">ICANS grade (ICE-derived)</td><td>Numeric, read-only</td><td>7–9 → 1 · 3–6 → 2 · 0–2 → 3 · 0 with unarousable → 4</td><td class="mono">4</td><td><span class="pill calc">Calculated</span></td></tr>
+        <tr><td class="nm">Level of consciousness</td><td>Existing row</td><td>Reused from neuro assessment; feeds grade 4 logic</td><td class="mono">—</td><td><span class="pill ex">Reuse</span></td></tr>
+        <tr><td class="nm">Cell therapy day (D+n)</td><td>Numeric</td><td>Days since infusion; scopes the advisory</td><td class="mono">—</td><td><span class="pill new">New</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="panel">
+    <div class="ph"><span class="pt">Placement</span><span class="ps">Template and navigator</span></div>
+    <div class="pb">
+      <dl class="spec">
+        <dt>Group</dt><dd>New flowsheet group <code>ICE Assessment</code>, placed within the existing inpatient neuro assessment template rather than as a standalone template — the assessment is already part of the neuro check, and a separate template means a second place to chart.</dd>
+        <dt>Navigator</dt><dd>New section on the cell therapy navigator: the five rows, the calculated total, and a 72-hour trend of the total.</dd>
+        <dt>Scope</dt><dd>Restricted to the cell therapy unit and the ICU beds that take CAR-T overflow. Not deployed house-wide — a score nobody is trained on produces bad data.</dd>
+        <dt>Filing frequency</dt><dd>q8h per protocol, with ad-hoc filing permitted. The advisory logic tolerates irregular intervals.</dd>
+        <dt>Training</dt><dd>Tip sheet plus a 10-minute unit in-service. The writing item in particular is scored inconsistently without instruction.</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="slab">Build inventory · 2 of 4</div>
+  <h2>The advisory</h2>
+  <p>This is where most alerting projects go wrong. A fixed threshold — fire at ICE ≤ 7 — misses the patient who falls from 10 to 8 in six hours and fires repeatedly on the stable patient who sits at 7 for three days. The criterion is the drop, not the level.</p>
+
+  <div class="panel">
+    <div class="ph"><span class="pt">BPA specification</span><span class="ps">Interruptive · care team</span></div>
+    <div class="pb">
+      <dl class="spec">
+        <dt>Trigger event</dt><dd>On filing of <code>ICE — Total score</code>.</dd>
+        <dt>Population</dt><dd>Inpatient · cell therapy or designated ICU bed · <code>Cell therapy day</code> between D+1 and D+30.</dd>
+        <dt>Criteria</dt><dd>
+          Fires when <b>either</b> condition is met:
+          <ul>
+            <li>Current total is lower than the previous total by the configured drop or more, within a 24-hour lookback</li>
+            <li>Current total ≤ 6 (ICANS grade 2 or worse) and no advisory has fired for this patient in the suppression window</li>
+          </ul>
+        </dd>
+        <dt>Suppression</dt><dd>One fire per patient per configured window, reset by an acknowledge reason of <em>Provider notified</em> or <em>SmartSet opened</em>.</dd>
+        <dt>Recipients</dt><dd>Filing nurse at the point of documentation; in-basket message to the covering provider on grade 3 or worse.</dd>
+        <dt>Display</dt><dd>Current score, previous score with its timestamp, the delta, the derived grade, and a 72-hour sparkline.</dd>
+        <dt>Acknowledge reasons</dt><dd>
+          <ul>
+            <li>Provider notified — time stamped</li>
+            <li>ICANS SmartSet opened</li>
+            <li>Score explained by sedation or sleep — requires comment</li>
+            <li>Assessment error, re-documenting</li>
+          </ul>
+        </dd>
+        <dt>Not built</dt><dd>No auto-ordering, no auto-paging of rapid response, no chart closure block. The advisory informs a clinician; it does not act.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ph"><span class="pt">Alert burden model</span><span class="ps">Tune before build, not after go-live</span></div>
+    <div class="roi">
+      <div class="roi-l">
+        <div class="par">
+          <div class="par-h"><span>CAR-T inpatients per month</span><span class="par-v" id="v-cen">14</span></div>
+          <input type="range" id="s-cen" min="4" max="40" value="14">
+          <div class="par-n">Average census on the unit</div>
+        </div>
+        <div class="par">
+          <div class="par-h"><span>Monitored days per patient</span><span class="par-v" id="v-day">10</span></div>
+          <input type="range" id="s-day" min="3" max="30" value="10">
+          <div class="par-n">D+1 through discharge</div>
+        </div>
+        <div class="par">
+          <div class="par-h"><span>Drop that fires the advisory</span><span class="par-v" id="v-drop">2 points</span></div>
+          <input type="range" id="s-drop" min="1" max="4" value="2">
+          <div class="par-n">Between consecutive assessments</div>
+        </div>
+        <div class="par">
+          <div class="par-h"><span>Suppression window</span><span class="par-v" id="v-sup">12 h</span></div>
+          <input type="range" id="s-sup" min="4" max="48" step="4" value="12">
+          <div class="par-n">Maximum one fire per patient per window</div>
+        </div>
+      </div>
+      <div class="roi-r">
+        <table class="ledger">
+          <tr><td>ICE assessments filed per month</td><td id="o-assess" class="v-cy">420</td></tr>
+          <tr><td>Advisories before suppression</td><td id="o-raw" class="v-a">38</td></tr>
+          <tr><td>Removed by suppression window</td><td id="o-sup" class="v-ok">−14</td></tr>
+          <tr><td>Expected to be clinically acted on</td><td id="o-true" class="v-ok">9</td></tr>
+          <tr class="tot"><td>Advisories reaching a nurse</td><td id="o-net" class="v-cy">24</td></tr>
+        </table>
+        <div class="note" id="burden-note">About 0.8 advisories per day across the unit, roughly 1 per 18 assessments. Below the threshold where clinicians begin dismissing reflexively.</div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:16px;font-size:13.5px;color:var(--ink4);max-width:70ch">Drop rates are modeled, not measured — the proportion of assessments showing a 2-point decline is an assumption until the rows exist and six weeks of real data can be queried. That retrospective query is the first post-go-live task, and the trigger is re-tuned from it.</p>
+</section>
+
+<section>
+  <div class="slab">Build inventory · 3 of 4</div>
+  <h2>Order set and reporting</h2>
+
+  <div class="panel">
+    <div class="ph"><span class="pt">ICANS management SmartSet</span><span class="ps">Opened from the advisory · no auto-signing</span></div>
+    <div class="tscroll"><table>
+      <thead><tr><th>Section</th><th>Contents</th><th>Default</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">Assessment</td><td>Neurology consult · ICE q4h frequency change · hourly neuro checks</td><td>Unselected</td></tr>
+        <tr><td class="nm">Imaging</td><td>CT head without contrast · MRI brain if grade 3+</td><td>Unselected</td></tr>
+        <tr><td class="nm">Neurodiagnostics</td><td>Continuous EEG — links to the cEEG workflow in project 02</td><td>Unselected</td></tr>
+        <tr><td class="nm">Pharmacy</td><td>Dexamethasone per protocol · tocilizumab if concurrent CRS · anti-seizure prophylaxis per institutional protocol</td><td>Unselected, dosing per protocol reference link</td></tr>
+        <tr><td class="nm">Safety</td><td>Aspiration precautions · seizure precautions · NPO pending swallow evaluation</td><td>Pre-selected at grade 3+</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="panel">
+    <div class="ph"><span class="pt">Clarity validation query</span><span class="ps">Run weekly for the first six weeks</span></div>
+    <div class="pb">
+<pre><span class="c">-- ICE score trajectory by encounter, cell therapy unit, last 60 days
+-- Validates: rows filing, totals calculating, drops detectable</span>
+<span class="k">SELECT</span>
+    enc.PAT_ENC_CSN_ID,
+    rec.RECORDED_TIME,
+    <span class="f">MAX</span>(<span class="k">CASE WHEN</span> grp.FLO_MEAS_NAME = <span class="s">'ICE TOTAL SCORE'</span>
+             <span class="k">THEN</span> <span class="f">TRY_CAST</span>(meas.MEAS_VALUE <span class="k">AS INT</span>) <span class="k">END</span>) <span class="k">AS</span> ice_total,
+    <span class="f">LAG</span>(<span class="f">MAX</span>(<span class="k">CASE WHEN</span> grp.FLO_MEAS_NAME = <span class="s">'ICE TOTAL SCORE'</span>
+                  <span class="k">THEN</span> <span class="f">TRY_CAST</span>(meas.MEAS_VALUE <span class="k">AS INT</span>) <span class="k">END</span>))
+        <span class="k">OVER</span> (<span class="k">PARTITION BY</span> enc.PAT_ENC_CSN_ID
+               <span class="k">ORDER BY</span> rec.RECORDED_TIME) <span class="k">AS</span> prior_total
+<span class="k">FROM</span> IP_FLWSHT_REC    rec
+<span class="k">JOIN</span> IP_FLWSHT_MEAS   meas <span class="k">ON</span> meas.FSD_ID = rec.FSD_ID
+<span class="k">JOIN</span> IP_FLO_GP_DATA   grp  <span class="k">ON</span> grp.FLO_MEAS_ID = meas.FLO_MEAS_ID
+<span class="k">JOIN</span> PAT_ENC_HSP      enc  <span class="k">ON</span> enc.INPATIENT_DATA_ID = rec.INPATIENT_DATA_ID
+<span class="k">WHERE</span> grp.FLO_MEAS_NAME <span class="k">LIKE</span> <span class="s">'ICE %'</span>
+  <span class="k">AND</span> rec.RECORDED_TIME &gt;= <span class="f">DATEADD</span>(day, -60, <span class="f">GETDATE</span>())
+<span class="k">GROUP BY</span> enc.PAT_ENC_CSN_ID, rec.RECORDED_TIME
+<span class="k">ORDER BY</span> enc.PAT_ENC_CSN_ID, rec.RECORDED_TIME;</pre>
+      <div class="note">Three things this answers in week one: are all five component rows filing or only the total, are any encounters charting ICE outside the intended units, and what is the real distribution of between-assessment drops — the number the alert model above only assumes.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="slab">Build inventory · 4 of 4</div>
+  <h2>Test script</h2>
+  <p>Written before the build, not after. Each case names the expected result, because a test without a stated expectation is a demonstration.</p>
+
+  <div class="panel">
+    <div class="ph"><span class="pt">Unit, integration, and regression cases</span><span class="ps">Tap a result to mark it</span></div>
+    <div id="tests"></div>
+    <div class="tsum"><span id="tcount">0 of 12 marked</span><span class="bar"><i id="tbar"></i></span><button class="tbtn" id="treset" style="width:auto">Reset</button></div>
+  </div>
+</section>
+
+<section>
+  <div class="slab">Governance</div>
+  <h2>How it moves to production</h2>
+
+  <div class="panel"><div class="pb">
+    <div class="cc">
+      <div class="mk" style="--c:var(--accent)"><div class="dot"></div><div class="ln"></div></div>
+      <div class="bd"><div class="env">Request</div><h3>Intake and clinical ownership</h3>
+      <p>Submitted by the cell therapy unit with a named physician owner. Without a clinician who owns the advisory's logic, nobody can approve a change to it later, and nobody is accountable for what it tells a nurse to do.</p></div>
+
+      <div class="mk" style="--c:var(--purple)"><div class="dot"></div><div class="ln"></div></div>
+      <div class="bd"><div class="env">Design</div><h3>Specification and governance review</h3>
+      <p>This document, reviewed by clinical informatics and the alerting governance committee. The alert burden model is the part the committee actually cares about.</p></div>
+
+      <div class="mk" style="--c:var(--amber)"><div class="dot"></div><div class="ln"></div></div>
+      <div class="bd"><div class="env">Build → Test</div><h3>Non-production build and unit test</h3>
+      <p>Rows and advisory built in the non-production environment, unit tested against the script above, then moved for integration testing with the SmartSet and in-basket routing.</p></div>
+
+      <div class="mk" style="--c:var(--teal)"><div class="dot"></div><div class="ln"></div></div>
+      <div class="bd"><div class="env">Validate</div><h3>Clinical validation</h3>
+      <p>Two nurses and the physician owner chart a full simulated patient course end to end, including a false-positive case. Sign-off is a signature, not a verbal agreement.</p></div>
+
+      <div class="mk" style="--c:var(--green)"><div class="dot"></div><div class="ln"></div></div>
+      <div class="bd"><div class="env">Production</div><h3>Release and monitoring</h3>
+      <p>Released in a scheduled window with the tip sheet distributed 48 hours ahead. Rollback is a single advisory deactivation; the flowsheet rows stay, since charted data should not disappear. Fire counts and acknowledge reasons reviewed weekly for six weeks, then the trigger is re-tuned from real drop rates.</p></div>
+    </div>
+  </div></div>
+
+  <div class="scope">
+    <h3>What this is, and is not</h3>
+    <p>A specification exercise built on public clinical standards — the ASTCT consensus grading for ICANS — using invented workflow details and placeholder record IDs.</p>
+    <ul>
+      <li>No patient data, no Stanford Health Care build content, no screenshots of a production system</li>
+      <li>Record IDs, unit names and protocol specifics are placeholders, filled at real build</li>
+      <li>Drop rates and alert volumes are modeled assumptions, labeled as such, to be replaced by the Clarity query above</li>
+      <li>Any real version of this requires clinical ownership, pharmacy review of the SmartSet, and approval through institutional alerting governance</li>
+    </ul>
+  </div>
+</section>
+
+<div class="foot">
+  <span>Anh Truong (Andy) Nguyen · Sr. Technical Solutions Analyst</span>
+  <a href="https://andy205261.github.io/">← Back to portfolio</a>
+</div>
+
+</div>
+
+<script>
+/* ---------- alert burden model ---------- */
+(function(){
+  var ids=['cen','day','drop','sup'],el={};
+  ids.forEach(function(k){el[k]=document.getElementById('s-'+k)});
+  function calc(){
+    var cen=+el.cen.value, day=+el.day.value, drop=+el.drop.value, sup=+el.sup.value;
+    var assess=Math.round(cen*day*3);                 // q8h = 3 per patient-day
+    // modeled share of consecutive assessments showing a drop of n or more
+    var shareByDrop={1:0.14,2:0.09,3:0.045,4:0.02};
+    var raw=Math.round(assess*shareByDrop[drop]);
+    // longer suppression windows collapse more repeat fires on the same patient
+    var keep=0.30+0.45*(4/sup);
+    var net=Math.max(1,Math.round(raw*keep));
+    var acted=Math.round(net*0.38);
+    var perDay=(net/30).toFixed(1);
+    var ratio=net?Math.round(assess/net):0;
+    document.getElementById('v-cen').textContent=cen;
+    document.getElementById('v-day').textContent=day;
+    document.getElementById('v-drop').textContent=drop+(drop===1?' point':' points');
+    document.getElementById('v-sup').textContent=sup+' h';
+    document.getElementById('o-assess').textContent=assess;
+    document.getElementById('o-raw').textContent=raw;
+    document.getElementById('o-sup').textContent='−'+(raw-net);
+    document.getElementById('o-true').textContent=acted;
+    document.getElementById('o-net').textContent=net;
+    var n=document.getElementById('burden-note');
+    var msg='About '+perDay+' advisories per day across the unit, roughly 1 per '+ratio+' assessments. ';
+    if(net/30>3){msg+='<span class="v-bad">Too many. At this rate nurses dismiss without reading, and the advisory stops working.</span>';}
+    else if(net/30>1.5){msg+='<span class="v-a">Borderline. Worth a wider drop threshold or a longer suppression window.</span>';}
+    else{msg+='<span class="v-ok">Below the threshold where clinicians begin dismissing reflexively.</span>';}
+    n.innerHTML=msg;
+  }
+  ids.forEach(function(k){el[k].addEventListener('input',calc)});
+  calc();
+})();
+
+/* ---------- test script ---------- */
+(function(){
+  var cases=[
+    ['UT-01','File all five component rows with maximum values','Total calculates to 10; derived grade is blank (no ICANS)'],
+    ['UT-02','File orientation 2, naming 3, commands 1, writing 0, attention 1','Total calculates to 7; derived grade 1'],
+    ['UT-03','File component values summing to 5','Total 5; derived grade 2'],
+    ['UT-04','File total 0 with level of consciousness = unarousable','Derived grade 4, not grade 3'],
+    ['UT-05','Attempt to edit the total row directly','Row is read-only; edit rejected'],
+    ['IT-01','File a total of 9, then 7 within the same shift','Advisory fires on the second filing; shows delta of 2 and both timestamps'],
+    ['IT-02','File 9, then 8, then 6 across three assessments','One advisory at the third filing; the 1-point drop does not fire'],
+    ['IT-03','File a qualifying drop twice inside the suppression window','Second advisory suppressed; suppression logged'],
+    ['IT-04','Acknowledge with "Provider notified"','Suppression resets; in-basket message sent on grade 3+'],
+    ['IT-05','Open the ICANS SmartSet from the advisory','SmartSet opens with no orders pre-signed; safety section pre-selected at grade 3+'],
+    ['RG-01','File a standard neuro assessment on a non-cell-therapy patient','No ICE rows displayed; no advisory; existing neuro flowsheet unchanged'],
+    ['RG-02','File ICE on day D+45','Outside the monitored window; rows file, advisory does not evaluate']
+  ];
+  var box=document.getElementById('tests');
+  cases.forEach(function(c){
+    var d=document.createElement('div');d.className='tcase';
+    d.innerHTML='<div class="tid">'+c[0]+'</div>'+
+      '<div class="st"><span class="lbl">Step</span>'+c[1]+'</div>'+
+      '<div class="ex"><span class="lbl">Expected</span>'+c[2]+'</div>'+
+      '<div><button class="tbtn">Mark pass</button></div>';
+    var b=d.querySelector('button');
+    b.addEventListener('click',function(){
+      b.classList.toggle('pass');
+      b.textContent=b.classList.contains('pass')?'✓ Passed':'Mark pass';
+      tally();
+    });
+    box.appendChild(d);
+  });
+  function tally(){
+    var all=box.querySelectorAll('.tbtn'),n=box.querySelectorAll('.tbtn.pass').length;
+    document.getElementById('tcount').textContent=n+' of '+all.length+' marked';
+    document.getElementById('tbar').style.width=(n/all.length*100)+'%';
+  }
+  document.getElementById('treset').addEventListener('click',function(){
+    box.querySelectorAll('.tbtn').forEach(function(b){b.classList.remove('pass');b.textContent='Mark pass'});
+    tally();
+  });
+  tally();
+})();
+</script>
+</body>
+</html>
