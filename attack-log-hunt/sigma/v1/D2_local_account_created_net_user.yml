@@ -1,0 +1,29 @@
+title: Local User Account Created With net.exe
+id: 57ff1144-e507-4aaa-bdef-6d901b17d1c5
+status: experimental
+description: |
+  A local account was added with "net user ... /add". Creating a backdoor account is a
+  common persistence step before ransomware is deployed.
+references:
+  - https://attack.mitre.org/techniques/T1136/001/
+author: Andy (Anh Truong) Nguyen
+date: 2026-11-26
+tags:
+  - attack.persistence
+  - attack.t1136.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    Image|endswith:
+      - '\net.exe'
+      - '\net1.exe'
+  selection_cli:
+    CommandLine|contains|all:
+      - ' user '
+      - '/add'
+  condition: all of selection_*
+falsepositives:
+  - Help desk or imaging scripts that create local accounts
+level: medium

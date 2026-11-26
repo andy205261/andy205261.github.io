@@ -1,0 +1,36 @@
+title: PowerShell Run With an Encoded Command
+id: aa67934b-0d7e-4ba5-962d-278283781fd2
+status: experimental
+description: |
+  PowerShell launched with -EncodedCommand (or a short form of it). Attackers, including
+  ransomware operators, use base64-encoded commands to hide what a script does.
+  Some admin tools do this legitimately, so review the parent process.
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+author: Andy (Anh Truong) Nguyen
+date: 2026-11-26
+tags:
+  - attack.execution
+  - attack.t1059.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    - Image|endswith:
+        - '\powershell.exe'
+        - '\pwsh.exe'
+    - OriginalFileName:
+        - 'PowerShell.EXE'
+        - 'pwsh.dll'
+  selection_cli:
+    CommandLine|contains:
+      - ' -enc '
+      - ' -enco'
+      - ' -encodedcommand '
+      - ' -e '
+      - ' -ec '
+  condition: all of selection_*
+falsepositives:
+  - Management and deployment tools that pass encoded scripts
+level: high

@@ -1,0 +1,5 @@
+rule,event_id,tactic,evtx_file,Image,CommandLine
+D2,00301,TA0003-Persistence,ID4688-User creation via commandline.evtx,C:\Windows\System32\net.exe,net  user toto3 @#(*kjh@(@Jd /add
+D2,00302,TA0003-Persistence,ID4688-User creation via commandline.evtx,C:\Windows\System32\net1.exe,C:\Windows\system32\net1  user toto3 @#(*kjh@(@Jd /add
+D3,00089,TA0002-Execution,ID4688-4698 Persistent scheduled task with SYSTEM privileges creation.evtx,C:\Windows\System32\schtasks.exe,"""C:\Windows\system32\schtasks.exe"" /create /sc minute /mo 1 /tn eviltask /tr C:\tools\shell.cmd /ru SYSTEM"
+D3,00093,TA0002-Execution,ID4688-Scheduled task creation.evtx,C:\Windows\System32\schtasks.exe,schtasks  /create /s fs02 /tn tasks_test_hacker2 /tr myapp.exe /sc daily /mo 10

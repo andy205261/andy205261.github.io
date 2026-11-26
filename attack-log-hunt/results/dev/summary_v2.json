@@ -1,0 +1,32 @@
+{
+  "D1": {
+    "title": "PowerShell Run With an Encoded Command",
+    "hits": 1,
+    "files": 1
+  },
+  "D1b": {
+    "title": "PowerShell Hidden Window or In-Memory Download and Decode",
+    "hits": 5,
+    "files": 4
+  },
+  "D2": {
+    "title": "Local User Account Created With net.exe",
+    "hits": 0,
+    "files": 0
+  },
+  "D3": {
+    "title": "Scheduled Task Created With schtasks.exe",
+    "hits": 8,
+    "files": 6
+  },
+  "D4": {
+    "title": "Shadow Copy or Backup Catalog Deletion",
+    "hits": 4,
+    "files": 1
+  },
+  "D5": {
+    "title": "Microsoft Defender Settings Changed From the Command Line",
+    "hits": 0,
+    "files": 0
+  }
+}

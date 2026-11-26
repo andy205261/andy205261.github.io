@@ -1,0 +1,4 @@
+evtx==0.15.0
+pandas==3.0.5
+pySigma==2.1.2
+pySigma-backend-sqlite==2.2.0
