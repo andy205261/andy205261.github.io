@@ -1,0 +1,57 @@
+user_id,role,department,rules,flagged_events,risk_score,ground_truth_anomalous
+U1244,Billing,Billing,R5,25,80,0
+U1104,Nurse,Oncology,R5,54,80,1
+U1029,Nurse,ED,R5,65,80,1
+U1048,Nurse,ICU,"R6, R7",9,78,1
+U1151,Nurse,Cardiology,"R6, R7",7,74,1
+U1225,Registration,Registration,R2,3,41,1
+U1122,Physician,Cardiology,R2,3,41,1
+U1098,Nurse,Oncology,R2,3,41,1
+U1270,Lab Tech,Lab,R2,2,39,1
+U1243,Billing,Billing,"R3, R7",2,39,1
+U1111,Nurse,Oncology,R2,2,39,1
+U1268,Lab Tech,Lab,R1,4,38,1
+U1254,Lab Tech,Lab,R1,4,38,1
+U1274,IT Analyst,IT,R2,1,37,1
+U1051,Nurse,ICU,R1,3,36,1
+U1113,Nurse,Oncology,R4,2,34,1
+U1100,Nurse,Oncology,R4,2,34,1
+U1094,Nurse,Oncology,R4,2,34,1
+U1089,Nurse,Oncology,R4,2,34,1
+U1026,Nurse,ED,R1,2,34,1
+U1259,Lab Tech,Lab,R4,1,32,1
+U1256,Lab Tech,Lab,R4,1,32,1
+U1183,Nurse,MedSurg,R1,1,32,1
+U1162,Nurse,MedSurg,R1,1,32,1
+U1117,Physician,Cardiology,R1,1,32,0
+U1079,Physician,Oncology,R1,1,32,0
+U1069,Nurse,ICU,R1,1,32,1
+U1024,Nurse,ED,R1,1,32,1
+U1123,Nurse,Cardiology,R3,3,31,1
+U1021,Nurse,ED,R3,3,31,1
+U1186,Nurse,MedSurg,R3,2,29,1
+U1119,Physician,Cardiology,R3,2,29,1
+U1193,Pharmacist,Pharmacy,R3,1,27,1
+U1184,Nurse,MedSurg,R3,1,27,0
+U1172,Nurse,MedSurg,R3,1,27,0
+U1158,Physician,MedSurg,R3,1,27,0
+U1153,Physician,MedSurg,R3,1,27,0
+U1116,Physician,Cardiology,R3,1,27,0
+U1007,Physician,ED,R3,1,27,0
+U1238,Billing,Billing,R7,5,20,1
+U1017,Nurse,ED,R7,5,20,1
+U1058,Nurse,ICU,R7,3,16,1
+U1161,Nurse,MedSurg,R7,2,14,0
+U1020,Nurse,ED,R7,2,14,1
+U1247,Billing,Billing,R7,1,12,0
+U1246,Billing,Billing,R7,1,12,0
+U1242,Billing,Billing,R7,1,12,0
+U1241,Billing,Billing,R7,1,12,0
+U1240,Billing,Billing,R7,1,12,0
+U1176,Nurse,MedSurg,R7,1,12,0
+U1175,Nurse,MedSurg,R7,1,12,0
+U1174,Nurse,MedSurg,R7,1,12,0
+U1173,Nurse,MedSurg,R7,1,12,0
+U1171,Nurse,MedSurg,R7,1,12,0
+U1169,Nurse,MedSurg,R7,1,12,0
+U1166,Nurse,MedSurg,R7,1,12,1
