@@ -1,0 +1,579 @@
+{
+  "dataset": {
+    "users": 280,
+    "patients": 2470,
+    "encounters": 2303,
+    "events": 39936,
+    "anomalous_events": 227,
+    "anomalous_users": 36,
+    "scenarios": 10,
+    "active_users": 271
+  },
+  "v1": {
+    "event_level": {
+      "flagged": 251,
+      "tp": 202,
+      "fp": 49,
+      "fn": 25,
+      "precision": 0.805,
+      "recall": 0.89
+    },
+    "user_level": {
+      "flagged": 56,
+      "caught": 34,
+      "false_users": 21,
+      "missed": 2,
+      "precision": 0.618,
+      "recall": 0.944,
+      "top_n": 20,
+      "top_n_true": 19
+    },
+    "per_rule": [
+      {
+        "rule_id": "R1",
+        "name": "VIP record, no relationship",
+        "weight": 30,
+        "events": 19,
+        "true_pos": 17,
+        "false_pos": 2
+      },
+      {
+        "rule_id": "R2",
+        "name": "Family record, no relationship",
+        "weight": 35,
+        "events": 14,
+        "true_pos": 14,
+        "false_pos": 0
+      },
+      {
+        "rule_id": "R3",
+        "name": "Coworker record, no relationship",
+        "weight": 25,
+        "events": 18,
+        "true_pos": 12,
+        "false_pos": 6
+      },
+      {
+        "rule_id": "R4",
+        "name": "Break-the-glass without justification",
+        "weight": 30,
+        "events": 10,
+        "true_pos": 10,
+        "false_pos": 0
+      },
+      {
+        "rule_id": "R5",
+        "name": "High volume of unrelated records",
+        "weight": 40,
+        "events": 144,
+        "true_pos": 119,
+        "false_pos": 25
+      },
+      {
+        "rule_id": "R6",
+        "name": "Account used after termination",
+        "weight": 50,
+        "events": 16,
+        "true_pos": 16,
+        "false_pos": 0
+      },
+      {
+        "rule_id": "R7",
+        "name": "Off-shift unrelated access",
+        "weight": 10,
+        "events": 36,
+        "true_pos": 20,
+        "false_pos": 16
+      }
+    ],
+    "per_scenario": [
+      {
+        "scenario": "Access after termination",
+        "events": 16,
+        "caught": 16,
+        "recall": 1.0,
+        "users": 2,
+        "users_caught": 2
+      },
+      {
+        "scenario": "After-hours access",
+        "events": 14,
+        "caught": 14,
+        "recall": 1.0,
+        "users": 4,
+        "users_caught": 4
+      },
+      {
+        "scenario": "Break-the-glass misuse",
+        "events": 10,
+        "caught": 10,
+        "recall": 1.0,
+        "users": 6,
+        "users_caught": 6
+      },
+      {
+        "scenario": "Bulk record browsing",
+        "events": 119,
+        "caught": 119,
+        "recall": 1.0,
+        "users": 2,
+        "users_caught": 2
+      },
+      {
+        "scenario": "Coworker snooping",
+        "events": 12,
+        "caught": 12,
+        "recall": 1.0,
+        "users": 6,
+        "users_caught": 6
+      },
+      {
+        "scenario": "Curiosity break-the-glass on coworker",
+        "events": 2,
+        "caught": 0,
+        "recall": 0.0,
+        "users": 1,
+        "users_caught": 0
+      },
+      {
+        "scenario": "Excessive access by care-team member",
+        "events": 8,
+        "caught": 0,
+        "recall": 0.0,
+        "users": 1,
+        "users_caught": 0
+      },
+      {
+        "scenario": "Family record snooping",
+        "events": 14,
+        "caught": 14,
+        "recall": 1.0,
+        "users": 6,
+        "users_caught": 6
+      },
+      {
+        "scenario": "Low-and-slow browsing",
+        "events": 15,
+        "caught": 0,
+        "recall": 0.0,
+        "users": 1,
+        "users_caught": 0
+      },
+      {
+        "scenario": "VIP snooping",
+        "events": 17,
+        "caught": 17,
+        "recall": 1.0,
+        "users": 8,
+        "users_caught": 8
+      }
+    ],
+    "false_positive_context": {
+      "Approved retrospective quality audit": 25,
+      "Picked up an extra evening shift on another unit": 9,
+      "Claim denial rework after hours": 7,
+      "Specialist consult, not on care team": 6,
+      "Float coverage, assignment not recorded": 2
+    },
+    "top_queue": [
+      {
+        "user_id": "U1244",
+        "role": "Billing",
+        "department": "Billing",
+        "rules": "R5",
+        "flagged_events": 25,
+        "risk_score": 80,
+        "ground_truth_anomalous": 0
+      },
+      {
+        "user_id": "U1104",
+        "role": "Nurse",
+        "department": "Oncology",
+        "rules": "R5",
+        "flagged_events": 54,
+        "risk_score": 80,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1029",
+        "role": "Nurse",
+        "department": "ED",
+        "rules": "R5",
+        "flagged_events": 65,
+        "risk_score": 80,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1048",
+        "role": "Nurse",
+        "department": "ICU",
+        "rules": "R6, R7",
+        "flagged_events": 9,
+        "risk_score": 78,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1151",
+        "role": "Nurse",
+        "department": "Cardiology",
+        "rules": "R6, R7",
+        "flagged_events": 7,
+        "risk_score": 74,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1225",
+        "role": "Registration",
+        "department": "Registration",
+        "rules": "R2",
+        "flagged_events": 3,
+        "risk_score": 41,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1122",
+        "role": "Physician",
+        "department": "Cardiology",
+        "rules": "R2",
+        "flagged_events": 3,
+        "risk_score": 41,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1098",
+        "role": "Nurse",
+        "department": "Oncology",
+        "rules": "R2",
+        "flagged_events": 3,
+        "risk_score": 41,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1270",
+        "role": "Lab Tech",
+        "department": "Lab",
+        "rules": "R2",
+        "flagged_events": 2,
+        "risk_score": 39,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1243",
+        "role": "Billing",
+        "department": "Billing",
+        "rules": "R3, R7",
+        "flagged_events": 2,
+        "risk_score": 39,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1111",
+        "role": "Nurse",
+        "department": "Oncology",
+        "rules": "R2",
+        "flagged_events": 2,
+        "risk_score": 39,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1268",
+        "role": "Lab Tech",
+        "department": "Lab",
+        "rules": "R1",
+        "flagged_events": 4,
+        "risk_score": 38,
+        "ground_truth_anomalous": 1
+      }
+    ]
+  },
+  "v2": {
+    "event_level": {
+      "flagged": 233,
+      "tp": 225,
+      "fp": 8,
+      "fn": 2,
+      "precision": 0.966,
+      "recall": 0.991
+    },
+    "user_level": {
+      "flagged": 37,
+      "caught": 35,
+      "false_users": 2,
+      "missed": 1,
+      "precision": 0.946,
+      "recall": 0.972,
+      "top_n": 20,
+      "top_n_true": 20
+    },
+    "per_rule": [
+      {
+        "rule_id": "R1",
+        "name": "VIP record, no relationship",
+        "weight": 30,
+        "events": 17,
+        "true_pos": 17,
+        "false_pos": 0
+      },
+      {
+        "rule_id": "R2",
+        "name": "Family record, no relationship",
+        "weight": 35,
+        "events": 14,
+        "true_pos": 14,
+        "false_pos": 0
+      },
+      {
+        "rule_id": "R3",
+        "name": "Coworker record, no relationship",
+        "weight": 25,
+        "events": 14,
+        "true_pos": 12,
+        "false_pos": 2
+      },
+      {
+        "rule_id": "R4",
+        "name": "Break-the-glass without justification",
+        "weight": 30,
+        "events": 10,
+        "true_pos": 10,
+        "false_pos": 0
+      },
+      {
+        "rule_id": "R5",
+        "name": "High volume of unrelated records",
+        "weight": 40,
+        "events": 119,
+        "true_pos": 119,
+        "false_pos": 0
+      },
+      {
+        "rule_id": "R6",
+        "name": "Account used after termination",
+        "weight": 50,
+        "events": 16,
+        "true_pos": 16,
+        "false_pos": 0
+      },
+      {
+        "rule_id": "R7",
+        "name": "Off-shift unrelated access",
+        "weight": 10,
+        "events": 20,
+        "true_pos": 20,
+        "false_pos": 0
+      },
+      {
+        "rule_id": "R8",
+        "name": "Persistent unrelated access (30 days)",
+        "weight": 25,
+        "events": 24,
+        "true_pos": 24,
+        "false_pos": 0
+      },
+      {
+        "rule_id": "R9",
+        "name": "Excessive access to sensitive record",
+        "weight": 20,
+        "events": 14,
+        "true_pos": 8,
+        "false_pos": 6
+      }
+    ],
+    "per_scenario": [
+      {
+        "scenario": "Access after termination",
+        "events": 16,
+        "caught": 16,
+        "recall": 1.0,
+        "users": 2,
+        "users_caught": 2
+      },
+      {
+        "scenario": "After-hours access",
+        "events": 14,
+        "caught": 14,
+        "recall": 1.0,
+        "users": 4,
+        "users_caught": 4
+      },
+      {
+        "scenario": "Break-the-glass misuse",
+        "events": 10,
+        "caught": 10,
+        "recall": 1.0,
+        "users": 6,
+        "users_caught": 6
+      },
+      {
+        "scenario": "Bulk record browsing",
+        "events": 119,
+        "caught": 119,
+        "recall": 1.0,
+        "users": 2,
+        "users_caught": 2
+      },
+      {
+        "scenario": "Coworker snooping",
+        "events": 12,
+        "caught": 12,
+        "recall": 1.0,
+        "users": 6,
+        "users_caught": 6
+      },
+      {
+        "scenario": "Curiosity break-the-glass on coworker",
+        "events": 2,
+        "caught": 0,
+        "recall": 0.0,
+        "users": 1,
+        "users_caught": 0
+      },
+      {
+        "scenario": "Excessive access by care-team member",
+        "events": 8,
+        "caught": 8,
+        "recall": 1.0,
+        "users": 1,
+        "users_caught": 1
+      },
+      {
+        "scenario": "Family record snooping",
+        "events": 14,
+        "caught": 14,
+        "recall": 1.0,
+        "users": 6,
+        "users_caught": 6
+      },
+      {
+        "scenario": "Low-and-slow browsing",
+        "events": 15,
+        "caught": 15,
+        "recall": 1.0,
+        "users": 1,
+        "users_caught": 1
+      },
+      {
+        "scenario": "VIP snooping",
+        "events": 17,
+        "caught": 17,
+        "recall": 1.0,
+        "users": 8,
+        "users_caught": 8
+      }
+    ],
+    "false_positive_context": {
+      "Routine opens by the same care-team member": 6,
+      "Float coverage, assignment not recorded": 2
+    },
+    "top_queue": [
+      {
+        "user_id": "U1048",
+        "role": "Nurse",
+        "department": "ICU",
+        "rules": "R6, R7, R8",
+        "flagged_events": 9,
+        "risk_score": 103,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1166",
+        "role": "Nurse",
+        "department": "MedSurg",
+        "rules": "R8, R9",
+        "flagged_events": 29,
+        "risk_score": 85,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1104",
+        "role": "Nurse",
+        "department": "Oncology",
+        "rules": "R5",
+        "flagged_events": 54,
+        "risk_score": 80,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1029",
+        "role": "Nurse",
+        "department": "ED",
+        "rules": "R5",
+        "flagged_events": 65,
+        "risk_score": 80,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1151",
+        "role": "Nurse",
+        "department": "Cardiology",
+        "rules": "R6, R7",
+        "flagged_events": 7,
+        "risk_score": 74,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1225",
+        "role": "Registration",
+        "department": "Registration",
+        "rules": "R2",
+        "flagged_events": 3,
+        "risk_score": 41,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1122",
+        "role": "Physician",
+        "department": "Cardiology",
+        "rules": "R2",
+        "flagged_events": 3,
+        "risk_score": 41,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1098",
+        "role": "Nurse",
+        "department": "Oncology",
+        "rules": "R2",
+        "flagged_events": 3,
+        "risk_score": 41,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1270",
+        "role": "Lab Tech",
+        "department": "Lab",
+        "rules": "R2",
+        "flagged_events": 2,
+        "risk_score": 39,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1111",
+        "role": "Nurse",
+        "department": "Oncology",
+        "rules": "R2",
+        "flagged_events": 2,
+        "risk_score": 39,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1268",
+        "role": "Lab Tech",
+        "department": "Lab",
+        "rules": "R1",
+        "flagged_events": 4,
+        "risk_score": 38,
+        "ground_truth_anomalous": 1
+      },
+      {
+        "user_id": "U1254",
+        "role": "Lab Tech",
+        "department": "Lab",
+        "rules": "R1",
+        "flagged_events": 4,
+        "risk_score": 38,
+        "ground_truth_anomalous": 1
+      }
+    ]
+  }
+}
