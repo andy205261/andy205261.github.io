@@ -1,0 +1,42 @@
+title: PowerShell Hidden Window or In-Memory Download and Decode
+id: b57c2449-02cf-4137-91d5-db2b97c87547
+status: experimental
+description: |
+  v2 addition. PowerShell started hidden, or told to download, decode or run code in memory
+  (IEX, FromBase64String, DownloadString/DownloadFile, GzipStream). The v1 rule only looked for
+  -EncodedCommand and missed these in public attack logs (Meterpreter over PsExec, a VBScript
+  launcher, a download cradle). Matches the PowerShell process itself or a parent whose command
+  line launches PowerShell.
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+author: Andy (Anh Truong) Nguyen
+date: 2026-11-26
+tags:
+  - attack.execution
+  - attack.t1059.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_ps:
+    - Image|endswith:
+        - '\powershell.exe'
+        - '\pwsh.exe'
+    - CommandLine|contains: 'powershell'
+  selection_tradecraft:
+    CommandLine|contains:
+      - ' -w hidden'
+      - ' -windowstyle hidden'
+      - 'IEX '
+      - 'IEX('
+      - 'Invoke-Expression'
+      - 'FromBase64String'
+      - 'DownloadString'
+      - 'DownloadFile'
+      - 'GzipStream'
+  filter_cmd_wrapper:
+    Image|endswith: '\cmd.exe'
+  condition: selection_ps and selection_tradecraft and not filter_cmd_wrapper
+falsepositives:
+  - Software deployment and monitoring agents that bootstrap with PowerShell
+level: high

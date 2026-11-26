@@ -1,0 +1,4 @@
+data/
+results/*/process_events.csv
+results/*/hunt_candidates.csv
+__pycache__/

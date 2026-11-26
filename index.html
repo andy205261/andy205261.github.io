@@ -32,6 +32,7 @@
   --purple:#a78bfa;--purple2:rgba(167,139,250,0.1);
   --red:#f87171;--red2:rgba(248,113,113,0.1);
   --pink:#f472b6;
+  --orange:#fb923c;
   --w03:rgba(255,255,255,0.05);--w04:rgba(255,255,255,0.06);--w05:rgba(255,255,255,0.07);--w06:rgba(255,255,255,0.09);--w07:rgba(255,255,255,0.10);--w10:rgba(255,255,255,0.13);--w14:rgba(255,255,255,0.18);--w25:rgba(255,255,255,0.30);--w28:rgba(255,255,255,0.46);--w30:rgba(255,255,255,0.40);--w50:rgba(255,255,255,0.66);
   --deep3:#0b1120;--deep:#0d1523;--deep2:#121a2a;--nav-bg:rgba(10,15,26,0.88);--on-accent:#080c14;
   --rule:rgba(255,255,255,0.10);
@@ -201,7 +202,7 @@ footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-b
   .theme-btn{right:12px;bottom:12px;padding:8px 12px;font-size:10px}
 }
 
-.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:10px;margin:4px 0 18px}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:4px 0 18px}
 .res a{display:block;text-decoration:none;background:var(--paper2);border:1px solid var(--rule);border-left:3px solid var(--c);border-radius:12px;padding:14px 16px;transition:all .2s cubic-bezier(.2,.8,.3,1)}
 .res a:hover{background:color-mix(in srgb,var(--c) 8%,var(--paper2));border-color:color-mix(in srgb,var(--c) 45%,transparent);transform:translateY(-2px)}
 .res .rv{font-family:'DM Serif Display',serif;font-size:26px;line-height:1.1;color:var(--c)}
@@ -219,6 +220,7 @@ html.light{
   --purple:#6d28d9;--purple2:rgba(109,40,217,0.09);
   --red:#be123c;--red2:rgba(190,18,60,0.09);
   --pink:#be185d;
+  --orange:#c2410c;
   --w03:rgba(15,23,42,0.03);--w04:rgba(15,23,42,0.04);--w05:rgba(15,23,42,0.05);--w06:rgba(15,23,42,0.07);--w07:rgba(15,23,42,0.09);--w10:rgba(15,23,42,0.10);--w14:rgba(15,23,42,0.14);--w25:rgba(15,23,42,0.22);--w28:rgba(15,23,42,0.45);--w30:rgba(15,23,42,0.30);--w50:rgba(15,23,42,0.55);
   --deep3:#f2f6fb;--deep:#eef3f9;--deep2:#e7eef7;--nav-bg:rgba(247,249,252,0.88);--on-accent:#ffffff;
   --rule:rgba(15,23,42,0.10);
@@ -289,7 +291,7 @@ html.light body{background:var(--paper);color:var(--ink)}
     </div>
     <div class="stats">
       <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">6</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Years enterprise<br>IT & health IT</span></div>
-      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">7</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Security &amp; clinical<br>projects built</span></div>
+      <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">8</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Security &amp; clinical<br>projects built</span></div>
       <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">96.6%</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Insider-misuse<br>alert precision</span></div>
       <div><span style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);display:block;letter-spacing:-1px;line-height:1">3</span><span style="font-size:11px;color:var(--ink3);display:block;margin-top:3px;line-height:1.5">Cloud AI<br>platforms used</span></div>
     </div>
@@ -373,23 +375,25 @@ html.light body{background:var(--paper);color:var(--ink)}
   <h2 class="fi">Projects</h2>
   <div class="res fi">
     <a href="#proj-01" style="--c:var(--teal)"><div class="rv">21 &rarr; 2</div><div class="rl">staff wrongly flagged for snooping, after detection tuning</div><div class="rp">01 &middot; EHR access monitoring</div></a>
-    <a href="#proj-02" style="--c:var(--red)"><div class="rv">16 h</div><div class="rl">earlier ICANS detection &mdash; 58 ICU days avoided / yr</div><div class="rp">02 &middot; Cancer center</div></a>
-    <a href="#proj-03" style="--c:var(--accent)"><div class="rv">104 &rarr; 7</div><div class="rl">false alarms per 24 h after threshold tuning</div><div class="rp">03 &middot; Neuro-ICU cEEG</div></a>
-    <a href="#proj-04" style="--c:var(--green)"><div class="rv">42</div><div class="rl">Epic tickets and 3 P1/P2 incidents worked end to end</div><div class="rp">04 &middot; Epic analyst lab</div></a>
-    <a href="#proj-05" style="--c:var(--amber)"><div class="rv">5 &rarr; 0</div><div class="rl">bot incidents per shift once guardrails are on</div><div class="rp">05 &middot; RPA governance</div></a>
-    <a href="#proj-06" style="--c:var(--purple)"><div class="rv">358 &rarr; 433</div><div class="rl">EMU admissions per year, same beds and staff</div><div class="rp">06 &middot; Epilepsy unit</div></a>
+    <a href="#proj-02" style="--c:var(--orange)"><div class="rv">56%</div><div class="rl">of ransomware steps caught in attack logs the rules never saw (v1: 17%)</div><div class="rp">02 &middot; Ransomware precursor hunt</div></a>
+    <a href="#proj-03" style="--c:var(--red)"><div class="rv">16 h</div><div class="rl">earlier ICANS detection &mdash; 58 ICU days avoided / yr</div><div class="rp">03 &middot; Cancer center</div></a>
+    <a href="#proj-04" style="--c:var(--accent)"><div class="rv">104 &rarr; 7</div><div class="rl">false alarms per 24 h after threshold tuning</div><div class="rp">04 &middot; Neuro-ICU cEEG</div></a>
+    <a href="#proj-05" style="--c:var(--green)"><div class="rv">42</div><div class="rl">Epic tickets and 3 P1/P2 incidents worked end to end</div><div class="rp">05 &middot; Epic analyst lab</div></a>
+    <a href="#proj-06" style="--c:var(--amber)"><div class="rv">5 &rarr; 0</div><div class="rl">bot incidents per shift once guardrails are on</div><div class="rp">06 &middot; RPA governance</div></a>
+    <a href="#proj-07" style="--c:var(--purple)"><div class="rv">358 &rarr; 433</div><div class="rl">EMU admissions per year, same beds and staff</div><div class="rp">07 &middot; Epilepsy unit</div></a>
   </div>
   <!-- PROJECT NAV TABS -->
   <div id="proj-tabs" style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:40px;padding:14px;background:var(--paper2);border:1px solid var(--rule);border-radius:14px">
     <a href="#proj-01" class="proj-nav-tab active" style="--c:var(--teal)"><span class="tn">01</span><span class="tl">EHR Access Monitoring</span></a>
-    <a href="#proj-02" class="proj-nav-tab" style="--c:var(--red)"><span class="tn">02</span><span class="tl">Cancer Center Automation</span></a>
-    <a href="#proj-03" class="proj-nav-tab" style="--c:var(--accent)"><span class="tn">03</span><span class="tl">Neurocritical Automation</span></a>
-    <a href="#proj-04" class="proj-nav-tab" style="--c:var(--green)"><span class="tn">04</span><span class="tl">Epic Analyst Lab</span></a>
-    <a href="#proj-05" class="proj-nav-tab" style="--c:var(--amber)"><span class="tn">05</span><span class="tl">Automation Governance</span></a>
-    <a href="#proj-06" class="proj-nav-tab" style="--c:var(--purple)"><span class="tn">06</span><span class="tl">Epilepsy Unit Capacity</span></a>
+    <a href="#proj-02" class="proj-nav-tab" style="--c:var(--orange)"><span class="tn">02</span><span class="tl">Ransomware Precursor Hunt</span></a>
+    <a href="#proj-03" class="proj-nav-tab" style="--c:var(--red)"><span class="tn">03</span><span class="tl">Cancer Center Automation</span></a>
+    <a href="#proj-04" class="proj-nav-tab" style="--c:var(--accent)"><span class="tn">04</span><span class="tl">Neurocritical Automation</span></a>
+    <a href="#proj-05" class="proj-nav-tab" style="--c:var(--green)"><span class="tn">05</span><span class="tl">Epic Analyst Lab</span></a>
+    <a href="#proj-06" class="proj-nav-tab" style="--c:var(--amber)"><span class="tn">06</span><span class="tl">Automation Governance</span></a>
+    <a href="#proj-07" class="proj-nav-tab" style="--c:var(--purple)"><span class="tn">07</span><span class="tl">Epilepsy Unit Capacity</span></a>
     <a href="#capstone" class="proj-nav-tab" style="--c:var(--pink)"><span class="tn">MBA</span><span class="tl">Capstone</span></a>
   </div>
-  <p class="intro fi">Six in-depth projects where healthcare security, clinical automation, and health system operations meet — from detecting insider snooping in EHR audit logs and governing bots that read charts, to CAR-T neurotoxicity surveillance, neuro-ICU seizure alerting, and Epic analyst simulations. Each one is a working build that names both what it does for patients and what it is worth to the institution.</p>
+  <p class="intro fi">Seven in-depth projects where healthcare security, clinical automation, and health system operations meet — from detecting insider snooping in EHR audit logs and hunting ransomware precursors in real attack logs, to governing bots that read charts, to CAR-T neurotoxicity surveillance, neuro-ICU seizure alerting, and Epic analyst simulations. Each one is a working build that names both what it does for patients and what it is worth to the institution.</p>
 
   <!-- PROJECT 1: EHR ACCESS MONITORING -->
   <div id="proj-01" style="margin-bottom:48px">
@@ -452,9 +456,69 @@ html.light body{background:var(--paper);color:var(--ink)}
     </div>
   </div>
 
-  <!-- PROJECT 2: CAR-T NEUROTOXICITY WATCH -->
+  <!-- PROJECT 2: RANSOMWARE PRECURSOR HUNT -->
   <div id="proj-02" style="margin-bottom:48px">
-    <a href="#proj-02" class="proj-label fi" style="text-decoration:none">Project 02 — Cancer Center Automation</a>
+    <a href="#proj-02" class="proj-label fi" style="text-decoration:none">Project 02 — Ransomware Precursor Hunt</a>
+    <div class="split fi">
+      <div class="pan dk">
+        <div class="tags" style="margin-bottom:12px">
+          <span class="tag">Healthcare security</span><span class="tag">Threat hunting</span><span class="tag">Sigma rules</span><span class="tag">MITRE ATT&amp;CK</span><span class="tag">Windows event logs</span>
+        </div>
+        <h3>Catching ransomware before it encrypts</h3>
+        <p style="font-size:13px;line-height:1.75;font-weight:300;margin-bottom:16px">Before ransomware locks a hospital's files, attackers run <b style="color:var(--ink);font-weight:600">hidden PowerShell, plant scheduled tasks, delete backups and turn off antivirus</b>. I wrote five Sigma detections for those steps, tuned them on one public set of real attack logs, then tested them on a second set I had not looked at. The drop between the two is the finding: it shows exactly where string-matching rules break.</p>
+        <div class="shap">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--w28);margin-bottom:8px;letter-spacing:.08em">ATTACK STEPS CAUGHT, v2 RULES</div>
+          <div class="srow"><span class="slb">Tuning logs</span><div class="strk"><div class="sbar" style="width:95%;background:var(--teal)"></div></div><span class="sval" style="color:var(--teal)">95%</span></div>
+          <div class="srow"><span class="slb">Unseen logs</span><div class="strk"><div class="sbar" style="width:56%;background:var(--amber)"></div></div><span class="sval" style="color:var(--amber)">56%</span></div>
+          <div class="srow"><span class="slb">Unseen, v1</span><div class="strk"><div class="sbar" style="width:17%;background:var(--red)"></div></div><span class="sval" style="color:var(--red)">17%</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">LOG FILES</div>
+            <div style="font-size:13px;color:var(--ink)">571 · 50,176 events</div>
+          </div>
+          <div style="padding:10px;background:var(--w04);border:1px solid var(--w07);border-radius:8px">
+            <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:3px">FALSE HITS</div>
+            <div style="font-size:13px;color:var(--accent)">0 in 2,829 process starts</div>
+          </div>
+        </div>
+      </div>
+      <div class="pan" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div style="background:var(--deep2);padding:12px 16px;border-bottom:1px solid var(--w07)">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px">Alert · public attack recording</div>
+          <div style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace">Sysmon Event 1 · rule D4 · T1490 inhibit recovery</div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="background:var(--deep);border:1px solid var(--w07);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;line-height:1.75;overflow-x:auto">
+            <div style="color:var(--ink);margin-bottom:6px;font-size:12px">CRITICAL · BACKUPS BEING DESTROYED</div>
+            <div style="color:var(--amber)">vssadmin.exe delete shadows /all /quiet</div>
+            <div style="color:var(--amber)">wbadmin.exe delete catalog -quiet</div>
+            <div style="color:var(--amber)">bcdedit.exe /set {default} recoveryenabled no</div>
+            <div style="margin-top:6px;color:var(--ink3)">→ isolate host, confirm offline backups intact</div>
+            <div style="margin-top:6px;color:var(--red)">Missed on unseen logs: same job done with WMIC</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+            <a href="attack-log-hunt/" target="_blank" style="padding:8px 18px;background:var(--accent);color:var(--on-accent);border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">Open the results →</a>
+            <a href="https://github.com/andy205261/andy205261.github.io/tree/main/attack-log-hunt" target="_blank" style="padding:8px 18px;background:transparent;border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent);border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;font-family:'Outfit',sans-serif;white-space:nowrap">View code →</a>
+            <div style="flex:1;height:1px;background:var(--rule)"></div>
+          </div>
+          <div class="mrow"><span class="mk">Detection</span><span class="mv">5 Sigma rules → SQL with pySigma</span></div>
+          <div class="mrow"><span class="mk">Validation</span><span class="mv ok">Held-out dataset, hand-labelled</span></div>
+          <div class="mrow"><span class="mk">Known gap</span><span class="mv">Obfuscated PowerShell, Defender changes</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-3 fi">
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag b">Held-out test</span></div><div class="ctitle">Tuned on one dataset, tested on another</div><div class="cdesc">The rules were written and tuned on EVTX-ATTACK-SAMPLES, then frozen. Only then did I open a second public set, EVTX-to-MITRE-Attack. Tuning lifted the dev score from 58% to 95%; on the unseen set, v2 caught 56%. That 39-point drop is what a SOC would feel on day one.</div></div><div class="card-body"><div class="mrow"><span class="mk">Dev set</span><span class="mv">11 → 18 of 19 actions</span></div><div class="mrow"><span class="mk">Held-out set</span><span class="mv ok">3 → 10 of 18 actions</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag p">Hunting</span></div><div class="ctitle">Every candidate labelled before scoring</div><div class="cdesc">Loose hunts pulled every event that might be one of the five steps. Each was labelled by hand with a reason: real attack action, duplicate (a cmd.exe wrapper, net.exe calling net1.exe) or a different technique, so the score counts attacks, not log lines.</div></div><div class="card-body"><div class="mrow"><span class="mk">Unit</span><span class="mv">One unique attack action</span></div><div class="mrow"><span class="mk">Labels</span><span class="mv ok">Published, with reasons</span></div></div></div>
+      <div class="card"><div class="card-head"><div class="tags"><span class="tag t">Lessons</span></div><div class="ctitle">Where command-line rules break</div><div class="cdesc">CrackMapExec hid PowerShell with -w 1 instead of -w hidden; WMIC deleted shadow copies instead of vssadmin; Defender was switched off through settings the rule didn't list. The fix is better telemetry (Script Block Logging, Defender's own events), not more strings.</div></div><div class="card-body"><div class="mrow"><span class="mk">Misses explained</span><span class="mv">8 of 8</span></div><div class="mrow"><span class="mk">Next</span><span class="mv ok">v3 scored on a third dataset</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- PROJECT 3: CAR-T NEUROTOXICITY WATCH -->
+  <div id="proj-03" style="margin-bottom:48px">
+    <a href="#proj-03" class="proj-label fi" style="text-decoration:none">Project 03 — Cancer Center Automation</a>
     <div class="split fi">
       <div class="pan dk">
         <div class="tags" style="margin-bottom:12px">
@@ -513,9 +577,9 @@ html.light body{background:var(--paper);color:var(--ink)}
     </div>
   </div>
 
-  <!-- PROJECT 2: NEURO-ICU cEEG ALERT PIPELINE -->
-  <div id="proj-03" style="margin-bottom:48px">
-    <a href="#proj-03" class="proj-label fi" style="text-decoration:none">Project 03 — Neurocritical Care Automation</a>
+  <!-- PROJECT 4: NEURO-ICU cEEG ALERT PIPELINE -->
+  <div id="proj-04" style="margin-bottom:48px">
+    <a href="#proj-04" class="proj-label fi" style="text-decoration:none">Project 04 — Neurocritical Care Automation</a>
     <div class="split fi">
       <div class="pan dk">
         <div class="tags" style="margin-bottom:12px">
@@ -575,9 +639,9 @@ html.light body{background:var(--paper);color:var(--ink)}
     </div>
   </div>
 
-  <!-- PROJECT 10: CLINICAL SYSTEMS ANALYST LAB -->
-  <div id="proj-04" style="margin-bottom:48px">
-    <a href="#proj-04" class="proj-label fi" style="text-decoration:none">Project 04 — Clinical Systems Analyst Lab</a>
+  <!-- PROJECT 5: CLINICAL SYSTEMS ANALYST LAB -->
+  <div id="proj-05" style="margin-bottom:48px">
+    <a href="#proj-05" class="proj-label fi" style="text-decoration:none">Project 05 — Clinical Systems Analyst Lab</a>
     <div class="split fi">
       <div class="pan dk">
         <div class="tags" style="margin-bottom:12px">
@@ -638,9 +702,9 @@ html.light body{background:var(--paper);color:var(--ink)}
     </div>
   </div>
 
-  <!-- PROJECT 5: RPA FLEET CONTROL TOWER -->
-  <div id="proj-05" style="margin-bottom:48px">
-    <a href="#proj-05" class="proj-label fi" style="text-decoration:none">Project 05 — Automation Governance</a>
+  <!-- PROJECT 6: RPA FLEET CONTROL TOWER -->
+  <div id="proj-06" style="margin-bottom:48px">
+    <a href="#proj-06" class="proj-label fi" style="text-decoration:none">Project 06 — Automation Governance</a>
     <div class="split fi">
       <div class="pan dk">
         <div class="tags" style="margin-bottom:12px">
@@ -698,9 +762,9 @@ html.light body{background:var(--paper);color:var(--ink)}
     </div>
   </div>
 
-  <!-- PROJECT 6: EMU CAPACITY -->
-  <div id="proj-06" style="margin-bottom:48px">
-    <a href="#proj-06" class="proj-label fi" style="text-decoration:none">Project 06 — Epilepsy Unit Capacity</a>
+  <!-- PROJECT 7: EMU CAPACITY -->
+  <div id="proj-07" style="margin-bottom:48px">
+    <a href="#proj-07" class="proj-label fi" style="text-decoration:none">Project 07 — Epilepsy Unit Capacity</a>
     <div class="split fi">
       <div class="pan dk">
         <div class="tags" style="margin-bottom:12px">
@@ -978,7 +1042,7 @@ html.light body{background:var(--paper);color:var(--ink)}
 
 <script>
 // Highlight active project tab on scroll
-const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05','proj-06','capstone'];
+const projSections = ['proj-01','proj-02','proj-03','proj-04','proj-05','proj-06','proj-07','capstone'];
 const navTabs = document.querySelectorAll('.proj-nav-tab');
 window.addEventListener('scroll', () => {
   let current = '';

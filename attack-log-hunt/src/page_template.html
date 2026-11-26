@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ransomware Precursor Hunt</title>
+<meta name="description" content="Five Sigma detections for the steps ransomware takes before encryption, tuned on one public attack-log set and tested on a second, held-out set.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light')}catch(e){}</script>
+<style>
+/* matches andy205261.github.io: dark by default, html.light from the site's theme toggle */
+:root {
+  color-scheme: dark;
+  --bg:#0a0f1a; --surface:#121a28; --ink:#f1f5f9; --ink-2:#d5dee9; --ink-3:#a3b3c7;
+  --line:rgba(255,255,255,0.10); --accent:#38bdf8; --accent-soft:rgba(56,189,248,0.08); --teal:#2dd4bf;
+  --series-1:#38bdf8; --meter-track:rgba(255,255,255,0.10); --code:#0d1523; --on-accent:#080c14;
+}
+html.light {
+  color-scheme: light;
+  --bg:#f7f9fc; --surface:#ffffff; --ink:#0f172a; --ink-2:#334155; --ink-3:#64748b;
+  --line:rgba(15,23,42,0.10); --accent:#0369a1; --accent-soft:rgba(3,105,161,0.07); --teal:#0f766e;
+  --series-1:#0369a1; --meter-track:rgba(15,23,42,0.10); --code:#eef3f9; --on-accent:#ffffff;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 'Outfit', -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-weight:300; }
+b, strong, th, .fval { font-weight:600; }
+.wrap { max-width:960px; margin:0 auto; padding:24px 16px 64px; }
+a { color:var(--accent); }
+.topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:36px; }
+.topbar a { font-family:'DM Mono',monospace; font-size:12px; text-decoration:none; letter-spacing:.04em; }
+.themebtn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.08em; background:var(--surface); color:var(--ink-2); border:1px solid var(--line); border-radius:999px; padding:5px 12px; cursor:pointer; }
+.eyebrow { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); }
+h1 { font-family:'DM Serif Display',serif; font-weight:400; font-size:clamp(34px,6vw,54px); line-height:1.08; margin:10px 0 14px; letter-spacing:-.5px; }
+h2 { font-family:'DM Serif Display',serif; font-weight:400; font-size:28px; margin:52px 0 12px; letter-spacing:-.3px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+.lede { font-size:18px; color:var(--ink-2); max-width:720px; }
+.tags { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+.tags span { font-size:13px; padding:3px 10px; border:1px solid var(--line); border-radius:999px; color:var(--ink-2); background:var(--surface); }
+.note { background:var(--accent-soft); border-left:3px solid var(--teal); padding:12px 16px; border-radius:6px; font-size:14px; color:var(--ink-2); }
+.card { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; }
+.grid4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.stat .k { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); }
+.stat .v { font-family:'DM Serif Display',serif; font-size:34px; line-height:1.2; }
+.stat .d { font-size:13px; color:var(--ink-2); }
+.arrow { color:var(--ink-3); font-weight:400; margin:0 4px; font-size:22px; }
+table { width:100%; border-collapse:collapse; font-size:14px; }
+th { text-align:left; font-family:'DM Mono',monospace; font-weight:500; color:var(--ink-3); font-size:11px; text-transform:uppercase; letter-spacing:.05em; padding:8px; border-bottom:1px solid var(--line); }
+td { padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.mono { font-family:'DM Mono',ui-monospace,Menlo,monospace; font-size:13px; }
+.sub { color:var(--ink-3); font-size:13px; }
+.tablewrap { overflow-x:auto; }
+.tablewrap table { min-width:600px; }
+.mcell { white-space:nowrap; width:170px; }
+.meter { display:inline-block; width:100px; height:8px; background:var(--meter-track); border-radius:4px; vertical-align:middle; overflow:hidden; }
+.meter span { display:block; height:100%; background:var(--series-1); border-radius:4px; }
+.mnum { margin-left:8px; font-variant-numeric:tabular-nums; font-size:13px; color:var(--ink-2); }
+.new { font-size:11px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:4px; padding:0 4px; margin-left:4px; }
+.flow { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; counter-reset:step; }
+.flow div { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px; font-size:14px; color:var(--ink-2); }
+.flow b { display:block; color:var(--ink); margin-bottom:4px; }
+.flow div::before { counter-increment:step; content:counter(step); display:inline-block; width:22px; height:22px; border-radius:50%; background:var(--accent); color:var(--on-accent); font-size:12px; text-align:center; line-height:22px; margin-bottom:6px; }
+.fpchart { display:grid; gap:10px; }
+.frow { display:grid; grid-template-columns:minmax(0,300px) minmax(0,1fr); gap:12px; align-items:center; font-size:14px; outline:none; }
+.flbl { color:var(--ink-2); text-align:right; }
+.ftrack { display:flex; align-items:center; gap:8px; }
+.fbar { display:block; height:22px; background:var(--series-1); border-radius:0 4px 4px 0; min-width:4px; }
+.fval { font-weight:600; font-variant-numeric:tabular-nums; }
+.frow:hover .fbar, .frow:focus .fbar { opacity:.8; }
+.tip { position:fixed; pointer-events:none; background:var(--ink); color:var(--bg); font-size:13px; padding:6px 10px; border-radius:6px; max-width:280px; opacity:0; transition:opacity .1s; z-index:10; }
+details { margin-top:10px; font-size:14px; }
+summary { cursor:pointer; color:var(--accent); }
+pre { font-family:'DM Mono',monospace; background:var(--code); border:1px solid var(--line); border-radius:8px; padding:14px; overflow-x:auto; font-size:13px; line-height:1.5; }
+ul.clean { padding-left:20px; } ul.clean li { margin:4px 0; }
+footer { margin-top:56px; font-size:13px; color:var(--ink-3); border-top:1px solid var(--line); padding-top:16px; }
+@media (max-width:720px) {
+  .grid4, .flow { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .grid3 { grid-template-columns:1fr; }
+  .mcell { width:auto; } .meter { width:60px; }
+  .frow { grid-template-columns:1fr; gap:4px; } .flbl { text-align:left; }
+}
+.grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.grid3.inner { gap:8px; margin:10px 0 6px; }
+.grid3.inner .v { font-size:26px; }
+.alertbox { background:var(--code); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:8px; padding:14px; font-size:13px; line-height:1.7; overflow-x:auto; }
+.alertbox .hl { color:var(--bg); background:var(--accent); border-radius:4px; padding:0 5px; margin-right:6px; font-weight:600; }
+.miss { margin:12px 0; }
+.miss .cmd { font-family:'DM Mono',monospace; font-size:12.5px; background:var(--code); border:1px solid var(--line); border-radius:6px; padding:8px 10px; margin-top:8px; overflow-wrap:anywhere; }
+.miss .cmd .sub { font-family:'Outfit',sans-serif; margin-top:2px; }
+.miss .fix { font-size:14px; color:var(--ink-2); margin:12px 0 0; }
+@media (max-width:720px) { .grid2 { grid-template-columns:1fr; } .grid3.inner { grid-template-columns:repeat(3,minmax(0,1fr)); } .grid3.inner .v { font-size:20px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="topbar"><a href="../#proj-02">&larr; Back to portfolio</a><button class="themebtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">LIGHT</button></div>
+
+<div class="eyebrow">Healthcare security · Project</div>
+<h1>Ransomware Precursor Hunt</h1>
+<p class="lede">Before ransomware encrypts a hospital's files, the attacker runs hidden PowerShell, plants a scheduled task, deletes the backups and turns off antivirus.
+I wrote five Sigma detections for those steps, tuned them on one set of real attack logs, then tested them on a second set I had not looked at.</p>
+<div class="tags"><span>Sigma</span><span>pySigma → SQL</span><span>Python</span><span>Windows event logs</span><span>Sysmon</span><span>MITRE ATT&amp;CK</span><span>Threat hunting</span></div>
+<p class="note"><b>Public data only.</b> Both datasets are published attack recordings from security researchers' lab machines. No patient data, no employer data, nothing installed. The raw logs are downloaded by the script, not stored here, and URLs from attacks are defanged (<span class="mono">hxxps</span>).</p>
+
+<h2>Why this matters</h2>
+<p>When ransomware hits a hospital, clinicians switch to paper and downtime procedures, sometimes for weeks. The encryption is the last step. Hours or days earlier, the attacker runs a short list of very recognizable commands to stay in, hide, and make recovery impossible.
+Catching those commands is the window where a SOC can still isolate one machine instead of restoring a whole hospital.</p>
+
+<h2>The data</h2>
+<div class="grid2">
+  <div class="card">
+    <div class="eyebrow">Dev set · used to write and tune</div>
+    <h3 style="margin-top:8px">EVTX-ATTACK-SAMPLES</h3>
+    <div class="grid3 inner">
+      <div class="stat"><div class="k">Log files</div><div class="v">{{DEV_FILES}}</div></div>
+      <div class="stat"><div class="k">Events</div><div class="v">{{DEV_REC}}</div></div>
+      <div class="stat"><div class="k">Process starts</div><div class="v">{{DEV_PROC}}</div></div>
+    </div>
+    <p class="sub">Mostly Sysmon Event 1. {{DEV_N}} in-scope attack actions after labelling.</p>
+  </div>
+  <div class="card">
+    <div class="eyebrow">Held-out set · opened only after v2 was frozen</div>
+    <h3 style="margin-top:8px">EVTX-to-MITRE-Attack</h3>
+    <div class="grid3 inner">
+      <div class="stat"><div class="k">Log files</div><div class="v">{{HO_FILES}}</div></div>
+      <div class="stat"><div class="k">Events</div><div class="v">{{HO_REC}}</div></div>
+      <div class="stat"><div class="k">Process starts</div><div class="v">{{HO_PROC}}</div></div>
+    </div>
+    <p class="sub">Mostly Windows Security Event 4688. {{HO_N}} in-scope attack actions after labelling.</p>
+  </div>
+</div>
+
+<h2>How it works</h2>
+<div class="flow">
+  <div><b>Parse</b>Every EVTX file is read; process starts (Sysmon 1, Security 4688) go into one table.</div>
+  <div><b>Detect</b>Each Sigma rule is converted to SQL with pySigma and run against that table.</div>
+  <div><b>Hunt and label</b>Loose keyword hunts pull every possible candidate. Each one is labelled by hand before scoring.</div>
+  <div><b>Score</b>Caught, missed and false hits per rule, per dataset, per version.</div>
+</div>
+<p class="sub" style="margin-top:10px">The unit is one unique attack action (log file + command line). A <span class="mono">cmd.exe /c</span> wrapper or <span class="mono">net.exe → net1.exe</span> pair is the same action seen twice, so it is not counted as a separate miss, and an alert on it is counted as a repeat, not a false hit.</p>
+
+<h3>The five detections</h3>
+<div class="card tablewrap"><table>
+<thead><tr><th>ID</th><th>Attacker step</th><th>What changed in v2 (after reviewing the dev set)</th></tr></thead>
+<tbody>
+{{DET_ROWS}}
+</tbody></table></div>
+
+<details><summary>Example: one Sigma rule and the SQL pySigma generates from it</summary>
+<pre>detection:
+  selection_vssadmin:
+    Image|endswith: '\vssadmin.exe'
+    CommandLine|contains|all: ['delete', 'shadows']
+  selection_wbadmin:
+    Image|endswith: '\wbadmin.exe'
+    CommandLine|contains|all: ['delete', 'catalog']
+  selection_bcdedit_bootstatus:
+    Image|endswith: '\bcdedit.exe'
+    CommandLine|contains: 'ignoreallfailures'
+  condition: 1 of selection_*</pre>
+<pre>SELECT * FROM logs WHERE
+  (Image LIKE '%\\vssadmin.exe' ESCAPE '\' AND (CommandLine LIKE '%delete%' ESCAPE '\' AND CommandLine LIKE '%shadows%' ESCAPE '\'))
+  OR (Image LIKE '%\\wbadmin.exe' ESCAPE '\' AND (CommandLine LIKE '%delete%' ESCAPE '\' AND CommandLine LIKE '%catalog%' ESCAPE '\'))
+  OR ...</pre>
+<p class="sub">The same YAML converts to Splunk, Elastic or Sentinel queries with a different pySigma backend.</p>
+</details>
+
+<h2>Results</h2>
+<div class="grid3">
+  <div class="card stat"><div class="k">Dev set, caught</div><div class="v">{{DEV_V1}}<span class="arrow">→</span>{{DEV_V2}}</div><div class="d">{{DEV_V1C}} → {{DEV_V2C}} of {{DEV_N}} actions, v1 → v2</div></div>
+  <div class="card stat"><div class="k">Held-out set, caught</div><div class="v">{{HO_V1}}<span class="arrow">→</span>{{HO_V2}}</div><div class="d">{{HO_V1C}} → {{HO_V2C}} of {{HO_N}} actions, v1 → v2</div></div>
+  <div class="card stat"><div class="k">False hits</div><div class="v">{{FALSE}}</div><div class="d">Across {{ALL_PROC}} process starts, both sets, both versions. {{REPEAT}} repeat alert (net1.exe).</div></div>
+</div>
+<p class="note" style="margin-top:14px"><b>The honest headline is the gap.</b> Tuning on the dev set took v2 to {{DEV_V2}} there, but on logs it had never seen, v2 caught {{HO_V2}}: a {{GAP}}-point drop.
+The dev-set number measures how well I fit the data I studied. The held-out number is closer to what a SOC would actually get.</p>
+
+<h3>Catch rate by attacker step</h3>
+<div class="card tablewrap"><table>
+<thead><tr><th>Step</th><th>Dev v1</th><th>Dev v2</th><th>Held-out v1</th><th>Held-out v2</th></tr></thead>
+<tbody>
+{{FAM_TABLE}}
+</tbody></table></div>
+<p class="sub" style="margin-top:10px">The dev set had no examples of D2 or D5, so those rules were effectively untested until the held-out set. D2 then caught its one case; D5 caught none of three. An untested rule is an unknown rule.</p>
+
+<h3>What a v2 alert looks like (dev set, D4)</h3>
+<div class="alertbox mono">
+<div class="sub" style="margin-bottom:6px">PanacheSysmon_vs_AtomicRedTeam01.evtx · Sysmon Event 1</div>
+{{ALERTS}}
+<div style="margin-top:8px;color:var(--teal)">→ isolate the host, confirm backups are offline and intact, page the on-call</div>
+</div>
+
+<h2>What the held-out set caught me missing</h2>
+<p>Every v2 miss on the held-out set, with what it says about the rule rather than a quick patch:</p>
+{{MISSES}}
+<p class="sub">Labelling also turned up one dev-set action v2 still misses: a payload download with <span class="mono">Start-BitsTransfer</span>. I left it unpatched rather than tune again after scoring.</p>
+
+<h2>Limits</h2>
+<ul class="clean">
+<li><b>Zero false hits is not a hospital number.</b> Both datasets are attack recordings from lab machines, not a normal workday of clinical workstations, so they cannot show how noisy these rules would be at a real site. The next test is a benign baseline: a week of normal endpoint logs.</li>
+<li><b>Small numbers.</b> {{DEV_N}} and {{HO_N}} in-scope actions are enough to find blind spots, not to quote a detection rate with confidence.</li>
+<li><b>One labeller.</b> I labelled every candidate myself. The labels, with a reason for each, are in <span class="mono">src/label.py</span> and <span class="mono">labels/ground_truth.csv</span> so anyone can disagree with a specific call.</li>
+<li><b>Command lines only.</b> The rules see process starts. Script content, registry, network and Defender's own events would catch much of what was missed.</li>
+</ul>
+
+<h2>Next (v3 backlog)</h2>
+<ul class="clean">
+<li>D1: move hidden-PowerShell detection to Script Block Logging (Event 4104); keep the command-line rule as a cheap first signal.</li>
+<li>D4: cover the behaviour across tools (WMIC <span class="mono">shadowcopy delete</span>, <span class="mono">wbadmin delete backup</span>, PowerShell <span class="mono">Win32_ShadowCopy</span>).</li>
+<li>D5: add Defender operational events 5001 and 5007, plus <span class="mono">sc config WinDefend</span>.</li>
+<li>D2: alert once per action (skip <span class="mono">net1.exe</span> when its parent is <span class="mono">net.exe</span>).</li>
+<li>Score v3 on a third dataset, not on either of these two.</li>
+</ul>
+
+<h2>Run it</h2>
+<pre>pip install -r requirements.txt
+bash run_all.sh            # downloads both datasets (pinned commits), parses, runs v1 and v2, labels, scores
+python src/build_page.py   # this page</pre>
+<p class="sub">Everything runs from public data in about ten seconds. Rules: <span class="mono">sigma/v1</span>, <span class="mono">sigma/v2</span>. Results: <span class="mono">results/</span>.</p>
+
+<h2>Sources</h2>
+<ul class="clean">
+<li><a href="https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES">EVTX-ATTACK-SAMPLES</a> by Samir Bousseaden (GPL-3.0), dev set</li>
+<li><a href="https://github.com/mdecrevoisier/EVTX-to-MITRE-Attack">EVTX-to-MITRE-Attack</a> by Michel de Crevoisier (CC0-1.0), held-out set</li>
+<li><a href="https://github.com/SigmaHQ/pySigma">pySigma</a> and the SQLite backend, for rule conversion</li>
+<li>MITRE ATT&amp;CK: <a href="https://attack.mitre.org/techniques/T1059/001/">T1059.001</a>, <a href="https://attack.mitre.org/techniques/T1136/001/">T1136.001</a>, <a href="https://attack.mitre.org/techniques/T1053/005/">T1053.005</a>, <a href="https://attack.mitre.org/techniques/T1490/">T1490</a>, <a href="https://attack.mitre.org/techniques/T1562/001/">T1562.001</a></li>
+</ul>
+
+<footer><a href="../">Andy (Anh Truong Nguyen)</a> · <a href="https://github.com/andy205261/andy205261.github.io/tree/main/attack-log-hunt">Code</a> · Public attack logs, no install, no patient data</footer>
+</div>
+<script>
+(function () {
+  var r = document.documentElement, tb = document.getElementById('themeBtn');
+  function lbl() { tb.textContent = r.classList.contains('light') ? 'DARK' : 'LIGHT'; }
+  lbl();
+  tb.addEventListener('click', function () {
+    var m = r.classList.toggle('light') ? 'light' : 'dark';
+    try { localStorage.setItem('theme', m); } catch (e) {}
+    lbl();
+  });
+})();
+</script>
+</body>
+</html>

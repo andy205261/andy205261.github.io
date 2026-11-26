@@ -1,0 +1,9 @@
+{
+  "evtx_files": 293,
+  "records": 12812,
+  "unparsed": 0,
+  "process_events": 1296,
+  "sysmon_1": 34,
+  "security_4688": 1262,
+  "files_with_process_events": 85
+}

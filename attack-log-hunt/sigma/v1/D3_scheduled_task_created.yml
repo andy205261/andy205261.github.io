@@ -1,0 +1,26 @@
+title: Scheduled Task Created With schtasks.exe
+id: 731bc3c9-c23f-4b81-8ca8-e7cacb3ef4cf
+status: experimental
+description: |
+  A scheduled task was created from the command line. Used for persistence and to launch
+  payloads on a timer.
+references:
+  - https://attack.mitre.org/techniques/T1053/005/
+author: Andy (Anh Truong) Nguyen
+date: 2026-11-26
+tags:
+  - attack.persistence
+  - attack.execution
+  - attack.t1053.005
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    Image|endswith: '\schtasks.exe'
+  selection_cli:
+    CommandLine|contains: '/create'
+  condition: all of selection_*
+falsepositives:
+  - Software installers and endpoint management agents
+level: medium

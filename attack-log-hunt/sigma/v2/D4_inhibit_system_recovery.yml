@@ -1,0 +1,40 @@
+title: Shadow Copy or Backup Catalog Deletion
+id: d97883b3-a8ca-4761-9490-64a30b35a463
+status: experimental
+description: |
+  Commands that delete volume shadow copies, the Windows backup catalog, or turn off
+  recovery mode and boot-failure prompts (bootstatuspolicy added in v2). Ransomware runs
+  these right before encrypting so files cannot be restored.
+references:
+  - https://attack.mitre.org/techniques/T1490/
+author: Andy (Anh Truong) Nguyen
+date: 2026-11-26
+tags:
+  - attack.impact
+  - attack.t1490
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_vssadmin:
+    Image|endswith: '\vssadmin.exe'
+    CommandLine|contains|all:
+      - 'delete'
+      - 'shadows'
+  selection_wbadmin:
+    Image|endswith: '\wbadmin.exe'
+    CommandLine|contains|all:
+      - 'delete'
+      - 'catalog'
+  selection_bcdedit_recovery:
+    Image|endswith: '\bcdedit.exe'
+    CommandLine|contains|all:
+      - 'recoveryenabled'
+      - 'no'
+  selection_bcdedit_bootstatus:
+    Image|endswith: '\bcdedit.exe'
+    CommandLine|contains: 'ignoreallfailures'
+  condition: 1 of selection_*
+falsepositives:
+  - Rare; backup administrators cleaning up old shadow copies
+level: critical
