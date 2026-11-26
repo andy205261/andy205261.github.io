@@ -5,52 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EHR Access Monitoring</title>
 <meta name="description" content="Detecting insider snooping in hospital EHR audit logs with SQL rules, tuned from a baseline using clinical context. Synthetic data only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light')}catch(e){}</script>
 <style>
+/* matches andy205261.github.io: dark by default, html.light from the site's theme toggle */
 :root {
-  color-scheme: light;
-  --bg:#f7f7f5; --surface:#ffffff; --ink:#191919; --ink-2:#555555; --ink-3:#767676;
-  --line:#e3e3df; --accent:#0f766e; --accent-soft:#e6f2f0;
-  --series-1:#257de0; --meter-track:#ececec; --code:#f1f1ee;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --bg:#121212; --surface:#191919; --ink:#efefef; --ink-2:#b4b4b4; --ink-3:#9c9c9c;
-    --line:#2e2e2e; --accent:#3cb5a8; --accent-soft:#16302d;
-    --series-1:#338ced; --meter-track:#2c2c2c; --code:#222222;
-  }
-}
-:root[data-theme="dark"] {
   color-scheme: dark;
-  --bg:#121212; --surface:#191919; --ink:#efefef; --ink-2:#b4b4b4; --ink-3:#9c9c9c;
-  --line:#2e2e2e; --accent:#3cb5a8; --accent-soft:#16302d;
-  --series-1:#338ced; --meter-track:#2c2c2c; --code:#222222;
+  --bg:#0a0f1a; --surface:#121a28; --ink:#f1f5f9; --ink-2:#d5dee9; --ink-3:#a3b3c7;
+  --line:rgba(255,255,255,0.10); --accent:#38bdf8; --accent-soft:rgba(56,189,248,0.08); --teal:#2dd4bf;
+  --series-1:#38bdf8; --meter-track:rgba(255,255,255,0.10); --code:#0d1523; --on-accent:#080c14;
+}
+html.light {
+  color-scheme: light;
+  --bg:#f7f9fc; --surface:#ffffff; --ink:#0f172a; --ink-2:#334155; --ink-3:#64748b;
+  --line:rgba(15,23,42,0.10); --accent:#0369a1; --accent-soft:rgba(3,105,161,0.07); --teal:#0f766e;
+  --series-1:#0369a1; --meter-track:rgba(15,23,42,0.10); --code:#eef3f9; --on-accent:#ffffff;
 }
 * { box-sizing:border-box; }
-body { margin:0; background:var(--bg); color:var(--ink);
-  font:16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-.wrap { max-width:960px; margin:0 auto; padding:40px 16px 64px; }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 'Outfit', -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-weight:300; }
+b, strong, th, .fval { font-weight:600; }
+.wrap { max-width:960px; margin:0 auto; padding:24px 16px 64px; }
 a { color:var(--accent); }
-.eyebrow { font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600; }
-h1 { font-size:clamp(28px,5vw,42px); line-height:1.15; margin:8px 0 12px; letter-spacing:-.01em; }
-h2 { font-size:22px; margin:48px 0 12px; }
+.topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:36px; }
+.topbar a { font-family:'DM Mono',monospace; font-size:12px; text-decoration:none; letter-spacing:.04em; }
+.themebtn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.08em; background:var(--surface); color:var(--ink-2); border:1px solid var(--line); border-radius:999px; padding:5px 12px; cursor:pointer; }
+.eyebrow { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); }
+h1 { font-family:'DM Serif Display',serif; font-weight:400; font-size:clamp(34px,6vw,54px); line-height:1.08; margin:10px 0 14px; letter-spacing:-.5px; }
+h2 { font-family:'DM Serif Display',serif; font-weight:400; font-size:28px; margin:52px 0 12px; letter-spacing:-.3px; }
 h3 { font-size:16px; margin:24px 0 8px; }
 .lede { font-size:18px; color:var(--ink-2); max-width:720px; }
 .tags { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
 .tags span { font-size:13px; padding:3px 10px; border:1px solid var(--line); border-radius:999px; color:var(--ink-2); background:var(--surface); }
-.note { background:var(--accent-soft); border-left:3px solid var(--accent); padding:12px 16px; border-radius:6px; font-size:14px; color:var(--ink-2); }
+.note { background:var(--accent-soft); border-left:3px solid var(--teal); padding:12px 16px; border-radius:6px; font-size:14px; color:var(--ink-2); }
 .card { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; }
 .grid4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
 .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
-.stat .k { font-size:13px; color:var(--ink-3); }
-.stat .v { font-size:30px; font-weight:650; letter-spacing:-.01em; }
+.stat .k { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); }
+.stat .v { font-family:'DM Serif Display',serif; font-size:34px; line-height:1.2; }
 .stat .d { font-size:13px; color:var(--ink-2); }
 .arrow { color:var(--ink-3); font-weight:400; margin:0 4px; font-size:22px; }
 table { width:100%; border-collapse:collapse; font-size:14px; }
-th { text-align:left; font-weight:600; color:var(--ink-3); font-size:12px; text-transform:uppercase; letter-spacing:.05em; padding:8px; border-bottom:1px solid var(--line); }
+th { text-align:left; font-family:'DM Mono',monospace; font-weight:500; color:var(--ink-3); font-size:11px; text-transform:uppercase; letter-spacing:.05em; padding:8px; border-bottom:1px solid var(--line); }
 td { padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
 td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
-.mono { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; }
+.mono { font-family:'DM Mono',ui-monospace,Menlo,monospace; font-size:13px; }
 .sub { color:var(--ink-3); font-size:13px; }
 .tablewrap { overflow-x:auto; }
 .tablewrap table { min-width:600px; }
@@ -62,7 +62,7 @@ td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
 .flow { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; counter-reset:step; }
 .flow div { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px; font-size:14px; color:var(--ink-2); }
 .flow b { display:block; color:var(--ink); margin-bottom:4px; }
-.flow div::before { counter-increment:step; content:counter(step); display:inline-block; width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-size:12px; text-align:center; line-height:22px; margin-bottom:6px; }
+.flow div::before { counter-increment:step; content:counter(step); display:inline-block; width:22px; height:22px; border-radius:50%; background:var(--accent); color:var(--on-accent); font-size:12px; text-align:center; line-height:22px; margin-bottom:6px; }
 .fpchart { display:grid; gap:10px; }
 .frow { display:grid; grid-template-columns:minmax(0,300px) minmax(0,1fr); gap:12px; align-items:center; font-size:14px; outline:none; }
 .flbl { color:var(--ink-2); text-align:right; }
@@ -73,7 +73,7 @@ td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
 .tip { position:fixed; pointer-events:none; background:var(--ink); color:var(--bg); font-size:13px; padding:6px 10px; border-radius:6px; max-width:280px; opacity:0; transition:opacity .1s; z-index:10; }
 details { margin-top:10px; font-size:14px; }
 summary { cursor:pointer; color:var(--accent); }
-pre { background:var(--code); border:1px solid var(--line); border-radius:8px; padding:14px; overflow-x:auto; font-size:13px; line-height:1.5; }
+pre { font-family:'DM Mono',monospace; background:var(--code); border:1px solid var(--line); border-radius:8px; padding:14px; overflow-x:auto; font-size:13px; line-height:1.5; }
 ul.clean { padding-left:20px; } ul.clean li { margin:4px 0; }
 footer { margin-top:56px; font-size:13px; color:var(--ink-3); border-top:1px solid var(--line); padding-top:16px; }
 @media (max-width:720px) {
@@ -86,7 +86,7 @@ footer { margin-top:56px; font-size:13px; color:var(--ink-3); border-top:1px sol
 </head>
 <body>
 <div class="wrap">
-<a href="../#proj-06" style="font-size:14px;text-decoration:none">&larr; Back to portfolio</a>
+<div class="topbar"><a href="../#proj-06">&larr; Back to portfolio</a><button class="themebtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">LIGHT</button></div>
 
 <div class="eyebrow">Healthcare security · Project</div>
 <h1>EHR Access Monitoring</h1>
@@ -207,6 +207,14 @@ python src/build_page.py      # this page</pre>
 <div class="tip" id="tip" role="tooltip"></div>
 <script>
 (function () {
+  var r = document.documentElement, tb = document.getElementById('themeBtn');
+  function lbl() { tb.textContent = r.classList.contains('light') ? 'DARK' : 'LIGHT'; }
+  lbl();
+  tb.addEventListener('click', function () {
+    var m = r.classList.toggle('light') ? 'light' : 'dark';
+    try { localStorage.setItem('theme', m); } catch (e) {}
+    lbl();
+  });
   var tip = document.getElementById('tip');
   document.querySelectorAll('.fpchart .frow').forEach(function (g) {
     function show(x, y) { tip.textContent = g.getAttribute('data-tip'); tip.style.left = Math.min(x + 12, window.innerWidth - 300) + 'px'; tip.style.top = (y + 12) + 'px'; tip.style.opacity = 1; }
